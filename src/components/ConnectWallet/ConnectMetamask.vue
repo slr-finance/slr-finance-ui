@@ -1,0 +1,56 @@
+<template>
+  <connect-wallet-plug size="48">
+    <div
+      @click="disconnect"
+      class="bg-black/50 text-12 leading-none rounded-12 text-white pl-16 pr-6 h-48 flex justify-center items-center"
+    >
+      <div v-if="isBalanceLoaded">{{ balanceStr }}</div>
+      <div class="ml-8 bg-black text-white/60 rounded-10 h-36 px-8 flex justify-center items-center">
+        {{ trimedAddress }}
+        <div class="bg-bnb w-20 h-20 flex justify-center items-center ml-6 rounded-4">
+          <ui-icon
+            name="bnb-chain"
+            size="14"
+          />
+        </div>
+      </div>
+    </div>
+  </connect-wallet-plug>
+</template>
+
+<script lang="ts">
+  import { computed, defineComponent } from 'vue'
+  import { useEthers, useWallet, shortenAddress } from 'vue-dapp'
+  import UiButton from '@/components/ui/UiButton.vue'
+  import ConnectWalletPlug from './ConnectWalletPlug.vue'
+  import { useSlrBalance } from '@/store/hooks/useBalance'
+  import { useTokenAmountFormat } from '@/hooks/formatters/useTokenAmountFormat'
+  import UiIcon from '@/components/ui/UiIcon.vue'
+  import { FetchingStatus } from '@/entities/common'
+
+  export default defineComponent({
+    setup() {
+      const { disconnect } = useWallet()
+      const { address, chainId } = useEthers()
+      const trimedAddress = computed(() => shortenAddress(address.value))
+      const isCorrectChainId = computed(() => chainId.value === 97)
+      const [slrInfo] = useSlrBalance()
+      const balance = computed(() => slrInfo.value.balance)
+      const isBalanceLoaded = computed(() => slrInfo.value.fetchStatus === FetchingStatus.FETCHED)
+      const balanceStr = useTokenAmountFormat(balance, 'SLR')
+
+      return {
+        isCorrectChainId,
+        trimedAddress,
+        disconnect,
+        balanceStr,
+        isBalanceLoaded,
+      }
+    },
+    components: {
+      UiButton,
+      ConnectWalletPlug,
+      UiIcon,
+    },
+  })
+</script>

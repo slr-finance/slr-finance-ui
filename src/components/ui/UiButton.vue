@@ -1,0 +1,89 @@
+<template>
+  <component
+    :is="componentName"
+    v-bind="componentProps"
+    class="ui-button"
+  >
+    <slot />
+  </component>
+</template>
+
+<script lang="ts">
+  import { computed, defineComponent, PropType } from 'vue'
+
+  export default defineComponent({
+    name: 'ui-button',
+    props: {
+      type: {
+        type: String as PropType<'button' | 'submit' | 'reset'>,
+        default: 'button',
+      },
+      disabled: {
+        type: Boolean,
+        default: false,
+      },
+      size: {
+        type: [Number, String],
+        default: 64,
+      },
+      to: {
+        type: Object,
+      },
+    },
+    setup(props) {
+      const componentProps = computed(() => {
+        return {
+          to: props.to ? props.to : undefined,
+          type: props.to ? undefined : props.type,
+          disabled: props.disabled,
+          class: {
+            '-disabled': props.disabled,
+            [`-size-${props.size}`]: true,
+          },
+        }
+      })
+
+      const componentName = computed(() => {
+        return props.to ? 'router-link' : 'button'
+      })
+
+      return {
+        componentProps,
+        componentName,
+      }
+    },
+  })
+</script>
+
+<style lang="postcss">
+  .ui-button.-size-64 {
+    @apply h-64 min-w-64 rounded-full border-2 opacity-80;
+
+    padding: 0 14px 0 14px;
+  }
+
+  .ui-button.-size-48 {
+    @apply h-48 min-w-48 rounded-full border-2 opacity-80;
+
+    padding: 0 8px 0 8px;
+  }
+
+  .ui-button.-disabled {
+    @apply border-dashed cursor-not-allowed opacity-40;
+  }
+
+  .ui-button:not(.-disabled) {
+    @apply cursor-pointer;
+  }
+
+  .ui-button:not(.-disabled):hover {
+    @apply opacity-100;
+  }
+
+  .ui-button {
+    @apply inline-flex justify-center items-center transition duration-150;
+
+    color: var(--page-active-color, #fff);
+    border-color: var(--page-active-color, #fff);
+  }
+</style>
