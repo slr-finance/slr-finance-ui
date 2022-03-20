@@ -14,26 +14,33 @@
         <span class="text-page-active">{{ apyStr }}</span>
       </p>
 
-      <staker-info :pool-id="poolState.id"/>
+      <staker-info
+        :pool-id="poolState.id"
+        class="mb-20"
+      />
 
-      <div v-if="poolState.id < stakerState.poolId">
-        <p>Вы тут закончили фармить</p>
-        <p>Нафармленно n SOLAR>FINANCE за k дней</p>
-        <router-link :to="{ name: 'earth' }">перейти к активной ферме</router-link>
-      </div>
+      <completed-pool
+        v-if="isCompletedPool"
+        :pool-id="poolState.id"
+        class="mb-20"
+      />
 
-      <migrate-form
-        v-else-if="isPoolFinished && stakerState.poolId === poolState.id && stakerState.amount.gt(0)"
+      <staking-finished
+        v-else-if="isCurrentStakerPoolFinished && isCurrentStakerPool && hasCurrentStakerPoolDeposit"
         :pool-id="poolId"
       />
 
       <stake-form
-        v-else-if="stakerState.poolId === poolState.id"
+        v-else-if="isCurrentStakerPool"
+        :pool-id="poolId"
+      />
+
+      <migrate-form
+        v-else-if="canMigrateToNextPool"
         :pool-id="poolId"
       />
 
       <div v-else>Не активен</div>
-      {{ isPoolFinished }}
     </div>
   </section>
 </template>
@@ -41,15 +48,16 @@
 <script lang="ts">
   import { computed, defineComponent, toRef } from 'vue'
   import { useEthers } from 'vue-dapp'
-  import StakeForm from './StakeForm.vue'
-  import StakedForm from './StakedForm.vue'
   import { usePool } from '@/store/hooks/usePool'
   import { usePoolInfo } from '../hooks/usePoolInfo'
   import { usePercentFormat } from '@/hooks/formatters/usePercentFormat'
   import { useI18n } from 'vue-i18n'
   import { useStaker } from '@/store/hooks/useStaker'
-import StakerInfo from './StakerInfo.vue'
-import MigrateForm from './MigrateForm.vue'
+  import StakerInfo from './StakerInfo.vue'
+  import StakingFinished from './StakingFinished.vue'
+  import CompletedPool from './CompletedPool.vue'
+  import StakeForm from './StakeForm.vue'
+  import MigrateForm from './MigrateForm.vue'
 
   export default defineComponent({
     name: 'staking-widget',
@@ -69,26 +77,45 @@ import MigrateForm from './MigrateForm.vue'
       const apyStr = computed(() => t('pool.fixedApy', [formattedApy.value]))
       const { isActivated } = useEthers()
       const [stakerState] = useStaker()
-      const isPoolFinished = computed(() => {
-        const stakerStateVal = stakerState.value
 
-        return stakerStateVal.startStaking + stakerStateVal.lock < stakerStateVal.timestamp
+      const isCompletedPool = computed(() => poolState.value.id < stakerState.value.poolId)
+      const isCurrentStakerPool = computed(
+        () => poolId.value === stakerState.value.poolId || stakerState.value.poolId === 0,
+      )
+      const hasCurrentStakerPoolDeposit = computed(() => stakerState.value.amount.gt(0))
+      const isCurrentStakerPoolFinished = computed(() => {
+        const { startStaking, lock, timestamp } = stakerState.value
+
+        return startStaking + lock < timestamp
       })
+      const canMigrateToNextPool = computed(
+        () =>
+          poolId.value > 1 &&
+          stakerState.value.poolId === poolId.value - 1 &&
+          hasCurrentStakerPoolDeposit.value &&
+          isCurrentStakerPoolFinished.value,
+      )
 
       return {
+        isCurrentStakerPool,
+        hasCurrentStakerPoolDeposit,
+        canMigrateToNextPool,
+        isCompletedPool,
+
         poolInfo,
         apyStr,
         isActivated,
         poolState,
         stakerState,
-        isPoolFinished,
+        isCurrentStakerPoolFinished,
       }
     },
     components: {
       StakeForm,
-      StakedForm,
-      StakerInfo,
       MigrateForm,
+      StakerInfo,
+      StakingFinished,
+      CompletedPool,
     },
   })
 </script>

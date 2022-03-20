@@ -20,7 +20,7 @@
   import { useReferrerRewards } from '../hooks/useReferrerRewards'
   import { useReferrerClaim } from '../hooks/useReferrerClaim'
   import SendTxButton from '@/components/Tx/SendTxButton.vue'
-import { useSlrBalance } from '@/store/hooks/useBalance'
+  import { useSlrBalance } from '@/store/hooks/useBalance'
 
   export default defineComponent({
     name: 'referrer-rewads',
@@ -33,10 +33,7 @@ import { useSlrBalance } from '@/store/hooks/useBalance'
       const pendingRewardStr = useTokenAmountFormat(pendingReward, 'SOLAR>FINANCE')
       const rewardedStr = useTokenAmountFormat(rewarded, 'SOLAR>FINANCE')
 
-      const refetchRewardsAndSlrBalance = () => Promise.all([
-        refetchRewards(),
-        refetchSlrBalance(),
-      ])
+      const refetchRewardsAndSlrBalance = () => Promise.all([refetchRewards(), refetchSlrBalance()])
 
       watch(claimTxState, ({ isSuccess }) => isSuccess && refetchRewardsAndSlrBalance())
 

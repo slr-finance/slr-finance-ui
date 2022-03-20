@@ -20,7 +20,7 @@
     },
     emits: ['update:value'],
     setup(props, { emit }) {
-      const valueBn = useVModel(props, 'value', emit)
+      const valueBn = useVModel(props, 'value', emit, { passive: true })
       const valueStr = ref(valueBn.value.toString())
 
       watch(valueBn, (value) => (valueStr.value = value.toString()))

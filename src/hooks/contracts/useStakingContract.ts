@@ -1,6 +1,6 @@
-import { getStakingContract } from "@/utils/contracts/getStakingContract"
-import { computed, unref } from "vue"
-import { useEthers } from "vue-dapp"
+import { getStakingContract } from '@/utils/contracts/getStakingContract'
+import { computed, unref } from 'vue'
+import { useEthers } from 'vue-dapp'
 
 export const useStakingContract = () => {
   const { signer } = useEthers()

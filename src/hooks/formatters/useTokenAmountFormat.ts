@@ -4,7 +4,7 @@ import { Ref, unref, computed, ComputedRef } from 'vue'
 import { useNumberFormat } from './useNumberFormat'
 
 export const useTokenAmountFormat = (
-  bignumber: MaybeRef<BigNumber|number>,
+  bignumber: MaybeRef<BigNumber | number>,
   symbol: string | Ref<string> = '',
   maximumFractionDigits: number | Ref<number> = 6,
 ) => {

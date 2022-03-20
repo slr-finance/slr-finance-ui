@@ -21,7 +21,7 @@ export type PoolState = {
 }
 
 export type StakerState = {
-  address: string,
+  address: string
   isStakinFinished: boolean
   poolId: number
   amount: BigNumber
@@ -31,6 +31,7 @@ export type StakerState = {
   timestamp: number
   rewardRaw: BigNumberEthers
   reward: BigNumber
+  fetchStatus: FetchingStatus
 }
 
 const getDefaultPoolState = (poolId: number): PoolState => ({
@@ -47,6 +48,7 @@ const getDefaultPoolState = (poolId: number): PoolState => ({
 })
 
 const defaultStakerState = (): StakerState => ({
+  fetchStatus: FetchingStatus.NONE,
   address: constants.AddressZero,
   isStakinFinished: false,
   poolId: 0,
@@ -100,9 +102,9 @@ export const stakingModule = createModule('staking', {
         console.error(error)
       }
     },
-    async refetchStaker({state:{stakerAddress}}) {
+    async refetchStaker({ state: { stakerAddress } }) {
       await stakingModule.actions.fetchStaker(stakerAddress)
-    }
+    },
   },
   mutations: {
     allPoolsFetching(state) {
@@ -127,7 +129,7 @@ export const stakingModule = createModule('staking', {
         state.pools[id].fetchStatus = FetchingStatus.ERROR
       })
     },
-    setStakerAddress(state, stakerAddress:string) {
+    setStakerAddress(state, stakerAddress: string) {
       state.stakerAddress = stakerAddress
     },
     stakerFetched(state, staker: StakerState) {

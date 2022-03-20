@@ -18,8 +18,8 @@ export const fetchPools = async (pools: number[]) => {
   const response = await multicall(StakingAbi, calls)
   const poolsInfo = pools.map((poolId, index) => {
     const poolState = response[index]
-
-    const apr = new BigNumber(poolState.apr)
+    const apr = new BigNumber(poolState.apr._hex).div(100000000)
+    const withdrawalFee = new BigNumber(poolState.withdrawalFees._hex).div(1000)
 
     return {
       apr: apr,
@@ -27,7 +27,7 @@ export const fetchPools = async (pools: number[]) => {
       maxDays: poolState.maxLock,
       minDays: poolState.minLock,
       id: poolState.id,
-      withdrawalFee: new BigNumber(poolState.withdrawalFees),
+      withdrawalFee: withdrawalFee,
       totalStaked: new BigNumber(poolState.totalStaked._hex),
       isDone: false,
       isActive: true,

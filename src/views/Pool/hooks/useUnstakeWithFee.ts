@@ -3,9 +3,9 @@ import { useSendTx } from '@/hooks/useSendTx'
 import { MaybeRef } from '@vueuse/core'
 import { computed, unref } from 'vue'
 
-export const useUnstake = (poolId: MaybeRef<number>) => {
+export const useUnstakeWithFee = (poolId: MaybeRef<number>) => {
   const stakingContract = useStakingContract()
   const params = computed(() => [unref(poolId)])
 
-  return useSendTx(stakingContract, 'unstake', params)
+  return useSendTx(stakingContract, 'unstakeWithFee', params)
 }

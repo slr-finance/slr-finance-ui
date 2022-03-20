@@ -1,7 +1,5 @@
 <template>
-  <section
-    class="ui-box-corners p-0"
-  >
+  <section class="ui-box-corners p-0">
     <div
       @click="toggle"
       class="py-32 px-18"

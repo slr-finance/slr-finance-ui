@@ -3,7 +3,7 @@ import BigNumber from 'bignumber.js'
 import { computed, unref } from 'vue'
 
 export const useNumberFormat = (
-  bignumber: MaybeRef<BigNumber|number>,
+  bignumber: MaybeRef<BigNumber | number>,
   options: Intl.NumberFormatOptions = {
     style: 'currency',
     currency: 'USD',

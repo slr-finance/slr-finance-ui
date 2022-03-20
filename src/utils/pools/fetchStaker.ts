@@ -2,6 +2,7 @@ import { Call, multicall } from '@/utils/contracts/multicall'
 import contractsAddresses from '@/config/constants/contractsAddresses.json'
 import StakingAbi from '@/config/abi/Staking.json'
 import BigNumber from 'bignumber.js'
+import { FetchingStatus } from '@/entities/common'
 
 const TEN_BN = new BigNumber(10)
 
@@ -13,12 +14,9 @@ export const fetchStaker = async (stakerAddress: string) => {
       params: [stakerAddress],
     },
   ]
-
   const [stakerRaw] = await multicall(StakingAbi, calls)
-
-  console.log(stakerRaw)
-
   const result = {
+    fetchStatus: FetchingStatus.FETCHED,
     isStakinFinished: stakerRaw.startStaking + stakerRaw.lock < stakerRaw.timestamp,
     address: stakerAddress,
     poolId: stakerRaw.poolId,

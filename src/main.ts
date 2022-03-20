@@ -45,7 +45,7 @@ slrModule.register(store)
 // Fetch pools and slr price [END]
 
 // Mount app [BEGIN]
-const app = createApp(App, { referrer })
+const app = createApp(App)
   .use(i18n)
   .use(i18nRouteHelperPlugin)
   .use(router)

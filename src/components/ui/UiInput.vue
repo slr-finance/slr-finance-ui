@@ -20,7 +20,7 @@
     },
     emits: ['update:value'],
     setup(props, { emit }) {
-      const value = useVModel(props, 'value', emit)
+      const value = useVModel(props, 'value', emit, { passive: true })
 
       return {
         value,
