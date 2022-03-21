@@ -18,9 +18,8 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent, PropType, ref, watch, computed } from 'vue'
+  import { defineComponent, PropType, ref, watch, computed, WritableComputedRef } from 'vue'
   import UiInputBn from '@/components/ui/UiInputBn.vue'
-  import { useSlrBalance } from '@/store/hooks/useBalance'
   import { FetchingStatus } from '@/entities/common'
   import BigNumber from 'bignumber.js'
   import { useVModel } from '@vueuse/core'
@@ -36,7 +35,7 @@
     },
     setup(props, { emit }) {
       const [stakerState] = useStaker()
-      const amount = useVModel(props, 'value', emit, { passive: true })
+      const amount = useVModel(props, 'value', emit, { passive: true }) as WritableComputedRef<BigNumber>
       const isChanged = ref(false)
       const maxAmount = computed(() => {
         const { amount, reward } = stakerState.value
