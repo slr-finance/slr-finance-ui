@@ -5,8 +5,7 @@ import { getReferrerFromLocalstorage } from '@/utils/getReferrerFromLocalstorage
 import { getPresaleContract } from '@/utils/contracts/getPresaleContract'
 import BigNumber from 'bignumber.js'
 import { MaybeRef } from '@vueuse/core'
-
-const TEN_BN = new BigNumber(10)
+import { BIG_TEN } from '@/utils/bigNumber'
 
 export const useBuyPresaleToken = (
   amountIn: MaybeRef<BigNumber>,
@@ -19,10 +18,10 @@ export const useBuyPresaleToken = (
   const presaleContract = computed(() => getPresaleContract(unref(signer)))
   const params = computed(() => [
     unref(amountIn)
-      .times(TEN_BN.pow(unref(tokenInDecimals)))
+      .times(BIG_TEN.pow(unref(tokenInDecimals)))
       .toFixed(),
     unref(amountOut)
-      .times(TEN_BN.pow(unref(tokenOutDecimals)))
+      .times(BIG_TEN.pow(unref(tokenOutDecimals)))
       .toFixed(),
     referrer,
   ])

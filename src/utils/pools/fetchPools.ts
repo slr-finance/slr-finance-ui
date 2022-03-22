@@ -1,9 +1,9 @@
-import BigNumber from 'bignumber.js'
 import { Call, multicall } from '@/utils/contracts/multicall'
 import contractsAddresses from '@/config/constants/contractsAddresses.json'
 import StakingAbi from '@/config/abi/Staking.json'
+import { getApy } from '@/utils/math/getApy'
+import { ethersToBigNumber } from '@/utils/bigNumber'
 import { FetchingStatus } from '@/entities/common'
-import { getApy } from '../math/getApy'
 
 export const fetchPools = async (pools: number[]) => {
   const calls: Call[] = pools
@@ -19,8 +19,8 @@ export const fetchPools = async (pools: number[]) => {
   const response = await multicall(StakingAbi, calls)
   const poolsInfo = pools.map((poolId, index) => {
     const poolState = response[index]
-    const apr = new BigNumber(poolState.apr._hex).div(100000000)
-    const withdrawalFee = new BigNumber(poolState.withdrawalFees._hex).div(1000)
+    const apr = ethersToBigNumber(poolState.apr).div(100000000)
+    const withdrawalFee = ethersToBigNumber(poolState.withdrawalFees).div(1000)
 
     return {
       fetchStatus: FetchingStatus.NONE,
@@ -30,7 +30,7 @@ export const fetchPools = async (pools: number[]) => {
       minDays: poolState.minLock,
       id: poolState.id,
       withdrawalFee: withdrawalFee,
-      totalStaked: new BigNumber(poolState.totalStaked._hex),
+      totalStaked: ethersToBigNumber(poolState.totalStaked),
       isDone: false,
       isActive: true,
     }

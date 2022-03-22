@@ -11,6 +11,7 @@ import dayjs from 'dayjs'
 import localizedFormat from 'dayjs/plugin/localizedFormat'
 import type { Result } from 'ethers/lib/utils'
 import { REFERRALS_ACTIONS } from '@/config/constants/referrals'
+import { BIG_TEN, ethersToBigNumber } from '@/utils/bigNumber'
 
 dayjs.extend(localizedFormat)
 
@@ -30,8 +31,6 @@ type AccrualInfo = {
   amountStr: string
   actionLabel: string
 }
-
-const TEN_BN = new BigNumber(10)
 
 export const useReferrerAccrualHistory = () => {
   const { address } = useEthers()
@@ -77,7 +76,7 @@ export const useReferrerAccrualHistory = () => {
 
             accrualList.value.push(
               ...referrals.map(({ from, timestamp, amount: amountEthersBn, action }) => {
-                const amount = new BigNumber(amountEthersBn._hex).div(TEN_BN.pow(18))
+                const amount = ethersToBigNumber(amountEthersBn).div(BIG_TEN.pow(18))
 
                 return {
                   address: from,

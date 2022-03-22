@@ -4,9 +4,8 @@ import { computed, Ref, ref, unref, watch } from 'vue'
 import { useEthers } from 'vue-dapp'
 import { Call, multicall } from '@/utils/contracts/multicall'
 import erc20Abi from '@/config/abi/Erc20.json'
+import { BIG_TEN, ethersToBigNumber } from '@/utils/bigNumber'
 import { runAsyncWithParamChecking } from '../runAsyncWithParamChecking'
-
-const TEN_BN = new BigNumber(10)
 
 type UseAllowanceReturn = [() => Promise<void>, Ref<BigNumber>, Ref<boolean>]
 
@@ -57,7 +56,7 @@ export const useAllowance = (tokenAddress: MaybeRef<string>, spender: MaybeRef<s
       ]
 
       const [[decimalsResponse], [allowanceResponse]] = await multicall(erc20Abi, calls)
-      allowance.value = new BigNumber(allowanceResponse._hex).div(TEN_BN.pow(decimalsResponse))
+      allowance.value = ethersToBigNumber(allowanceResponse).div(BIG_TEN.pow(decimalsResponse))
       isFetching.value = false
     })
 

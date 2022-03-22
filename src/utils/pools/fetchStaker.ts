@@ -1,10 +1,8 @@
 import { Call, multicall } from '@/utils/contracts/multicall'
 import contractsAddresses from '@/config/constants/contractsAddresses.json'
 import StakingAbi from '@/config/abi/Staking.json'
-import BigNumber from 'bignumber.js'
 import { FetchingStatus } from '@/entities/common'
-
-const TEN_BN = new BigNumber(10)
+import { BIG_TEN, ethersToBigNumber } from '@/utils/bigNumber'
 
 export const fetchStaker = async (stakerAddress: string) => {
   const calls: Call[] = [
@@ -22,11 +20,11 @@ export const fetchStaker = async (stakerAddress: string) => {
     poolId: stakerRaw.poolId,
     startStaking: stakerRaw.startStaking,
     lock: stakerRaw.lock,
-    amount: new BigNumber(stakerRaw.amount._hex).div(TEN_BN.pow(18)),
+    amount: ethersToBigNumber(stakerRaw.amount).div(BIG_TEN.pow(18)),
     amountRaw: stakerRaw.amount,
     timestamp: stakerRaw.timestamp,
     rewardRaw: stakerRaw.reward,
-    reward: new BigNumber(stakerRaw.reward._hex).div(TEN_BN.pow(18)),
+    reward: ethersToBigNumber(stakerRaw.reward).div(BIG_TEN.pow(18)),
   }
 
   return result

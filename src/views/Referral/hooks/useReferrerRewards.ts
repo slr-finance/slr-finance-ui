@@ -4,13 +4,12 @@ import { getReferralContract } from '@/utils/contracts/getReferralContract'
 import { BigNumber as BigNumberEther } from 'ethers'
 import BigNumber from 'bignumber.js'
 import { runAsyncWithParamChecking } from '@/hooks/runAsyncWithParamChecking'
+import { BIG_TEN, ethersToBigNumber } from '@/utils/bigNumber'
 
 type ReferrerRewardRaw = {
   reward: BigNumberEther
   rewarded: BigNumberEther
 }
-
-const TEN_BN = new BigNumber(10)
 
 export const useReferrerRewards = () => {
   const { address } = useEthers()
@@ -32,8 +31,8 @@ export const useReferrerRewards = () => {
 
         breakIfValueChanged()
 
-        reward.value = new BigNumber(referrerReward.reward._hex).div(TEN_BN.pow(18))
-        rewarded.value = new BigNumber(referrerReward.rewarded._hex).div(TEN_BN.pow(18))
+        reward.value = ethersToBigNumber(referrerReward.reward).div(BIG_TEN.pow(18))
+        rewarded.value = ethersToBigNumber(referrerReward.rewarded).div(BIG_TEN.pow(18))
         isFetching.value = false
       },
     )

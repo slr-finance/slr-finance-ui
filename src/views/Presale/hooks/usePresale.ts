@@ -8,6 +8,7 @@ import { getPresaleContract } from '@/utils/contracts/getPresaleContract'
 import { Call, multicall } from '@/utils/contracts/multicall'
 import contractsAddresses from '@/config/constants/contractsAddresses.json'
 import { isAddress, Result } from 'ethers/lib/utils'
+import { BIG_TEN, ethersToBigNumber } from '@/utils/bigNumber'
 
 type PresaleInfoRaw = [
   [number] & Result,
@@ -27,8 +28,6 @@ export type BuyPresaleTokenPayload = {
   amountIn: BigNumber
   amountOut: BigNumber
 }
-
-const TEN_BN = new BigNumber(10)
 
 export const usePresale = () => {
   const { address, signer } = useEthers()
@@ -130,15 +129,15 @@ export const usePresale = () => {
 
         tokenOutDecimals.value = tokenOutDecimalsVal
         tokenInDecimals.value = tokenInDecimalsVal
-        totalSupply.value = new BigNumber(totalSupplyVal._hex).div(TEN_BN.pow(tokenOutDecimalsVal))
+        totalSupply.value = ethersToBigNumber(totalSupplyVal).div(BIG_TEN.pow(tokenOutDecimalsVal))
         tokenOutAddress.value = tokenOutAddressVal
-        endWhiteListBlock.value = new BigNumber(endWhiteListBlockVal._hex).toNumber()
-        endPresaleBlock.value = new BigNumber(endPresaleBlockVal._hex).toNumber()
-        tokenPrice.value = new BigNumber(tokenPriceVal._hex).div(TEN_BN.pow(tokenInDecimalsVal))
+        endWhiteListBlock.value = ethersToBigNumber(endWhiteListBlockVal).toNumber()
+        endPresaleBlock.value = ethersToBigNumber(endPresaleBlockVal).toNumber()
+        tokenPrice.value = ethersToBigNumber(tokenPriceVal).div(BIG_TEN.pow(tokenInDecimalsVal))
         isPresaleEnded.value = isPresaleEndedVal
         isWhiteListClosed.value = isWhiteListClosedVal
         presaleTokenBalance.value = presaleTokenBalanceBn
-          ? new BigNumber(presaleTokenBalanceBn._hex).div(TEN_BN.pow(tokenOutDecimalsVal))
+          ? ethersToBigNumber(presaleTokenBalanceBn).div(BIG_TEN.pow(tokenOutDecimalsVal))
           : new BigNumber(0)
         joined.value = joinedVal ? joinedVal : false
 
