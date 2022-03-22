@@ -5,7 +5,7 @@ import BigNumber from 'bignumber.js'
 import { getReferrerFromLocalstorage } from '@/utils/getReferrerFromLocalstorage'
 import { useSlrBalance } from '@/store/hooks/useBalance'
 import { useStakingContract } from '@/hooks/contracts/useStakingContract'
-import { BIG_TEN } from '@/utils/bigNumber'
+import { bigToWei } from '@/utils/bigNumber'
 
 type UseStakeParams = {
   poolId: MaybeRef<number>
@@ -16,8 +16,8 @@ type UseStakeParams = {
 
 export const useStake = (params: UseStakeParams) => {
   const [slrTokenInfo] = useSlrBalance()
-  const amountWei = computed(() => unref(params.amount).times(BIG_TEN.pow(slrTokenInfo.value.decimals)))
-  const reinvestAmountWei = computed(() => unref(params.reinvestAmount).times(BIG_TEN.pow(slrTokenInfo.value.decimals)))
+  const amountWei = computed(() => bigToWei(unref(params.amount), slrTokenInfo.value.decimals))
+  const reinvestAmountWei = computed(() => bigToWei(unref(params.reinvestAmount), slrTokenInfo.value.decimals))
   const stakingContract = useStakingContract()
   const callParams = computed(() => [
     unref(params.poolId),

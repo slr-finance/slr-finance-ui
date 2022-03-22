@@ -4,21 +4,21 @@ import { getReferralContract } from '@/utils/contracts/getReferralContract'
 import { multicall, Call } from '@/utils/contracts/multicall'
 import ReferralAbi from '@/config/abi/Referral.json'
 import contractsAddresses from '@/config/constants/contractsAddresses.json'
-import { BigNumber as BigNumberEther } from 'ethers'
+import { BigNumber as BigNumberEthers } from 'ethers'
 import { runAsyncWithParamChecking } from '@/hooks/runAsyncWithParamChecking'
 import BigNumber from 'bignumber.js'
 import dayjs from 'dayjs'
 import localizedFormat from 'dayjs/plugin/localizedFormat'
 import type { Result } from 'ethers/lib/utils'
 import { REFERRALS_ACTIONS } from '@/config/constants/referrals'
-import { BIG_TEN, ethersToBigNumber } from '@/utils/bigNumber'
+import { parseWei } from '@/utils/bigNumber'
 
 dayjs.extend(localizedFormat)
 
 interface AccrualRaw extends Result {
   from: string
   timestamp: number
-  amount: BigNumberEther
+  amount: BigNumberEthers
   action: number
 }
 
@@ -51,7 +51,7 @@ export const useReferrerAccrualHistory = () => {
 
           breakIfValueIsNil()
 
-          const totalAccrualsBn: BigNumberEther[] = await getReferralContract().functions.accrualHistoryLength(
+          const totalAccrualsBn: BigNumberEthers[] = await getReferralContract().functions.accrualHistoryLength(
             addressVal,
           )
           const totalAccruals = totalAccrualsBn[0].toNumber()
@@ -76,7 +76,7 @@ export const useReferrerAccrualHistory = () => {
 
             accrualList.value.push(
               ...referrals.map(({ from, timestamp, amount: amountEthersBn, action }) => {
-                const amount = ethersToBigNumber(amountEthersBn).div(BIG_TEN.pow(18))
+                const amount = parseWei(amountEthersBn, 18)
 
                 return {
                   address: from,

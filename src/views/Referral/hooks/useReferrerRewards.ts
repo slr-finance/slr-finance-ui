@@ -1,14 +1,14 @@
 import { Ref, ref, watch } from 'vue'
 import { useEthers } from 'vue-dapp'
 import { getReferralContract } from '@/utils/contracts/getReferralContract'
-import { BigNumber as BigNumberEther } from 'ethers'
+import { BigNumber as BigNumberEthers } from 'ethers'
 import BigNumber from 'bignumber.js'
 import { runAsyncWithParamChecking } from '@/hooks/runAsyncWithParamChecking'
-import { BIG_TEN, ethersToBigNumber } from '@/utils/bigNumber'
+import { parseWei } from '@/utils/bigNumber'
 
 type ReferrerRewardRaw = {
-  reward: BigNumberEther
-  rewarded: BigNumberEther
+  reward: BigNumberEthers
+  rewarded: BigNumberEthers
 }
 
 export const useReferrerRewards = () => {
@@ -31,8 +31,8 @@ export const useReferrerRewards = () => {
 
         breakIfValueChanged()
 
-        reward.value = ethersToBigNumber(referrerReward.reward).div(BIG_TEN.pow(18))
-        rewarded.value = ethersToBigNumber(referrerReward.rewarded).div(BIG_TEN.pow(18))
+        reward.value = parseWei(referrerReward.reward, 18)
+        rewarded.value = parseWei(referrerReward.rewarded, 18)
         isFetching.value = false
       },
     )

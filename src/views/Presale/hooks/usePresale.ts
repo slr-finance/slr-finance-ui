@@ -1,26 +1,26 @@
 import PresaleAbi from '@/config/abi/Presale.json'
 import { Ref, ref, watch } from 'vue'
 import { useEthers } from 'vue-dapp'
-import { BigNumber as BigNumberEther, constants, ContractTransaction } from 'ethers'
+import { BigNumber as BigNumberEthers, constants, ContractTransaction } from 'ethers'
 import BigNumber from 'bignumber.js'
 import { runAsyncWithParamChecking } from '@/hooks/runAsyncWithParamChecking'
 import { getPresaleContract } from '@/utils/contracts/getPresaleContract'
 import { Call, multicall } from '@/utils/contracts/multicall'
 import contractsAddresses from '@/config/constants/contractsAddresses.json'
 import { isAddress, Result } from 'ethers/lib/utils'
-import { BIG_TEN, ethersToBigNumber } from '@/utils/bigNumber'
+import { ethersToBigNumber, parseWei } from '@/utils/bigNumber'
 
 type PresaleInfoRaw = [
   [number] & Result,
   [number] & Result,
-  [BigNumberEther] & Result,
+  [BigNumberEthers] & Result,
   [string] & Result,
-  [BigNumberEther] & Result,
-  [BigNumberEther] & Result,
-  [BigNumberEther] & Result,
+  [BigNumberEthers] & Result,
+  [BigNumberEthers] & Result,
+  [BigNumberEthers] & Result,
   [boolean] & Result,
   [boolean] & Result,
-  ([BigNumberEther] & Result) | undefined,
+  ([BigNumberEthers] & Result) | undefined,
   ([boolean] & Result) | undefined,
 ]
 
@@ -129,15 +129,15 @@ export const usePresale = () => {
 
         tokenOutDecimals.value = tokenOutDecimalsVal
         tokenInDecimals.value = tokenInDecimalsVal
-        totalSupply.value = ethersToBigNumber(totalSupplyVal).div(BIG_TEN.pow(tokenOutDecimalsVal))
+        totalSupply.value = parseWei(totalSupplyVal, tokenOutDecimalsVal)
         tokenOutAddress.value = tokenOutAddressVal
         endWhiteListBlock.value = ethersToBigNumber(endWhiteListBlockVal).toNumber()
         endPresaleBlock.value = ethersToBigNumber(endPresaleBlockVal).toNumber()
-        tokenPrice.value = ethersToBigNumber(tokenPriceVal).div(BIG_TEN.pow(tokenInDecimalsVal))
+        tokenPrice.value = parseWei(tokenPriceVal, tokenInDecimalsVal)
         isPresaleEnded.value = isPresaleEndedVal
         isWhiteListClosed.value = isWhiteListClosedVal
         presaleTokenBalance.value = presaleTokenBalanceBn
-          ? ethersToBigNumber(presaleTokenBalanceBn).div(BIG_TEN.pow(tokenOutDecimalsVal))
+          ? parseWei(presaleTokenBalanceBn, tokenOutDecimalsVal)
           : new BigNumber(0)
         joined.value = joinedVal ? joinedVal : false
 

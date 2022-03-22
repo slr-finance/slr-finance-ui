@@ -4,7 +4,7 @@ import { getReferralContract } from '@/utils/contracts/getReferralContract'
 import { multicall, Call } from '@/utils/contracts/multicall'
 import ReferralAbi from '@/config/abi/Referral.json'
 import contractsAddresses from '@/config/constants/contractsAddresses.json'
-import { BigNumber as BigNumberEther } from 'ethers'
+import { BigNumber as BigNumberEthers } from 'ethers'
 import { runAsyncWithParamChecking } from '@/hooks/runAsyncWithParamChecking'
 import dayjs from 'dayjs'
 import localizedFormat from 'dayjs/plugin/localizedFormat'
@@ -43,7 +43,7 @@ export const useReferrals = () => {
 
           breakIfValueIsNil()
 
-          const totalReferralsBn: BigNumberEther[] = await getReferralContract().functions.referralsLength(addressVal)
+          const totalReferralsBn: BigNumberEthers[] = await getReferralContract().functions.referralsLength(addressVal)
           const totalReferrals = totalReferralsBn[0].toNumber()
           numberOfReferrals.value = totalReferrals
 

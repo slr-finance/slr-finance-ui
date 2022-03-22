@@ -4,7 +4,7 @@ import { BigNumber as BigNumberEthers } from 'ethers'
 import get from 'lodash.get'
 import { createModule } from 'vuexok'
 import contractsAddresses from '@/config/constants/contractsAddresses.json'
-import { BIG_TEN, ethersToBigNumber } from '@/utils/bigNumber'
+import { parseWei } from '@/utils/bigNumber'
 
 export type TokenInfo = {
   decimals: number
@@ -44,7 +44,7 @@ export const balanceModule = createModule('balances', {
       state.balances[payload.tokenAddress] = {
         decimals: payload.decimals,
         balanceRaw: payload.balanceRaw,
-        balance: ethersToBigNumber(payload.balanceRaw).div(BIG_TEN.pow(payload.decimals)),
+        balance: parseWei(payload.balanceRaw, payload.decimals),
         address: payload.tokenAddress,
         fetchStatus: FetchingStatus.FETCHED,
       }
