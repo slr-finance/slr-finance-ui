@@ -10,7 +10,6 @@
   import { store } from '@/store/store'
   import AppHeader from '@/components/AppHeader.vue'
   import { stakingModule } from '@/store/modules/stakingModule'
-  import { getProvider } from '@/utils/contracts/getProvider'
 
   export default defineComponent({
     props: {
@@ -22,7 +21,10 @@
       const { address } = useEthers()
       stakingModule.register(store)
       watch(address, (addressVal) => stakingModule.actions.setStakerAddress(addressVal))
-      getProvider().on('block', () => stakingModule.actions.refetchStaker())
+
+      import('@/utils/contracts/getProvider').then(({ getProvider }) => {
+        getProvider().on('block', () => stakingModule.actions.refetchStaker())
+      })
     },
     components: {
       AppHeader,

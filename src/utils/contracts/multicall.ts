@@ -25,7 +25,7 @@ interface TryAggregateRaw extends Result {
 }
 ;[]
 
-export const multicall = async <T extends Result[]>(abi: any[], calls: Call[]): Promise<T> => {
+export const multicall = async <T extends Array<any>>(abi: any[], calls: Call[]): Promise<T> => {
   try {
     const multi = getMulticallContract()
     const itf = new ethers.utils.Interface(abi)

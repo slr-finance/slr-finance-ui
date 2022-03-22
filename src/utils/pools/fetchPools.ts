@@ -1,7 +1,8 @@
+import BigNumber from 'bignumber.js'
 import { Call, multicall } from '@/utils/contracts/multicall'
 import contractsAddresses from '@/config/constants/contractsAddresses.json'
 import StakingAbi from '@/config/abi/Staking.json'
-import BigNumber from 'bignumber.js'
+import { FetchingStatus } from '@/entities/common'
 import { getApy } from '../math/getApy'
 
 export const fetchPools = async (pools: number[]) => {
@@ -22,6 +23,7 @@ export const fetchPools = async (pools: number[]) => {
     const withdrawalFee = new BigNumber(poolState.withdrawalFees._hex).div(1000)
 
     return {
+      fetchStatus: FetchingStatus.NONE,
       apr: apr,
       apy: getApy(apr),
       maxDays: poolState.maxLock,

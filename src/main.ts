@@ -11,7 +11,7 @@ import './index.css'
 import { store } from './store/store'
 import { REFERRER_QUERY_PARAM, REFERRER_STORAGE_NAME } from './config/constants/referrals'
 import { slrModule } from './store/modules/slrModule'
-import { fetchVideoAndCache } from './utils/video/cacheVideo'
+import { prefetchVideo } from './utils/video/cacheVideo'
 import { POOLS_INFO } from './config/constants/Pools'
 import { i18n, i18nRouteHelperPlugin } from './i18n'
 
@@ -49,7 +49,7 @@ const app = createApp(App)
   .use(i18n)
   .use(i18nRouteHelperPlugin)
   .use(router)
-  .use(VueDapp, { appName: 'solar>finance' })
+  .use(VueDapp, { appName: 'slr.finance', appUrl: 'https://slr.finance' })
   .use(Toast, { position: POSITION.TOP_LEFT })
 
 app.mount('#app')
@@ -62,6 +62,6 @@ POOLS_INFO.forEach(
     page: {
       videoUrl: { large },
     },
-  }) => fetchVideoAndCache(large),
+  }) => prefetchVideo(large),
 )
 // Cache video [END]

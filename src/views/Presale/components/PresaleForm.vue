@@ -3,10 +3,10 @@
     Presale form
     <form class="flex flex-col items-stretch">
       <ui-input v-model:value="amountInStr" />
-      <ui-input v-model:value="amountOut" />
+      <ui-input-bn v-model:value="amountOut" />
 
       <approve-token-plug
-        :minAllowance="amountInStr"
+        :minAllowance="amountIn"
         :tokenAddress="tokenOutAddress"
         :spenderAddress="presaleAddress"
       >
@@ -25,6 +25,7 @@
   import { computed, defineComponent, PropType, Ref, ref, toRef } from 'vue'
   import SendTxButton from '@/components/Tx/SendTxButton.vue'
   import UiInput from '@/components/ui/UiInput.vue'
+  import UiInputBn from '@/components/ui/UiInputBn.vue'
 
   import { syncRef } from '@vueuse/core'
   import BigNumber from 'bignumber.js'
@@ -71,6 +72,7 @@
       return {
         handelBuy,
         amountInStr,
+        amountIn,
         amountOut,
         presaleAddress: contractsAddresses.PresaleService,
         buyTxState,
@@ -79,6 +81,7 @@
     components: {
       SendTxButton,
       UiInput,
+      UiInputBn,
       ApproveTokenPlug,
     },
   })
