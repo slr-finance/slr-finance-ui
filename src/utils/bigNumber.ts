@@ -12,3 +12,15 @@ export const ethersToSerializedBigNumber = (ethersBn: BigNumberEthers): Serializ
   ethersToBigNumber(ethersBn).toJSON()
 
 export const ethersToBigNumber = (ethersBn: BigNumberEthers): BigNumber => new BigNumber(ethersBn.toString())
+
+/**
+ * Returns the value of a ten taken to a specified power.
+ * @param exponent The exponent value of the expression.
+ */
+export const bigTenPow = (exponent: number): BigNumber => BIG_TEN.pow(exponent)
+
+export const weiToBig = (value: BigNumber, decimals: number) => value.div(bigTenPow(decimals))
+
+export const bigToWei = (value: BigNumber, decimals: number) => value.times(bigTenPow(decimals))
+
+export const parseWei = (wei: BigNumberEthers, decimals: number) => weiToBig(ethersToBigNumber(wei), decimals)
