@@ -103,6 +103,10 @@ export const stakingModule = createModule('staking', {
       }
     },
     async refetchStaker({ state: { stakerAddress } }) {
+      if (stakerAddress === constants.AddressZero) {
+        return
+      }
+
       await stakingModule.actions.fetchStaker(stakerAddress)
     },
   },
