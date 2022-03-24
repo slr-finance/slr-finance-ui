@@ -11,7 +11,7 @@ export const BIG_TEN = new BigNumber(10)
 export const ethersToSerializedBigNumber = (ethersBn: BigNumberEthers): SerializedBigNumber =>
   ethersToBigNumber(ethersBn).toJSON()
 
-export const ethersToBigNumber = (ethersBn: BigNumberEthers): BigNumber => new BigNumber(ethersBn.toString())
+export const ethersToBigNumber = (ethersBn: BigNumberEthers): BigNumber => new BigNumber(ethersBn.toHexString())
 
 /**
  * Returns the value of a ten taken to a specified power.
