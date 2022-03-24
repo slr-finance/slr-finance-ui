@@ -1,9 +1,9 @@
 <template>
   <div class="ui-box-corners mb-24 cursor-default">
     <p class="text-14">
-      Will be earned: <span class="text-page-active">{{ profitStr }} ({{ profitInDollStr }})</span>
+      Will be earned <span class="text-page-active">{{ profitStr }} ({{ profitInDollStr }})</span> for {{ daysStr }}
     </p>
-    <p class="text-14 text-white/60">{{ withdrawalFeeStr }} unstaking fee if withdraw within {{ daysStr }}</p>
+    <p class="text-14 text-white/60">Early unlock penalty fee is {{ withdrawalFeeStr }}</p>
   </div>
 </template>
 
@@ -56,7 +56,7 @@
       const withdrawalFee = computed(() => poolState.value.withdrawalFee)
 
       const profit = useProfit(amount, apr, days)
-      const profitStr = useTokenAmountFormat(profit, 'SLN', 5)
+      const profitStr = useTokenAmountFormat(profit, 'SLR', 5)
       const profitInDollStr = useUsdFormat(useUsdPrice(profit))
       const withdrawalFeeStr = usePercentFormat(withdrawalFee)
 

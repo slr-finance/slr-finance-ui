@@ -34,8 +34,8 @@
       const stakedAmount = computed(() => stakerState.value.amount)
       const earnedAmount = computed(() => stakerState.value.reward.toNumber())
       const earnedAmountAnimated = useTransition(earnedAmount, { duration: 300 })
-      const stakedStr = useTokenAmountFormat(stakedAmount, 'SLN', 2)
-      const earnedStr = useTokenAmountFormat(earnedAmountAnimated, 'SLN', 9)
+      const stakedStr = useTokenAmountFormat(stakedAmount, 'SLR', 2)
+      const earnedStr = useTokenAmountFormat(earnedAmountAnimated, 'SLR', 9)
 
       const lifeTimestamp = useInterval(1000)
       const leftToWait = computed(() => {
