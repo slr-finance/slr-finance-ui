@@ -118,7 +118,7 @@
     @apply flex space-x-24 h-full;
   }
 
-  .app-header > .links > .item > {
+  .app-header > .links > .item {
     @apply h-full;
   }
 

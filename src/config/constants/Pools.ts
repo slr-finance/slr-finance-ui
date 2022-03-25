@@ -5,9 +5,7 @@ export type PoolType = {
   page: {
     description: string
     activeColor: string
-    videoUrl: {
-      large: string
-    }
+    videoFolder: string
   }
 }
 
@@ -19,9 +17,7 @@ export const POOLS_INFO: PoolType[] = [
     page: {
       description: 'the first planet of the income path',
       activeColor: '#f00',
-      videoUrl: {
-        large: '/planets/neptune.webm',
-      },
+      videoFolder: '/planets/earth',
     },
   },
   {
@@ -31,9 +27,7 @@ export const POOLS_INFO: PoolType[] = [
     page: {
       description: 'the first planet of the income path',
       activeColor: '#00f',
-      videoUrl: {
-        large: '/planets/earth.webm',
-      },
+      videoFolder: '/planets/earth',
     },
   },
   {
@@ -43,9 +37,7 @@ export const POOLS_INFO: PoolType[] = [
     page: {
       description: 'the first planet of the income path',
       activeColor: '#0491cf',
-      videoUrl: {
-        large: '/planets/earth.webm',
-      },
+      videoFolder: '/planets/earth',
     },
   },
   {
@@ -55,9 +47,7 @@ export const POOLS_INFO: PoolType[] = [
     page: {
       description: 'the first planet of the income path',
       activeColor: '#b7531f',
-      videoUrl: {
-        large: '/planets/earth.webm',
-      },
+      videoFolder: '/planets/earth',
     },
   },
   {
@@ -67,9 +57,7 @@ export const POOLS_INFO: PoolType[] = [
     page: {
       description: 'the first planet of the income path',
       activeColor: '#00f',
-      videoUrl: {
-        large: '/planets/earth.webm',
-      },
+      videoFolder: '/planets/earth',
     },
   },
   {
@@ -79,9 +67,7 @@ export const POOLS_INFO: PoolType[] = [
     page: {
       description: 'the first planet of the income path',
       activeColor: '#00f',
-      videoUrl: {
-        large: '/planets/earth.webm',
-      },
+      videoFolder: '/planets/earth',
     },
   },
   {
@@ -91,9 +77,7 @@ export const POOLS_INFO: PoolType[] = [
     page: {
       description: 'the first planet of the income path',
       activeColor: '#00f',
-      videoUrl: {
-        large: '/planets/earth.webm',
-      },
+      videoFolder: '/planets/earth',
     },
   },
   {
@@ -103,9 +87,7 @@ export const POOLS_INFO: PoolType[] = [
     page: {
       description: 'the first planet of the income path',
       activeColor: '#00f',
-      videoUrl: {
-        large: '/planets/earth.webm',
-      },
+      videoFolder: '/planets/neptune',
     },
   },
   {
@@ -115,9 +97,7 @@ export const POOLS_INFO: PoolType[] = [
     page: {
       description: 'the first planet of the income path',
       activeColor: '#c94619',
-      videoUrl: {
-        large: '/planets/earth.webm',
-      },
+      videoFolder: '/planets/earth',
     },
   },
 ]
