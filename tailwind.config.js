@@ -58,7 +58,14 @@ module.exports = {
       12: '12px',
       18: '18px',
     },
+    aspectRatio: {
+      auto: 'auto',
+      'pool-video': '1250 / 1080',
+      'pool-video-gradient': '500 / 1080',
+    },
     extend: {},
   },
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/aspect-ratio'),
+  ],
 }
