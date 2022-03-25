@@ -1,11 +1,27 @@
 <template>
-  <div class="pool-planet-video h-full pointer-events-none fixed right-0 top-0">
+  <div class="
+    pointer-events-none
+    h-full
+    fixed
+    right-0
+    top-0
+    aspect-pool-video
+    before:content-[' ']
+    before:block 
+    before:absolute 
+    before:top-0 
+    before:left-0 
+    before:h-full 
+    before:aspect-pool-video-gradient
+    before:bg-gradient-to-r 
+    before:from-black 
+    before:to-transparent
+  ">
     <video
       ref="video"
       autoplay
       loop
       muted
-      class="w-full h-full"
     />
   </div>
 </template>
@@ -37,16 +53,3 @@
     },
   })
 </script>
-
-<style lang="postcss">
-  .pool-planet-video {
-    aspect-ratio: 1150 / 1080;
-  }
-
-  .pool-planet-video::after {
-    aspect-ratio: 500 / 1080;
-    background: linear-gradient(90deg, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 100%);
-    content: '';
-    @apply block absolute top-0 left-0 h-full;
-  }
-</style>

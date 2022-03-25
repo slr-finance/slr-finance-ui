@@ -20,7 +20,7 @@ export const POOLS_INFO: PoolType[] = [
       description: 'the first planet of the income path',
       activeColor: '#f00',
       videoUrl: {
-        large: '/planets/earth.webm',
+        large: '/planets/neptune.webm',
       },
     },
   },
