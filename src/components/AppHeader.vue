@@ -50,12 +50,12 @@
         </router-link>
       </li>
       <li class="item h-full">
-        <router-link
+        <a
           class="link h-full"
-          :to="i18nRouteHelper({ name: 'swap' })"
+          :href="`https://pancake.kiemtienonline360.com/#/swap?outputCurrency=${tokenAddress}`"
         >
           <div>Buy/Sell</div>
-        </router-link>
+        </a>
       </li>
     </ul>
 
@@ -71,6 +71,7 @@
   import ConnectMetamask from './ConnectWallet/ConnectMetamask.vue'
   import { POOLS_INFO } from '../config/constants/Pools'
   import { useWindowScroll } from '@vueuse/core'
+  import contractsAddresses from '@/config/constants/contractsAddresses.json'
 
   type LinkType = {
     text: string
@@ -95,7 +96,7 @@
         return opacity.toFixed(2)
       })
 
-      return { poolsLinks, opacity }
+      return { poolsLinks, opacity, tokenAddress: contractsAddresses.SolarToken }
     },
     components: {
       ConnectMetamask,

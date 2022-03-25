@@ -14,7 +14,12 @@ export const slrModule = createModule('slr', {
       slrModule.mutations.priceFetching()
 
       try {
-        const slrPrice = await fetchPrice(contractsAddresses.SolarToken, ['0x430d9FAFf11096C119258Cd0A158276FaAa0798d'])
+        const slrPrice = await fetchPrice(contractsAddresses.SolarToken, [
+          '0x9Ac64Cc6e4415144C455BD8E4837Fea55603e5c3',
+          '0xAE4C99935B1AA0e76900e86cD155BFA63aB77A2a',
+          '0xF8E4ce287E0D1f9c9fda5EC917515cB87D9C1E6C',
+          '0x5126C1B8b4368c6F07292932451230Ba53a6eB7A',
+        ])
 
         slrModule.mutations.priceFetched(slrPrice)
       } catch (error) {
