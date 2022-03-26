@@ -74,11 +74,12 @@ export const stakingModule = createModule('staking', {
   },
   actions: {
     async setStakerAddress(_, stakerAddress: string | null) {
-      if (stakerAddress) {
+      if (stakerAddress && stakerAddress !== constants.AddressZero) {
         stakingModule.mutations.setStakerAddress(stakerAddress)
         stakingModule.actions.fetchStaker(stakerAddress)
       } else {
         stakingModule.mutations.setStakerAddress(constants.AddressZero)
+        stakingModule.mutations.stakerFetched(defaultStakerState())
       }
     },
     async fetchAll() {

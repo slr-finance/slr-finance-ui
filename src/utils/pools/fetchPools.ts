@@ -2,7 +2,7 @@ import { Call, multicall } from '@/utils/contracts/multicall'
 import contractsAddresses from '@/config/constants/contractsAddresses.json'
 import StakingAbi from '@/config/abi/Staking.json'
 import { getApy } from '@/utils/math/getApy'
-import { ethersToBigNumber } from '@/utils/bigNumber'
+import { ethersToBigNumber, parseWei } from '@/utils/bigNumber'
 import { FetchingStatus } from '@/entities/common'
 
 export const fetchPools = async (pools: number[]) => {
@@ -30,7 +30,7 @@ export const fetchPools = async (pools: number[]) => {
       minDays: poolState.minLock,
       id: poolState.id,
       withdrawalFee: withdrawalFee,
-      totalStaked: ethersToBigNumber(poolState.totalStaked),
+      totalStaked: parseWei(poolState.totalStaked, 18),
       isDone: false,
       isActive: true,
     }

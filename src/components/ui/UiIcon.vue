@@ -4,10 +4,7 @@
     :width="size"
     :height="size"
   >
-    <use
-      :xlink:href="symbolId"
-      :fill="color"
-    />
+    <use :xlink:href="symbolId" />
   </svg>
 </template>
 
@@ -24,10 +21,6 @@
       name: {
         type: String,
         required: true,
-      },
-      color: {
-        type: String,
-        default: '#333',
       },
       size: {
         type: [Number, String],

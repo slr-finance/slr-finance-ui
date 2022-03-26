@@ -1,10 +1,13 @@
 <template>
-  <div
-    class="ui-box-corners text-14"
-    v-if="poolId === stakerPoolId"
-  >
-    <div>You staked: {{ stakedStr }}</div>
-    <div>You earned: {{ earnedStr }}</div>
+  <div class="space-y-16">
+    <div class="staker-info">
+      <div class="label">You staked:</div>
+      <div class="value">{{ stakedStr }}</div>
+    </div>
+    <div class="staker-info">
+      <div class="label">You earned:</div>
+      <div class="value">{{ earnedStr }}</div>
+    </div>
     <div v-if="!isStakinFinished">Harvest Lockup: {{ leftToWaitStr }}</div>
   </div>
 </template>
@@ -59,3 +62,17 @@
     },
   })
 </script>
+
+<style>
+  .staker-info {
+    @apply flex justify-between items-end;
+  }
+
+  .staker-info > .label {
+    @apply text-12 text-white text-opacity-60 leading-none;
+  }
+
+  .staker-info > .value {
+    @apply text-14 text-white font-title leading-none;
+  }
+</style>

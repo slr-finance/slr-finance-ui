@@ -26,7 +26,6 @@
   },
   "devDependencies": {
     "@rollup/plugin-inject": "4.0.4",
-    "@tailwindcss/aspect-ratio": "0.4.0",
     "@types/lodash.get": "4.4.6",
     "@vitejs/plugin-vue": "2.2.0",
     "autoprefixer": "10.4.2",

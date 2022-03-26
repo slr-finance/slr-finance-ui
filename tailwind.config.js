@@ -18,9 +18,11 @@ module.exports = {
       48: '48px',
       50: '50px',
       64: '64px',
+      80: '80px',
       full: '100%',
     },
     fontSize: {
+      10: '10px',
       12: '12px',
       14: '14px',
       16: '16px',
@@ -38,6 +40,7 @@ module.exports = {
     colors: {
       transparent: 'transparent',
       black: 'black',
+      red: '#D42727',
       white: '#fcfcfc',
       bnb: '#D9A21F',
       'page-active': 'var(--page-active-color, #fcfcfc)',
@@ -54,18 +57,18 @@ module.exports = {
     borderRadius: {
       full: '9999px',
       4: '4px',
+      8: '8px',
       10: '10px',
       12: '12px',
       18: '18px',
+      24: '24px',
     },
     aspectRatio: {
       auto: 'auto',
+      1: '1/1',
       'pool-video': '1250 / 1080',
       'pool-video-gradient': '500 / 1080',
     },
     extend: {},
   },
-  plugins: [
-    require('@tailwindcss/aspect-ratio'),
-  ],
 }
