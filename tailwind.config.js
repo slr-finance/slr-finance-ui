@@ -8,6 +8,7 @@ module.exports = {
       4: '4px',
       6: '6px',
       8: '8px',
+      10: '10px',
       12: '12px',
       16: '16px',
       18: '18px',
@@ -15,15 +16,19 @@ module.exports = {
       24: '24px',
       32: '32px',
       36: '36px',
+      40: '40px',
       48: '48px',
       50: '50px',
       64: '64px',
       full: '100%',
     },
     fontSize: {
+      11: '11px',
       12: '12px',
       14: '14px',
       16: '16px',
+      18: '18px',
+      38: '38px',
       40: '40px',
     },
     lineHeight: {
@@ -37,15 +42,24 @@ module.exports = {
     },
     colors: {
       transparent: 'transparent',
+      gray: '#6C7479',
       black: 'black',
       white: '#fcfcfc',
       bnb: '#D9A21F',
+      purple: '#6D0DFC',
+      aqua: '#40E7FF',
+      yellow: '#F2D700',
+      pink: '#FF36DF',
       'page-active': 'var(--page-active-color, #fcfcfc)',
     },
     minWidth: {
+      40: '40px',
       48: '48px',
       50: '50px',
       64: '64px',
+    },
+    minHeight: {
+      24: '24px',
     },
     backdropBlur: {
       4: '4px',
@@ -56,6 +70,7 @@ module.exports = {
       4: '4px',
       10: '10px',
       12: '12px',
+      16: '16px',
       18: '18px',
     },
     aspectRatio: {
@@ -65,7 +80,5 @@ module.exports = {
     },
     extend: {},
   },
-  plugins: [
-    require('@tailwindcss/aspect-ratio'),
-  ],
+  plugins: [],
 }

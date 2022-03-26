@@ -2,6 +2,8 @@
   <ui-button
     :disabled="isDisabled"
     :type="type"
+    :size="size"
+    :variant="variant"
   >
     <div v-if="txState.isWaitingForSigning && !loading">Waiting confirmation in your wallet</div>
     <div v-else-if="txState.isWaitingForReceipt || loading">Loader</div>
@@ -33,6 +35,13 @@
         type: Object as PropType<TxState<TxStatus>>,
         required: true,
       },
+      size: {
+        type: [Number, String],
+      },
+      variant: {
+        validator: (value: string) => ['primary'].includes(value),
+        default: 'primary'
+      }
     },
     setup(props) {
       const isDisabled = computed(
