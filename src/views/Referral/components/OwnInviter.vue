@@ -1,5 +1,8 @@
 <template>
-  <div>My inviter: {{ shortenInviterAddress }}</div>
+  <div class="flex flex-col">
+    <span class="text-11 text-gray uppercase">my inviter</span>
+    <span>{{ shortenInviterAddress }}</span>
+  </div>
 </template>
 
 <script lang="ts">

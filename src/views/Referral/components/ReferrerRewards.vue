@@ -1,17 +1,26 @@
 <template>
-  <div>
-    <div>isFetching: {{ isFetching }}</div>
-    <div>Pending rewards: {{ pendingRewardStr }}</div>
-    <div>Withdrawn Rewards: {{ rewardedStr }}</div>
-    <send-tx-button
-      @click="handleClaim"
-      :txState="claimTxState"
-      :loading="isFetching"
-      :disabled="isNotEnoughReward"
-    >
-      Claim rewards
-    </send-tx-button>
-  </div>
+  <ui-widget>
+    <own-inviter class="mb-16"/>
+    <div class="bg-white bg-opacity-30 rounded-12 h-48 px-16 flex items-center justify-between mb-10">
+      <span class="text-gray">Total rewards</span>
+      <span class="text-14">{{ pendingRewardStr }}</span>
+    </div>
+    <div class="flex items-center bg-aqua bg-opacity-10 rounded-12 h-48 pl-18 pr-6 mb-12">
+      <div class="flex-1 flex justify-between mr-10">
+        <span class="text-aqua">Unclaim rewards</span>
+        <span class="text-18">{{ rewardedStr }}</span>
+      </div>
+      <send-tx-button
+        @click="handleClaim"
+        :txState="claimTxState"
+        :loading="isFetching"
+        :disabled="!isNotEnoughReward"
+        size="36"
+      >
+        CLAIM
+      </send-tx-button>
+    </div>
+  </ui-widget>
 </template>
 
 <script lang="ts">
@@ -21,17 +30,19 @@
   import { useReferrerClaim } from '../hooks/useReferrerClaim'
   import SendTxButton from '@/components/Tx/SendTxButton.vue'
   import { useSlrBalance } from '@/store/hooks/useBalance'
+  import UiWidget from '@/components/ui/UiWidget.vue'
+  import OwnInviter from './OwnInviter.vue'
 
   export default defineComponent({
-    name: 'referrer-rewads',
+    name: 'referrer-rewards',
     setup() {
       const [handleClaim, claimTxState] = useReferrerClaim()
       const [, refetchSlrBalance] = useSlrBalance()
       const { reward, rewarded, isFetching, refetchRewards } = useReferrerRewards()
       const pendingReward = computed(() => reward.value.minus(rewarded.value))
       const isNotEnoughReward = computed(() => pendingReward.value.lte(0))
-      const pendingRewardStr = useTokenAmountFormat(pendingReward, 'SOLAR>FINANCE')
-      const rewardedStr = useTokenAmountFormat(rewarded, 'SOLAR>FINANCE')
+      const pendingRewardStr = useTokenAmountFormat(pendingReward, 'SLR')
+      const rewardedStr = useTokenAmountFormat(rewarded, 'SLR')
 
       const refetchRewardsAndSlrBalance = () => Promise.all([refetchRewards(), refetchSlrBalance()])
 
@@ -46,6 +57,6 @@
         claimTxState,
       }
     },
-    components: { SendTxButton },
+    components: { SendTxButton, UiWidget, OwnInviter },
   })
 </script>

@@ -29,6 +29,10 @@
       to: {
         type: Object,
       },
+      variant: {
+        validator: (value: string) => ['primary'].includes(value),
+        default: 'default'
+      }
     },
     setup(props) {
       const componentProps = computed(() => {
@@ -39,6 +43,7 @@
           class: {
             '-disabled': props.disabled,
             [`-size-${props.size}`]: true,
+            [`-${props.variant}`]: true,
           },
         }
       })
@@ -68,6 +73,12 @@
     padding: 0 8px 0 8px;
   }
 
+  .ui-button.-size-36 {
+    @apply h-36 min-w-48 rounded-10 border-2 opacity-80 text-12;
+
+    padding: 0 8px 0 8px;
+  }
+
   .ui-button.-disabled {
     @apply border-dashed cursor-not-allowed opacity-40;
   }
@@ -85,5 +96,9 @@
 
     color: var(--page-active-color, #fff);
     border-color: var(--page-active-color, #fff);
+  }
+
+  .ui-button.-primary {
+    @apply bg-aqua text-black border-none;
   }
 </style>

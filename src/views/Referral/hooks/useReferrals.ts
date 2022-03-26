@@ -1,5 +1,5 @@
 import { ref, watch } from 'vue'
-import { useEthers } from 'vue-dapp'
+import { useEthers, shortenAddress } from 'vue-dapp'
 import { getReferralContract } from '@/utils/contracts/getReferralContract'
 import { multicall, Call } from '@/utils/contracts/multicall'
 import ReferralAbi from '@/config/abi/Referral.json'
@@ -20,8 +20,10 @@ interface ReferralInfoRaw extends Result {
 
 type ReferralInfo = {
   address: string
+  shortAddress: string
   timestamp: number
   dateStr: string
+  timeStr: string
 }
 
 export const useReferrals = () => {
@@ -65,11 +67,16 @@ export const useReferrals = () => {
             breakIfValueChanged()
 
             referralsList.value.push(
-              ...referrals.map(({ account, timestamp }) => ({
-                address: account,
-                timestamp,
-                dateStr: dayjs.unix(timestamp).format('LLL'),
-              })),
+              ...referrals.map(({ account, timestamp }) => {
+                const date = dayjs.unix(timestamp)
+                return {
+                  address: account,
+                  shortAddress: shortenAddress(account),
+                  timestamp,
+                  dateStr: date.format('DD.MM.YY'),
+                  timeStr: date.format('HH:MM'),
+                }
+              }),
             )
           }
 

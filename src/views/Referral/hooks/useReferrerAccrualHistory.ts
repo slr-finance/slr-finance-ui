@@ -28,8 +28,10 @@ type AccrualInfo = {
   timestamp: number
   amount: BigNumber
   dateStr: string
+  timeStr: string
   amountStr: string
   actionLabel: string
+  action: number
 }
 
 export const useReferrerAccrualHistory = () => {
@@ -77,18 +79,21 @@ export const useReferrerAccrualHistory = () => {
             accrualList.value.push(
               ...referrals.map(({ from, timestamp, amount: amountEthersBn, action }) => {
                 const amount = parseWei(amountEthersBn, 18)
+                const date = dayjs.unix(timestamp)
 
                 return {
                   address: from,
                   shortAddress: shortenAddress(from),
                   timestamp,
                   amount,
-                  dateStr: dayjs.unix(timestamp).format('LLL'),
+                  dateStr: date.format('DD.MM.YY'),
+                  timeStr: date.format('HH:MM'),
                   amountStr: `${amount.toNumber().toLocaleString('en-En', {
                     style: 'decimal',
                     maximumFractionDigits: 6,
-                  })} SOLAR>FINANCE`,
+                  })} SLR`,
                   actionLabel: REFERRALS_ACTIONS[action],
+                  action
                 }
               }),
             )
