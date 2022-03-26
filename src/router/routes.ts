@@ -1,4 +1,3 @@
-import { AppLocale } from '@/i18n'
 import type { RouteRecordRaw } from 'vue-router'
 import { POOLS_INFO } from '../config/constants/Pools'
 
@@ -28,13 +27,6 @@ export const routes: RouteRecordRaw[] = [
     path: '/:locale?/pool',
     name: 'pool',
     component: () => import('@/views/Pool/PoolLayout.vue'),
-    beforeEnter: (to, from, next) => {
-      if (to.name === 'pool') {
-        next(from)
-      } else {
-        next()
-      }
-    },
     props: (to) => to.meta,
     children: [
       ...POOLS_INFO.map(({ name, id: poolId, routeName }): RouteRecordRaw => {

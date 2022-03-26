@@ -6,6 +6,7 @@ export type PoolType = {
     description: string
     activeColor: string
     videoFolder: string
+    icon: string
   }
 }
 
@@ -18,6 +19,7 @@ export const POOLS_INFO: PoolType[] = [
       description: 'the first planet of the income path',
       activeColor: '#f00',
       videoFolder: '/planets/earth',
+      icon: 'pool-mercury',
     },
   },
   {
@@ -28,6 +30,7 @@ export const POOLS_INFO: PoolType[] = [
       description: 'the first planet of the income path',
       activeColor: '#00f',
       videoFolder: '/planets/earth',
+      icon: 'pool-venus',
     },
   },
   {
@@ -38,6 +41,7 @@ export const POOLS_INFO: PoolType[] = [
       description: 'the first planet of the income path',
       activeColor: '#0491cf',
       videoFolder: '/planets/earth',
+      icon: 'pool-earth',
     },
   },
   {
@@ -48,6 +52,7 @@ export const POOLS_INFO: PoolType[] = [
       description: 'the first planet of the income path',
       activeColor: '#b7531f',
       videoFolder: '/planets/earth',
+      icon: 'pool-mars',
     },
   },
   {
@@ -58,6 +63,7 @@ export const POOLS_INFO: PoolType[] = [
       description: 'the first planet of the income path',
       activeColor: '#00f',
       videoFolder: '/planets/earth',
+      icon: 'pool-jupiter',
     },
   },
   {
@@ -68,6 +74,7 @@ export const POOLS_INFO: PoolType[] = [
       description: 'the first planet of the income path',
       activeColor: '#00f',
       videoFolder: '/planets/earth',
+      icon: 'pool-saturn',
     },
   },
   {
@@ -78,6 +85,7 @@ export const POOLS_INFO: PoolType[] = [
       description: 'the first planet of the income path',
       activeColor: '#00f',
       videoFolder: '/planets/earth',
+      icon: 'pool-uranus',
     },
   },
   {
@@ -88,6 +96,7 @@ export const POOLS_INFO: PoolType[] = [
       description: 'the first planet of the income path',
       activeColor: '#00f',
       videoFolder: '/planets/neptune',
+      icon: 'pool-neptune',
     },
   },
   {
@@ -98,6 +107,7 @@ export const POOLS_INFO: PoolType[] = [
       description: 'the first planet of the income path',
       activeColor: '#c94619',
       videoFolder: '/planets/earth',
+      icon: 'pool-solar',
     },
   },
 ]

@@ -3,8 +3,11 @@
     <input
       class="input flex-1"
       v-model="value"
+      :placeholder="placeholder"
     />
-    <div class="flex justify-center items-center">
+    <div
+      class="flex justify-center items-center relative pl-12 before:content-[' '] before:block before:absolute before:h-full before:w-24 before:bg-gradient-to-r before:from-transparent before:to-black before:right-full before:top-0 before:pointer-events-none"
+    >
       <slot name="postfix"></slot>
     </div>
   </label>
@@ -17,6 +20,10 @@
   export default defineComponent({
     props: {
       value: [String, Number],
+      placeholder: {
+        type: String,
+        default: '',
+      },
     },
     emits: ['update:value'],
     setup(props, { emit }) {
@@ -31,17 +38,17 @@
 
 <style lang="postcss">
   .ui-input.-size-50 {
-    @apply h-50 min-w-50 rounded-12 border border-white border-opacity-60 px-24;
+    @apply h-50 min-w-50 rounded-12 border border-white border-opacity-20 px-18 text-14 text-white;
   }
 
   .ui-input {
-    @apply bg-transparent backdrop-blur-4;
+    @apply bg-black;
 
     color: var(--page-active-color, #fff);
     border-color: var(--page-active-color, #fff);
   }
 
   .ui-input > .input {
-    @apply bg-transparent outline-none border-0;
+    @apply bg-transparent outline-none border-0 placeholder-white placeholder-opacity-60;
   }
 </style>

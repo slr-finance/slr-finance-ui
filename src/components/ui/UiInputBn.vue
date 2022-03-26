@@ -1,5 +1,8 @@
 <template>
-  <ui-input v-model:value="valueStr">
+  <ui-input
+    v-model:value="valueStr"
+    :placeholder="placeholder"
+  >
     <template #postfix><slot name="postfix" /></template>
   </ui-input>
 </template>
@@ -16,6 +19,10 @@
       value: {
         type: Object as PropType<BigNumber>,
         default: new BigNumber(0),
+      },
+      placeholder: {
+        type: String,
+        default: 'Amount',
       },
     },
     emits: ['update:value'],

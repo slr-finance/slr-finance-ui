@@ -1,7 +1,7 @@
 import BigNumber from 'bignumber.js'
 import { Call, multicall } from '../contracts/multicall'
 import PairAbi from '@/config/abi/Pair.json'
-import { ethersToBigNumber } from '@/utils/bigNumber'
+import { ethersToBigNumber, parseWei } from '@/utils/bigNumber'
 
 export const fetchPrice = async (tokenAddress: string, path: string[]) => {
   const calls: Call[] = path
@@ -35,5 +35,9 @@ export const fetchPrice = async (tokenAddress: string, path: string[]) => {
     { price: new BigNumber(1), token: tokenAddress },
   )
 
-  return price
+  const liquidityPrice = price
+    .times(parseWei(tokenAddress === response[0] ? response[2].reserve1 : response[2].reserve0, 18))
+    .times(2)
+
+  return { price, liquidityPrice }
 }

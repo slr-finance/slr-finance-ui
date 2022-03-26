@@ -1,19 +1,38 @@
 <template>
-  <div v-if="poolId === stakerState.poolId">
-    <ui-button :to="i18nRouteHelper({ name: nextPool.routeName })">
-      Migrate to {{ nextPool.name }} pool with {{ nextPoolApyStr }} APY and zero performance fee
-      <ui-icon
-        name="arrow-right"
-        class="ml-8"
-      />
-    </ui-button>
+  <div class="relative pt-32">
+    <ui-poligon class="absolute top-32 right-0 transform-gpu translate-x-1/2 -translate-y-1/2 z-20"> End </ui-poligon>
 
-    <send-tx-button
-      @click="handleUnstake"
-      :tx-state="unstakeTxState"
+    <div
+      v-if="poolId === stakerState.poolId"
+      class="ui-box-corners"
     >
-      Withdrawal to wallet
-    </send-tx-button>
+      <staker-info
+        :poolId="poolId"
+        class="pt-18 pb-16"
+      />
+      <ui-button
+        :to="i18nRouteHelper({ name: nextPool.routeName })"
+        class="mb-12"
+      >
+        Migrate to {{ nextPool.name }} pool with {{ nextPoolApyStr }} APY and zero performance fee
+        <ui-icon
+          name="arrow-right"
+          class="ml-8"
+        />
+      </ui-button>
+
+      <send-tx-button
+        @click="handleUnstake"
+        :tx-state="unstakeTxState"
+        class="mb-12"
+      >
+        Withdrawal to wallet
+      </send-tx-button>
+
+      <ui-alert class="text-red">
+        When withdrawing, farming is possible only from the first pool without the ability to return to the end point
+      </ui-alert>
+    </div>
   </div>
 </template>
 
@@ -28,6 +47,9 @@
   import { useSlrBalance } from '@/store/hooks/useBalance'
   import { usePool } from '@/store/hooks/usePool'
   import { usePercentFormat } from '@/hooks/formatters/usePercentFormat'
+  import StakerInfo from './StakerInfo.vue'
+  import UiPoligon from '@/components/ui/UiPoligon.vue'
+  import UiAlert from '@/components/ui/UiAlert.vue'
 
   export default defineComponent({
     name: 'staking-finished',
@@ -62,6 +84,6 @@
         unstakeTxState,
       }
     },
-    components: { SendTxButton, UiButton, UiIcon },
+    components: { SendTxButton, UiButton, UiIcon, StakerInfo, UiPoligon, UiAlert },
   })
 </script>

@@ -1,46 +1,55 @@
 <template>
   <section class="staking-widget">
-    <div class="flex-1 flex flex-col justify-center">
-      <div class="text-12 text-white/60 mb-8 h-24 flex items-center cursor-default">
-        <div class="w-20 h-20 border border-white rounded-full mr-8" />
-        {{ poolInfo.page.description }}
+    <div class="flex-1 flex flex-col justify-between space-y-32">
+      <div>
+        <div class="text-12 text-white/60 mb-8 h-24 flex items-center cursor-default">
+          <div class="w-20 h-20 border border-white rounded-full mr-8" />
+          {{ poolInfo.page.description }}
+        </div>
+
+        <h2 class="title text-40 uppercase font-title text-page-active mb-8 leading-140 cursor-default">
+          {{ poolInfo.name }}&nbsp;<span class="opacity-60">staking planet</span>
+        </h2>
+
+        <p class="text-16 text-white/60 leading-125 mb-20 cursor-default">
+          <span class="text-page-active">{{ apyStr }}</span>
+        </p>
+
+        <completed-pool
+          v-if="isCompletedPool"
+          :pool-id="poolState.id"
+          class="mb-20"
+        />
+
+        <staking-finished
+          v-else-if="isCurrentStakerPoolFinished && isCurrentStakerPool && hasCurrentStakerPoolDeposit"
+          :pool-id="poolId"
+        />
+
+        <stake-form
+          v-else-if="isCurrentStakerPool"
+          :pool-id="poolId"
+        />
+
+        <migrate-form
+          v-else-if="canMigrateToNextPool"
+          :pool-id="poolId"
+        />
+
+        <div v-else>Не активен</div>
       </div>
 
-      <h2 class="title text-40 uppercase font-title text-page-active mb-8 leading-140 cursor-default">
-        {{ poolInfo.name }}&nbsp;<span class="opacity-60">staking planet</span>
-      </h2>
-
-      <p class="text-16 text-white/60 leading-125 mb-20 cursor-default">
-        <span class="text-page-active">{{ apyStr }}</span>
-      </p>
-
-      <staker-info
-        :pool-id="poolState.id"
-        class="mb-20"
-      />
-
-      <completed-pool
-        v-if="isCompletedPool"
-        :pool-id="poolState.id"
-        class="mb-20"
-      />
-
-      <staking-finished
-        v-else-if="isCurrentStakerPoolFinished && isCurrentStakerPool && hasCurrentStakerPoolDeposit"
-        :pool-id="poolId"
-      />
-
-      <stake-form
-        v-else-if="isCurrentStakerPool"
-        :pool-id="poolId"
-      />
-
-      <migrate-form
-        v-else-if="canMigrateToNextPool"
-        :pool-id="poolId"
-      />
-
-      <div v-else>Не активен</div>
+      <div>
+        <pool-tvl
+          :pool-id="poolId"
+          class="mb-24"
+        />
+        <div class="text-14 mb-32">
+          The first planet of the solar farming system, the first step of your earnings, start your flight from it to
+          the golden sun and high APY
+        </div>
+        <token-info />
+      </div>
     </div>
   </section>
 </template>
@@ -53,11 +62,12 @@
   import { usePercentFormat } from '@/hooks/formatters/usePercentFormat'
   import { useI18n } from 'vue-i18n'
   import { useStaker } from '@/store/hooks/useStaker'
-  import StakerInfo from './StakerInfo.vue'
   import StakingFinished from './StakingFinished.vue'
   import CompletedPool from './CompletedPool.vue'
   import StakeForm from './StakeForm.vue'
   import MigrateForm from './MigrateForm.vue'
+  import TokenInfo from './TokenInfo.vue'
+  import PoolTvl from './PoolTvl.vue'
 
   export default defineComponent({
     name: 'staking-widget',
@@ -113,9 +123,10 @@
     components: {
       StakeForm,
       MigrateForm,
-      StakerInfo,
       StakingFinished,
       CompletedPool,
+      TokenInfo,
+      PoolTvl,
     },
   })
 </script>

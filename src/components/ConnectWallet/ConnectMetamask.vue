@@ -9,6 +9,7 @@
         {{ trimedAddress }}
         <div class="bg-bnb w-20 h-20 flex justify-center items-center ml-6 rounded-4">
           <ui-icon
+            class="text-white"
             name="bnb-chain"
             size="14"
           />
