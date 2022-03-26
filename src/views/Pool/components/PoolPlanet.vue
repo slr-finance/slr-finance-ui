@@ -43,13 +43,13 @@
     setup(props) {
       const videoRef = templateRef<HTMLVideoElement>('video')
       const poolInfo = usePoolInfo(toRef(props, 'poolId'))
-      const videoUrl = computed(() => poolInfo.value.page.videoUrl.large)
+      const videoFolder = computed(() => poolInfo.value.page.videoFolder)
 
       onMounted(() => {
-        playVideoFromCache(videoRef.value, videoUrl.value)
+        playVideoFromCache(videoRef.value, videoFolder.value)
       })
 
-      watch(videoUrl, () => playVideoFromCache(videoRef.value, videoUrl.value))
+      watch(videoFolder, () => playVideoFromCache(videoRef.value, videoFolder.value))
     },
   })
 </script>

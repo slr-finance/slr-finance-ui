@@ -1,6 +1,40 @@
 const fetchPromises = new Map<string, Promise<Response>>()
 
-export const prefetchVideo = async (videoFileUrl: string) => {
+const checkSupportedVideoCodec = () => {
+  const testVideoEl = document.createElement('video')
+
+  const codecs = [
+    {
+      name: 'vp9',
+      type: 'video/webm; codecs="vp9, vorbis"',
+      extension: 'webm',
+    },
+    {
+      name: 'vp8',
+      type: 'video/webm; codecs="vp8, vorbis"',
+      extension: 'webm',
+    },
+    {
+      name: 'h264',
+      type: 'video/mp4; codecs="avc1.42E01E"',
+      extension: 'mp4',
+    },
+  ]
+
+  const availableCodec = codecs.find((codec) => testVideoEl.canPlayType(codec.type) !== '')
+
+  return availableCodec
+}
+
+export const codec = checkSupportedVideoCodec()
+
+export const prefetchVideo = async (folderPath: string) => {
+  if (!codec) {
+    throw new Error()
+  }
+
+  const videoFileUrl = `${folderPath}/${codec.name}.${codec.extension}`
+
   if (fetchPromises.has(videoFileUrl)) {
     return fetchPromises.get(videoFileUrl) as Promise<Response>
   } else {
