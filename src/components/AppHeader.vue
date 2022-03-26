@@ -1,33 +1,29 @@
 <template>
-  <header class="app-header z-50">
+  <header
+    class="app-header z-50 pt-32 h-[92px]"
+    :style="{ transform: styleList.transform }"
+  >
     <div
       class="backdrop-blur-8 absolute top-0 left-0 w-full h-full z-0 bg-black bg-opacity-40"
-      :style="{ opacity: opacity }"
+      :style="{ opacity: styleList.opacity }"
     ></div>
-    <div class="logo relative z-10">SLR FINANCE</div>
+    <a
+      class="flex items-center"
+      href="https://slr.finance"
+    >
+      <div class="relative z-10 h-50 w-50 rounded-full bg-bnb"></div>
+      <div class="relative z-10 text-18 mr-[92px] ml-32">SLR FINANCE</div>
+    </a>
 
     <ul class="links flex-1 relative z-10">
-      <li
-        class="item h-full"
-        v-for="(link, index) in poolsLinks"
-        :key="index"
-      >
+      <li class="item h-full">
         <router-link
           class="link h-full"
-          :to="i18nRouteHelper(link.to)"
+          :to="i18nRouteHelper({ name: 'swap' })"
         >
-          <div>{{ link.text }}</div>
-          <div
-            v-if="link.isDone"
-            class="status"
-          >
-            done
-          </div>
+          <div>Swap</div>
         </router-link>
       </li>
-    </ul>
-
-    <ul class="links relative z-10">
       <li class="item h-full">
         <router-link
           class="link h-full"
@@ -36,11 +32,14 @@
           <div>Presale</div>
         </router-link>
       </li>
-      <!-- <li class="item h-full">
-        <router-link class="link h-full" :to="i18nRouteHelper({ name: 'dashboard' })">
-          <div>Dashboard</div>
+      <li class="item h-full">
+        <router-link
+          class="link h-full"
+          :to="i18nRouteHelper({ name: 'pool' })"
+        >
+          <div>Farming</div>
         </router-link>
-      </li> -->
+      </li>
       <li class="item h-full">
         <router-link
           class="link h-full"
@@ -49,19 +48,21 @@
           <div>Refferal</div>
         </router-link>
       </li>
+    </ul>
+
+    <ul class="links relative z-10 space-x-24">
       <li class="item h-full">
         <a
           class="link h-full"
-          :href="`https://pancake.kiemtienonline360.com/#/swap?outputCurrency=${tokenAddress}`"
+          href="https://docs.slr.finance"
         >
-          <div>Buy/Sell</div>
+          <div>Knowledge base</div>
         </a>
       </li>
+      <li class="item h-full">
+        <connect-metamask />
+      </li>
     </ul>
-
-    <div class="relative z-10">
-      <connect-metamask />
-    </div>
   </header>
 </template>
 
@@ -71,7 +72,6 @@
   import ConnectMetamask from './ConnectWallet/ConnectMetamask.vue'
   import { POOLS_INFO } from '../config/constants/Pools'
   import { useWindowScroll } from '@vueuse/core'
-  import contractsAddresses from '@/config/constants/contractsAddresses.json'
 
   type LinkType = {
     text: string
@@ -90,13 +90,17 @@
   export default defineComponent({
     setup() {
       const { y: scrollY } = useWindowScroll()
-      const opacity = computed(() => {
-        const opacity = Math.min(scrollY.value, 100) / 100
 
-        return opacity.toFixed(2)
+      const styleList = computed(() => {
+        const scrollFactor = Math.min(scrollY.value, 100) / 100
+
+        return {
+          opacity: scrollFactor.toFixed(2),
+          transform: `translateY(-${scrollFactor * 32}px)`,
+        }
       })
 
-      return { poolsLinks, opacity, tokenAddress: contractsAddresses.SolarToken }
+      return { poolsLinks, styleList }
     },
     components: {
       ConnectMetamask,
@@ -106,16 +110,11 @@
 
 <style lang="postcss">
   .app-header {
-    @apply flex fixed top-0 left-0 w-full h-64 space-x-24 px-24 items-center;
-  }
-
-  .app-header > .logo {
-    color: var(--page-active-color);
-    @apply flex justify-center items-center transition duration-300 ease-out hover:ease-in;
+    @apply flex fixed top-0 left-0 w-full h-64 px-[40px] items-center;
   }
 
   .app-header > .links {
-    @apply flex space-x-24 h-full;
+    @apply flex space-x-32 h-full;
   }
 
   .app-header > .links > .item {
@@ -123,7 +122,7 @@
   }
 
   .app-header > .links > .item > .link {
-    @apply flex flex-col justify-center items-center leading-none transition duration-300 ease-out hover:ease-in h-full;
+    @apply text-14 flex flex-col justify-center items-center leading-none transition duration-300 ease-out hover:ease-in h-full;
   }
 
   .app-header > .links > .item > .link > .status {

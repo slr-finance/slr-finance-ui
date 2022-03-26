@@ -9,19 +9,13 @@
 
 <script lang="ts">
   import { computed, defineComponent, PropType, toRef } from 'vue'
-  import UiButton from '@/components/ui/UiButton.vue'
-  import UiInputBn from '@/components/ui/UiInputBn.vue'
-  import ConnectWalletPlug from '@/components/ConnectWallet/ConnectWalletPlug.vue'
   import { useUsdPrice } from '@/hooks/useUsdPrice'
   import { useTokenAmountFormat } from '@/hooks/formatters/useTokenAmountFormat'
   import { useUsdFormat } from '@/hooks/formatters/useUsdFormat'
   import { usePool } from '@/store/hooks/usePool'
   import { useProfit } from '../hooks/useProfit'
   import { usePercentFormat } from '@/hooks/formatters/usePercentFormat'
-  import SendTxButton from '@/components/Tx/SendTxButton.vue'
   import BigNumber from 'bignumber.js'
-  import UiInputRange from '@/components/ui/UiInputRange.vue'
-  import ApproveTokenPlug from '@/components/ApproveToken/ApproveTokenPlug.vue'
   import { useI18n } from 'vue-i18n'
 
   export default defineComponent({
@@ -67,14 +61,6 @@
         withdrawalFeeStr,
         daysStr,
       }
-    },
-    components: {
-      UiButton,
-      UiInputBn,
-      ConnectWalletPlug,
-      SendTxButton,
-      UiInputRange,
-      ApproveTokenPlug,
     },
   })
 </script>
