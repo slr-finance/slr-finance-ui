@@ -3,6 +3,7 @@
     :tag="tag"
     class="ui-poligon-button"
     :size="size"
+    :variant="variant"
     v-bind="componentProps"
   >
     <div class="ui-poligon-button-content"><slot /></div>
@@ -32,6 +33,10 @@
         default: '50',
         validator: (val:string) => ['50'].includes(val),
       },
+      variant: {
+        validator: (value: string) => ['primary', 'contrast', 'accent', 'default'].includes(value),
+        default: 'default'
+      }
     },
     setup(props) {
       const componentProps = computed(() => {

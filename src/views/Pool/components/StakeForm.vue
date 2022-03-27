@@ -28,6 +28,9 @@
           @click="handleStake"
           :txState="stakeTxState"
           :disabled="false"
+          class="w-full"
+          size="48"
+          variant="accent"
         >
           Stake on {{ daysStr }}
         </send-tx-button>
@@ -38,6 +41,8 @@
           @click="handleUnstakeWithFee"
           :txState="unstakeWithFeeTxState"
           :disabled="false"
+          size="48"
+          variant="primary"
         >
           Withdrawal to wallet with {{ withdrawalFeeStr }} fee
         </send-tx-button>

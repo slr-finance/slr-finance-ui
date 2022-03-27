@@ -11,8 +11,9 @@
           {{ poolInfo.name }}&nbsp;<span class="opacity-60">staking planet</span>
         </h2>
 
-        <p class="text-16 text-white/60 leading-125 mb-20 cursor-default">
-          <span class="text-page-active">{{ apyStr }}</span>
+        <p class="text-16 text-white/40 leading-125 mb-20 cursor-default">
+          Fixed APY:
+          <span class="text-yellow text-opacity-80">{{ apyStr }}</span>
         </p>
 
         <completed-pool
@@ -82,15 +83,19 @@
       const { t } = useI18n()
       const poolId = toRef(props, 'poolId')
       const poolState = usePool(poolId)
+      const apy = computed(() => poolState.value.apy)
       const poolInfo = usePoolInfo(poolId)
-      const formattedApy = usePercentFormat(poolState.value.apy)
-      const apyStr = computed(() => t('pool.fixedApy', [formattedApy.value]))
+      const apyStr = usePercentFormat(apy)
       const { isActivated } = useEthers()
       const [stakerState] = useStaker()
 
       const isCompletedPool = computed(() => poolState.value.id < stakerState.value.poolId)
       const isCurrentStakerPool = computed(
-        () => poolId.value === stakerState.value.poolId || stakerState.value.poolId === 0,
+        () => (
+          poolId.value === stakerState.value.poolId 
+          || stakerState.value.poolId === 0 && poolId.value === 1
+          || !isActivated.value
+        ),
       )
       const hasCurrentStakerPoolDeposit = computed(() => stakerState.value.amount.gt(0))
       const isCurrentStakerPoolFinished = computed(() => {

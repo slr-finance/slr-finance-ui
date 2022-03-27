@@ -30,7 +30,7 @@
         type: Object,
       },
       variant: {
-        validator: (value: string) => ['primary'].includes(value),
+        validator: (value: string) => ['primary', 'contrast', 'default'].includes(value),
         default: 'default'
       }
     },
@@ -61,6 +61,10 @@
 </script>
 
 <style lang="postcss">
+  .ui-button {
+    @apply block uppercase select-none;
+  }
+
   .ui-button.-size-64 {
     @apply h-64 min-w-64 rounded-full border-2 opacity-80;
 
@@ -68,7 +72,7 @@
   }
 
   .ui-button.-size-48 {
-    @apply h-48 min-w-48 rounded-full border-2 opacity-80;
+    @apply h-48 min-w-48 rounded-10 border-2 opacity-80 text-12;
 
     padding: 0 8px 0 8px;
   }
@@ -98,7 +102,15 @@
     border-color: var(--page-active-color, #fff);
   }
 
+  .ui-button.-contrast {
+    @apply bg-white text-black border-none;
+  }
+
   .ui-button.-primary {
     @apply bg-aqua text-black border-none;
+  }
+
+  .ui-button.-accent {
+    @apply bg-purple text-white border-none;
   }
 </style>

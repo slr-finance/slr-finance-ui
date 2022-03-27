@@ -7,6 +7,9 @@
       @click="handleApprove"
       :txState="approveTxState"
       :loading="isFetchingAllowance"
+      class="w-full"
+      variant="contrast"
+      size="48"
     >
       {{ text }}
     </send-tx-button>

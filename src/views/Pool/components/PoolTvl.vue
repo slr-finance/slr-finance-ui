@@ -1,6 +1,6 @@
 <template>
   <div class="flex justify-between items-center text-white text-opacity-60 text-12">
-    <div>Total Staked</div>
+    <div>Total pool staked</div>
     <div
       class="flex justify-between items-center cursor-default border border-white border-opacity-20 px-12 py-8 rounded-8"
     >

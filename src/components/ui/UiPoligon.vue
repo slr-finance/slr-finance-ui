@@ -42,12 +42,17 @@
         default: '50',
         validator: (val: string) => ['50'].includes(val),
       },
+      variant: {
+        validator: (value: string) => ['primary', 'contrast', 'default', 'accent'].includes(value),
+        default: 'default',
+      },
     },
     setup(props) {
       const classList = computed(() => {
         return {
           [`-size-${props.size}`]: true,
           'cursor-default': props.tag === 'div',
+          [`-${props.variant}`]: true,
         }
       })
 
@@ -59,5 +64,30 @@
 <style>
   .ui-poligon.-size-50 > .wrapper {
     @apply w-50 h-50 text-12;
+  }
+
+  .ui-poligon.-default > .wrapper > .content {
+    @apply text-black;
+  }
+
+  .ui-poligon.-primary > .wrapper {
+    @apply text-aqua;
+  }
+  .ui-poligon.-primary > .wrapper > .content {
+    @apply text-black;
+  }
+
+  .ui-poligon.-accent > .wrapper {
+    @apply text-purple;
+  }
+  .ui-poligon.-accent > .wrapper > .content {
+    @apply text-white;
+  }
+
+  .ui-poligon.-contrast > .wrapper {
+    @apply text-white;
+  }
+  .ui-poligon.-contrast > .wrapper > .content {
+    @apply text-black;
   }
 </style>

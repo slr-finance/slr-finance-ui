@@ -1,6 +1,11 @@
 <template>
   <div class="relative pt-32">
-    <ui-poligon class="absolute top-32 right-0 transform-gpu translate-x-1/2 -translate-y-1/2 z-20"> End </ui-poligon>
+    <ui-poligon
+      class="absolute top-32 right-0 transform-gpu translate-x-1/2 -translate-y-1/2 z-20"
+      variant="primary"
+    >
+      End
+    </ui-poligon>
 
     <div
       v-if="poolId === stakerState.poolId"
@@ -12,19 +17,19 @@
       />
       <ui-button
         :to="i18nRouteHelper({ name: nextPool.routeName })"
-        class="mb-12"
+        class="mb-12 w-full"
+        variant="accent"
+        size="48"
       >
-        Migrate to {{ nextPool.name }} pool with {{ nextPoolApyStr }} APY and zero performance fee
-        <ui-icon
-          name="arrow-right"
-          class="ml-8"
-        />
+        Migrate to {{ nextPool.name }} pool without fee
       </ui-button>
 
       <send-tx-button
         @click="handleUnstake"
         :tx-state="unstakeTxState"
-        class="mb-12"
+        class="mb-12 w-full"
+        variant="accent"
+        size="48"
       >
         Withdrawal to wallet
       </send-tx-button>
@@ -39,7 +44,6 @@
 <script lang="ts">
   import SendTxButton from '@/components/Tx/SendTxButton.vue'
   import UiButton from '@/components/ui/UiButton.vue'
-  import UiIcon from '@/components/ui/UiIcon.vue'
   import { useStaker } from '@/store/hooks/useStaker'
   import { computed, defineComponent, toRef, watch } from 'vue'
   import { usePoolInfo } from '../hooks/usePoolInfo'
@@ -84,6 +88,6 @@
         unstakeTxState,
       }
     },
-    components: { SendTxButton, UiButton, UiIcon, StakerInfo, UiPoligon, UiAlert },
+    components: { SendTxButton, UiButton, StakerInfo, UiPoligon, UiAlert },
   })
 </script>

@@ -39,7 +39,7 @@
         type: [Number, String],
       },
       variant: {
-        validator: (value: string) => ['primary'].includes(value),
+        validator: (value: string) => ['primary', 'contrast'].includes(value),
         default: 'primary'
       }
     },

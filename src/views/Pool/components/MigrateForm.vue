@@ -45,6 +45,9 @@
       >
         <send-tx-button
           @click="handleMigrate"
+          class="w-full"
+          size="48"
+          variant="accent"
           :tx-state="migrateTxState"
         >
           Migrate to {{ poolInfo.name }} pool with {{ poolApyStr }} APY and zero performance fee

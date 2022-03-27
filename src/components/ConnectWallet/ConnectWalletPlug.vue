@@ -6,6 +6,8 @@
     <ui-button
       :size="size"
       @click="open"
+      class="w-full"
+      variant="contrast"
     >
       {{ isIncorrectChainId && isActivated ? 'Wrong chain' : text }}
     </ui-button>
@@ -32,7 +34,7 @@
       },
       size: {
         type: [Number, String],
-        default: 64,
+        default: 48,
       },
     },
     setup() {
