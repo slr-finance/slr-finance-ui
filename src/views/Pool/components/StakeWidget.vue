@@ -28,7 +28,12 @@
         />
 
         <stake-form
-          v-else-if="isCurrentStakerPool"
+          v-else-if="isCurrentStakerPool && !hasCurrentStakerPoolDeposit"
+          :pool-id="poolId"
+        />
+
+        <staked-state
+          v-else-if="isCurrentStakerPool && hasCurrentStakerPoolDeposit"
           :pool-id="poolId"
         />
 
@@ -69,6 +74,8 @@
   import MigrateForm from './MigrateForm.vue'
   import TokenInfo from './TokenInfo.vue'
   import PoolTvl from './PoolTvl.vue'
+  import StakerInfo from './StakerInfo.vue'
+  import StakedState from './StakedState.vue'
 
   export default defineComponent({
     name: 'staking-widget',
@@ -91,11 +98,10 @@
 
       const isCompletedPool = computed(() => poolState.value.id < stakerState.value.poolId)
       const isCurrentStakerPool = computed(
-        () => (
-          poolId.value === stakerState.value.poolId 
-          || stakerState.value.poolId === 0 && poolId.value === 1
-          || !isActivated.value
-        ),
+        () =>
+          poolId.value === stakerState.value.poolId ||
+          (stakerState.value.poolId === 0 && poolId.value === 1) ||
+          !isActivated.value,
       )
       const hasCurrentStakerPoolDeposit = computed(() => stakerState.value.amount.gt(0))
       const isCurrentStakerPoolFinished = computed(() => {
@@ -132,6 +138,8 @@
       CompletedPool,
       TokenInfo,
       PoolTvl,
+      StakerInfo,
+      StakedState,
     },
   })
 </script>

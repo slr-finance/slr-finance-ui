@@ -40,8 +40,8 @@
       },
       variant: {
         validator: (value: string) => ['primary', 'contrast'].includes(value),
-        default: 'primary'
-      }
+        default: 'primary',
+      },
     },
     setup(props) {
       const isDisabled = computed(

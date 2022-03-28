@@ -24,7 +24,6 @@
   import StakingWidget from './components/StakeWidget.vue'
   import StakingNavigation from './components/StakingNavigation.vue'
   import PoolPlanet from './components/PoolPlanet.vue'
-  import PoolsList from './components/PoolsList.vue'
 
   export default defineComponent({
     props: {
@@ -37,17 +36,20 @@
       StakingWidget,
       StakingNavigation,
       PoolPlanet,
-      PoolsList,
     },
   })
 </script>
 
 <style lang="postcss">
   .pool-page {
-    @apply h-full grid bg-black pb-48 pt-80 px-24;
+    @apply grid bg-black;
 
-    grid-template: 'list pool nav';
-    grid-template-columns: min-content minmax(auto, 1200px) 1fr;
+    min-height: 100% !important; /* browser fill */
+    height: auto;
+
+    padding-top: calc(var(--app-ui-header-base-height) + var(--app-ui-header-scroll-padding));
+    grid-template: 'pool nav';
+    grid-template-columns: minmax(auto, 1200px) 1fr;
     grid-template-rows: 1fr;
     gap: 8px;
     background-size: contain;
@@ -63,11 +65,5 @@
     @apply h-full relative z-40;
 
     grid-area: nav;
-  }
-
-  .pool-page > .staking-pools-list {
-    @apply h-full pt-80 mt-36 relative z-40;
-
-    grid-area: list;
   }
 </style>

@@ -31,8 +31,8 @@
       },
       variant: {
         validator: (value: string) => ['primary', 'contrast', 'default'].includes(value),
-        default: 'default'
-      }
+        default: 'default',
+      },
     },
     setup(props) {
       const componentProps = computed(() => {
@@ -69,6 +69,12 @@
     @apply h-64 min-w-64 rounded-full border-2 opacity-80;
 
     padding: 0 14px 0 14px;
+  }
+
+  .ui-button.-size-40 {
+    @apply h-40 min-w-40 rounded-10 border-2 opacity-80 text-12;
+
+    padding: 0 8px 0 8px;
   }
 
   .ui-button.-size-48 {

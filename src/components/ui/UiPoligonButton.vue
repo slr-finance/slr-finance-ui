@@ -31,12 +31,12 @@
       size: {
         type: String,
         default: '50',
-        validator: (val:string) => ['50'].includes(val),
+        validator: (val: string) => ['50'].includes(val),
       },
       variant: {
         validator: (value: string) => ['primary', 'contrast', 'accent', 'default'].includes(value),
-        default: 'default'
-      }
+        default: 'default',
+      },
     },
     setup(props) {
       const componentProps = computed(() => {

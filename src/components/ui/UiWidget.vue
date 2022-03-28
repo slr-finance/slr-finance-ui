@@ -8,6 +8,6 @@
   import { defineComponent } from 'vue'
 
   export default defineComponent({
-    name: 'referrals-link-block'
+    name: 'referrals-link-block',
   })
 </script>

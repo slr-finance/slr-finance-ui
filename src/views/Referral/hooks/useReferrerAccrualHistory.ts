@@ -93,7 +93,7 @@ export const useReferrerAccrualHistory = () => {
                     maximumFractionDigits: 6,
                   })} SLR`,
                   actionLabel: REFERRALS_ACTIONS[action],
-                  action
+                  action,
                 }
               }),
             )

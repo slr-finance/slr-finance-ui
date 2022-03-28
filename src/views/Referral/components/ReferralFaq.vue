@@ -1,7 +1,10 @@
 <template>
   <div>
     <h3 class="text-white text-18 mb-24 uppercase">Answers on solar questions</h3>
-    <div class="grid grid-cols-2 gap-20" style="max-width: 836px;">
+    <div
+      class="grid grid-cols-2 gap-20"
+      style="max-width: 836px"
+    >
       <div class="space-y-20">
         <ui-accordion title="Where do I get my referral link?">
           Connect a wallet and find your referral link in the Referral section.

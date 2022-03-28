@@ -19,7 +19,7 @@ export const fetchPools = async (pools: number[]) => {
   const response = await multicall(StakingAbi, calls)
   const poolsInfo = pools.map((poolId, index) => {
     const poolState = response[index]
-    const apr = ethersToBigNumber(poolState.apr).div(100000000)
+    const apr = ethersToBigNumber(poolState.apr).div(1000000)
     const withdrawalFee = ethersToBigNumber(poolState.withdrawalFees).div(1000)
 
     return {

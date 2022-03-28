@@ -8,7 +8,11 @@
       <div class="token-info-label">Total liquidity</div>
       <div class="token-info-value">{{ slrLiquidityPriceStr }}</div>
     </div>
-    <ui-poligon-button :to="{ name: 'swap' }" variant="accent">Buy</ui-poligon-button>
+    <ui-poligon-button
+      :to="{ name: 'swap' }"
+      variant="accent"
+      >Buy</ui-poligon-button
+    >
   </div>
 </template>
 

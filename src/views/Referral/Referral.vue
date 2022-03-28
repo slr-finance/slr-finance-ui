@@ -9,8 +9,8 @@
 
       <template #default>
         <div class="flex space-x-20">
-          <referral-link-block style="width: 408px;" />
-          <referrer-rewards style="width: 408px;" />
+          <referral-link-block style="width: 408px" />
+          <referrer-rewards style="width: 408px" />
         </div>
 
         <div class="flex space-x-20 pt-32">
@@ -41,7 +41,7 @@
       ReferralLinkBlock,
       ReferrerRewards,
       ReferrerAccrualHistory,
-      ReferralFaq
+      ReferralFaq,
     },
   })
 </script>
