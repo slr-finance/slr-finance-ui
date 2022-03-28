@@ -16,8 +16,8 @@
   import { useTokenAmountFormat } from '@/hooks/formatters/useTokenAmountFormat'
   import { useStaker } from '@/store/hooks/useStaker'
   import { useInterval, useTransition } from '@vueuse/core'
-  import dayjs from 'dayjs'
   import { computed, defineComponent, watch } from 'vue'
+  import dayjs from 'dayjs'
   import relativeTime from 'dayjs/plugin/relativeTime'
 
   dayjs.extend(relativeTime)

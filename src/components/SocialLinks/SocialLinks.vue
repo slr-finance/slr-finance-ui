@@ -1,13 +1,34 @@
 <template>
   <div class="flex items-center space-x-12">
-    <a href="#" target="_blank" rel="noreferrer">
-      <ui-icon name="twitter" size="20"/>
+    <a
+      href="#"
+      target="_blank"
+      rel="noreferrer"
+    >
+      <ui-icon
+        name="twitter"
+        size="20"
+      />
     </a>
-    <a href="#" target="_blank" rel="noreferrer">
-      <ui-icon name="facebook" size="20"/>
+    <a
+      href="#"
+      target="_blank"
+      rel="noreferrer"
+    >
+      <ui-icon
+        name="facebook"
+        size="20"
+      />
     </a>
-    <a href="#" target="_blank" rel="noreferrer">
-      <ui-icon name="instagram" size="20"/>
+    <a
+      href="#"
+      target="_blank"
+      rel="noreferrer"
+    >
+      <ui-icon
+        name="instagram"
+        size="20"
+      />
     </a>
   </div>
 </template>
@@ -18,6 +39,6 @@
 
   export default defineComponent({
     name: 'social-links',
-    components: { UiIcon }
+    components: { UiIcon },
   })
 </script>

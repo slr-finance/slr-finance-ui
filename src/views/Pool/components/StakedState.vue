@@ -1,0 +1,118 @@
+<template>
+  <div class="relative pt-32">
+    <ui-poligon
+      class="absolute top-32 right-0 transform-gpu translate-x-1/2 -translate-y-1/2 z-20"
+      variant="primary"
+    >
+      Active
+    </ui-poligon>
+    <div class="ui-box-corners">
+      <div class="flex justify-between pt-18 mb-24">
+        <div>
+          <div class="text-12 uppercase text-white text-opacity-60 leading-none mb-8">SLR Staked</div>
+          <div class="text-14 uppercase text-white leading-none font-title">
+            {{ stakedStr }}
+          </div>
+        </div>
+
+        <div class="space-x-6">
+          <ui-button
+            variant="accent"
+            size="40"
+            @click="handleOpenAddForm"
+          >
+            <ui-icon
+              name="plus"
+              size="14"
+              class="text-white"
+            />
+          </ui-button>
+
+          <ui-button
+            variant="accent"
+            size="40"
+            @click="handleOpenRewardForm"
+          >
+            <ui-icon
+              name="plus"
+              size="14"
+              class="text-white"
+            />
+          </ui-button>
+        </div>
+      </div>
+
+      <div class="bg-green-atomic bg-opacity-10 pl-16 pr-6 py-6 rounded-12 flex justify-between space-x-12">
+        <div class="pt-14">
+          <div class="text-green-atomic text-12 leading-none mb-8">Rewards</div>
+          <div class="text-12 uppercase text-white leading-none font-title">
+            {{ earnedStr }}
+          </div>
+        </div>
+
+        <div
+          class="rounded-12 bg-gradient-to-t from-transparent to-green-atomic bg-op py-14 px-6"
+          style="min-width: 130px"
+        >
+          <div class="text-green-atomic text-12 leading-none mb-8">Time to unlock</div>
+          <div class="text-12 uppercase text-white leading-none font-title">
+            {{ leftToWaitStr }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script lang="ts">
+  import { defineComponent, computed, ref, watch, WritableComputedRef } from 'vue'
+  import UiButton from '@/components/ui/UiButton.vue'
+  import UiIcon from '@/components/ui/UiIcon.vue'
+  import UiPoligon from '@/components/ui/UiPoligon.vue'
+  import { useStaker } from '@/store/hooks/useStaker'
+  import { useTokenAmountFormat } from '@/hooks/formatters/useTokenAmountFormat'
+  import { useInterval } from '@vueuse/core'
+  import dayjs from 'dayjs'
+  import relativeTime from 'dayjs/plugin/relativeTime'
+
+  dayjs.extend(relativeTime)
+
+  export default defineComponent({
+    name: 'staked-form',
+    setup() {
+      const [stakerState] = useStaker()
+      const stakedAmount = computed(() => stakerState.value.amount)
+      const earnedAmount = computed(() => stakerState.value.reward)
+      const stakedStr = useTokenAmountFormat(stakedAmount, 'SLR', 2)
+      const earnedStr = useTokenAmountFormat(earnedAmount, 'SLR', 2)
+
+      const lifeTimestamp = useInterval(1000)
+      const leftToWait = computed(() => {
+        const { startStaking, lock } = stakerState.value
+
+        return Math.max(0, startStaking + lock - lifeTimestamp.value)
+      })
+      const leftToWaitStr = computed(() => dayjs().add(leftToWait.value, 's').toNow(true))
+      // Sinc local timestamp with blockchain timestamp
+      watch(stakerState, ({ timestamp }) => {
+        lifeTimestamp.value = timestamp
+      })
+
+      const handleOpenAddForm = () => {}
+      const handleOpenRewardForm = () => {}
+
+      return {
+        stakedStr,
+        earnedStr,
+        leftToWaitStr,
+        handleOpenAddForm,
+        handleOpenRewardForm,
+      }
+    },
+    components: {
+      UiButton,
+      UiIcon,
+      UiPoligon,
+    },
+  })
+</script>

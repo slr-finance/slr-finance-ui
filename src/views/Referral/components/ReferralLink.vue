@@ -11,7 +11,11 @@
       class="flex justify-center items-center rounded-10 bg-opacity-20 bg-purple min-w-40 w-40 h-40"
       @click="handleCopy"
     >
-      <ui-icon class="text-purple" size="18" name="copy" />
+      <ui-icon
+        class="text-purple"
+        size="18"
+        name="copy"
+      />
     </button>
   </div>
   <div v-else>Error: Invalid wallet address</div>

@@ -10,6 +10,7 @@ module.exports = {
       8: '8px',
       10: '10px',
       12: '12px',
+      14: '14px',
       16: '16px',
       18: '18px',
       20: '20px',
@@ -45,6 +46,7 @@ module.exports = {
     colors: {
       transparent: 'transparent',
       gray: '#6C7479',
+      'green-atomic': '#40E7FF',
       black: 'black',
       red: '#D42727',
       white: '#fcfcfc',
@@ -63,6 +65,7 @@ module.exports = {
     },
     minHeight: {
       24: '24px',
+      full: '100%',
     },
     backdropBlur: {
       4: '4px',
