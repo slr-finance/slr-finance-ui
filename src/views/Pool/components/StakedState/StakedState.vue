@@ -19,7 +19,7 @@
           <ui-button
             variant="accent"
             size="40"
-            @click="handleOpenAddForm"
+            @click="() => handleOpenAddForm()"
           >
             <ui-icon
               name="plus"
@@ -31,7 +31,7 @@
           <ui-button
             variant="accent"
             size="40"
-            @click="handleOpenRewardForm"
+            @click="() => handleOpenRewardForm()"
           >
             <ui-icon
               name="plus"
@@ -62,23 +62,40 @@
       </div>
     </div>
   </div>
+
+  <ui-modal v-model="isOpenAddModal">
+    <stake-more-modal :pool-id="poolId"/>
+  </ui-modal>
+
+  <ui-modal v-model="isOpenWithdrawalModal">
+    <withdrawal-with-fee-modal/>
+  </ui-modal>
 </template>
 
 <script lang="ts">
   import { defineComponent, computed, ref, watch, WritableComputedRef } from 'vue'
+  import dayjs from 'dayjs'
+  import relativeTime from 'dayjs/plugin/relativeTime'
+  import { useInterval, useToggle } from '@vueuse/core'
   import UiButton from '@/components/ui/UiButton.vue'
   import UiIcon from '@/components/ui/UiIcon.vue'
   import UiPoligon from '@/components/ui/UiPoligon.vue'
+  import UiModal from '@/components/ui/UiModal.vue'
   import { useStaker } from '@/store/hooks/useStaker'
   import { useTokenAmountFormat } from '@/hooks/formatters/useTokenAmountFormat'
-  import { useInterval } from '@vueuse/core'
-  import dayjs from 'dayjs'
-  import relativeTime from 'dayjs/plugin/relativeTime'
+  import WithdrawalWithFeeModal from './WithdrawalWithFeeModal.vue'
+  import StakeMoreModal from './StakeMoreModal.vue'
 
   dayjs.extend(relativeTime)
 
   export default defineComponent({
     name: 'staked-form',
+    props: {
+      poolId: {
+        type: Number,
+        required: true,
+      }
+    },
     setup() {
       const [stakerState] = useStaker()
       const stakedAmount = computed(() => stakerState.value.amount)
@@ -98,13 +115,15 @@
         lifeTimestamp.value = timestamp
       })
 
-      const handleOpenAddForm = () => {}
-      const handleOpenRewardForm = () => {}
+      const [isOpenAddModal, handleOpenAddForm] = useToggle()
+      const [isOpenWithdrawalModal, handleOpenRewardForm] = useToggle()
 
       return {
         stakedStr,
         earnedStr,
         leftToWaitStr,
+        isOpenAddModal,
+        isOpenWithdrawalModal,
         handleOpenAddForm,
         handleOpenRewardForm,
       }
@@ -113,6 +132,9 @@
       UiButton,
       UiIcon,
       UiPoligon,
+      UiModal,
+      WithdrawalWithFeeModal,
+      StakeMoreModal,
     },
   })
 </script>

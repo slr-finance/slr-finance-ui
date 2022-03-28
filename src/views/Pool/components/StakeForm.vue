@@ -35,18 +35,6 @@
           Stake on {{ daysStr }}
         </send-tx-button>
       </approve-token-plug>
-
-      <div v-if="isStaked">
-        <send-tx-button
-          @click="handleUnstakeWithFee"
-          :txState="unstakeWithFeeTxState"
-          :disabled="false"
-          size="48"
-          variant="primary"
-        >
-          Withdrawal to wallet with {{ withdrawalFeeStr }} fee
-        </send-tx-button>
-      </div>
     </connect-wallet-plug>
   </div>
 </template>
@@ -85,10 +73,8 @@
       const [stakerState, refetchStaker] = useStaker()
 
       const [, refetchBalance] = useSlrBalance()
-      const withdrawalFee = computed(() => poolState.value.withdrawalFee)
       const poolId = computed(() => poolState.value.id)
       const amount = ref(new BigNumber(0)) as Ref<BigNumber>
-      const isStaked = computed(() => stakerState.value.amount.gt(0))
       const isChanged = ref(false)
 
       const days = ref(poolState.value.maxDays)
@@ -98,26 +84,19 @@
         return t('common.days', [daysValue], daysValue)
       })
 
-      const withdrawalFeeStr = usePercentFormat(withdrawalFee)
-
       const refetchBalanceAndStakerState = () => Promise.all([refetchStaker(), refetchBalance()])
       const [handleStake, stakeTxState] = useStake({ poolId, amount, days, reinvestAmount: new BigNumber(0) })
       watch(stakeTxState, ({ isSuccess }) => isSuccess && refetchBalanceAndStakerState())
-      const [handleUnstakeWithFee, unstakeWithFeeTxState] = useUnstakeWithFee(poolId)
-      watch(unstakeWithFeeTxState, ({ isSuccess }) => isSuccess && refetchBalanceAndStakerState())
+
       return {
         t,
         amount,
         days,
-        withdrawalFeeStr,
         handleStake,
         stakeTxState,
-        handleUnstakeWithFee,
-        unstakeWithFeeTxState,
         stakedTokenAddress: contractsAddresses.SolarToken,
         poolAddress: contractsAddresses.StakingService,
         daysStr,
-        isStaked,
       }
     },
     components: {
