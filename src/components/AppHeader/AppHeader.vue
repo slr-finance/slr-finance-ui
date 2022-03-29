@@ -1,13 +1,7 @@
 <template>
   <header class="app-header z-50 pt-32">
     <div class="app-header-bg backdrop-blur-8 absolute top-0 left-0 w-full h-full z-0 bg-black bg-opacity-40"></div>
-    <a
-      class="flex items-center"
-      href="https://slr.finance"
-    >
-      <div class="relative z-10 h-50 w-50 rounded-full bg-bnb"></div>
-      <div class="relative z-10 text-18 mr-[92px] ml-32">SLR FINANCE</div>
-    </a>
+    <app-header-logo :is-mobile="!isDesktop"/>
 
     <div 
       v-if="!isDesktop"
@@ -69,7 +63,8 @@
 
 <script lang="ts">
   import { watch, defineComponent } from 'vue'
-  import ConnectMetamask from './ConnectWallet/ConnectMetamask.vue'
+  import AppHeaderLogo from './AppHeaderLogo.vue'
+  import ConnectMetamask from '@/components/ConnectWallet/ConnectMetamask.vue'
   import { useWindowScroll, useStyleTag, useBreakpoints } from '@vueuse/core'
 
   const getScrollFactorStyle = (scrollY:number) => {
@@ -97,6 +92,7 @@
       }
     },
     components: {
+      AppHeaderLogo,
       ConnectMetamask,
     },
   })

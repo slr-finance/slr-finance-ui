@@ -8,7 +8,7 @@
   import { defineComponent, watch } from 'vue'
   import { useEthers } from 'vue-dapp'
   import { store } from '@/store/store'
-  import AppHeader from '@/components/AppHeader.vue'
+  import AppHeader from '@/components/AppHeader'
   import { stakingModule } from '@/store/modules/stakingModule'
 
   export default defineComponent({
