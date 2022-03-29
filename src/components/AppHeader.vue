@@ -9,7 +9,14 @@
       <div class="relative z-10 text-18 mr-[92px] ml-32">SLR FINANCE</div>
     </a>
 
-    <ul class="links flex-1 relative z-10">
+    <div 
+      v-if="!isDesktop"
+      class="flex-1"
+    >
+      mobile menu
+    </div>
+
+    <ul class="links flex-1 relative z-10" v-if="isDesktop">
       <li class="item h-full">
         <router-link
           class="link h-full"
@@ -45,7 +52,7 @@
     </ul>
 
     <ul class="links relative z-10 space-x-24">
-      <li class="item h-full">
+      <li class="item h-full" v-if="isDesktop">
         <a
           class="link h-full"
           href="https://docs.slr.finance"
@@ -61,10 +68,9 @@
 </template>
 
 <script lang="ts">
-  import type { LocationAsRelativeRaw } from 'vue-router'
   import { watch, defineComponent } from 'vue'
   import ConnectMetamask from './ConnectWallet/ConnectMetamask.vue'
-  import { useWindowScroll, useStyleTag } from '@vueuse/core'
+  import { useWindowScroll, useStyleTag, useBreakpoints } from '@vueuse/core'
 
   const getScrollFactorStyle = (scrollY:number) => {
     const scrollFactor = Math.min(scrollY, 97) / 100
@@ -83,6 +89,12 @@
         () => { css.value = getScrollFactorStyle(scrollY.value) },
       )
       // Handle scroll [END]
+
+      const { isDesktop } = useBreakpoints({ isDesktop: 1100 })
+
+      return {
+        isDesktop,
+      }
     },
     components: {
       ConnectMetamask,
@@ -98,7 +110,11 @@
 
   .app-header {
     @apply flex fixed top-0 left-0 w-full px-[40px] items-center;
-    transform: translateY(calc(var(--app-ui-header-scroll-factor) * -32px));
+    transform: translateY(calc(
+      var(--app-ui-header-scroll-factor) 
+      * var(--app-ui-header-scroll-padding) 
+      * -1
+    ));
     height: calc(var(--app-ui-header-base-height) + var(--app-ui-header-scroll-padding));
     padding-top: var(--app-ui-header-scroll-padding);
   }

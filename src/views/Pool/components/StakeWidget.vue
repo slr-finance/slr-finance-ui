@@ -75,7 +75,7 @@
   import TokenInfo from './TokenInfo.vue'
   import PoolTvl from './PoolTvl.vue'
   import StakerInfo from './StakerInfo.vue'
-  import StakedState from './StakedState.vue'
+  import StakedState from './StakedState'
 
   export default defineComponent({
     name: 'staking-widget',
