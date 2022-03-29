@@ -1,6 +1,6 @@
 <template>
   <div class="pt-64">
-    <h1 class="text-38 mb-40 uppercase">Referral <span class="text-gray">station</span></h1>
+    <h1 class="text-38 ml-12 my-40 uppercase">Referral <span class="text-gray">station</span></h1>
     <connect-wallet-plug>
       <template #plug>
         Unlock wallet to get your unique referral link
@@ -8,19 +8,19 @@
       </template>
 
       <template #default>
-        <div class="flex space-x-20">
-          <referral-link-block style="width: 408px" />
-          <referrer-rewards style="width: 408px" />
+        <div class="875:flex 875:space-x-20 875:space-y-0 space-y-24 px-12">
+          <referral-link-block class="flex-1" style="max-width: 408px" />
+          <referrer-rewards class="flex-1" style="max-width: 408px" />
         </div>
 
-        <div class="flex space-x-20 pt-32">
+        <div class="875:flex 875:space-x-20 875:space-y-0 space-y-24 px-12 pt-32">
           <referrals-list class="flex-1" />
           <referrer-accrual-history class="flex-1" />
         </div>
       </template>
     </connect-wallet-plug>
 
-    <referral-faq class="mt-48" />
+    <referral-faq class="600:block hidden px-12 mt-48" />
   </div>
 </template>
 
