@@ -18,28 +18,28 @@
       isMobile: {
         type: Boolean,
         default: true,
-      }
-    }
+      },
+    },
   })
 </script>
 
 <style>
-.app-header-logo:not(.-mobile) {
-  min-width: 300px;
-}
-.app-header-logo:not(.-mobile) > .logo {
-  @apply w-50 h-50 mr-32;
-}
+  .app-header-logo:not(.-mobile) {
+    min-width: 300px;
+  }
+  .app-header-logo:not(.-mobile) > .logo {
+    @apply w-50 h-50 mr-32;
+  }
 
-.app-header-logo:not(.-mobile) > .title {
-  @apply text-18;
-}
+  .app-header-logo:not(.-mobile) > .title {
+    @apply text-18;
+  }
 
-.app-header-logo.-mobile > .logo {
-  @apply w-36 h-36 mr-16;
-}
+  .app-header-logo.-mobile > .logo {
+    @apply w-36 h-36 mr-16;
+  }
 
-.app-header-logo.-mobile > .title {
-  @apply text-14;
-}
+  .app-header-logo.-mobile > .title {
+    @apply text-14;
+  }
 </style>

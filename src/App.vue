@@ -1,14 +1,15 @@
 <template>
-  <vdapp-board />
+  <connect-wallet-modal />
   <app-header />
   <router-view />
 </template>
 
 <script lang="ts">
   import { defineComponent, watch } from 'vue'
-  import { useEthers } from 'vue-dapp'
+  import { useEthers } from '@/hooks/dapp/useEthers'
   import { store } from '@/store/store'
   import AppHeader from '@/components/AppHeader'
+  import ConnectWalletModal from '@/components/ConnectWallet/ConnectWalletModal.vue'
   import { stakingModule } from '@/store/modules/stakingModule'
 
   export default defineComponent({
@@ -28,6 +29,7 @@
     },
     components: {
       AppHeader,
+      ConnectWalletModal,
     },
   })
 </script>

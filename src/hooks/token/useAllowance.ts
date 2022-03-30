@@ -1,7 +1,7 @@
 import { MaybeRef } from '@vueuse/core'
 import BigNumber from 'bignumber.js'
 import { computed, Ref, ref, unref, watch } from 'vue'
-import { useEthers } from 'vue-dapp'
+import { useEthers } from '@/hooks/dapp/useEthers'
 import { Call, multicall } from '@/utils/contracts/multicall'
 import erc20Abi from '@/config/abi/Erc20.json'
 import { parseWei } from '@/utils/bigNumber'

@@ -2,7 +2,7 @@ import path from 'path'
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
-import inject from '@rollup/plugin-inject'
+// import inject from '@rollup/plugin-inject'
 import { visualizer } from 'rollup-plugin-visualizer'
 import { terser } from 'rollup-plugin-terser'
 
@@ -25,7 +25,7 @@ export default defineConfig({
   build: {
     rollupOptions: {
       plugins: [
-        inject({ Buffer: ['buffer', 'Buffer'] }),
+        // inject({ Buffer: ['buffer', 'Buffer'] }),
         visualizer((opts) => {
           return { filename: path.join(opts.dir, 'stats.html') }
         }),

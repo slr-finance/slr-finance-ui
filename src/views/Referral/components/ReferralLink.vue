@@ -23,7 +23,7 @@
 
 <script lang="ts">
   import { computed, defineComponent, unref } from 'vue'
-  import { useEthers } from 'vue-dapp'
+  import { useEthers } from '@/hooks/dapp/useEthers'
   import get from 'lodash.get'
   import { useClipboard } from '@vueuse/core'
   import { REFERRER_QUERY_PARAM } from '@/config/constants/referrals'

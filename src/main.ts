@@ -2,7 +2,6 @@ import 'virtual:svg-icons-register'
 import { createApp } from 'vue'
 import Toast, { POSITION } from 'vue-toastification'
 import 'vue-toastification/dist/index.css'
-import { VueDapp } from 'vue-dapp'
 import { isAddress } from 'ethers/lib/utils'
 import { router } from './router'
 import { stakingModule } from './store/modules/stakingModule'
@@ -43,12 +42,7 @@ slrModule.register(store)
 // Fetch pools and slr price [END]
 
 // Mount app [BEGIN]
-const app = createApp(App)
-  .use(i18n)
-  .use(i18nRouteHelperPlugin)
-  .use(router)
-  .use(VueDapp, { appName: 'slr.finance', appUrl: 'https://slr.finance' })
-  .use(Toast, { position: POSITION.TOP_LEFT })
+const app = createApp(App).use(i18n).use(i18nRouteHelperPlugin).use(router).use(Toast, { position: POSITION.TOP_LEFT })
 
 app.mount('#app')
 // Mount app [END]

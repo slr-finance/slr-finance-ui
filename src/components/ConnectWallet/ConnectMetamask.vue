@@ -21,13 +21,15 @@
 
 <script lang="ts">
   import { computed, defineComponent } from 'vue'
-  import { useEthers, useWallet, shortenAddress } from 'vue-dapp'
+  import { useEthers } from '@/hooks/dapp/useEthers'
+  import { shortenAddress } from '@/utils/address/shortenAddress'
   import UiButton from '@/components/ui/UiButton.vue'
   import ConnectWalletPlug from './ConnectWalletPlug.vue'
   import { useSlrBalance } from '@/store/hooks/useBalance'
   import { useTokenAmountFormat } from '@/hooks/formatters/useTokenAmountFormat'
   import UiIcon from '@/components/ui/UiIcon.vue'
   import { FetchingStatus } from '@/entities/common'
+  import { useWallet } from '@/hooks/dapp/useWallet'
 
   export default defineComponent({
     setup() {

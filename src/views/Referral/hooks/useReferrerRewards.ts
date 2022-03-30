@@ -1,5 +1,5 @@
 import { Ref, ref, watch } from 'vue'
-import { useEthers } from 'vue-dapp'
+import { useEthers } from '@/hooks/dapp/useEthers'
 import { getReferralContract } from '@/utils/contracts/getReferralContract'
 import { BigNumber as BigNumberEthers } from 'ethers'
 import BigNumber from 'bignumber.js'

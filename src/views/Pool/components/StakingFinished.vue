@@ -16,6 +16,7 @@
         class="pt-18 pb-16"
       />
       <ui-button
+        v-if="nextPoolId > poolId"
         :to="i18nRouteHelper({ name: nextPool.routeName })"
         class="mb-12 w-full"
         variant="accent"
@@ -54,6 +55,7 @@
   import StakerInfo from './StakerInfo.vue'
   import UiPoligon from '@/components/ui/UiPoligon.vue'
   import UiAlert from '@/components/ui/UiAlert.vue'
+  import { MAX_POOL_ID } from '@/config/constants/Pools'
 
   export default defineComponent({
     name: 'staking-finished',
@@ -68,7 +70,7 @@
       const [, refetchSlrBalance] = useSlrBalance()
 
       const poolId = toRef(props, 'poolId')
-      const nextPoolId = computed(() => stakerState.value.poolId + 1)
+      const nextPoolId = computed(() => Math.min(stakerState.value.poolId + 1, MAX_POOL_ID))
       const nextPool = usePoolInfo(nextPoolId)
       const nextPoolState = usePool(nextPoolId)
       const nextPoolApy = computed(() => nextPoolState.value.apy)
@@ -82,6 +84,7 @@
 
       return {
         stakerState,
+        nextPoolId,
         nextPool,
         nextPoolApyStr,
         handleUnstake,

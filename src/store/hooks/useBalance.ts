@@ -1,7 +1,7 @@
 import { Call, multicall } from '@/utils/contracts/multicall'
 import { MaybeRef } from '@vueuse/core'
 import { computed, ComputedRef, unref, watch } from 'vue'
-import { useEthers } from 'vue-dapp'
+import { useEthers } from '@/hooks/dapp/useEthers'
 import { balanceModule, TokenInfo } from '../modules/balanceModule'
 import { store } from '../store'
 import erc20Abi from '@/config/abi/Erc20.json'

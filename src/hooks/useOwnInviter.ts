@@ -1,5 +1,5 @@
 import { ref, watch } from 'vue'
-import { useEthers } from 'vue-dapp'
+import { useEthers } from '@/hooks/dapp/useEthers'
 import { getReferralContract } from '@/utils/contracts/getReferralContract'
 import { runAsyncWithParamChecking } from '@/hooks/runAsyncWithParamChecking'
 import { isAddress } from 'ethers/lib/utils'
