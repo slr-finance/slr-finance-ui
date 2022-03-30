@@ -1,7 +1,7 @@
 import { MaybeRef } from '@vueuse/core'
 import { computed, Ref, ref, unref } from 'vue'
 import BigNumber from 'bignumber.js'
-import { useEthers } from 'vue-dapp'
+import { useEthers } from '@/hooks/dapp/useEthers'
 import { getErc20Contract } from '@/utils/contracts/getErc20Contract'
 import { ethersToBigNumber } from '@/utils/bigNumber'
 import { useDecimals } from './useDecimals'

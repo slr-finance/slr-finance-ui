@@ -1,6 +1,6 @@
 import PresaleAbi from '@/config/abi/Presale.json'
 import { Ref, ref, watch } from 'vue'
-import { useEthers } from 'vue-dapp'
+import { useEthers } from '@/hooks/dapp/useEthers'
 import { BigNumber as BigNumberEthers, constants, ContractTransaction } from 'ethers'
 import BigNumber from 'bignumber.js'
 import { runAsyncWithParamChecking } from '@/hooks/runAsyncWithParamChecking'

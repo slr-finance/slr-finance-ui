@@ -64,11 +64,11 @@
   </div>
 
   <ui-modal v-model="isOpenAddModal">
-    <stake-more-modal :pool-id="poolId"/>
+    <stake-more-modal :pool-id="poolId" />
   </ui-modal>
 
   <ui-modal v-model="isOpenWithdrawalModal">
-    <withdrawal-with-fee-modal/>
+    <withdrawal-with-fee-modal />
   </ui-modal>
 </template>
 
@@ -94,7 +94,7 @@
       poolId: {
         type: Number,
         required: true,
-      }
+      },
     },
     setup() {
       const [stakerState] = useStaker()

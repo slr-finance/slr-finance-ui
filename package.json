@@ -10,14 +10,17 @@
     "format:write": "prettier --write '**/*.{js,jsx,ts,tsx,vue}'"
   },
   "dependencies": {
+    "@ethersproject/providers": "5.6.2",
+    "@metamask/detect-provider": "1.2.0",
     "@vueuse/core": "8.1.1",
+    "@walletconnect/web3-provider": "1.7.7",
     "bignumber.js": "9.0.2",
     "dayjs": "1.11.0",
     "ethers": "5.5.2",
     "lodash.get": "4.4.2",
+    "qr-code-styling": "1.6.0-rc.1",
     "vite-plugin-svg-icons": "2.0.1",
     "vue": "3.2.25",
-    "vue-dapp": "0.4.8",
     "vue-i18n": "9",
     "vue-router": "4",
     "vue-toastification": "2.0.0-rc.5",

@@ -1,5 +1,5 @@
 <template>
-  <stake-form :pool-id="poolId"/>
+  <stake-form :pool-id="poolId" />
 </template>
 
 <script lang="ts">
@@ -12,13 +12,11 @@
       poolId: {
         type: Number,
         required: true,
-      }
+      },
     },
-    setup(props) {
-
-    },
+    setup(props) {},
     components: {
       StakeForm,
-    }
+    },
   })
 </script>

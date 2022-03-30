@@ -4,6 +4,7 @@ import { computed, unref, ComputedRef } from 'vue'
 
 export const usePoolInfo = (poolId: MaybeRef<number>): ComputedRef<PoolType> => {
   return computed(() => {
+    console.log(unref(poolId))
     const poolIdVal = unref(poolId)
     const findedPoolInfo = POOLS_INFO.find((poolInfo) => poolInfo.id === poolIdVal)
 

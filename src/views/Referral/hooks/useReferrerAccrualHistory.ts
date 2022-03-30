@@ -1,5 +1,6 @@
 import { ref, watch } from 'vue'
-import { shortenAddress, useEthers } from 'vue-dapp'
+import { useEthers } from '@/hooks/dapp/useEthers'
+import { shortenAddress } from '@/utils/address/shortenAddress'
 import { getReferralContract } from '@/utils/contracts/getReferralContract'
 import { multicall, Call } from '@/utils/contracts/multicall'
 import ReferralAbi from '@/config/abi/Referral.json'

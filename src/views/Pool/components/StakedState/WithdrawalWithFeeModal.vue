@@ -11,7 +11,6 @@
   </div>
 </template>
 
-
 <script lang="ts">
   import { computed, defineComponent, watch } from 'vue'
   import { useUnstakeWithFee } from '../../hooks/useUnstakeWithFee'
@@ -43,6 +42,6 @@
     },
     components: {
       SendTxButton,
-    }
+    },
   })
 </script>

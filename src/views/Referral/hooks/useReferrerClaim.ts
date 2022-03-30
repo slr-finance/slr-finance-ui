@@ -1,7 +1,7 @@
 import { getReferralContract } from '@/utils/contracts/getReferralContract'
 import { computed, unref } from 'vue'
 import { useSendTx } from '@/hooks/useSendTx'
-import { useEthers } from 'vue-dapp'
+import { useEthers } from '@/hooks/dapp/useEthers'
 
 export const useReferrerClaim = () => {
   const { signer } = useEthers()

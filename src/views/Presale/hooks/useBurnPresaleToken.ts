@@ -1,6 +1,6 @@
 import { computed, unref } from 'vue'
 import { useSendTx } from '@/hooks/useSendTx'
-import { useEthers } from 'vue-dapp'
+import { useEthers } from '@/hooks/dapp/useEthers'
 import { getPresaleContract } from '@/utils/contracts/getPresaleContract'
 
 export const useBurnPresaleToken = () => {

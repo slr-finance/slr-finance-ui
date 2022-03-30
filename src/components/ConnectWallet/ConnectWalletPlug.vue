@@ -22,8 +22,9 @@
 <script lang="ts">
   import { CHAIN_ID } from '@/config/constants/chain'
   import { computed, defineComponent } from 'vue'
-  import { useBoard, useEthers } from 'vue-dapp'
+  import { useEthers } from '@/hooks/dapp/useEthers'
   import UiButton from '@/components/ui/UiButton.vue'
+  import { useConnectWalletModal } from './hooks/useConnectWalletModal'
 
   export default defineComponent({
     name: 'connect-wallet-plug',
@@ -38,7 +39,7 @@
       },
     },
     setup() {
-      const { open } = useBoard()
+      const { open } = useConnectWalletModal()
       const { isActivated, chainId } = useEthers()
       const isIncorrectChainId = computed(() => chainId.value !== CHAIN_ID)
 

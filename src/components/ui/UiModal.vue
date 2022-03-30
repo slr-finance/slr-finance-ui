@@ -10,12 +10,13 @@
         <div class="ui-modal-backdrop bg-black bg-opacity-70 backdrop-blur-8 fixed z-0 inset-0"></div>
 
         <div
-          class="ui-modal-box m-auto flex-grow-0 relative z-10 bg-black px-32 py-48 border border-white rounded-12"
+          class="ui-modal-box m-auto flex-grow-0 w-full relative z-10 bg-black px-32 py-48 border border-white rounded-12"
+          :style="styleList"
           ref="root"
           tabindex="1"
         >
-          <div @click="handleClose">close</div> 
-          <slot/>
+          <div @click="handleClose">close</div>
+          <slot />
         </div>
       </div>
     </transition>
@@ -23,7 +24,7 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent, ref, watch } from 'vue'
+  import { defineComponent, ref, watch, computed } from 'vue'
   import { useVModel, useEventListener, useScrollLock } from '@vueuse/core'
 
   export default defineComponent({
@@ -33,18 +34,23 @@
         type: Boolean,
         default: false,
       },
+      maxWidth: {
+        type: String,
+        default: '450px',
+      },
     },
     setup(props, { emit }) {
       let prevActiveElement = null as null | HTMLElement
       const isOpen = useVModel(props, 'modelValue', emit)
       const isLocked = useScrollLock(document.body)
-      const handleClose = () => { isOpen.value = false }
+      const styleList = computed(() => ({ maxWidth: props.maxWidth }))
+      const handleClose = () => {
+        isOpen.value = false
+      }
 
-      useEventListener(
-        document,
-        'keyup',
-        ({ key }) => { key === 'Escape' && handleClose() },
-      )
+      useEventListener(document, 'keyup', ({ key }) => {
+        key === 'Escape' && handleClose()
+      })
 
       watch(isOpen, (isOpenVal) => {
         isLocked.value = isOpenVal
@@ -52,7 +58,7 @@
         if (isOpenVal && document.activeElement && (document.activeElement as HTMLElement).blur) {
           prevActiveElement = document.activeElement as HTMLElement
 
-          (document.activeElement as HTMLElement).blur()
+          ;(document.activeElement as HTMLElement).blur()
         } else {
           if (prevActiveElement && document.body.contains(prevActiveElement)) {
             prevActiveElement.focus()
@@ -62,7 +68,7 @@
         }
       })
 
-      return { isOpen, handleClose }
+      return { isOpen, handleClose, styleList }
     },
   })
 </script>
@@ -83,7 +89,7 @@
   }
 
   .ui-modal-leave-active > .ui-modal-backdrop {
-    transition: all 0.3s  0.3s ease-out;
+    transition: all 0.3s 0.3s ease-out;
   }
 
   .ui-modal-enter-from > .ui-modal-backdrop,

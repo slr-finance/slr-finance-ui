@@ -16,8 +16,15 @@
           <span class="text-yellow text-opacity-80">{{ apyStr }}</span>
         </p>
 
+        <div
+          v-if="!isStakerLoaded"
+          class="flex justify-center items-center py-48"
+        >
+          <ui-galaxy-loader />
+        </div>
+
         <completed-pool
-          v-if="isCompletedPool"
+          v-else-if="isCompletedPool"
           :pool-id="poolState.id"
           class="mb-20"
         />
@@ -62,7 +69,7 @@
 
 <script lang="ts">
   import { computed, defineComponent, toRef } from 'vue'
-  import { useEthers } from 'vue-dapp'
+  import { useEthers } from '@/hooks/dapp/useEthers'
   import { usePool } from '@/store/hooks/usePool'
   import { usePoolInfo } from '../hooks/usePoolInfo'
   import { usePercentFormat } from '@/hooks/formatters/usePercentFormat'
@@ -76,6 +83,8 @@
   import PoolTvl from './PoolTvl.vue'
   import StakerInfo from './StakerInfo.vue'
   import StakedState from './StakedState'
+  import UiGalaxyLoader from '@/components/ui/UiGalaxyLoader.vue'
+  import { FetchingStatus } from '@/entities/common'
 
   export default defineComponent({
     name: 'staking-widget',
@@ -95,6 +104,9 @@
       const apyStr = usePercentFormat(apy)
       const { isActivated } = useEthers()
       const [stakerState] = useStaker()
+      const isStakerLoaded = computed(
+        () => stakerState.value.fetchStatus === FetchingStatus.FETCHED || !isActivated.value,
+      )
 
       const isCompletedPool = computed(() => poolState.value.id < stakerState.value.poolId)
       const isCurrentStakerPool = computed(
@@ -129,6 +141,7 @@
         poolState,
         stakerState,
         isCurrentStakerPoolFinished,
+        isStakerLoaded,
       }
     },
     components: {
@@ -140,6 +153,7 @@
       PoolTvl,
       StakerInfo,
       StakedState,
+      UiGalaxyLoader,
     },
   })
 </script>

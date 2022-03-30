@@ -3,7 +3,7 @@ import { constants } from 'ethers'
 import { computed, unref } from 'vue'
 import { useSendTx } from '@/hooks/useSendTx'
 import { MaybeRef } from '@vueuse/core'
-import { useEthers } from 'vue-dapp'
+import { useEthers } from '@/hooks/dapp/useEthers'
 
 export const useApprove = (tokenAddress: MaybeRef<string>, spender: MaybeRef<string>) => {
   const { signer } = useEthers()

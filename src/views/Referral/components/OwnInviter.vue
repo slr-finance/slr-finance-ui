@@ -8,7 +8,7 @@
 <script lang="ts">
   import { computed, defineComponent } from 'vue'
   import { useOwnInviter } from '@/hooks/useOwnInviter'
-  import { shortenAddress } from 'vue-dapp'
+  import { shortenAddress } from '@/utils/address/shortenAddress'
 
   export default defineComponent({
     setup() {

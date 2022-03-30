@@ -111,3 +111,5 @@ export const POOLS_INFO: PoolType[] = [
     },
   },
 ]
+
+export const MAX_POOL_ID = 9

@@ -30,9 +30,9 @@
 html, body {
   height: 100%;
   background-color: #000;
-  color: rgba(255,255,255,0.8);
+  font-display: block;
 
-  @apply font-body;
+  @apply font-body text-white;
 }
 
 #app {
