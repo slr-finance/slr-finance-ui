@@ -87,6 +87,11 @@ module.exports = {
       'pool-video': '1250 / 1080',
       'pool-video-gradient': '500 / 1080',
     },
-    extend: {},
+    extend: {
+      screens: {
+        600: '600px',
+        875: '875px'
+      },
+    },
   },
 }
