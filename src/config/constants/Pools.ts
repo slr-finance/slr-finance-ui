@@ -26,7 +26,7 @@ export const POOLS_INFO: PoolType[] = [
     id: 2,
     page: {
       description: 'the first planet of the income path',
-      videoFolder: '/planets/earth',
+      videoFolder: '/planets/uranus',
       icon: 'pool-uranus',
     },
   },
@@ -36,7 +36,7 @@ export const POOLS_INFO: PoolType[] = [
     id: 3,
     page: {
       description: 'the first planet of the income path',
-      videoFolder: '/planets/earth',
+      videoFolder: '/planets/saturn',
       icon: 'pool-saturn',
     },
   },
@@ -46,7 +46,7 @@ export const POOLS_INFO: PoolType[] = [
     id: 4,
     page: {
       description: 'the first planet of the income path',
-      videoFolder: '/planets/earth',
+      videoFolder: '/planets/jupiter',
       icon: 'pool-jupiter',
     },
   },
@@ -56,7 +56,7 @@ export const POOLS_INFO: PoolType[] = [
     id: 5,
     page: {
       description: 'the first planet of the income path',
-      videoFolder: '/planets/earth',
+      videoFolder: '/planets/mars',
       icon: 'pool-mars',
     },
   },
@@ -76,7 +76,7 @@ export const POOLS_INFO: PoolType[] = [
     id: 7,
     page: {
       description: 'the first planet of the income path',
-      videoFolder: '/planets/earth',
+      videoFolder: '/planets/venus',
       icon: 'pool-venus',
     },
   },
@@ -86,7 +86,7 @@ export const POOLS_INFO: PoolType[] = [
     id: 8,
     page: {
       description: 'the first planet of the income path',
-      videoFolder: '/planets/earth',
+      videoFolder: '/planets/mercury',
       icon: 'pool-mercury',
     },
   },
@@ -96,7 +96,7 @@ export const POOLS_INFO: PoolType[] = [
     id: 9,
     page: {
       description: 'the first planet of the income path',
-      videoFolder: '/planets/earth',
+      videoFolder: '/planets/solar',
       icon: 'pool-solar',
     },
   },

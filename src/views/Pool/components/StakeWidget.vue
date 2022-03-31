@@ -1,7 +1,7 @@
 <template>
   <section class="staking-widget">
     <div class="flex-1 flex flex-col justify-between space-y-32">
-      <div>
+      <div class="flex-1 flex flex-col">
         <div class="text-12 text-white/60 mb-8 h-24 flex items-center cursor-default">
           <div class="w-20 h-20 border border-white rounded-full mr-8" />
           {{ poolInfo.page.description }}
@@ -18,7 +18,7 @@
 
         <div
           v-if="!isStakerLoaded"
-          class="flex justify-center items-center py-48"
+          class="flex flex-1 justify-center items-center py-48"
         >
           <ui-galaxy-loader />
         </div>
@@ -49,10 +49,15 @@
           :pool-id="poolId"
         />
 
-        <disable-pool-state
+        <div 
           v-else
-          :pool-id="poolId"
-        />
+          class="flex-1 flex justify-center items-center"
+        >
+          <disable-pool-state
+            :pool-id="poolId"
+            class="w-full"
+          />
+        </div>
       </div>
 
       <div>
