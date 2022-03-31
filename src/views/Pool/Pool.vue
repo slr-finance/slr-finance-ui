@@ -5,8 +5,6 @@
   >
     <pool-planet :pool-id="poolId" />
 
-    <pools-list class="staking-pools-list mr-24" />
-
     <staking-widget
       class="staking-widget"
       :pool-id="poolId"

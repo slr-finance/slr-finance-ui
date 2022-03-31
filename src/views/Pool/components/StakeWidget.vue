@@ -49,7 +49,10 @@
           :pool-id="poolId"
         />
 
-        <div v-else>Не активен</div>
+        <disable-pool-state
+          v-else
+          :pool-id="poolId"
+        />
       </div>
 
       <div>
@@ -83,6 +86,7 @@
   import PoolTvl from './PoolTvl.vue'
   import StakerInfo from './StakerInfo.vue'
   import StakedState from './StakedState'
+  import DisablePoolState from './DisablePoolState.vue'
   import UiGalaxyLoader from '@/components/ui/UiGalaxyLoader.vue'
   import { FetchingStatus } from '@/entities/common'
 
@@ -153,6 +157,7 @@
       PoolTvl,
       StakerInfo,
       StakedState,
+      DisablePoolState,
       UiGalaxyLoader,
     },
   })
