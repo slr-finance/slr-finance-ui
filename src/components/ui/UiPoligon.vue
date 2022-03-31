@@ -6,7 +6,7 @@
   >
     <div class="wrapper inline-block relative aspect-1 font-title overflow-hidden">
       <svg
-        class="w-full h-full"
+        class="svg w-full h-full"
         width="64"
         height="64"
         viewBox="0 0 64 64"
@@ -16,7 +16,7 @@
         <path
           fill-rule="evenodd"
           clip-rule="evenodd"
-          d="M32 0L48 4.28719L59.7128 16L64 32L59.7128 48L48 59.7128L32 64L16 59.7128L4.28719 48L0 32L4.28719 16L16 4.28719L32 0Z"
+          :d="d"
           fill="currentColor"
         />
       </svg>
@@ -42,26 +42,45 @@
         default: '50',
         validator: (val: string) => ['50'].includes(val),
       },
+      corners: {
+        type: [Number, String],
+        default: 12,
+        validator: (val: number) => ['12', '6'].includes(val.toString()),
+      },
       variant: {
         validator: (value: string) => ['primary', 'contrast', 'default', 'accent'].includes(value),
         default: 'default',
       },
+      opacity: {
+        type: Boolean,
+        default: false,
+      },
     },
     setup(props) {
+      const d = computed(() => {
+        return props.corners == 6 
+          ? 'M32 0L59.7128 16V48L32 64L4.28719 48V16L32 0Z'
+          : 'M32 0L48 4.28719L59.7128 16L64 32L59.7128 48L48 59.7128L32 64L16 59.7128L4.28719 48L0 32L4.28719 16L16 4.28719L32 0Z'
+      })
       const classList = computed(() => {
         return {
+          '-opacity': props.opacity,
           [`-size-${props.size}`]: true,
           'cursor-default': props.tag === 'div',
           [`-${props.variant}`]: true,
         }
       })
 
-      return { classList }
+      return { classList, d }
     },
   })
 </script>
 
 <style>
+  .ui-poligon.-opacity > .wrapper > .svg {
+    @apply opacity-30;
+  }
+
   .ui-poligon.-size-50 > .wrapper {
     @apply w-50 h-50 text-12;
   }

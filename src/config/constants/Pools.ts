@@ -4,7 +4,6 @@ export type PoolType = {
   routeName: string
   page: {
     description: string
-    activeColor: string
     videoFolder: string
     icon: string
   }
@@ -12,91 +11,83 @@ export type PoolType = {
 
 export const POOLS_INFO: PoolType[] = [
   {
-    name: 'Mercury',
-    routeName: 'pool-mercury',
+    name: 'Neptune',
+    routeName: 'pool-neptune',
     id: 1,
     page: {
       description: 'the first planet of the income path',
-      activeColor: '#f00',
-      videoFolder: '/planets/earth',
-      icon: 'pool-mercury',
-    },
-  },
-  {
-    name: 'Venus',
-    routeName: 'pool-venus',
-    id: 2,
-    page: {
-      description: 'the first planet of the income path',
-      activeColor: '#00f',
-      videoFolder: '/planets/earth',
-      icon: 'pool-venus',
-    },
-  },
-  {
-    name: 'Earth',
-    routeName: 'pool-earth',
-    id: 3,
-    page: {
-      description: 'the first planet of the income path',
-      activeColor: '#0491cf',
-      videoFolder: '/planets/earth',
-      icon: 'pool-earth',
-    },
-  },
-  {
-    name: 'Mars',
-    routeName: 'pool-mars',
-    id: 4,
-    page: {
-      description: 'the first planet of the income path',
-      activeColor: '#b7531f',
-      videoFolder: '/planets/earth',
-      icon: 'pool-mars',
-    },
-  },
-  {
-    name: 'Jupiter',
-    routeName: 'pool-jupiter',
-    id: 5,
-    page: {
-      description: 'the first planet of the income path',
-      activeColor: '#00f',
-      videoFolder: '/planets/earth',
-      icon: 'pool-jupiter',
-    },
-  },
-  {
-    name: 'Saturn',
-    routeName: 'pool-saturn',
-    id: 6,
-    page: {
-      description: 'the first planet of the income path',
-      activeColor: '#00f',
-      videoFolder: '/planets/earth',
-      icon: 'pool-saturn',
+      videoFolder: '/planets/neptune',
+      icon: 'pool-neptune',
     },
   },
   {
     name: 'Uranus',
     routeName: 'pool-uranus',
-    id: 7,
+    id: 2,
     page: {
       description: 'the first planet of the income path',
-      activeColor: '#00f',
-      videoFolder: '/planets/earth',
+      videoFolder: '/planets/uranus',
       icon: 'pool-uranus',
     },
   },
   {
-    name: 'Neptune',
-    routeName: 'pool-neptune',
+    name: 'Saturn',
+    routeName: 'pool-saturn',
+    id: 3,
+    page: {
+      description: 'the first planet of the income path',
+      videoFolder: '/planets/saturn',
+      icon: 'pool-saturn',
+    },
+  },
+  {
+    name: 'Jupiter',
+    routeName: 'pool-jupiter',
+    id: 4,
+    page: {
+      description: 'the first planet of the income path',
+      videoFolder: '/planets/jupiter',
+      icon: 'pool-jupiter',
+    },
+  },
+  {
+    name: 'Mars',
+    routeName: 'pool-mars',
+    id: 5,
+    page: {
+      description: 'the first planet of the income path',
+      videoFolder: '/planets/mars',
+      icon: 'pool-mars',
+    },
+  },
+  {
+    name: 'Earth',
+    routeName: 'pool-earth',
+    id: 6,
+    page: {
+      description: 'the first planet of the income path',
+      videoFolder: '/planets/earth',
+      icon: 'pool-earth',
+    },
+  },
+  {
+    name: 'Venus',
+    routeName: 'pool-venus',
+    id: 7,
+    page: {
+      description: 'the first planet of the income path',
+      videoFolder: '/planets/venus',
+      icon: 'pool-venus',
+    },
+  },
+  {
+    name: 'Mercury',
+    routeName: 'pool-mercury',
     id: 8,
     page: {
       description: 'the first planet of the income path',
-      activeColor: '#00f',
-      videoFolder: '/planets/neptune',
-      icon: 'pool-neptune',
+      videoFolder: '/planets/mercury',
+      icon: 'pool-mercury',
     },
   },
   {
@@ -105,8 +96,7 @@ export const POOLS_INFO: PoolType[] = [
     id: 9,
     page: {
       description: 'the first planet of the income path',
-      activeColor: '#c94619',
-      videoFolder: '/planets/earth',
+      videoFolder: '/planets/solar',
       icon: 'pool-solar',
     },
   },

@@ -30,7 +30,7 @@
         type: Object,
       },
       variant: {
-        validator: (value: string) => ['primary', 'contrast', 'default'].includes(value),
+        validator: (value: string) => ['primary', 'contrast', 'default', 'accent'].includes(value),
         default: 'default',
       },
     },
