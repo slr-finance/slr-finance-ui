@@ -1,16 +1,17 @@
 <template>
   <a
     :class="{ '-mobile': isMobile }"
-    class="app-header-logo flex items-center"
+    class="app-header-logo flex items-center relative z-10 leading-none"
     href="https://slr.finance"
   >
-    <div class="logo relative z-10 rounded-full bg-bnb"></div>
-    <div class="title relative z-10">SLR FINANCE</div>
+    <ui-icon name="slr-logo" class="logo"/>
+    <div class="title flex items-center justify-start">SLR <div class="dot rounded-full"></div> FINANCE</div>
   </a>
 </template>
 
 <script lang="ts">
   import { watch, defineComponent } from 'vue'
+  import UiIcon from '@/components/ui/UiIcon.vue'
 
   export default defineComponent({
     name: 'app-header-logo',
@@ -20,6 +21,9 @@
         default: true,
       },
     },
+    components: {
+      UiIcon,
+    }
   })
 </script>
 
@@ -41,5 +45,12 @@
 
   .app-header-logo.-mobile > .title {
     @apply text-14;
+  }
+
+  .app-header-logo > .title > .dot {
+    background: radial-gradient(173% 173% at 181% 176%, #6071FF 66.96%, #27FDFF 83%);
+    width: 5px;
+    height: 5px;
+    margin: 2px 3px 0 3px;
   }
 </style>
