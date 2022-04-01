@@ -4,6 +4,7 @@
       class="input flex-1"
       v-model="value"
       :placeholder="placeholder"
+      :inputmode="inputmode"
     />
     <div
       class="flex flex-grow-0 justify-center items-center relative pl-12 before:content-[' '] before:block before:absolute before:h-full before:w-24 before:bg-gradient-to-r before:from-transparent before:to-black before:right-full before:top-0 before:pointer-events-none"
@@ -14,7 +15,7 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent } from 'vue'
+  import { defineComponent, HTMLAttributes, PropType } from 'vue'
   import { useVModel } from '@vueuse/core'
 
   export default defineComponent({
@@ -23,6 +24,10 @@
       placeholder: {
         type: String,
         default: '',
+      },
+      inputmode: {
+        type: String as PropType<HTMLAttributes['inputmode']>,
+        default: 'text',
       },
     },
     emits: ['update:value'],
