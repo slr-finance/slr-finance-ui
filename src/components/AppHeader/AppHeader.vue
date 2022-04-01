@@ -1,5 +1,8 @@
 <template>
-  <header class="app-header z-50 pt-32">
+  <header
+    class="app-header z-50 pt-32"
+    :class="{ '-mobile': !isDesktop }"
+  >
     <div class="app-header-bg backdrop-blur-8 absolute top-0 left-0 w-full h-full z-0 bg-black bg-opacity-40"></div>
     <app-header-logo :is-mobile="!isDesktop" />
 
@@ -10,60 +13,14 @@
       mobile menu
     </div>
 
-    <ul
-      class="links flex-1 relative z-10"
+    <app-header-desktop-nav
       v-if="isDesktop"
-    >
-      <li class="item h-full">
-        <router-link
-          class="link h-full"
-          :to="i18nRouteHelper({ name: 'swap' })"
-        >
-          <div>Swap</div>
-        </router-link>
-      </li>
-      <li class="item h-full">
-        <router-link
-          class="link h-full"
-          :to="i18nRouteHelper({ name: 'presale' })"
-        >
-          <div>Presale</div>
-        </router-link>
-      </li>
-      <li class="item h-full">
-        <router-link
-          class="link h-full"
-          :to="i18nRouteHelper({ name: 'pool' })"
-        >
-          <div>Farming</div>
-        </router-link>
-      </li>
-      <li class="item h-full">
-        <router-link
-          class="link h-full"
-          :to="i18nRouteHelper({ name: 'referral' })"
-        >
-          <div>Refferal</div>
-        </router-link>
-      </li>
-    </ul>
+      class="flex-1 relative z-10"
+    />
 
-    <ul class="links relative z-10 space-x-24">
-      <li
-        class="item h-full"
-        v-if="isDesktop"
-      >
-        <a
-          class="link h-full"
-          href="https://docs.slr.finance"
-        >
-          <div>Knowledge base</div>
-        </a>
-      </li>
-      <li class="item h-full">
-        <connect-metamask />
-      </li>
-    </ul>
+    <div class="relative z-10 ml-16">
+      <connect-metamask :is-mobile="!isDesktop" />
+    </div>
   </header>
 </template>
 
@@ -72,6 +29,7 @@
   import AppHeaderLogo from './AppHeaderLogo.vue'
   import ConnectMetamask from '@/components/ConnectWallet/ConnectMetamask.vue'
   import { useWindowScroll, useStyleTag, useBreakpoints } from '@vueuse/core'
+  import AppHeaderDesktopNav from './AppHeaderDesktopNav.vue'
 
   const getScrollFactorStyle = (scrollY: number) => {
     const scrollFactor = Math.min(scrollY, 97) / 100
@@ -99,6 +57,7 @@
     components: {
       AppHeaderLogo,
       ConnectMetamask,
+      AppHeaderDesktopNav,
     },
   })
 </script>
@@ -109,8 +68,16 @@
     --app-ui-header-scroll-padding: 32px;
   }
 
+  .app-header.-mobile {
+    @apply px-16;
+  }
+
+  .app-header:not(.-mobile) {
+    @apply px-[40px];
+  }
+
   .app-header {
-    @apply flex fixed top-0 left-0 w-full px-[40px] items-center;
+    @apply flex fixed top-0 left-0 w-full items-center;
     transform: translateY(calc(var(--app-ui-header-scroll-factor) * var(--app-ui-header-scroll-padding) * -1));
     height: calc(var(--app-ui-header-base-height) + var(--app-ui-header-scroll-padding));
     padding-top: var(--app-ui-header-scroll-padding);
@@ -118,31 +85,5 @@
 
   .app-header > .app-header-bg {
     opacity: var(--app-ui-header-scroll-factor);
-  }
-
-  .app-header > .links {
-    @apply flex space-x-32 h-full;
-  }
-
-  .app-header > .links > .item {
-    @apply h-full;
-  }
-
-  .app-header > .links > .item > .link {
-    @apply text-14 flex flex-col justify-center items-center leading-none transition duration-300 ease-out hover:ease-in h-full;
-  }
-
-  .app-header > .links > .item > .link > .status {
-    @apply text-16;
-  }
-
-  .app-header > .links > .item:hover > .link {
-    color: var(--page-active-color);
-  }
-
-  .app-header > .links > .item > .link.router-link-exact-active {
-    outline: none;
-    color: var(--page-active-color);
-    box-shadow: 0 2px 0 var(--page-active-color);
   }
 </style>

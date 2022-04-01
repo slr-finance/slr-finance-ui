@@ -6,7 +6,7 @@
       :placeholder="placeholder"
     />
     <div
-      class="flex justify-center items-center relative pl-12 before:content-[' '] before:block before:absolute before:h-full before:w-24 before:bg-gradient-to-r before:from-transparent before:to-black before:right-full before:top-0 before:pointer-events-none"
+      class="flex flex-grow-0 justify-center items-center relative pl-12 before:content-[' '] before:block before:absolute before:h-full before:w-24 before:bg-gradient-to-r before:from-transparent before:to-black before:right-full before:top-0 before:pointer-events-none"
     >
       <slot name="postfix"></slot>
     </div>

@@ -1,6 +1,9 @@
 <template>
-  <div class="flex min-h-full pb-48 pl-24">
-    <pools-list class="staking-pools-list mr-24 relative z-10" />
+  <div class="flex min-h-full pb-48 px-24">
+    <pools-list
+      class="staking-pools-list mr-24 relative z-10"
+      v-if="isLaptop"
+    />
 
     <router-view v-slot="{ Component }">
       <transition
@@ -8,12 +11,18 @@
         mode="out-in"
       >
         <component
-          class="flex-1 overflow-x-hidden"
+          class="flex-1 overflow-x-hidden page-padding"
           :is="Component"
           :key="$route.name"
         />
       </transition>
     </router-view>
+
+    <staking-navigation
+      v-if="isDesktop"
+      :pool-id="poolId"
+      class="page-padding"
+    />
   </div>
 </template>
 
@@ -21,10 +30,17 @@
   import { defineComponent, watch } from 'vue'
   import { stakingModule } from '@/store/modules/stakingModule'
   import { useRoute, useRouter } from 'vue-router'
+  import { useBreakpoints } from '@vueuse/core'
   import { POOLS_INFO } from '@/config/constants/Pools'
   import PoolsList from './components/PoolsList.vue'
+  import StakingNavigation from './components/StakingNavigation.vue'
 
   export default defineComponent({
+    props: {
+      poolId: {
+        type: Number,
+      },
+    },
     setup() {
       const route = useRoute()
       const router = useRouter()
@@ -48,14 +64,25 @@
         },
         { immediate: true },
       )
+
+      const { isDesktop, isLaptop } = useBreakpoints({ isDesktop: 641, isLaptop: 541 })
+
+      return {
+        isDesktop,
+        isLaptop,
+      }
     },
     components: {
       PoolsList,
+      StakingNavigation,
     },
   })
 </script>
 
 <style lang="postcss">
+  .page-padding {
+    padding-top: calc(var(--app-ui-header-base-height) + var(--app-ui-header-scroll-padding));
+  }
   .pool-page-transition-enter-active {
     transition: all 0.3s ease-out;
   }

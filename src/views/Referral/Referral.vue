@@ -9,8 +9,14 @@
 
       <template #default>
         <div class="875:flex 875:space-x-20 875:space-y-0 space-y-24 px-12">
-          <referral-link-block class="flex-1" style="max-width: 408px" />
-          <referrer-rewards class="flex-1" style="max-width: 408px" />
+          <referral-link-block
+            class="flex-1"
+            style="max-width: 408px"
+          />
+          <referrer-rewards
+            class="flex-1"
+            style="max-width: 408px"
+          />
         </div>
 
         <div class="875:flex 875:space-x-20 875:space-y-0 space-y-24 px-12 pt-32">

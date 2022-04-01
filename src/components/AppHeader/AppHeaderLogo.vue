@@ -4,8 +4,15 @@
     class="app-header-logo flex items-center relative z-10 leading-none"
     href="https://slr.finance"
   >
-    <ui-icon name="slr-logo" class="logo"/>
-    <div class="title flex items-center justify-start">SLR <div class="dot rounded-full"></div> FINANCE</div>
+    <ui-icon
+      name="slr-logo"
+      class="logo"
+    />
+    <div class="title flex items-center justify-start">
+      SLR
+      <div class="dot rounded-full"></div>
+      FINANCE
+    </div>
   </a>
 </template>
 
@@ -23,7 +30,7 @@
     },
     components: {
       UiIcon,
-    }
+    },
   })
 </script>
 
@@ -48,7 +55,7 @@
   }
 
   .app-header-logo > .title > .dot {
-    background: radial-gradient(173% 173% at 181% 176%, #6071FF 66.96%, #27FDFF 83%);
+    background: radial-gradient(173% 173% at 181% 176%, #6071ff 66.96%, #27fdff 83%);
     width: 5px;
     height: 5px;
     margin: 2px 3px 0 3px;

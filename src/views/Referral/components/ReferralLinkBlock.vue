@@ -9,7 +9,10 @@
       Share link
       <social-links />
     </div>
-    <ui-poligon-button class="absolute transform translate-x-18 -translate-y-1/2 top-0 right-0" variant="accent">
+    <ui-poligon-button
+      class="absolute transform translate-x-18 -translate-y-1/2 top-0 right-0"
+      variant="accent"
+    >
       Share
     </ui-poligon-button>
   </ui-widget>

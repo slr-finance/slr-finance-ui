@@ -58,7 +58,7 @@
     },
     setup(props) {
       const d = computed(() => {
-        return props.corners == 6 
+        return props.corners == 6
           ? 'M32 0L59.7128 16V48L32 64L4.28719 48V16L32 0Z'
           : 'M32 0L48 4.28719L59.7128 16L64 32L59.7128 48L48 59.7128L32 64L16 59.7128L4.28719 48L0 32L4.28719 16L16 4.28719L32 0Z'
       })
