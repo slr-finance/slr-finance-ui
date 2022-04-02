@@ -180,21 +180,20 @@
 
 <style lang="postcss">
   .pool-page {
-    @apply grid bg-black;
+    @apply grid;
 
     min-height: 100% !important; /* browser fill */
     height: auto;
 
-    padding-top: calc(var(--app-ui-header-base-height) + var(--app-ui-header-scroll-padding));
-    grid-template: 'pool nav';
-    grid-template-columns: minmax(min-content, 1200px) 1fr;
+    grid-template: 'pool';
+    grid-template-columns: minmax(min-content, 1200px);
     grid-template-rows: 1fr;
     gap: 8px;
     background-size: contain;
   }
 
   .pool-page > .staking-widget {
-    @apply h-full pt-80 relative z-40 flex flex-col justify-center;
+    @apply h-full relative z-40 flex flex-col justify-center;
 
     max-width: 321px;
     grid-area: pool;

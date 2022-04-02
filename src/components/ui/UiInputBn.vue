@@ -29,15 +29,16 @@
     emits: ['update:value'],
     setup(props, { emit }) {
       const valueBn = useVModel(props, 'value', emit, { passive: true })
-      const valueStr = ref(valueBn.value.toString())
+      const valueStr = ref(valueBn.value.toFixed())
 
-      watch(valueBn, (value) => (valueStr.value = value.isFinite() ? value.toString() : ''))
+      watch(valueBn, (value) => (valueStr.value = value.isFinite() ? value.toFixed() : ''))
       watch(valueStr, (str) => {
         const preparedStr = str.replace(/[^\d,\.]/g, '').replace(/([\.,])(?=\d*[\.,])/g, '')
 
         if (preparedStr.length === 0) {
           valueBn.value = markRaw(new BigNumber(0))
         }
+
         const bn = new BigNumber(preparedStr.replace(/,/g, '.'))
 
         if (bn.isFinite()) {

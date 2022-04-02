@@ -25,29 +25,11 @@
 <script lang="ts">
   import { defineComponent } from 'vue'
   import { i18nRouteHelper } from '@/i18n'
-
-  const links = [
-    {
-      label: 'Swap',
-      route: i18nRouteHelper({ name: 'swap' }),
-    },
-    {
-      label: 'Presale',
-      route: i18nRouteHelper({ name: 'presale' }),
-    },
-    {
-      label: 'Staking',
-      route: i18nRouteHelper({ name: 'pool' }),
-    },
-    {
-      label: 'Refferal',
-      route: i18nRouteHelper({ name: 'referral' }),
-    },
-  ]
+  import { linksList } from './linksList'
 
   export default defineComponent({
     setup() {
-      return { links }
+      return { links: linksList }
     },
   })
 </script>

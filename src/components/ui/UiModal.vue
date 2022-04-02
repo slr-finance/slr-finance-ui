@@ -57,7 +57,7 @@
 
         if (isOpenVal && document.activeElement && (document.activeElement as HTMLElement).blur) {
           prevActiveElement = document.activeElement as HTMLElement
-          (document.activeElement as HTMLElement).blur()
+          ;(document.activeElement as HTMLElement).blur()
         } else {
           if (prevActiveElement && document.body.contains(prevActiveElement)) {
             prevActiveElement.focus()

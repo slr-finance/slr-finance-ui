@@ -1,17 +1,15 @@
 <template>
   <header
-    class="app-header z-50 pt-32"
+    class="app-header z-header pt-32"
     :class="{ '-mobile': !isDesktop }"
   >
     <div class="app-header-bg backdrop-blur-8 absolute top-0 left-0 w-full h-full z-0 bg-black bg-opacity-40"></div>
     <app-header-logo :is-mobile="!isDesktop" />
 
-    <div
+    <app-header-mobile-menu
       v-if="!isDesktop"
-      class="flex-1"
-    >
-      mobile menu
-    </div>
+      class="flex-1 relative z-10 ml-8"
+    />
 
     <app-header-desktop-nav
       v-if="isDesktop"
@@ -19,9 +17,10 @@
     />
 
     <div class="relative z-10 ml-16">
-      <connect-metamask :is-mobile="!isDesktop" />
+      <connect-metamask :is-mobile="!isLaptop" />
     </div>
   </header>
+  <div id="header-mobile-menu-place"></div>
 </template>
 
 <script lang="ts">
@@ -30,6 +29,7 @@
   import ConnectMetamask from '@/components/ConnectWallet/ConnectMetamask.vue'
   import { useWindowScroll, useStyleTag, useBreakpoints } from '@vueuse/core'
   import AppHeaderDesktopNav from './AppHeaderDesktopNav.vue'
+  import AppHeaderMobileMenu from './AppHeaderMobileMenu.vue'
 
   const getScrollFactorStyle = (scrollY: number) => {
     const scrollFactor = Math.min(scrollY, 97) / 100
@@ -48,16 +48,18 @@
       })
       // Handle scroll [END]
 
-      const { isDesktop } = useBreakpoints({ isDesktop: 1100 })
+      const { isDesktop, isLaptop } = useBreakpoints({ isDesktop: 1100, isLaptop: 450 })
 
       return {
         isDesktop,
+        isLaptop,
       }
     },
     components: {
       AppHeaderLogo,
       ConnectMetamask,
       AppHeaderDesktopNav,
+      AppHeaderMobileMenu,
     },
   })
 </script>
