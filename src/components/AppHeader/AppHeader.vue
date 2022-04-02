@@ -24,10 +24,10 @@
 </template>
 
 <script lang="ts">
-  import { watch, defineComponent } from 'vue'
+  import { defineComponent } from 'vue'
   import AppHeaderLogo from './AppHeaderLogo.vue'
   import ConnectMetamask from '@/components/ConnectWallet/ConnectMetamask.vue'
-  import { useWindowScroll, useStyleTag, useBreakpoints } from '@vueuse/core'
+  import { useStyleTag, useBreakpoints, useEventListener } from '@vueuse/core'
   import AppHeaderDesktopNav from './AppHeaderDesktopNav.vue'
   import AppHeaderMobileMenu from './AppHeaderMobileMenu.vue'
 
@@ -40,11 +40,29 @@
   export default defineComponent({
     setup() {
       // Handle scroll [BEGIN]
-      const { y: scrollY } = useWindowScroll()
-      const { css } = useStyleTag(getScrollFactorStyle(scrollY.value))
+      let ticking = false
 
-      watch(scrollY, () => {
-        css.value = getScrollFactorStyle(scrollY.value)
+      const handleScroll = () => {
+        if (ticking) {
+          return
+        }
+
+        const currentPos = window.scrollY
+        ticking = true
+
+        window.requestAnimationFrame(() => {
+          css.value = getScrollFactorStyle(currentPos)
+          ticking = false
+          if (currentPos !== window.scrollY) {
+            handleScroll()
+          }
+        });
+      }
+
+      const { css } = useStyleTag(getScrollFactorStyle(window.scrollY))
+
+      useEventListener(window, 'scroll', (event) => {
+        handleScroll()
       })
       // Handle scroll [END]
 
