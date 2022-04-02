@@ -1,5 +1,5 @@
 <template>
-  <div style="max-width: 408px">
+  <div>
     <div class="mb-20 text-18 flex items-center uppercase">
       Referral list
       <div class="w-max bg-yellow text-black flex items-center rounded-16 h-32 px-10 text-14 ml-16">
@@ -15,7 +15,7 @@
         <span class="header-item uppercase">address</span>
         <span class="header-item text-right uppercase">date</span>
         <template
-          v-for="(item, i) of referralsList"
+          v-for="(item, i) of referrals"
           :key="item.address"
         >
           <span class="item pr-20 text-gray leading-none">{{ i + 1 }}</span>
@@ -28,28 +28,60 @@
           </div>
         </template>
       </div>
+      <ui-button
+        variant="pale"
+        size="48"
+        class="w-full 875:hidden"
+        @click="showAllReferrals"
+        v-if="isButtonVisible"
+      >
+        <div class="flex items-center">
+          <span>Show full referral list</span>
+          <div class="w-24 h-24 rounded-full border border-white border-opacity-20 flex justify-center items-center ml-10">
+            <ui-icon size="14" name="arrow-right" />
+          </div>
+        </div>
+      </ui-button>
     </ui-widget>
   </div>
 </template>
 
 <script lang="ts">
-  import { defineComponent } from 'vue'
+  import { defineComponent, computed, ref, unref } from 'vue'
   import UiWidget from '@/components/ui/UiWidget.vue'
+  import UiButton from '@/components/ui/UiButton.vue'
+  import UiIcon from '@/components/ui/UiIcon.vue'
 
   import { useReferrals } from '../hooks/useReferrals'
+
+  const INITIAL_VISIBLE_AMOUNT = 6
 
   export default defineComponent({
     name: 'referrals-list',
     components: {
-      UiWidget,
-    },
+    UiWidget,
+    UiButton,
+    UiIcon,
+},
     setup() {
       const { referralsList, isFetching, numberOfReferrals } = useReferrals()
+
+      const visibleItemsAmount = ref(INITIAL_VISIBLE_AMOUNT)
+
+      const referrals = computed(() => unref(referralsList).slice(0, unref(visibleItemsAmount)))
+
+      const showAllReferrals = () => {
+        visibleItemsAmount.value = unref(referralsList).length
+      }
+
+      const isButtonVisible = computed(() => unref(visibleItemsAmount) < unref(referralsList).length)
 
       return {
         isFetching,
         numberOfReferrals,
-        referralsList,
+        referrals,
+        isButtonVisible,
+        showAllReferrals,
       }
     },
   })
