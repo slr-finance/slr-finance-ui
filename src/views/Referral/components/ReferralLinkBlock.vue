@@ -9,12 +9,9 @@
       Share link
       <social-links />
     </div>
-    <ui-poligon-button
-      class="absolute transform translate-x-18 -translate-y-1/2 top-0 right-0"
-      variant="accent"
-    >
+    <ui-poligon class="absolute transform translate-x-18 -translate-y-1/2 top-0 right-0" variant="accent">
       Share
-    </ui-poligon-button>
+    </ui-poligon>
   </ui-widget>
 </template>
 
@@ -23,7 +20,7 @@
   import UiWidget from '@/components/ui/UiWidget.vue'
   import ReferralLink from './ReferralLink.vue'
   import SocialLinks from '@/components/SocialLinks/SocialLinks.vue'
-  import UiPoligonButton from '@/components/ui/UiPoligonButton.vue'
+  import UiPoligon from '@/components/ui/UiPoligon.vue'
 
   export default defineComponent({
     name: 'referrals-link-block',
@@ -31,7 +28,7 @@
       UiWidget,
       ReferralLink,
       SocialLinks,
-      UiPoligonButton,
+      UiPoligon,
     },
   })
 </script>

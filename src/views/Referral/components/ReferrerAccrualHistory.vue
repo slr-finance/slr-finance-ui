@@ -1,5 +1,5 @@
 <template>
-  <div style="max-width: 408px">
+  <div>
     <div class="mb-24 text-18 uppercase">Accrual history</div>
     <ui-widget>
       <div
@@ -11,7 +11,7 @@
         <span class="header-item pr-20 text-right uppercase">date</span>
         <span class="header-item text-right uppercase">reason</span>
         <template
-          v-for="item of accrualList"
+          v-for="item of accruals"
           :key="item.address"
         >
           <span class="item pr-20 leading-none">{{ item.amountStr }}</span>
@@ -38,27 +38,59 @@
           </div>
         </template>
       </div>
+      <ui-button
+        variant="pale"
+        size="48"
+        class="w-full 875:hidden"
+        @click="showAllReferrals"
+        v-if="isButtonVisible"
+      >
+        <div class="flex items-center">
+          <span>Show accrual history list</span>
+          <div class="w-24 h-24 rounded-full border border-white border-opacity-20 flex justify-center items-center ml-10">
+            <ui-icon size="14" name="arrow-right" />
+          </div>
+        </div>
+      </ui-button>
     </ui-widget>
   </div>
 </template>
 
 <script lang="ts">
-  import { defineComponent } from 'vue'
+  import { defineComponent, computed, ref, unref } from 'vue'
   import UiWidget from '@/components/ui/UiWidget.vue'
+  import UiButton from '@/components/ui/UiButton.vue'
+  import UiIcon from '@/components/ui/UiIcon.vue'
 
   import { useReferrerAccrualHistory } from '../hooks/useReferrerAccrualHistory'
+
+  const INITIAL_VISIBLE_AMOUNT = 6
 
   export default defineComponent({
     name: 'referrer-accrual-history',
     components: {
       UiWidget,
+      UiButton,
+      UiIcon,
     },
     setup() {
       const { accrualList, isFetching } = useReferrerAccrualHistory()
 
+      const visibleItemsAmount = ref(INITIAL_VISIBLE_AMOUNT)
+
+      const accruals = computed(() => unref(accrualList).slice(0, unref(visibleItemsAmount)))
+
+      const isButtonVisible = computed(() => unref(visibleItemsAmount) < unref(accrualList).length)
+
+      const showAllReferrals = () => {
+        visibleItemsAmount.value = unref(accrualList).length
+      }
+
       return {
         isFetching,
-        accrualList,
+        accruals,
+        isButtonVisible,
+        showAllReferrals,
       }
     },
   })

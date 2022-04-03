@@ -30,7 +30,7 @@
         type: Object,
       },
       variant: {
-        validator: (value: string) => ['primary', 'contrast', 'default', 'accent'].includes(value),
+        validator: (value: string) => ['primary', 'contrast', 'default', 'accent', 'pale'].includes(value),
         default: 'default',
       },
     },
@@ -118,5 +118,9 @@
 
   .ui-button.-accent {
     @apply bg-purple text-white border-none;
+  }
+
+  .ui-button.-pale {
+    @apply bg-white bg-opacity-10 text-white border-none;
   }
 </style>

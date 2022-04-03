@@ -9,19 +9,13 @@
 
       <template #default>
         <div class="875:flex 875:space-x-20 875:space-y-0 space-y-24 px-12">
-          <referral-link-block
-            class="flex-1"
-            style="max-width: 408px"
-          />
-          <referrer-rewards
-            class="flex-1"
-            style="max-width: 408px"
-          />
+          <referral-link-block class="flex-1 wrapper" />
+          <referrer-rewards class="flex-1 wrapper" />
         </div>
 
         <div class="875:flex 875:space-x-20 875:space-y-0 space-y-24 px-12 pt-32">
-          <referrals-list class="flex-1" />
-          <referrer-accrual-history class="flex-1" />
+          <referrals-list class="flex-1 wrapper" />
+          <referrer-accrual-history class="flex-1 wrapper" />
         </div>
       </template>
     </connect-wallet-plug>
@@ -51,3 +45,9 @@
     },
   })
 </script>
+
+<style scoped lang="postcss">
+  .wrapper {
+    @apply 875:max-w-[408px]
+  }
+</style>
