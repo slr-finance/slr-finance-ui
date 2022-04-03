@@ -1,5 +1,8 @@
 <template>
-  <connect-wallet-plug :size="buttonSize">
+  <connect-wallet-plug
+    :size="buttonSize"
+    :text="connectWalletText"
+  >
     <div
       @click="disconnect"
       class="bg-black/50 text-12 leading-none rounded-12 text-white pl-16 pr-6 h-48 flex justify-center items-center"
@@ -51,6 +54,7 @@
       const isBalanceLoaded = computed(() => slrInfo.value.fetchStatus === FetchingStatus.FETCHED)
       const balanceStr = useTokenAmountFormat(balance, 'SLR')
       const buttonSize = computed(() => (props.isMobile ? 36 : 48))
+      const connectWalletText = computed(() => (props.isMobile ? 'Connect' : 'Connect Wallet'))
 
       return {
         isCorrectChainId,
@@ -59,6 +63,7 @@
         balanceStr,
         buttonSize,
         isBalanceLoaded,
+        connectWalletText,
       }
     },
     components: {

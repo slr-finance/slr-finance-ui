@@ -66,7 +66,7 @@
   }
 
   .ui-button.-size-64 {
-    @apply h-64 min-w-64 rounded-full border-2 opacity-80;
+    @apply h-64 min-w-64 opacity-80;
 
     padding: 0 14px 0 14px;
   }

@@ -87,6 +87,15 @@ module.exports = {
       'pool-video': '1250 / 1080',
       'pool-video-gradient': '500 / 1080',
     },
+    zIndex: {
+      header: 1001,
+      'mobile-menu': 1000,
+      10: 10,
+      20: 20,
+      30: 30,
+      40: 40,
+      50: 50,
+    },
     extend: {
       screens: {
         600: '600px',
