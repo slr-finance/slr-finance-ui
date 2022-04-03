@@ -4,7 +4,11 @@
     :width="size"
     :height="size"
   >
-    <use :xlink:href="symbolId" />
+    <use
+      :xlink:href="symbolId"
+      :style="styleList"
+      class="origin-center"
+    />
   </svg>
 </template>
 
@@ -26,10 +30,15 @@
         type: [Number, String],
         default: 32,
       },
+      rotate: {
+        type: [Number, String],
+        default: 0,
+      },
     },
     setup(props) {
+      const styleList = computed(() => ({ transform: `rotate(${props.rotate}deg)` }))
       const symbolId = computed(() => `#${props.prefix}-${props.name}`)
-      return { symbolId }
+      return { symbolId, styleList }
     },
   })
 </script>

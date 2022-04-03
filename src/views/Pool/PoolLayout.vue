@@ -1,5 +1,5 @@
 <template>
-  <div class="flex min-h-full pb-48 px-24">
+  <div class="flex min-h-full pb-48 px-24 bg-black">
     <pools-list
       class="staking-pools-list mr-24 relative z-10"
       v-if="isLaptop"
@@ -18,11 +18,12 @@
       </transition>
     </router-view>
 
-    <staking-navigation
+    <div
       v-if="isDesktop"
-      :pool-id="poolId"
       class="page-padding"
-    />
+    >
+      <pools-navigation :pool-id="poolId" />
+    </div>
   </div>
 </template>
 
@@ -33,12 +34,13 @@
   import { useBreakpoints } from '@vueuse/core'
   import { POOLS_INFO } from '@/config/constants/Pools'
   import PoolsList from './components/PoolsList.vue'
-  import StakingNavigation from './components/StakingNavigation.vue'
+  import PoolsNavigation from './components/PoolsNavigation.vue'
 
   export default defineComponent({
     props: {
       poolId: {
         type: Number,
+        default: 0,
       },
     },
     setup() {
@@ -74,14 +76,14 @@
     },
     components: {
       PoolsList,
-      StakingNavigation,
+      PoolsNavigation,
     },
   })
 </script>
 
 <style lang="postcss">
   .page-padding {
-    padding-top: calc(var(--app-ui-header-base-height) + var(--app-ui-header-scroll-padding));
+    padding-top: calc(var(--app-ui-header-base-height) + var(--app-ui-header-scroll-padding) + 80px);
   }
   .pool-page-transition-enter-active {
     transition: all 0.3s ease-out;
