@@ -60,7 +60,7 @@ export const useAllowance = (tokenAddress: MaybeRef<string>, spender: MaybeRef<s
       isFetching.value = false
     })
 
-  watch(() => watchSource, fetchAllowance, { immediate: true })
+  watch(watchSource, fetchAllowance, { immediate: true })
 
   return [fetchAllowance, allowance, isFetching]
 }
