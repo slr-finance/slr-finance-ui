@@ -36,7 +36,7 @@ export const fetchPrice = async (tokenAddress: string, path: string[]) => {
   )
 
   const liquidityPrice = price
-    .times(parseWei(tokenAddress === response[0] ? response[2].reserve1 : response[2].reserve0, 18))
+    .times(parseWei(tokenAddress === response[0] ? response[2].reserve0 : response[2].reserve1, 18))
     .times(2)
 
   return { price, liquidityPrice }

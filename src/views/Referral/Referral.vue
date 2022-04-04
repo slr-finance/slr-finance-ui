@@ -46,8 +46,11 @@
   })
 </script>
 
-<style scoped lang="postcss">
+<style
+  scoped
+  lang="postcss"
+>
   .wrapper {
-    @apply 875:max-w-[408px]
+    @apply 875:max-w-[408px];
   }
 </style>

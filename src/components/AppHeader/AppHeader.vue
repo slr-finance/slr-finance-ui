@@ -56,7 +56,7 @@
           if (currentPos !== window.scrollY) {
             handleScroll()
           }
-        });
+        })
       }
 
       const { css } = useStyleTag(getScrollFactorStyle(window.scrollY))

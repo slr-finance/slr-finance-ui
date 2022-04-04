@@ -20,7 +20,7 @@ export const fetchPools = async (pools: number[]) => {
   const poolsInfo = pools.map((poolId, index) => {
     const poolState = response[index]
     const apr = ethersToBigNumber(poolState.apr).div(1000000)
-    const withdrawalFee = ethersToBigNumber(poolState.withdrawalFees).div(1000)
+    const withdrawalFee = ethersToBigNumber(poolState.withdrawalFees).div(1000000)
 
     return {
       fetchStatus: FetchingStatus.NONE,

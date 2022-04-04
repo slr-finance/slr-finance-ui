@@ -37,8 +37,13 @@
       >
         <div class="flex items-center">
           <span>Show full referral list</span>
-          <div class="w-24 h-24 rounded-full border border-white border-opacity-20 flex justify-center items-center ml-10">
-            <ui-icon size="14" name="arrow-right" />
+          <div
+            class="w-24 h-24 rounded-full border border-white border-opacity-20 flex justify-center items-center ml-10"
+          >
+            <ui-icon
+              size="14"
+              name="arrow-right"
+            />
           </div>
         </div>
       </ui-button>
@@ -59,10 +64,10 @@
   export default defineComponent({
     name: 'referrals-list',
     components: {
-    UiWidget,
-    UiButton,
-    UiIcon,
-},
+      UiWidget,
+      UiButton,
+      UiIcon,
+    },
     setup() {
       const { referralsList, isFetching, numberOfReferrals } = useReferrals()
 

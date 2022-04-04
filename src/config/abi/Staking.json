@@ -191,8 +191,7 @@
       }
     ],
     "stateMutability": "view",
-    "type": "function",
-    "constant": true
+    "type": "function"
   },
   {
     "inputs": [],
@@ -205,8 +204,7 @@
       }
     ],
     "stateMutability": "view",
-    "type": "function",
-    "constant": true
+    "type": "function"
   },
   {
     "inputs": [],
@@ -219,8 +217,7 @@
       }
     ],
     "stateMutability": "view",
-    "type": "function",
-    "constant": true
+    "type": "function"
   },
   {
     "inputs": [],
@@ -233,8 +230,7 @@
       }
     ],
     "stateMutability": "view",
-    "type": "function",
-    "constant": true
+    "type": "function"
   },
   {
     "inputs": [],
@@ -254,8 +250,7 @@
       }
     ],
     "stateMutability": "view",
-    "type": "function",
-    "constant": true
+    "type": "function"
   },
   {
     "inputs": [
@@ -289,8 +284,7 @@
       }
     ],
     "stateMutability": "view",
-    "type": "function",
-    "constant": true
+    "type": "function"
   },
   {
     "inputs": [],
@@ -303,8 +297,7 @@
       }
     ],
     "stateMutability": "view",
-    "type": "function",
-    "constant": true
+    "type": "function"
   },
   {
     "inputs": [
@@ -348,8 +341,7 @@
       }
     ],
     "stateMutability": "view",
-    "type": "function",
-    "constant": true
+    "type": "function"
   },
   {
     "inputs": [
@@ -380,51 +372,6 @@
   {
     "inputs": [
       {
-        "internalType": "address",
-        "name": "_owner",
-        "type": "address"
-      }
-    ],
-    "name": "getStaker",
-    "outputs": [
-      {
-        "internalType": "uint16",
-        "name": "poolId",
-        "type": "uint16"
-      },
-      {
-        "internalType": "uint128",
-        "name": "amount",
-        "type": "uint128"
-      },
-      {
-        "internalType": "uint32",
-        "name": "lock",
-        "type": "uint32"
-      },
-      {
-        "internalType": "uint32",
-        "name": "startStaking",
-        "type": "uint32"
-      },
-      {
-        "internalType": "uint32",
-        "name": "timestamp",
-        "type": "uint32"
-      },
-      {
-        "internalType": "uint128",
-        "name": "reward",
-        "type": "uint128"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function",
-    "constant": true
-  },
-  {
-    "inputs": [
-      {
         "internalType": "uint16",
         "name": "_poolId",
         "type": "uint16"
@@ -432,11 +379,6 @@
       {
         "internalType": "uint128",
         "name": "_amount",
-        "type": "uint128"
-      },
-      {
-        "internalType": "uint128",
-        "name": "_reinvestAmount",
         "type": "uint128"
       },
       {
@@ -498,8 +440,51 @@
       }
     ],
     "stateMutability": "view",
-    "type": "function",
-    "constant": true
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_owner",
+        "type": "address"
+      }
+    ],
+    "name": "getStaker",
+    "outputs": [
+      {
+        "internalType": "uint16",
+        "name": "poolId",
+        "type": "uint16"
+      },
+      {
+        "internalType": "uint128",
+        "name": "amount",
+        "type": "uint128"
+      },
+      {
+        "internalType": "uint32",
+        "name": "lock",
+        "type": "uint32"
+      },
+      {
+        "internalType": "uint32",
+        "name": "startStaking",
+        "type": "uint32"
+      },
+      {
+        "internalType": "uint32",
+        "name": "timestamp",
+        "type": "uint32"
+      },
+      {
+        "internalType": "uint128",
+        "name": "reward",
+        "type": "uint128"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
   },
   {
     "inputs": [
@@ -523,8 +508,7 @@
       }
     ],
     "stateMutability": "pure",
-    "type": "function",
-    "constant": true
+    "type": "function"
   },
   {
     "inputs": [
@@ -538,12 +522,11 @@
     "outputs": [
       {
         "internalType": "uint128",
-        "name": "",
+        "name": "amount",
         "type": "uint128"
       }
     ],
     "stateMutability": "view",
-    "type": "function",
-    "constant": true
+    "type": "function"
   }
 ]

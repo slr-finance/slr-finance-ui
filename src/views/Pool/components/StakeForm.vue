@@ -85,7 +85,7 @@
       })
 
       const refetchBalanceAndStakerState = () => Promise.all([refetchStaker(), refetchBalance()])
-      const [handleStake, stakeTxState] = useStake({ poolId, amount, days, reinvestAmount: new BigNumber(0) })
+      const [handleStake, stakeTxState] = useStake({ poolId, amount, days })
       watch(stakeTxState, ({ isSuccess }) => isSuccess && refetchBalanceAndStakerState())
 
       return {

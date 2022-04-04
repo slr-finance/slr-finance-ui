@@ -1,5 +1,7 @@
 <template>
   <div>
+    Will be received: {{ willBeReceivedStr }}
+
     <send-tx-button
       @click="handleUnstakeWithFee"
       :txState="unstakeWithFeeTxState"
@@ -19,6 +21,8 @@
   import { useStaker } from '@/store/hooks/useStaker'
   import { useSlrBalance } from '@/store/hooks/useBalance'
   import SendTxButton from '@/components/Tx/SendTxButton.vue'
+  import { useTokenAmountFormat } from '@/hooks/formatters/useTokenAmountFormat'
+  import { BIG_ONE } from '@/utils/bigNumber'
 
   export default defineComponent({
     name: 'withdrawal-with-fee-modal',
@@ -32,12 +36,20 @@
       const withdrawalFeeStr = usePercentFormat(withdrawalFee)
       const refetchBalanceAndStakerState = () => Promise.all([refetchStaker(), refetchBalance()])
 
+      const willBeReceived = computed(() => {
+        const { amount, reward } = stakerState.value
+
+        return BIG_ONE.minus(withdrawalFee.value).times(amount.plus(reward))
+      })
+      const willBeReceivedStr = useTokenAmountFormat(willBeReceived, 'SLR')
+
       watch(unstakeWithFeeTxState, ({ isSuccess }) => isSuccess && refetchBalanceAndStakerState())
 
       return {
         unstakeWithFeeTxState,
         handleUnstakeWithFee,
         withdrawalFeeStr,
+        willBeReceivedStr,
       }
     },
     components: {

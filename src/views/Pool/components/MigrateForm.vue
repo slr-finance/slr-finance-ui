@@ -108,7 +108,7 @@
       const poolApy = computed(() => poolState.value.apy)
       const poolApyStr = usePercentFormat(poolApy)
 
-      const [handleMigrate, migrateTxState] = useStake({ poolId, amount, days, reinvestAmount })
+      const [handleMigrate, migrateTxState] = useStake({ poolId, amount, days })
       const refetchStakerAndBalance = () => Promise.all([refetchStaker(), refetchSlrBalance()])
 
       watch(migrateTxState, ({ isSuccess }) => isSuccess && refetchStakerAndBalance())
