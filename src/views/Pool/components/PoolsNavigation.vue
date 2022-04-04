@@ -18,9 +18,10 @@
         >
           <div>{{ prevPoolName }} {{ prevApyStr }}</div>
           <ui-icon
-            name="slr-logo"
-            class="logo"
-            size="18"
+            name="arrow-pixel"
+            class="mr-8"
+            rotate="180"
+            size="12"
           />
         </router-link>
         <router-link
@@ -30,9 +31,9 @@
         >
           <div>{{ nextPoolName }} {{ nextApyStr }}</div>
           <ui-icon
-            name="slr-logo"
-            class="logo"
-            size="18"
+            name="arrow-pixel"
+            class="mr-8"
+            size="12"
           />
         </router-link>
       </div>

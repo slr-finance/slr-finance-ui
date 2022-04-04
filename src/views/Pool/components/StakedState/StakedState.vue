@@ -23,19 +23,19 @@
           >
             <ui-icon
               name="plus"
-              size="14"
+              size="10"
               class="text-white"
             />
           </ui-button>
 
           <ui-button
-            variant="accent"
+            variant="pale"
             size="40"
             @click="() => handleOpenRewardForm()"
           >
             <ui-icon
-              name="plus"
-              size="14"
+              name="minus"
+              size="10"
               class="text-white"
             />
           </ui-button>
@@ -76,7 +76,7 @@
   import { defineComponent, computed, ref, watch, WritableComputedRef } from 'vue'
   import dayjs from 'dayjs'
   import relativeTime from 'dayjs/plugin/relativeTime'
-  import { useInterval, useToggle } from '@vueuse/core'
+  import { useInterval, useToggle, useTransition } from '@vueuse/core'
   import UiButton from '@/components/ui/UiButton.vue'
   import UiIcon from '@/components/ui/UiIcon.vue'
   import UiPoligon from '@/components/ui/UiPoligon.vue'
@@ -99,9 +99,10 @@
     setup() {
       const [stakerState] = useStaker()
       const stakedAmount = computed(() => stakerState.value.amount)
-      const earnedAmount = computed(() => stakerState.value.reward)
+      const earnedAmountNumber = computed(() => stakerState.value.reward.toNumber())
       const stakedStr = useTokenAmountFormat(stakedAmount, 'SLR', 2)
-      const earnedStr = useTokenAmountFormat(earnedAmount, 'SLR', 2)
+      const earnedAnimationAmount = useTransition(earnedAmountNumber, { duration: 500 })
+      const earnedStr = useTokenAmountFormat(earnedAnimationAmount, 'SLR', 2)
 
       const lifeTimestamp = useInterval(1000)
       const leftToWait = computed(() => {
