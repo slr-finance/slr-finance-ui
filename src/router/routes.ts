@@ -2,7 +2,7 @@ import type { RouteRecordRaw } from 'vue-router'
 import { POOLS_INFO } from '../config/constants/Pools'
 
 export const routes: RouteRecordRaw[] = [
-  { 
+  {
     path: '/:locale?',
     name: 'dashboard',
     component: () => import('@/views/Dashboard/Dashboard.vue'),
@@ -20,7 +20,7 @@ export const routes: RouteRecordRaw[] = [
   {
     path: '/:locale?/swap',
     name: 'swap',
-    component: () => import('@/views/Swap.vue'),
+    component: () => import('@/views/Swap/Swap.vue'),
   },
   {
     path: '/:locale?/pool',

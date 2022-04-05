@@ -81,7 +81,10 @@
   })
 </script>
 
-<style lang="postcss" scoped>
+<style
+  lang="postcss"
+  scoped
+>
   .page-padding {
     padding-top: calc(var(--app-ui-header-base-height) + var(--app-ui-header-scroll-padding) + 80px);
   }

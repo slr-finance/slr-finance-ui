@@ -2,7 +2,7 @@
   <div>
     Presale form
     <form class="flex flex-col items-stretch">
-      <ui-input v-model:value="amountInStr" />
+      <ui-input-bn v-model:value="amountIn" />
       <ui-input-bn v-model:value="amountOut" />
 
       <approve-token-plug
@@ -24,7 +24,6 @@
 <script lang="ts">
   import { computed, defineComponent, PropType, Ref, ref, toRef } from 'vue'
   import SendTxButton from '@/components/Tx/SendTxButton.vue'
-  import UiInput from '@/components/ui/UiInput.vue'
   import UiInputBn from '@/components/ui/UiInputBn.vue'
 
   import { syncRef } from '@vueuse/core'
@@ -71,7 +70,6 @@
 
       return {
         handelBuy,
-        amountInStr,
         amountIn,
         amountOut,
         presaleAddress: contractsAddresses.PresaleService,
@@ -80,7 +78,6 @@
     },
     components: {
       SendTxButton,
-      UiInput,
       UiInputBn,
       ApproveTokenPlug,
     },

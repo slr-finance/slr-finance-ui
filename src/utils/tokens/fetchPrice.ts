@@ -1,25 +1,14 @@
 import BigNumber from 'bignumber.js'
-import { Call, multicall } from '../contracts/multicall'
-import PairAbi from '@/config/abi/Pair.json'
-import { ethersToBigNumber, parseWei } from '@/utils/bigNumber'
+import { weiToBig } from '@/utils/bigNumber'
+import { fetchReserves } from './fetchReserves'
 
 export const fetchPrice = async (tokenAddress: string, path: string[]) => {
-  const calls: Call[] = path
-    .map((pairAddress) => [
-      { address: pairAddress, name: 'token0' },
-      { address: pairAddress, name: 'token1' },
-      { address: pairAddress, name: 'getReserves' },
-    ])
-    .flat()
+  const pairsInfo = await fetchReserves(path)
 
-  const response = await multicall(PairAbi, calls)
-  const { price } = path.reduce(
-    (previousValue, pair, index) => {
-      const [token0] = response[3 * index]
-      const [token1] = response[3 * index + 1]
-      const reserves = response[3 * index + 2]
-      const reserve0 = ethersToBigNumber(reserves.reserve0)
-      const reserve1 = ethersToBigNumber(reserves.reserve1)
+  const { price } = pairsInfo.reduce(
+    (previousValue, { token0, token1, reserves }) => {
+      const [reserve0, reserve1] = reserves
+      console.log(previousValue, token0, token1)
 
       if (previousValue.token !== token0 && previousValue.token !== token1) {
         throw new Error('[fetchPrice]: path is incorrect')
@@ -36,7 +25,7 @@ export const fetchPrice = async (tokenAddress: string, path: string[]) => {
   )
 
   const liquidityPrice = price
-    .times(parseWei(tokenAddress === response[0] ? response[2].reserve0 : response[2].reserve1, 18))
+    .times(weiToBig(tokenAddress === pairsInfo[0].token0 ? pairsInfo[0].reserves[0] : pairsInfo[0].reserves[1], 18))
     .times(2)
 
   return { price, liquidityPrice }
