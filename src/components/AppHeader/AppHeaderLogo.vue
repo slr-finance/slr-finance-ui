@@ -1,8 +1,8 @@
 <template>
-  <a
+  <router-link
     :class="{ '-mobile': isMobile }"
     class="app-header-logo flex items-center relative z-10 leading-none"
-    href="https://slr.finance"
+    :to="{ name: 'dashboard' }"
   >
     <ui-icon
       name="slr-logo"
@@ -13,7 +13,7 @@
       <div class="dot rounded-full"></div>
       FINANCE
     </div>
-  </a>
+  </router-link>
 </template>
 
 <script lang="ts">
