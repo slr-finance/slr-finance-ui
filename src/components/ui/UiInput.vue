@@ -3,6 +3,7 @@
     <input
       class="input flex-1"
       v-model="value"
+      @input="handleInput"
       :placeholder="placeholder"
       :inputmode="inputmode"
     />
@@ -17,6 +18,7 @@
 <script lang="ts">
   import { defineComponent, HTMLAttributes, PropType } from 'vue'
   import { useVModel } from '@vueuse/core'
+  import { get } from 'lodash'
 
   export default defineComponent({
     props: {
@@ -30,12 +32,16 @@
         default: 'text',
       },
     },
-    emits: ['update:value'],
+    emits: ['update:value', 'input'],
     setup(props, { emit }) {
       const value = useVModel(props, 'value', emit, { passive: true })
+      const handleInput = (event: Event) => {
+        emit('input', get(event, ['target', 'value'], ''))
+      }
 
       return {
         value,
+        handleInput,
       }
     },
   })

@@ -17,8 +17,8 @@ export const useBuyPresaleToken = (
   const referrer = getReferrerFromLocalstorage()
   const presaleContract = computed(() => getPresaleContract(unref(signer)))
   const params = computed(() => [
-    bigToWei(unref(amountIn), unref(tokenInDecimals)).toFixed(),
-    bigToWei(unref(amountOut), unref(tokenOutDecimals)).toFixed(),
+    bigToWei(unref(amountIn), unref(tokenInDecimals)),
+    bigToWei(unref(amountOut), unref(tokenOutDecimals)),
     referrer,
   ])
 

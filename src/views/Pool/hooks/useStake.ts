@@ -19,7 +19,7 @@ export const useStake = (params: UseStakeParams) => {
   const stakingContract = useStakingContract()
   const callParams = computed(() => [
     unref(params.poolId),
-    unref(amountWei).toFixed(),
+    unref(amountWei),
     Number(unref(params.days)),
     getReferrerFromLocalstorage(),
   ])

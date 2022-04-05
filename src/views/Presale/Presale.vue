@@ -79,7 +79,7 @@
           <a
             :href="`https://bscscan.com/block/${endWhiteListBlock}`"
             target="_blank"
-            rel="noreferrer"
+            rel="noopener noreferrer"
             >{{ endWhiteListBlock }}</a
           >
           block number

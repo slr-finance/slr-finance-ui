@@ -27,6 +27,7 @@
             <a
               class="ui-link text-14 flex flex-col justify-center items-center leading-none h-full"
               href="https://docs.slr.finance"
+              rel="noopener noreferrer"
             >
               <div>Knowledge base</div>
             </a>

@@ -3,7 +3,7 @@
     <a
       href="#"
       target="_blank"
-      rel="noreferrer"
+      rel="noopener noreferrer"
     >
       <ui-icon
         name="twitter"
@@ -13,7 +13,7 @@
     <a
       href="#"
       target="_blank"
-      rel="noreferrer"
+      rel="noopener noreferrer"
     >
       <ui-icon
         name="facebook"
@@ -23,7 +23,7 @@
     <a
       href="#"
       target="_blank"
-      rel="noreferrer"
+      rel="noopener noreferrer"
     >
       <ui-icon
         name="instagram"

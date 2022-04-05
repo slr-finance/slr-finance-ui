@@ -1,7 +1,6 @@
 import { Call, multicall } from '@/utils/contracts/multicall'
 import PairAbi from '@/config/abi/Pair.json'
-import { ethersToBigNumber } from '@/utils/bigNumber'
-import BigNumber from 'bignumber.js'
+import { BigNumber as BigNumberEthers } from 'ethers'
 
 export const fetchReserves = async (
   pairs: string[],
@@ -10,7 +9,7 @@ export const fetchReserves = async (
     pair: string
     token0: string
     token1: string
-    reserves: [BigNumber, BigNumber]
+    reserves: [BigNumberEthers, BigNumberEthers]
   }[]
 > => {
   const calls: Call[] = pairs
@@ -27,9 +26,6 @@ export const fetchReserves = async (
     pair: pair,
     token0: response[index * 3][0] as string,
     token1: response[index * 3 + 1][0] as string,
-    reserves: [
-      ethersToBigNumber(response[index * 3 + 2].reserve0),
-      ethersToBigNumber(response[index * 3 + 2].reserve1),
-    ],
+    reserves: [response[index * 3 + 2].reserve0, response[index * 3 + 2].reserve1],
   }))
 }

@@ -1,14 +1,15 @@
 import BigNumber from 'bignumber.js'
-import { weiToBig } from '@/utils/bigNumber'
+import { parseWei } from '@/utils/bigNumber'
 import { fetchReserves } from './fetchReserves'
+import { ethersToBigNumber } from '@/utils/bigNumber'
 
 export const fetchPrice = async (tokenAddress: string, path: string[]) => {
   const pairsInfo = await fetchReserves(path)
 
   const { price } = pairsInfo.reduce(
     (previousValue, { token0, token1, reserves }) => {
-      const [reserve0, reserve1] = reserves
-      console.log(previousValue, token0, token1)
+      const reserve0 = ethersToBigNumber(reserves[0])
+      const reserve1 = ethersToBigNumber(reserves[1])
 
       if (previousValue.token !== token0 && previousValue.token !== token1) {
         throw new Error('[fetchPrice]: path is incorrect')
@@ -25,7 +26,7 @@ export const fetchPrice = async (tokenAddress: string, path: string[]) => {
   )
 
   const liquidityPrice = price
-    .times(weiToBig(tokenAddress === pairsInfo[0].token0 ? pairsInfo[0].reserves[0] : pairsInfo[0].reserves[1], 18))
+    .times(parseWei(tokenAddress === pairsInfo[0].token0 ? pairsInfo[0].reserves[0] : pairsInfo[0].reserves[1], 18))
     .times(2)
 
   return { price, liquidityPrice }
