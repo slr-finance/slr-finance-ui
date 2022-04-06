@@ -63,7 +63,7 @@ export const useReferrals = () => {
               })
             }
 
-            const referrals = await multicall<ReferralInfoRaw[]>(ReferralAbi, calls)
+            const [referrals] = await multicall<ReferralInfoRaw[]>(ReferralAbi, calls)
 
             breakIfValueChanged()
 

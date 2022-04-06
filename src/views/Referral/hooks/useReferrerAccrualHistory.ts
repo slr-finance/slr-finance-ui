@@ -73,7 +73,7 @@ export const useReferrerAccrualHistory = () => {
               })
             }
 
-            const referrals = await multicall<AccrualRaw[]>(ReferralAbi, calls)
+            const [referrals] = await multicall<AccrualRaw[]>(ReferralAbi, calls)
 
             breakIfValueChanged()
 

@@ -113,7 +113,7 @@ export const usePresale = () => {
           )
         }
 
-        const [
+        const [[
           [tokenOutDecimalsVal],
           [tokenInDecimalsVal],
           [totalSupplyVal],
@@ -125,7 +125,7 @@ export const usePresale = () => {
           [isWhiteListClosedVal],
           [presaleTokenBalanceBn] = [],
           [joinedVal] = [],
-        ] = await multicall<PresaleInfoRaw>(PresaleAbi, calls)
+        ]] = await multicall<PresaleInfoRaw>(PresaleAbi, calls)
 
         tokenOutDecimals.value = tokenOutDecimalsVal
         tokenInDecimals.value = tokenInDecimalsVal
