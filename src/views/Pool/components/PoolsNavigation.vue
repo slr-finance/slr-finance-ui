@@ -18,10 +18,10 @@
         >
           <div>{{ prevPoolName }} {{ prevApyStr }}</div>
           <ui-icon
-            name="arrow-pixel"
+            name="arrow-pixel-to"
             class="mr-8"
             rotate="180"
-            size="12"
+            size="16"
           />
         </router-link>
         <router-link
@@ -31,9 +31,9 @@
         >
           <div>{{ nextPoolName }} {{ nextApyStr }}</div>
           <ui-icon
-            name="arrow-pixel"
+            name="arrow-pixel-to"
             class="mr-8"
-            size="12"
+            size="16"
           />
         </router-link>
       </div>

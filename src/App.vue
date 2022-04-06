@@ -9,7 +9,7 @@
   import { useEthers } from '@/hooks/dapp/useEthers'
   import { store } from '@/store/store'
   import AppHeader from '@/components/AppHeader'
-  import ConnectWalletModal from '@/components/ConnectWallet/ConnectWalletModal.vue'
+  import ConnectWalletModal from '@/components/ConnectWallet/ConnectWalletModal'
   import { stakingModule } from '@/store/modules/stakingModule'
   import { useBlockInfo } from './hooks/useBlockInfo'
 
