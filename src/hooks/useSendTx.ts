@@ -86,7 +86,11 @@ export const useSendTx = (
       })
     } catch (error) {
       // TODO: изменить дефолтный текст
-      const errorMessage = get(error, 'message', 'Проблема')
+      const errorMessage = get(
+        error,
+        ['data', 'message'],
+        get(error, ['data'], 'Something wrong. Transaction not success.'),
+      )
 
       txToast.error(errorMessage, { timeout: 8000 })
 

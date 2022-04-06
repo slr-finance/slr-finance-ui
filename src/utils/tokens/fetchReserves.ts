@@ -20,7 +20,7 @@ export const fetchReserves = async (
     ])
     .flat()
 
-  const response = await multicall(PairAbi, calls)
+  const [response] = await multicall(PairAbi, calls)
 
   return pairs.map((pair, index) => ({
     pair: pair,

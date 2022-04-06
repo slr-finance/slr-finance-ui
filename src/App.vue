@@ -11,6 +11,7 @@
   import AppHeader from '@/components/AppHeader'
   import ConnectWalletModal from '@/components/ConnectWallet/ConnectWalletModal.vue'
   import { stakingModule } from '@/store/modules/stakingModule'
+  import { useBlockInfo } from './hooks/useBlockInfo'
 
   export default defineComponent({
     props: {
@@ -19,13 +20,13 @@
       },
     },
     setup() {
-      const { address } = useEthers()
       stakingModule.register(store)
+
+      const { address } = useEthers()
       watch(address, (addressVal) => stakingModule.actions.setStakerAddress(addressVal))
 
-      import('@/utils/contracts/getProvider').then(({ getProvider }) => {
-        getProvider().on('block', () => stakingModule.actions.refetchStaker())
-      })
+      const { blockNumber } = useBlockInfo()
+      watch(blockNumber, () => stakingModule.actions.refetchStaker())
     },
     components: {
       AppHeader,

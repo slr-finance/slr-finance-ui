@@ -25,16 +25,16 @@ interface TryAggregateRaw extends Result {
 }
 ;[]
 
-export const multicall = async <T extends Array<any>>(abi: any[], calls: Call[]): Promise<T> => {
+export const multicall = async <T extends Array<any>>(abi: any[], calls: Call[]): Promise<[T, BigNumberEthers]> => {
   try {
     const multi = getMulticallContract()
     const itf = new ethers.utils.Interface(abi)
 
     const calldata = calls.map((call) => [call.address.toLowerCase(), itf.encodeFunctionData(call.name, call.params)])
-    const { returnData } = (await multi.functions.aggregate(calldata)) as AggregateRaw
+    const { returnData, blockNumber } = (await multi.functions.aggregate(calldata)) as AggregateRaw
     const res = returnData.map((call, i) => itf.decodeFunctionResult(calls[i].name, call)) as T
 
-    return res
+    return [res, blockNumber]
   } catch (error) {
     throw new Error(error as any)
   }

@@ -29,7 +29,7 @@
         <approve-token-plug
           text="Enable"
           :minAllowance="amountIn"
-          :tokenAddress="tokenOutAddress"
+          :tokenAddress="tokenInAddress"
           :spenderAddress="routerAddress"
         >
           <send-tx-button
@@ -56,6 +56,7 @@
 
 <script lang="ts">
   import { defineComponent, computed, watch } from 'vue'
+  import contractsAddresses from '@/config/constants/contractsAddresses.json'
 
   import UiInputBn from '@/components/ui/UiInputBn.vue'
   import UiButton from '@/components/ui/UiButton.vue'
@@ -78,7 +79,7 @@
   export default defineComponent({
     name: 'swap-form',
     setup() {
-      const routerAddress = ''
+      const routerAddress = contractsAddresses.SwapRouter
       const {
         swapSide,
         handleTypeInput,
@@ -101,7 +102,7 @@
 
       const minAmountIn = computed(() => amountOut.value.times(BIG_ONE.minus(slippage.value)))
 
-      const [handleSwap, swapTxState] = useSwapTx(path, amounts)
+      const [handleSwap, swapTxState] = useSwapTx(path, swapParams)
 
       const minAmountInStr = useTokenAmountFormat(minAmountIn)
       const swapFeeStr = usePercentFormat(swapFee)
@@ -119,7 +120,6 @@
         handleTypeOutput,
         routerAddress,
         tokenInAddress,
-        tokenOutAddress,
         tokenInSymbol,
         tokenOutSymbol,
         swapParams,

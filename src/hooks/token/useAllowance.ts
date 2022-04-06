@@ -55,7 +55,7 @@ export const useAllowance = (tokenAddress: MaybeRef<string>, spender: MaybeRef<s
         },
       ]
 
-      const [[decimalsResponse], [allowanceResponse]] = await multicall(erc20Abi, calls)
+      const [[[decimalsResponse], [allowanceResponse]]] = await multicall(erc20Abi, calls)
       allowance.value = parseWei(allowanceResponse, decimalsResponse)
       isFetching.value = false
     })

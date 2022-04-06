@@ -31,7 +31,7 @@ export const useBalance = (tokenAddress: MaybeRef<string>): UseBalanceReturns =>
   const handleFetchBalance = async () => {
     if (isAddress(userAddress.value)) {
       balanceModule.mutations.fetchingBalance(unref(tokenAddress))
-      const [[decimals], [balanceRaw]] = await multicall(erc20Abi, unref(calls))
+      const [[[decimals], [balanceRaw]]] = await multicall(erc20Abi, unref(calls))
 
       balanceModule.mutations.fetchedBalance({
         tokenAddress: unref(tokenAddress),

@@ -1,4 +1,5 @@
 import { getContract } from './getContract'
 import MulticallAbi from '@/config/abi/Multicall.json'
+import contractsAddresses from '@/config/constants/contractsAddresses.json'
 
-export const getMulticallContract = () => getContract('0xae11C5B5f29A6a25e955F0CB8ddCc416f522AF5C', MulticallAbi)
+export const getMulticallContract = () => getContract(contractsAddresses.Multicall, MulticallAbi)

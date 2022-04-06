@@ -12,7 +12,7 @@ export const fetchStaker = async (stakerAddress: string) => {
       params: [stakerAddress],
     },
   ]
-  const [stakerRaw] = await multicall(StakingAbi, calls)
+  const [[stakerRaw]] = await multicall(StakingAbi, calls)
   const result = {
     fetchStatus: FetchingStatus.FETCHED,
     isStakinFinished: stakerRaw.startStaking + stakerRaw.lock < stakerRaw.timestamp,

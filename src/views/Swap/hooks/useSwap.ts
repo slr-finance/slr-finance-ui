@@ -180,7 +180,7 @@ export const useSwap = () => {
     updatePriceImpact(amountInWei, amountOutWei)
   }
 
-  const path = computed(() => [tokenOutAddress.value, tokenInAddress.value])
+  const path = computed(() => [tokenInAddress.value, tokenOutAddress.value])
 
   fetchPairState()
 

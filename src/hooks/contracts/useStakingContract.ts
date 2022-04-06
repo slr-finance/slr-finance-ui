@@ -1,10 +1,10 @@
 import { getStakingContract } from '@/utils/contracts/getStakingContract'
-import { computed, unref } from 'vue'
+import { computed, markRaw, unref } from 'vue'
 import { useEthers } from '@/hooks/dapp/useEthers'
 
 export const useStakingContract = () => {
   const { signer } = useEthers()
-  const stakingContract = computed(() => getStakingContract(unref(signer)))
+  const stakingContract = computed(() => markRaw(getStakingContract(unref(signer))))
 
   return stakingContract
 }

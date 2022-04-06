@@ -30,7 +30,7 @@ export const useMilkyWayInfo = () => {
   ]
 
   const handleLoad = async () => {
-    const [[totalBaybackRaw], [pendingBuyBackAndBurnRaw], [pendingInvestRaw]] = await multicall(MilkyWayAbi, calls)
+    const [[[totalBaybackRaw], [pendingBuyBackAndBurnRaw], [pendingInvestRaw]]] = await multicall(MilkyWayAbi, calls)
 
     totalBayback.value = markRaw(parseWei(totalBaybackRaw, 18))
     pendingBuyBackAndBurn.value = markRaw(parseWei(pendingBuyBackAndBurnRaw, 18))

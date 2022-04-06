@@ -16,7 +16,7 @@ export const fetchPools = async (pools: number[]) => {
     ])
     .flat(1)
 
-  const response = await multicall(StakingAbi, calls)
+  const [response] = await multicall(StakingAbi, calls)
   const poolsInfo = pools.map((poolId, index) => {
     const poolState = response[index]
     const apr = ethersToBigNumber(poolState.apr).div(1000000)
