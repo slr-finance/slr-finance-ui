@@ -5,7 +5,7 @@ import { useNumberFormat } from './useNumberFormat'
 const toLocaleStringOptions = {
   style: 'currency',
   currency: 'USD',
-  maximumFractionDigits: 2,
+  maximumFractionDigits: 4,
 }
 
 const minDispaly = 0.01

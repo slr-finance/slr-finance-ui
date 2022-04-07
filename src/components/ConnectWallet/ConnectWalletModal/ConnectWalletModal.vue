@@ -1,30 +1,62 @@
 <template>
   <ui-modal
     v-model="isOpen"
+    label="Connect wallet"
     max-width="400px"
+    :closable="!isLoading"
   >
-    <ui-galaxy-loader v-if="isLoading" />
+    <transition name="fade">
+      <div
+        v-if="isLoading"
+        class="backdrop-blur-4 absolute top-0 left-0 w-full h-full bg-black bg-opacity-60 flex justify-center items-center"
+      >
+        <ui-galaxy-loader />
+      </div>
+    </transition>
 
-    <div v-else-if="isOpenQr">
-      <ui-qr :data="walletConnectUri" />
+    <div v-if="isOpenQr">
+      <ui-qr
+        :data="walletConnectUri"
+        class="w-full rounded-8"
+      />
+
+      <walletconnect-mobile-deep-link
+        wallet="metamask"
+        :uri="walletConnectUri"
+      />
+
+      <walletconnect-mobile-deep-link
+        wallet="trustwallet"
+        :uri="walletConnectUri"
+      />
     </div>
 
     <div
       v-else
-      class="flex flex-col space-y-32"
+      class="flex flex-col space-y-16"
     >
-      <button
+      <connect-button
         @click="handleConnectMetamask"
-        class="flex justify-center items-center bg-white bg-opacity-10 px-16 py-40 rounded-12"
+        label="Metamask"
+        iconName="metamask"
+        description="One of the most secure wallets with great flexibility"
+        :disabled="checkingMetamask"
       >
-        Metamask
-      </button>
-      <button
+        <transition name="fade">
+          <span
+            v-if="metamaskDisabled && !checkingMetamask"
+            class="text-purple"
+          >
+            Install
+          </span>
+        </transition>
+      </connect-button>
+      <connect-button
         @click="handleConnectWalletconnect"
-        class="flex justify-center items-center bg-white bg-opacity-10 px-16 py-40 rounded-12"
-      >
-        WalletConnect
-      </button>
+        label="WalletConnect"
+        iconName="walletConnect"
+        description="Connect wallet with QR code scanning or deep linking."
+      />
     </div>
   </ui-modal>
 </template>
@@ -37,20 +69,28 @@
   import UiQr from '@/components/ui/UiQr.vue'
   import UiModal from '@/components/ui/UiModal.vue'
   import UiGalaxyLoader from '@/components/ui/UiGalaxyLoader.vue'
-  import { useConnectWalletModal } from './hooks/useConnectWalletModal'
+  import { useConnectWalletModal } from '../hooks/useConnectWalletModal'
+  import ConnectButton from './ConnectButton.vue'
+  import { Metamask } from '@/utils/wallet/Metamask'
+  import WalletconnectMobileDeepLink from './WalletconnectMobileDeepLink.vue'
 
   export default defineComponent({
     setup() {
       const { connect } = useWallet()
       const { isOpen } = useConnectWalletModal()
+      const checkingMetamask = ref(true)
       const isLoading = ref(false)
       const isOpenQr = ref(false)
       const walletConnectUri = ref('')
       const metamaskDisabled = ref(true)
       const appUrl = 'https://slr.finance'
 
-      onMounted(() => {
-        metamaskDisabled.value = false
+      onMounted(async () => {
+        if (await Metamask.check()) {
+          metamaskDisabled.value = false
+        }
+
+        checkingMetamask.value = false
       })
 
       watch(isOpen, (isOpenVal) => {
@@ -78,6 +118,10 @@
       }
 
       const handleConnectMetamask = async () => {
+        if (checkingMetamask.value) {
+          return
+        }
+
         if (metamaskDisabled.value && appUrl) {
           window.open(`https://metamask.app.link/dapp/${appUrl}`, '_blank')
           return
@@ -121,12 +165,16 @@
         isOpenQr,
         isLoading,
         walletConnectUri,
+        metamaskDisabled,
+        checkingMetamask,
       }
     },
     components: {
       UiQr,
       UiModal,
       UiGalaxyLoader,
+      ConnectButton,
+      WalletconnectMobileDeepLink,
     },
   })
 </script>

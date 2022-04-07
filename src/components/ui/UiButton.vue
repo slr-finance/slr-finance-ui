@@ -29,6 +29,9 @@
       to: {
         type: Object,
       },
+      href: {
+        type: String,
+      },
       variant: {
         validator: (value: string) => ['primary', 'contrast', 'default', 'accent', 'pale'].includes(value),
         default: 'default',
@@ -38,7 +41,8 @@
       const componentProps = computed(() => {
         return {
           to: props.to ? props.to : undefined,
-          type: props.to ? undefined : props.type,
+          href: props.href ? props.href : undefined,
+          type: props.to || props.href ? undefined : props.type,
           disabled: props.disabled,
           class: {
             '-disabled': props.disabled,
@@ -49,7 +53,7 @@
       })
 
       const componentName = computed(() => {
-        return props.to ? 'router-link' : 'button'
+        return props.to ? 'router-link' : props.href ? 'a' : 'button'
       })
 
       return {

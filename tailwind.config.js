@@ -79,6 +79,7 @@ module.exports = {
       12: '12px',
       16: '16px',
       18: '18px',
+      20: '20px',
       24: '24px',
     },
     aspectRatio: {
