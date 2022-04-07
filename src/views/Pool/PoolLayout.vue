@@ -2,7 +2,7 @@
   <div class="flex min-h-full pb-48 px-24 bg-black">
     <pools-list
       class="staking-pools-list mr-24 relative z-10"
-      v-if="isLaptop"
+      v-if="isShownPoolsList"
     />
 
     <router-view v-slot="{ Component }">
@@ -19,22 +19,38 @@
     </router-view>
 
     <div
-      v-if="isDesktop"
-      class="page-padding"
+      v-if="isShownPoolsNav"
+      class="page-padding flex flex-col justify-between items-end"
     >
       <pools-navigation :pool-id="poolId" />
+      <div
+        v-if="isShownPoolsMap"
+        class="fixed bottom-0 right-32"
+      >
+        <pools-map />
+      </div>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-  import { defineComponent, watch } from 'vue'
+  import { defineAsyncComponent, defineComponent, watch } from 'vue'
   import { stakingModule } from '@/store/modules/stakingModule'
   import { useRoute, useRouter } from 'vue-router'
   import { useBreakpoints } from '@vueuse/core'
   import { POOLS_INFO } from '@/config/constants/Pools'
-  import PoolsList from './components/PoolsList.vue'
-  import PoolsNavigation from './components/PoolsNavigation.vue'
+
+  const PoolsList = defineAsyncComponent(() => {
+    return import('./components/PoolsList.vue')
+  })
+
+  const PoolsNavigation = defineAsyncComponent(() => {
+    return import('./components/PoolsNavigation.vue')
+  })
+
+  const PoolsMap = defineAsyncComponent(() => {
+    return import('./components/PoolsMap.vue')
+  })
 
   export default defineComponent({
     props: {
@@ -67,16 +83,22 @@
         { immediate: true },
       )
 
-      const { isDesktop, isLaptop } = useBreakpoints({ isDesktop: 641, isLaptop: 541 })
+      const { isShownPoolsMap, isShownPoolsNav, isShownPoolsList } = useBreakpoints({
+        isShownPoolsMap: 1000,
+        isShownPoolsNav: 641,
+        isShownPoolsList: 541,
+      })
 
       return {
-        isDesktop,
-        isLaptop,
+        isShownPoolsMap,
+        isShownPoolsNav,
+        isShownPoolsList,
       }
     },
     components: {
       PoolsList,
       PoolsNavigation,
+      PoolsMap,
     },
   })
 </script>
@@ -95,7 +117,6 @@
   .pool-page-transition-leave-active {
     transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
   }
-
   .pool-page-transition-enter-from,
   .pool-page-transition-leave-to {
     opacity: 0;

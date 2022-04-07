@@ -1,5 +1,5 @@
 import { POOLS_INFO } from '../config/constants/Pools'
 
-export const usePools = () => {
+export const usePoolsInfo = () => {
   return POOLS_INFO
 }

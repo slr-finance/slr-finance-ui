@@ -1,10 +1,10 @@
 import { MaybeRef } from '@vueuse/core'
 import { computed, unref } from 'vue'
 import type { PoolType } from '../config/constants/Pools'
-import { usePools } from './usePools'
+import { usePoolsInfo } from './usePoolsInfo'
 
 export const useNextPool = (currentPool: MaybeRef<PoolType>) => {
-  const pools = usePools()
+  const pools = usePoolsInfo()
 
   const nextPool = computed(() => {
     const index = unref(currentPool).id
