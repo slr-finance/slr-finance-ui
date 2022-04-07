@@ -3,12 +3,12 @@ import { computed, ComputedRef, unref } from 'vue'
 import { PoolState, stakingModule } from '../modules/stakingModule'
 import { store } from '../store'
 
-type UsePoolReturns = ComputedRef<PoolState>
+type UsePoolReturns = ComputedRef<Record<number, PoolState>>
 
-export const usePool = (poolId: MaybeRef<number>): UsePoolReturns => {
+export const usePools = (): UsePoolReturns => {
   stakingModule.register(store)
 
-  const poolState = computed(() => stakingModule.getters.getPool(unref(poolId)))
+  const poolsStates = computed(() => stakingModule.state.pools)
 
-  return poolState
+  return poolsStates
 }
