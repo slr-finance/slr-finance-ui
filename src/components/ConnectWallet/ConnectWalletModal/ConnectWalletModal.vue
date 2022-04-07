@@ -3,11 +3,32 @@
     v-model="isOpen"
     label="Connect wallet"
     max-width="400px"
+    :closable="!isLoading"
   >
-    <ui-galaxy-loader v-if="isLoading" />
+    <transition name="fade">
+      <div
+        v-if="isLoading"
+        class="backdrop-blur-4 absolute top-0 left-0 w-full h-full bg-black bg-opacity-60 flex justify-center items-center"
+      >
+        <ui-galaxy-loader />
+      </div>
+    </transition>
 
-    <div v-else-if="isOpenQr">
-      <ui-qr :data="walletConnectUri" />
+    <div v-if="isOpenQr">
+      <ui-qr
+        :data="walletConnectUri"
+        class="w-full rounded-8"
+      />
+
+      <walletconnect-mobile-deep-link
+        wallet="metamask"
+        :uri="walletConnectUri"
+      />
+
+      <walletconnect-mobile-deep-link
+        wallet="trustwallet"
+        :uri="walletConnectUri"
+      />
     </div>
 
     <div
@@ -51,6 +72,7 @@
   import { useConnectWalletModal } from '../hooks/useConnectWalletModal'
   import ConnectButton from './ConnectButton.vue'
   import { Metamask } from '@/utils/wallet/Metamask'
+  import WalletconnectMobileDeepLink from './WalletconnectMobileDeepLink.vue'
 
   export default defineComponent({
     setup() {
@@ -152,6 +174,7 @@
       UiModal,
       UiGalaxyLoader,
       ConnectButton,
+      WalletconnectMobileDeepLink,
     },
   })
 </script>

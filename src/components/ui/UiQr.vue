@@ -1,5 +1,8 @@
 <template>
-  <div ref="canvas" />
+  <div
+    class="ui-qr flex justify-center items-center overflow-hidden select-none"
+    ref="canvas"
+  />
 </template>
 
 <script lang="ts">
@@ -8,13 +11,13 @@
   import QRCodeStyling, { Options } from 'qr-code-styling'
 
   const getQrOptions = (data: string): Partial<Options> => {
-    return {
-      width: 300,
-      height: 300,
+    const options: Partial<Options> = {
+      width: 600,
+      height: 600,
       type: 'canvas',
       data,
-      image: '/favicon.ico',
-      margin: 0,
+      image: '/images/qr-code-logo.jpg',
+      margin: 8,
       qrOptions: {
         typeNumber: 0,
         mode: 'Byte',
@@ -22,52 +25,28 @@
       },
       imageOptions: {
         hideBackgroundDots: true,
-        imageSize: 1,
+        imageSize: 1.5,
         margin: 0,
         crossOrigin: 'anonymous',
       },
       dotsOptions: {
-        // color: '#000',
-        gradient: {
-          type: 'linear', // 'radial'
-          rotation: 0,
-          colorStops: [
-            { offset: 0, color: '#8688B2' },
-            { offset: 1, color: '#77779C' },
-          ],
-        },
-        type: 'dots',
+        color: '#000',
+        type: 'rounded',
       },
       backgroundOptions: {
-        // color: '#fff',
-        gradient: {
-          type: 'linear', // 'radial'
-          rotation: 0,
-          colorStops: [
-            { offset: 0, color: '#ededff' },
-            { offset: 1, color: '#e6e7ff' },
-          ],
-        },
+        color: '#fff',
       },
       cornersSquareOptions: {
-        color: '#35495E',
+        color: '#000',
         type: 'extra-rounded',
-        // gradient: {
-        //   type: 'linear', // 'radial'
-        //   rotation: 180,
-        //   colorStops: [{ offset: 0, color: '#25456e' }, { offset: 1, color: '#4267b2' }]
-        // },
       },
       cornersDotOptions: {
-        color: '#35495E',
+        color: '#000',
         type: 'dot',
-        // gradient: {
-        //   type: 'linear', // 'radial'
-        //   rotation: 180,
-        //   colorStops: [{ offset: 0, color: '#00266e' }, { offset: 1, color: '#4060b3' }]
-        // },
       },
     }
+
+    return options
   }
 
   export default defineComponent({
@@ -92,3 +71,9 @@
     },
   })
 </script>
+
+<style>
+  .ui-qr > canvas {
+    width: 100%;
+  }
+</style>

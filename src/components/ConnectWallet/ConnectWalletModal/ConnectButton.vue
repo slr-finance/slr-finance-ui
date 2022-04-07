@@ -4,9 +4,13 @@
   >
     <div class="flex justify-between items-center mb-16">
       <div class="bg-black rounded-full w-32 h-32 flex justify-center items-center">
-        <ui-icon prefix="icon-wallets" :name="iconName" size="16"/>
+        <ui-icon
+          prefix="icon-wallets"
+          :name="iconName"
+          size="16"
+        />
       </div>
-      <div><slot/></div>
+      <div><slot /></div>
     </div>
 
     <div class="text-14 text-white leading-none mb-8">
@@ -27,19 +31,19 @@
     props: {
       iconName: {
         type: String,
-        required: true, 
+        required: true,
       },
       label: {
         type: String,
-        required: true, 
+        required: true,
       },
       description: {
         type: String,
-        required: true, 
+        required: true,
       },
     },
     components: {
       UiIcon,
-    }
+    },
   })
 </script>
