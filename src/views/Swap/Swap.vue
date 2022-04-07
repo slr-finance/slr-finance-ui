@@ -3,6 +3,8 @@
   <div>
     <swap-form />
     <power-by-dex />
+
+    <mercuryo />
   </div>
 </template>
 
@@ -11,6 +13,7 @@
   import contractsAddresses from '@/config/constants/contractsAddresses.json'
   import SwapForm from './components/SwapForm.vue'
   import PowerByDex from './components/PowerByDex.vue'
+  import Mercuryo from './components/Mercuryo.vue'
 
   export default defineComponent({
     name: 'swap-page',
@@ -22,6 +25,7 @@
     components: {
       SwapForm,
       PowerByDex,
+      Mercuryo,
     },
   })
 </script>

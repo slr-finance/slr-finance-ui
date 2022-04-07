@@ -10,7 +10,9 @@ export const useSwapTx = (path: MaybeRef<string[]>, swapParams: MaybeRef<SwapPar
   const { blockTimestamp } = useBlockInfo()
   const { address } = useEthers()
   const method = computed(() =>
-    unref(swapParams).tradeType === TradeType.EXACT_INPUT ? 'swapExactTokensForTokens' : 'swapTokensForExactTokens',
+    unref(swapParams).tradeType === TradeType.EXACT_INPUT
+      ? 'swapExactTokensForTokensSupportingFeeOnTransferTokens'
+      : 'swapTokensForExactTokens',
   )
   const params = computed(() => {
     const swapParamsVal = unref(swapParams)

@@ -3,6 +3,7 @@
     :is="componentName"
     v-bind="componentProps"
     class="ui-button"
+    @click="handleClick"
   >
     <slot />
   </component>
@@ -56,9 +57,17 @@
         return props.to ? 'router-link' : props.href ? 'a' : 'button'
       })
 
+      const handleClick = (event: Event) => {
+        if (props.disabled) {
+          event.preventDefault()
+          event.stopPropagation()
+        }
+      }
+
       return {
         componentProps,
         componentName,
+        handleClick,
       }
     },
   })

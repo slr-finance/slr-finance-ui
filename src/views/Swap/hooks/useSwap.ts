@@ -3,7 +3,7 @@ import contractsAddresses from '@/config/constants/contractsAddresses.json'
 import { ref, computed, markRaw, Ref, ComputedRef } from 'vue'
 import { fetchReserves } from '@/utils/tokens/fetchReserves'
 import { BigNumber as BigNumberEthers } from 'ethers'
-import { bigToWei, parseWei } from '@/utils/bigNumber'
+import { bigToWei, BIG_ONE, parseWei } from '@/utils/bigNumber'
 
 export enum TradeType {
   EXACT_INPUT = 0,
@@ -49,9 +49,9 @@ function getAmountOut(
     return BigNumberEthers.from(0)
   }
 
-  const amountInWithFee = amountInWei.mul(1000 - fee)
+  const amountInWithFee = amountInWei.mul(10000 - fee)
 
-  return amountInWithFee.mul(reserveOut).div(reserveIn.mul(1000).add(amountInWithFee))
+  return amountInWithFee.mul(reserveOut).div(reserveIn.mul(10000).add(amountInWithFee))
 }
 
 function getAmountIn(
@@ -66,12 +66,12 @@ function getAmountIn(
 
   return reserveIn
     .mul(amountOut)
-    .mul(1000)
-    .div(reserveOut.sub(amountOut).mul(1000 - fee))
+    .mul(10000)
+    .div(reserveOut.sub(amountOut).mul(10000 - fee))
     .add(1)
 }
 
-const DEX_FEE = 2
+const DEX_FEE = 0.002
 
 export const useSwap = () => {
   const tokenInAddress = ref(contractsAddresses.SolarToken)
@@ -92,10 +92,23 @@ export const useSwap = () => {
       return new BigNumber(0.15)
     }
 
-    return new BigNumber(0.1)
+    return new BigNumber(0.11)
   }) as ComputedRef<BigNumber>
 
   const amounts = computed(() => [amountIn.value, amountOut.value])
+
+  const dexFeeWithTokenFee = computed(() => {
+    console.log(
+      BIG_ONE.minus(BIG_ONE.minus(swapFee.value).times(BIG_ONE.minus(DEX_FEE)))
+        .times(10000)
+        .integerValue(BigNumber.ROUND_UP)
+        .toNumber(),
+    )
+    return BIG_ONE.minus(BIG_ONE.minus(swapFee.value).times(BIG_ONE.minus(DEX_FEE)))
+      .times(10000)
+      .integerValue(BigNumber.ROUND_UP)
+      .toNumber()
+  })
 
   const swapSide = () => {
     const tokenInAddressStr = tokenInAddress.value
@@ -144,14 +157,15 @@ export const useSwap = () => {
     const { [tokenInAddress.value]: reserveInWei, [tokenOutAddress.value]: reserveOutWei } = pairReserves.value
 
     const amountInWei = bigToWei(value, 18)
-    const amountOutWei = getAmountOut(amountInWei, reserveInWei, reserveOutWei, DEX_FEE)
+    const amountOutWei = getAmountOut(amountInWei, reserveInWei, reserveOutWei, DEX_FEE * 10000)
+    const amountOutMinWei = getAmountOut(amountInWei, reserveInWei, reserveOutWei, dexFeeWithTokenFee.value)
     const insufficientLiquidityBool = amountOutWei.lte(0)
 
     insufficientLiquidity.value = insufficientLiquidityBool
     swapParams.value.amountIn = amountInWei
     swapParams.value.amountInMax = amountInWei
     swapParams.value.amountOut = amountOutWei
-    swapParams.value.amountOutMin = amountOutWei
+    swapParams.value.amountOutMin = amountOutMinWei
     swapParams.value.tradeType = TradeType.EXACT_INPUT
 
     amountOut.value = insufficientLiquidityBool ? new BigNumber(0) : parseWei(amountOutWei, 18)
@@ -164,14 +178,15 @@ export const useSwap = () => {
     const { [tokenInAddress.value]: reserveInWei, [tokenOutAddress.value]: reserveOutWei } = pairReserves.value
 
     const amountOutWei = bigToWei(value, 18)
-    const amountInWei = getAmountIn(amountOutWei, reserveInWei, reserveOutWei, DEX_FEE)
+    const amountInWei = getAmountIn(amountOutWei, reserveInWei, reserveOutWei, DEX_FEE * 10000)
+    const amountInMaxWei = getAmountIn(amountOutWei, reserveInWei, reserveOutWei, dexFeeWithTokenFee.value)
     const insufficientLiquidityBool = amountInWei.lte(0)
 
     insufficientLiquidity.value = insufficientLiquidityBool
     swapParams.value.amountOut = amountOutWei
     swapParams.value.amountOutMin = amountOutWei
     swapParams.value.amountIn = amountInWei
-    swapParams.value.amountInMax = amountInWei
+    swapParams.value.amountInMax = amountInMaxWei
     swapParams.value.tradeType = TradeType.EXACT_OUTPUT
 
     amountIn.value = insufficientLiquidityBool ? new BigNumber(0) : parseWei(amountInWei, 18)
