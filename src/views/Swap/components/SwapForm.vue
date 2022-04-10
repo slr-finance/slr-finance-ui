@@ -1,26 +1,23 @@
 <template>
-  <form>
-    <ui-input-bn
+  <form class="swap-form">
+    <ui-balance-input
+      label="From"
       :value="amountIn"
+      :currencySymbol="tokenInSymbol"
+      :balance="tokensBalances.in"
+      :iconName="tokenInIconName"
       @input="handleTypeInput"
-    >
-      <template #postfix>
-        <div>
-          {{ tokenInSymbol }}
-        </div>
-      </template>
-    </ui-input-bn>
+    />
     <ui-button @click="swapSide">swapSide</ui-button>
-    <ui-input-bn
+    <ui-balance-input
+      label="To"
+      class="mb-48"
       :value="amountOut"
+      :currencySymbol="tokenOutSymbol"
+      :balance="tokensBalances.out"
+      :iconName="tokenOutIconName"
       @input="handleTypeOutput"
-    >
-      <template #postfix>
-        <div>
-          {{ tokenOutSymbol }}
-        </div>
-      </template>
-    </ui-input-bn>
+    />
 
     <div v-if="insufficientLiquidity">Insufficient liquidity for this trade</div>
 
@@ -29,7 +26,7 @@
         <approve-token-plug
           text="Enable"
           :minAllowance="amountIn"
-          :tokenAddress="tokenInAddress"
+          :tokenAddress="swapParams.tokenIn"
           :spenderAddress="routerAddress"
         >
           <send-tx-button
@@ -51,14 +48,16 @@
         <price-impact :price-impact="priceImpact" />
       </div>
     </template>
+    <div>{{ JSON.stringify(swapParams, null, 2) }}</div>
   </form>
 </template>
 
 <script lang="ts">
   import { defineComponent, computed, watch } from 'vue'
   import contractsAddresses from '@/config/constants/contractsAddresses.json'
+  import { useEthers } from '@/hooks/dapp/useEthers'
 
-  import UiInputBn from '@/components/ui/UiInputBn.vue'
+  import UiBalanceInput from '@/components/ui/UiBalanceInput.vue'
   import UiButton from '@/components/ui/UiButton.vue'
 
   import ApproveTokenPlug from '@/components/ApproveToken/ApproveTokenPlug.vue'
@@ -76,6 +75,8 @@
   import PriceImpact from './PriceImpact.vue'
   import TradeInfo from './TradeInfo.vue'
 
+  import BigNumber from 'bignumber.js'
+
   export default defineComponent({
     name: 'swap-form',
     setup() {
@@ -87,12 +88,10 @@
         fetchPairState,
         swapParams,
         insufficientLiquidity,
-        tokenInAddress,
-        tokenOutAddress,
         tokenInSymbol,
         tokenOutSymbol,
-        path,
-        amounts,
+        tokenInIconName,
+        tokenOutIconName,
         amountIn,
         amountOut,
         priceImpact,
@@ -100,42 +99,48 @@
         swapFee,
       } = useSwap()
 
-      const minAmountIn = computed(() => amountOut.value.times(BIG_ONE.minus(slippage.value)))
+      const [handleSwap, swapTxState] = useSwapTx(swapParams)
 
-      const [handleSwap, swapTxState] = useSwapTx(path, swapParams)
-
-      const minAmountInStr = useTokenAmountFormat(minAmountIn)
       const swapFeeStr = usePercentFormat(swapFee)
+      const [slrTokenInfo, fetchBalance] = useSlrBalance()
 
       // Refetch balance and pair state after swap [BEGIN]
-      const [, fetchBalance] = useSlrBalance()
       const refetchBalanceAndPairState = () => Promise.all([fetchPairState(), fetchBalance()])
 
       watch(swapTxState, ({ isSuccess }) => isSuccess && refetchBalanceAndPairState())
       // Refetch balance and pair state after swap [END]
+
+      const { balance: bnbBalance } = useEthers()
+
+      const tokensBalances = computed(() =>
+        swapParams.value.tokenIn === contractsAddresses.SolarToken
+          ? { in: slrTokenInfo.value.balance, out: bnbBalance.value }
+          : { out: slrTokenInfo.value.balance, in: bnbBalance.value },
+      )
 
       return {
         swapSide,
         handleTypeInput,
         handleTypeOutput,
         routerAddress,
-        tokenInAddress,
         tokenInSymbol,
         tokenOutSymbol,
+        tokenInIconName,
+        tokenOutIconName,
         swapParams,
         insufficientLiquidity,
         amountIn,
         amountOut,
-        minAmountInStr,
         priceImpact,
         swapFeeStr,
         handleSwap,
         swapTxState,
+        tokensBalances,
       }
     },
     components: {
       UiButton,
-      UiInputBn,
+      UiBalanceInput,
       ApproveTokenPlug,
       ConnectWalletPlug,
       SendTxButton,

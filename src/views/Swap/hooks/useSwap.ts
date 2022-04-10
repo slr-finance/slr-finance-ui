@@ -10,12 +10,19 @@ export enum TradeType {
   EXACT_OUTPUT = 1,
 }
 
+// export enum TokenSide {
+//   IN = 0,
+//   OUT = 1,
+// }
+
 export type SwapParams = {
   tradeType: TradeType
   amountIn: BigNumberEthers
   amountOut: BigNumberEthers
   amountInMax: BigNumberEthers
   amountOutMin: BigNumberEthers
+  tokenIn: string
+  tokenOut: string
 }
 
 /**
@@ -74,36 +81,19 @@ function getAmountIn(
 const DEX_FEE = 0.002
 
 export const useSwap = () => {
-  const tokenInAddress = ref(contractsAddresses.SolarToken)
-  const tokenOutAddress = ref(contractsAddresses.BnbToken)
   const tokenInSymbol = ref('SLR')
   const tokenOutSymbol = ref('BNB')
-  const pairReserves = ref({
-    [tokenOutAddress.value]: BigNumberEthers.from(0),
-    [tokenInAddress.value]: BigNumberEthers.from(0),
-  }) as Ref<Record<string, BigNumberEthers>>
+  const tokenInIconName = ref('slr')
+  const tokenOutIconName = ref('bnb')
   const insufficientLiquidity = ref(false)
   const priceImpact = ref(markRaw(new BigNumber(0))) as Ref<BigNumber>
   const amountIn = ref(markRaw(new BigNumber(0))) as Ref<BigNumber>
   const amountOut = ref(markRaw(new BigNumber(0))) as Ref<BigNumber>
   const slippage = ref(markRaw(new BigNumber(0))) as Ref<BigNumber>
-  const swapFee = computed(() => {
-    if (tokenOutAddress.value === contractsAddresses.SolarToken) {
-      return new BigNumber(0.15)
-    }
-
-    return new BigNumber(0.11)
-  }) as ComputedRef<BigNumber>
 
   const amounts = computed(() => [amountIn.value, amountOut.value])
 
   const dexFeeWithTokenFee = computed(() => {
-    console.log(
-      BIG_ONE.minus(BIG_ONE.minus(swapFee.value).times(BIG_ONE.minus(DEX_FEE)))
-        .times(10000)
-        .integerValue(BigNumber.ROUND_UP)
-        .toNumber(),
-    )
     return BIG_ONE.minus(BIG_ONE.minus(swapFee.value).times(BIG_ONE.minus(DEX_FEE)))
       .times(10000)
       .integerValue(BigNumber.ROUND_UP)
@@ -111,13 +101,17 @@ export const useSwap = () => {
   })
 
   const swapSide = () => {
-    const tokenInAddressStr = tokenInAddress.value
-    tokenInAddress.value = tokenOutAddress.value
-    tokenOutAddress.value = tokenInAddressStr
+    const tokenInAddressStr = swapParams.value.tokenIn
+    swapParams.value.tokenIn = swapParams.value.tokenOut
+    swapParams.value.tokenOut = tokenInAddressStr
 
     const tokenInSymbolStr = tokenInSymbol.value
     tokenInSymbol.value = tokenOutSymbol.value
     tokenOutSymbol.value = tokenInSymbolStr
+
+    const tokenInIconNameStr = tokenInIconName.value
+    tokenInIconName.value = tokenOutIconName.value
+    tokenOutIconName.value = tokenInIconNameStr
 
     if (swapParams.value.tradeType === TradeType.EXACT_INPUT) {
       handleTypeOutput(amountIn.value)
@@ -140,25 +134,36 @@ export const useSwap = () => {
     amountOut: BigNumberEthers.from(0),
     amountInMax: BigNumberEthers.from(0),
     amountOutMin: BigNumberEthers.from(0),
+    tokenIn: contractsAddresses.SolarToken,
+    tokenOut: contractsAddresses.BnbToken,
   })
+  const swapFee = computed(() => {
+    if (swapParams.value.tokenOut === contractsAddresses.SolarToken) {
+      return new BigNumber(0.15)
+    }
+
+    return new BigNumber(0.11)
+  }) as ComputedRef<BigNumber>
+  const pairReserves = ref({
+    [swapParams.value.tokenOut]: BigNumberEthers.from(0),
+    [swapParams.value.tokenIn]: BigNumberEthers.from(0),
+  }) as Ref<Record<string, BigNumberEthers>>
+  const reserveInWei = computed(() => pairReserves.value[swapParams.value.tokenIn])
+  const reserveOutWei = computed(() => pairReserves.value[swapParams.value.tokenOut])
 
   const updatePriceImpact = (inputAmount: BigNumberEthers, outputAmount: BigNumberEthers) => {
-    const { [tokenInAddress.value]: reserveInWei, [tokenOutAddress.value]: reserveOutWei } = pairReserves.value
-
     priceImpact.value = computePriceImpact(
-      parseWei(reserveInWei, 18),
-      parseWei(reserveOutWei, 18),
+      parseWei(reserveInWei.value, 18),
+      parseWei(reserveOutWei.value, 18),
       parseWei(inputAmount, 18),
       parseWei(outputAmount, 18),
     )
   }
 
   const handleTypeInput = (value: BigNumber) => {
-    const { [tokenInAddress.value]: reserveInWei, [tokenOutAddress.value]: reserveOutWei } = pairReserves.value
-
     const amountInWei = bigToWei(value, 18)
-    const amountOutWei = getAmountOut(amountInWei, reserveInWei, reserveOutWei, DEX_FEE * 10000)
-    const amountOutMinWei = getAmountOut(amountInWei, reserveInWei, reserveOutWei, dexFeeWithTokenFee.value)
+    const amountOutWei = getAmountOut(amountInWei, reserveInWei.value, reserveOutWei.value, DEX_FEE * 10000)
+    const amountOutMinWei = getAmountOut(amountInWei, reserveInWei.value, reserveOutWei.value, dexFeeWithTokenFee.value)
     const insufficientLiquidityBool = amountOutWei.lte(0)
 
     insufficientLiquidity.value = insufficientLiquidityBool
@@ -175,7 +180,7 @@ export const useSwap = () => {
   }
 
   const handleTypeOutput = (value: BigNumber) => {
-    const { [tokenInAddress.value]: reserveInWei, [tokenOutAddress.value]: reserveOutWei } = pairReserves.value
+    const { [swapParams.value.tokenIn]: reserveInWei, [swapParams.value.tokenOut]: reserveOutWei } = pairReserves.value
 
     const amountOutWei = bigToWei(value, 18)
     const amountInWei = getAmountIn(amountOutWei, reserveInWei, reserveOutWei, DEX_FEE * 10000)
@@ -195,8 +200,6 @@ export const useSwap = () => {
     updatePriceImpact(amountInWei, amountOutWei)
   }
 
-  const path = computed(() => [tokenInAddress.value, tokenOutAddress.value])
-
   fetchPairState()
 
   return {
@@ -207,11 +210,10 @@ export const useSwap = () => {
     swapParams,
     priceImpact,
     insufficientLiquidity,
-    tokenInAddress,
-    tokenOutAddress,
     tokenInSymbol,
     tokenOutSymbol,
-    path,
+    tokenInIconName,
+    tokenOutIconName,
     amounts,
     amountIn,
     amountOut,

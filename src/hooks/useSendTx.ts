@@ -35,6 +35,7 @@ export const useSendTx = (
   contract: MaybeRef<Contract>,
   method: MaybeRef<string>,
   params: MaybeRef<any[]> = [],
+  options: MaybeRef<any> = {},
   toastsText?: MaybeRef<TxToastsText>,
 ): UseSendTxReturn => {
   const txToast = useSingleToast()
@@ -68,6 +69,7 @@ export const useSendTx = (
 
       const estimateGas = await contractVal.estimateGas[methodVal](...paramsVal)
       const tx: ContractTransaction = await contractVal[methodVal](...paramsVal, {
+        ...unref(options),
         gasLimit: calculateGasMargin(estimateGas),
       })
 
@@ -85,7 +87,6 @@ export const useSendTx = (
         onClick: () => window.open(`https://bscscan.com/tx/${txReceipt.transactionHash}`),
       })
     } catch (error) {
-      // TODO: изменить дефолтный текст
       const errorMessage = get(
         error,
         ['data', 'message'],

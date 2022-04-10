@@ -20,6 +20,7 @@ export default defineConfig({
       iconDirs: [
         path.resolve(process.cwd(), 'src/assets/icons'),
         path.resolve(process.cwd(), 'src/assets/icons/wallets'),
+        path.resolve(process.cwd(), 'src/assets/icons/currency'),
       ],
       // Specify symbolId format
       symbolId: 'icon-[dir]-[name]',

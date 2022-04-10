@@ -1,6 +1,6 @@
 <template>
   <header
-    class="app-header z-header pt-32"
+    class="app-header px-ui-page-spacing z-header pt-32"
     :class="{ '-mobile': !isDesktop }"
   >
     <div class="app-header-bg backdrop-blur-8 absolute top-0 left-0 w-full h-full z-0 bg-black bg-opacity-40"></div>
@@ -86,14 +86,6 @@
   :root {
     --app-ui-header-base-height: 64px;
     --app-ui-header-scroll-padding: 32px;
-  }
-
-  .app-header.-mobile {
-    @apply px-16;
-  }
-
-  .app-header:not(.-mobile) {
-    @apply px-[40px];
   }
 
   .app-header {

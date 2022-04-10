@@ -1,10 +1,19 @@
 <template>
-  <div class="pt-[100px]">Click here 👇</div>
-  <div>
-    <swap-form />
-    <power-by-dex />
+  <div class="flex flex-col justify-start items-center p-ui-page-spacing page-padding">
+    <div class="swap-page-content">
+      <h1 class="text-white font-title text-38 mb-16 text-center">
+        <span class="text-white text-opacity-60">Make</span>
+        a space swap
+      </h1>
 
-    <mercuryo />
+      <p class="text-16 text-white text-opacity-60 text-center mb-48">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.
+      </p>
+      <swap-form />
+      <power-by-dex />
+
+      <mercuryo />
+    </div>
   </div>
 </template>
 
@@ -29,3 +38,16 @@
     },
   })
 </script>
+
+<style
+  lang="postcss"
+  scoped
+>
+  .swap-page-content {
+    max-width: 440px;
+    width: 100%;
+  }
+  .page-padding {
+    margin-top: calc(var(--app-ui-header-base-height) + var(--app-ui-header-scroll-padding));
+  }
+</style>
