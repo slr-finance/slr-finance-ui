@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="mb-24 text-18 uppercase">Accrual history</div>
+    <div class="mb-24 text-18 uppercase font-title">Accrual history</div>
     <ui-widget>
       <div
         class="table grid-cols-4 overflow-auto text-12"

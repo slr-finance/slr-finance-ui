@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h3 class="text-white text-18 mb-24 uppercase">Answers on solar questions</h3>
+    <h3 class="text-white text-18 mb-24 uppercase font-title">Answers on solar questions</h3>
     <div
       class="grid grid-cols-2 gap-20"
       style="max-width: 836px"
