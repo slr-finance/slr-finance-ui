@@ -29,11 +29,15 @@
             <ui-galaxy-loader />
           </div>
 
-          <completed-pool
+          <div
             v-else-if="isCompletedPool"
-            :pool-id="poolState.id"
-            class="mb-20"
-          />
+            class="flex-1 flex justify-center items-center mb-20"
+          >
+            <completed-pool
+              :pool-id="poolState.id"
+              class="w-full"
+            />
+          </div>
 
           <staking-finished
             v-else-if="isCurrentStakerPoolFinished && isCurrentStakerPool && hasCurrentStakerPoolDeposit"

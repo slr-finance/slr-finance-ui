@@ -50,7 +50,7 @@
       const withdrawalFee = computed(() => poolState.value.withdrawalFee)
 
       const profit = useProfit(amount, apr, days)
-      const profitStr = useTokenAmountFormat(profit, 'SLR', 5)
+      const profitStr = useTokenAmountFormat(profit, 'SLR')
       const profitInDollStr = useUsdFormat(useUsdPrice(profit))
       const withdrawalFeeStr = usePercentFormat(withdrawalFee)
 
