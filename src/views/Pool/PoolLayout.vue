@@ -1,7 +1,7 @@
 <template>
-  <div class="flex min-h-full pb-48 px-24 bg-black">
+  <div class="px-ui-page-spacing pb-ui-page-spacing flex min-h-full bg-black">
     <pools-list
-      class="staking-pools-list mr-24 relative z-10"
+      class="staking-pools-list mr-ui-page-spacing relative z-10"
       v-if="isShownPoolsList"
     />
 
@@ -25,7 +25,7 @@
       <pools-navigation :pool-id="poolId" />
       <div
         v-if="isShownPoolsMap"
-        class="fixed bottom-0 right-32"
+        class="fixed bottom-0 right-ui-page-spacing"
       >
         <pools-map />
       </div>
@@ -108,7 +108,7 @@
   scoped
 >
   .page-padding {
-    padding-top: calc(var(--app-ui-header-base-height) + var(--app-ui-header-scroll-padding) + 80px);
+    margin-top: calc(var(--app-ui-header-base-height) + var(--app-ui-header-scroll-padding) + 80px);
   }
   .pool-page-transition-enter-active {
     transition: all 0.3s ease-out;

@@ -32,13 +32,7 @@ export const balanceModule = createModule('balances', {
       state.balances = {}
     },
     fetchingBalance(state, tokenAddress: string) {
-      state.balances[tokenAddress] = {
-        decimals: 0,
-        balanceRaw: BigNumberEthers.from(0),
-        balance: new BigNumber(0),
-        address: tokenAddress,
-        fetchStatus: FetchingStatus.FETCHING,
-      }
+      state.balances[tokenAddress].fetchStatus = FetchingStatus.FETCHING
     },
     fetchedBalance(state, payload: { tokenAddress: string; balanceRaw: BigNumberEthers; decimals: number }) {
       state.balances[payload.tokenAddress] = {

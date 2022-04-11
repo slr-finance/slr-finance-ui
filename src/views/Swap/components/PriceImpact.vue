@@ -1,5 +1,8 @@
 <template>
-  <div>Price Impact {{ priceImpactStr }}</div>
+  <div class="flex justify-between items-center text-12 text-white">
+    <div class="text-white text-opacity-60">Price Impact</div>
+    <div>{{ priceImpactStr }}</div>
+  </div>
 </template>
 
 <script lang="ts">

@@ -32,11 +32,12 @@ export const useMilkyWayInfo = () => {
       name: 'balanceOf',
       address: contractsAddresses.BnbToken,
       params: [contractsAddresses.MilkyWay],
-    }
+    },
   ]
 
   const handleLoad = async () => {
-    const [[[totalBaybackRaw], [pendingBuyBackAndBurnRaw], [pendingInvestRaw], [currantBnbBalanceRaw]]] = await multicall([...Erc20Abi, ...MilkyWayAbi], calls)
+    const [[[totalBaybackRaw], [pendingBuyBackAndBurnRaw], [pendingInvestRaw], [currantBnbBalanceRaw]]] =
+      await multicall([...Erc20Abi, ...MilkyWayAbi], calls)
 
     totalBayback.value = markRaw(parseWei(totalBaybackRaw, 18))
     pendingBuyBackAndBurn.value = markRaw(parseWei(pendingBuyBackAndBurnRaw, 18))

@@ -25,6 +25,7 @@ module.exports = {
       50: '50px',
       64: '64px',
       80: '80px',
+      'ui-page-spacing': 'var(--ui-page-spacing)',
       full: '100%',
     },
     fontSize: {
@@ -35,6 +36,7 @@ module.exports = {
       14: '14px',
       16: '16px',
       18: '18px',
+      28: '28px',
       38: '38px',
       40: '40px',
     },
