@@ -35,6 +35,7 @@ export const useSendTx = (
   contract: MaybeRef<Contract>,
   method: MaybeRef<string>,
   params: MaybeRef<any[]> = [],
+  options: MaybeRef<any> = {},
   toastsText?: MaybeRef<TxToastsText>,
 ): UseSendTxReturn => {
   const txToast = useSingleToast()
@@ -59,6 +60,7 @@ export const useSendTx = (
     const methodVal = unref(method)
     const paramsVal = unref(params)
     const toastsTextVal = unref(toastsText)
+    const optionsVal = unref(options)
 
     try {
       txHash.value = null
@@ -66,8 +68,9 @@ export const useSendTx = (
 
       txToast.info(get(toastsTextVal, 'waitingSigning', 'Confirm transaction in your wallet'), { timeout: false })
 
-      const estimateGas = await contractVal.estimateGas[methodVal](...paramsVal)
+      const estimateGas = await contractVal.estimateGas[methodVal](...paramsVal, optionsVal)
       const tx: ContractTransaction = await contractVal[methodVal](...paramsVal, {
+        ...optionsVal,
         gasLimit: calculateGasMargin(estimateGas),
       })
 
@@ -85,7 +88,6 @@ export const useSendTx = (
         onClick: () => window.open(`https://bscscan.com/tx/${txReceipt.transactionHash}`),
       })
     } catch (error) {
-      // TODO: изменить дефолтный текст
       const errorMessage = get(
         error,
         ['data', 'message'],
@@ -95,7 +97,7 @@ export const useSendTx = (
       txToast.error(errorMessage, { timeout: 8000 })
 
       console.error(errorMessage, error)
-      console.error('Faild tx:', methodVal, paramsVal)
+      console.error('Faild tx:', methodVal, paramsVal, optionsVal)
 
       txStatus.value = TxStatus.TX_ERROR
     }

@@ -1,3 +1,5 @@
+const colors = require('./colors')
+
 module.exports = {
   content: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
   theme: {
@@ -15,6 +17,7 @@ module.exports = {
       18: '18px',
       20: '20px',
       24: '24px',
+      28: '28px',
       32: '32px',
       36: '36px',
       40: '40px',
@@ -22,6 +25,7 @@ module.exports = {
       50: '50px',
       64: '64px',
       80: '80px',
+      'ui-page-spacing': 'var(--ui-page-spacing)',
       full: '100%',
     },
     fontSize: {
@@ -32,6 +36,7 @@ module.exports = {
       14: '14px',
       16: '16px',
       18: '18px',
+      28: '28px',
       38: '38px',
       40: '40px',
     },
@@ -45,18 +50,21 @@ module.exports = {
       body: ['Karelia'],
     },
     colors: {
-      transparent: 'transparent',
-      gray: '#6C7479',
-      'green-atomic': '#40E7FF',
-      black: 'black',
-      red: '#D42727',
-      white: '#fcfcfc',
-      bnb: '#D9A21F',
-      purple: '#6D0DFC',
-      aqua: '#40E7FF',
-      yellow: '#F2D700',
-      pink: '#FF36DF',
-      'page-active': 'var(--page-active-color, #fcfcfc)',
+      transparent: colors.transparent,
+      'green-atomic': colors['green-atomic'],
+      black: colors.black,
+      red: colors.red,
+      white: colors.white,
+      bnb: colors.bnb,
+      purple: colors.purple,
+      aqua: colors.aqua,
+      yellow: colors.yellow,
+      pink: colors.pink,
+      'page-active': colors['page-active'],
+      gray: {
+        DEFAULT: colors.gray['500'],
+        ...colors.gray,
+      },
     },
     minWidth: {
       40: '40px',
@@ -92,6 +100,7 @@ module.exports = {
     zIndex: {
       header: 1001,
       'mobile-menu': 1000,
+      1: 1,
       10: 10,
       20: 20,
       30: 30,

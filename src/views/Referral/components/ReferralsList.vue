@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="mb-20 text-18 flex items-center uppercase">
+    <div class="mb-20 text-18 flex items-center uppercase font-title">
       Referral list
       <div class="w-max bg-yellow text-black flex items-center rounded-16 h-32 px-10 text-14 ml-16">
         {{ numberOfReferrals }}

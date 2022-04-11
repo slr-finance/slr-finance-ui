@@ -1,6 +1,12 @@
 <template>
   <div class="pt-64">
-    <h1 class="text-38 ml-12 my-40 uppercase">Referral <span class="text-gray">station</span></h1>
+    <div class="ml-12 mr-48 mb-40 mt-50 flex justify-between">
+      <h1 class="text-38 uppercase font-title">Referral <span class="text-gray">station</span></h1>
+      <ui-bread-crumbs
+        class="875:flex hidden"
+        :items="[{ to: { name: 'dashboard' }, text: 'Home' }, { to: { name: 'referral' }, text: 'Referral' }]"
+      />
+    </div>
     <connect-wallet-plug>
       <template #plug>
         Unlock wallet to get your unique referral link
@@ -27,6 +33,7 @@
 <script lang="ts">
   import { defineComponent } from 'vue'
   import ConnectWalletPlug from '@/components/ConnectWallet/ConnectWalletPlug.vue'
+  import UiBreadCrumbs from '@/components/ui/UiBreadCrumbs/UiBreadCrumbs.vue'
   import ReferralsList from './components/ReferralsList.vue'
   import ReferralLinkBlock from './components/ReferralLinkBlock.vue'
   import ReferrerRewards from './components/ReferrerRewards.vue'
@@ -42,6 +49,7 @@
       ReferrerRewards,
       ReferrerAccrualHistory,
       ReferralFaq,
+      UiBreadCrumbs,
     },
   })
 </script>
