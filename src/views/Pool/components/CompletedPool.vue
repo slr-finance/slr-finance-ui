@@ -1,32 +1,63 @@
 <template>
-  <div>
-    <p>Вы тут закончили фармить</p>
-    <p>Нафармленно n SOLAR>FINANCE за k дней</p>
-    <ui-button :to="i18nRouteHelper({ name: stakerPool.routeName })">
-      Go to active pool
-      <ui-icon
-        name="arrow-right"
-        class="ml-8"
-      />
-    </ui-button>
+  <div class="ui-box-corners p-20">
+    <ui-placeholder
+      icon="finish"
+      title="Staking completed"
+    >
+      <template #description>
+        <p>
+          Earned
+          <span class="text-white">{{ ernedStr }}</span>
+          for
+          <span class="text-white">{{ daysStr }} days</span>
+        </p>
+      </template>
+
+      <ui-button
+        size="48"
+        class="w-full"
+        variant="accent"
+        :to="i18nRouteHelper({ name: stakerPool.routeName })"
+      >
+        Go to active pool
+      </ui-button>
+    </ui-placeholder>
   </div>
 </template>
 
 <script lang="ts">
   import { computed, defineComponent } from 'vue'
   import UiButton from '@/components/ui/UiButton.vue'
+  import UiPlaceholder from '@/components/ui/UiPlaceholder.vue'
+
   import { useStaker } from '@/store/hooks/useStaker'
   import { usePoolInfo } from '../hooks/usePoolInfo'
+  import { useTokenAmountFormat } from '@/hooks/formatters/useTokenAmountFormat'
+  import { BIG_ZERO } from '@/utils/bigNumber'
 
   export default defineComponent({
     name: 'completed-pool',
+    props: {
+      poolId: {
+        type: Number,
+        required: true,
+      }
+    },
     setup(props) {
       const [stakerState] = useStaker()
       const poolId = computed(() => stakerState.value.poolId)
       const stakerPool = usePoolInfo(poolId)
+      const history = computed(() => {
+        const poolIdVal = props.poolId
 
-      return { stakerPool }
+        return stakerState.value.history.find((item => item.poolId === poolIdVal))
+      })
+      const erned = computed(() => history.value?.earned ?? BIG_ZERO)
+      const daysStr = computed(() => Math.ceil((history.value?.lock ?? 0) / (60 * 60 * 24)).toString())
+      const ernedStr = useTokenAmountFormat(erned, 'SLR')
+
+      return { stakerPool, ernedStr, history, daysStr }
     },
-    components: { UiButton },
+    components: { UiButton, UiPlaceholder },
   })
 </script>

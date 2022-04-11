@@ -68,7 +68,7 @@
   import { useStaker } from '@/store/hooks/useStaker'
   import { computed, defineComponent, toRef, watch, ref, Ref, ComputedRef } from 'vue'
   import { usePoolInfo } from '../hooks/usePoolInfo'
-  import { useStake } from '../hooks/useStake'
+  import { useMigrateTx } from '../hooks/useMigrateTx'
   import { useSlrBalance } from '@/store/hooks/useBalance'
   import { usePool } from '@/store/hooks/usePool'
   import { usePercentFormat } from '@/hooks/formatters/usePercentFormat'
@@ -108,7 +108,7 @@
       const poolApy = computed(() => poolState.value.apy)
       const poolApyStr = usePercentFormat(poolApy)
 
-      const [handleMigrate, migrateTxState] = useStake({ poolId, amount, days })
+      const [handleMigrate, migrateTxState] = useMigrateTx({ poolId, amount, days })
       const refetchStakerAndBalance = () => Promise.all([refetchStaker(), refetchSlrBalance()])
 
       watch(migrateTxState, ({ isSuccess }) => isSuccess && refetchStakerAndBalance())

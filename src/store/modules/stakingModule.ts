@@ -31,7 +31,15 @@ export type StakerState = {
   timestamp: number
   rewardRaw: BigNumberEthers
   reward: BigNumber
+  history: StakerHistory[]
   fetchStatus: FetchingStatus
+}
+
+export type StakerHistory = {
+  poolId: number,
+  amount: BigNumber,
+  earned: BigNumber,
+  lock: number,
 }
 
 const getDefaultPoolState = (poolId: number): PoolState => ({
@@ -59,6 +67,7 @@ const defaultStakerState = (): StakerState => ({
   timestamp: 0,
   reward: new BigNumber(0),
   rewardRaw: BigNumberEthers.from(0),
+  history: [],
 })
 
 export const stakingModule = createModule('staking', {

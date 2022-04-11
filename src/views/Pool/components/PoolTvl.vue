@@ -14,6 +14,7 @@
   import UiIcon from '@/components/ui/UiIcon.vue'
   import { useTokenAmountFormat } from '@/hooks/formatters/useTokenAmountFormat'
   import { stakingModule } from '@/store/modules/stakingModule'
+  import { useStore } from 'vuex'
 
   export default defineComponent({
     name: 'pool-tvl',
@@ -24,6 +25,8 @@
       },
     },
     setup(props) {
+      const store = useStore()
+      stakingModule.register(store)
       const poolState = computed(() => stakingModule.getters.getPool(props.poolId))
       const totalStaked = computed(() => poolState.value.totalStaked)
       const tvlStr = useTokenAmountFormat(totalStaked, 'SLR')
