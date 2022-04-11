@@ -60,6 +60,7 @@ export const useSendTx = (
     const methodVal = unref(method)
     const paramsVal = unref(params)
     const toastsTextVal = unref(toastsText)
+    const optionsVal = unref(options)
 
     try {
       txHash.value = null
@@ -67,9 +68,9 @@ export const useSendTx = (
 
       txToast.info(get(toastsTextVal, 'waitingSigning', 'Confirm transaction in your wallet'), { timeout: false })
 
-      const estimateGas = await contractVal.estimateGas[methodVal](...paramsVal)
+      const estimateGas = await contractVal.estimateGas[methodVal](...paramsVal, optionsVal)
       const tx: ContractTransaction = await contractVal[methodVal](...paramsVal, {
-        ...unref(options),
+        ...optionsVal,
         gasLimit: calculateGasMargin(estimateGas),
       })
 
@@ -96,7 +97,7 @@ export const useSendTx = (
       txToast.error(errorMessage, { timeout: 8000 })
 
       console.error(errorMessage, error)
-      console.error('Faild tx:', methodVal, paramsVal)
+      console.error('Faild tx:', methodVal, paramsVal, optionsVal)
 
       txStatus.value = TxStatus.TX_ERROR
     }

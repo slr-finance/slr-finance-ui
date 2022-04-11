@@ -3,25 +3,58 @@
     :disabled="!isActivated"
     :href="mercuryoLinkBuy"
     target="_blank"
-    >Buy bnb on Mercuryo</ui-button
   >
+    <ui-icon
+      prefix="icon-card"
+      name="visa"
+      size="16"
+      class="mr-4"
+    />
+    <ui-icon
+      prefix="icon-card"
+      name="mastercard"
+      size="16"
+      class="mr-6"
+    />
+    Buy bnb on Mercuryo
+  </ui-button>
   <ui-button
     :disabled="!isActivated"
     :href="mercuryoLinkSell"
     target="_blank"
-    >Sell bnb on Mercuryo</ui-button
   >
+    <ui-icon
+      prefix="icon-card"
+      name="visa"
+      size="16"
+      class="mr-4"
+    />
+    <ui-icon
+      prefix="icon-card"
+      name="mastercard"
+      size="16"
+      class="mr-6"
+    />
+    Sell bnb on Mercuryo
+  </ui-button>
   <ui-button
     href="https://docs.slr.finance/buy-sell-crypto/binance"
     target="_blank"
-    >Sell/Buy crypto on Binance</ui-button
   >
+    <ui-icon
+      prefix="icon-card"
+      name="binance"
+      size="16"
+      class="mr-6"
+    />
+    Sell/Buy crypto on Binance
+  </ui-button>
 </template>
 
 <script lang="ts">
   import { defineComponent, computed } from 'vue'
-  import UiModal from '@/components/ui/UiModal.vue'
   import UiButton from '@/components/ui/UiButton.vue'
+  import UiIcon from '@/components/ui/UiIcon.vue'
   import { useEthers } from '@/hooks/dapp/useEthers'
 
   export default defineComponent({
@@ -60,8 +93,8 @@
       return { mercuryoLinkSell, mercuryoLinkBuy, isActivated }
     },
     components: {
-      UiModal,
       UiButton,
+      UiIcon,
     },
   })
 </script>

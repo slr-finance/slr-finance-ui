@@ -11,17 +11,18 @@ import { SwapParams, TradeType } from './useSwap'
 const useSwapParams = (swapParams: MaybeRef<SwapParams>) => {
   const { blockTimestamp } = useBlockInfo()
   const { address } = useEthers()
-  const { amountIn, amountOutMin, tokenIn, tokenOut, tradeType } = unref(swapParams)
-
-  const deadline = blockTimestamp.value + 60
 
   const swapOptions = computed(() => {
+    const { amountIn, amountOut, amountOutMin, tokenIn, tokenOut, tradeType, amountInMax } = unref(swapParams)
+
     let method: string
     let params: any[] = []
     let options = { value: BigNumberEthers.from(0) }
+    const deadline = blockTimestamp.value + 60
+
     if (tokenIn === contractsAddresses.BnbToken) {
       if (tradeType === TradeType.EXACT_INPUT) {
-        method = 'swapExactETHForTokens'
+        method = 'swapExactETHForTokensSupportingFeeOnTransferTokens'
 
         const path = [tokenIn, tokenOut]
         params = [amountOutMin, path, address.value, deadline]
@@ -30,26 +31,26 @@ const useSwapParams = (swapParams: MaybeRef<SwapParams>) => {
       } else {
         method = 'swapETHForExactTokens'
 
-        const path = [tokenOut, tokenIn]
+        const path = [tokenIn, tokenOut]
         params = [amountOutMin, path, address.value, deadline]
 
-        options.value = BigNumberEthers.from(0)
+        options.value = amountInMax
       }
     } else if (tokenOut === contractsAddresses.BnbToken) {
       if (tradeType === TradeType.EXACT_INPUT) {
         method = 'swapExactTokensForETHSupportingFeeOnTransferTokens'
 
         const path = [tokenIn, tokenOut]
-        params = [amountOutMin, path, address.value, deadline]
+        params = [amountIn, amountOutMin, path, address.value, deadline]
 
         options.value = BigNumberEthers.from(0)
       } else {
-        method = 'swapExactETHForTokensSupportingFeeOnTransferTokens' // возможно не верно
+        method = 'swapTokensForExactETH' // возможно не верно
 
-        const path = [tokenOut, tokenIn]
-        params = [amountOutMin, path, address.value, deadline]
+        const path = [tokenIn, tokenOut]
+        params = [amountOut, amountInMax, path, address.value, deadline]
 
-        options.value = amountIn
+        options.value = BigNumberEthers.from(0)
       }
     } else {
       throw new Error()

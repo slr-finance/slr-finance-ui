@@ -50,14 +50,15 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent, computed, ref, watch, markRaw, PropType } from 'vue'
+  import { defineComponent, computed, ref, watch, markRaw, PropType, Ref } from 'vue'
   import { useTransition, useVModel } from '@vueuse/core'
   import { get } from 'lodash'
   import BigNumber from 'bignumber.js'
+  import { BIG_ZERO } from '@/utils/bigNumber'
   import { useTokenAmountFormat } from '@/hooks/formatters/useTokenAmountFormat'
   import UiIcon from './UiIcon.vue'
 
-  const stringToBn = (value: string, defaultBn: BigNumber) => {
+  const stringToBn = (value: string, defaultBn: BigNumber = BIG_ZERO) => {
     const preparedStr = value.replace(/[^\d,\.]/g, '').replace(/([\.,])(?=\d*[\.,])/g, '')
 
     if (preparedStr.length === 0) {

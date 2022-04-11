@@ -1,4 +1,4 @@
-import { computed, markRaw, ref, Ref } from 'vue'
+import { computed, markRaw, ref, unref, Ref } from 'vue'
 import { Web3Provider, Network, ExternalProvider } from '@ethersproject/providers'
 import { Signer } from 'ethers'
 import { WalletProvider } from './useWallet'
@@ -44,6 +44,17 @@ async function activate(walletProvider: WalletProvider) {
 export const useEthers = () => {
   const chainId = computed(() => network.value?.chainId)
 
+  const fetchBalance = async () => {
+    const signerVal = unref(signer)
+
+    if (!signerVal) {
+      return
+    }
+
+    const _balance = await signerVal.getBalance()
+    balance.value = parseWei(_balance, 18)
+  }
+
   return {
     // state
     isActivated,
@@ -52,6 +63,7 @@ export const useEthers = () => {
     network,
     address,
     balance,
+    fetchBalance,
 
     // getters
     chainId,

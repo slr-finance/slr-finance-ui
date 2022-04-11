@@ -1,5 +1,8 @@
 <template>
-  <div>{{ tradeInfoStr }}</div>
+  <div class="flex justify-between items-center text-12 text-white">
+    <div class="text-white text-opacity-60">{{ tradeInfo.label }}</div>
+    <div>{{ tradeInfo.value }}</div>
+  </div>
 </template>
 
 <script lang="ts">
@@ -16,7 +19,7 @@
       },
     },
     setup(props) {
-      const tradeInfoStr = computed(() => {
+      const tradeInfo = computed(() => {
         if (props.swapParams.tradeType === TradeType.EXACT_OUTPUT) {
           const amountInMaxStr = Number(parseWei(props.swapParams.amountInMax, 18).toPrecision(5)).toLocaleString(
             'en-En',
@@ -25,7 +28,10 @@
             },
           )
 
-          return `Maximum sold ${amountInMaxStr}`
+          return {
+            label: 'Maximum sold',
+            value: amountInMaxStr,
+          }
         }
 
         const amountOutMinStr = Number(parseWei(props.swapParams.amountOutMin, 18).toPrecision(5)).toLocaleString(
@@ -35,10 +41,13 @@
           },
         )
 
-        return `Minimum received ${amountOutMinStr}`
+        return {
+          label: 'Minimum received',
+          value: amountOutMinStr,
+        }
       })
 
-      return { tradeInfoStr }
+      return { tradeInfo }
     },
   })
 </script>

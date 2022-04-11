@@ -1,1 +1,1 @@
-export const DOMAIN = 'slr.finance'
+export const DOMAIN = 'app.slr.finance'

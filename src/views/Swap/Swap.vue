@@ -1,17 +1,23 @@
 <template>
-  <div class="flex flex-col justify-start items-center p-ui-page-spacing page-padding">
-    <div class="swap-page-content">
-      <h1 class="text-white font-title text-38 mb-16 text-center">
-        <span class="text-white text-opacity-60">Make</span>
-        a space swap
-      </h1>
+  <div class="flex flex-col min-h-full p-ui-page-spacing justify-between items-center">
+    <div class="page-padding swap-page-content">
+      <div class="875:text-center text-left">
+        <h1 class="text-white font-title 875:text-38 mb-16 text-28">
+          <span class="text-white text-opacity-60">Make</span>
+          a space swap
+        </h1>
 
-      <p class="text-16 text-white text-opacity-60 text-center mb-48">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.
-      </p>
-      <swap-form />
-      <power-by-dex />
+        <p class="875:text-16 text-white text-opacity-60 text-14 mb-48">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.
+        </p>
+      </div>
 
+      <div class="bg-black bg-opacity-10 600:p-24 p-10 rounded-20">
+        <swap-form />
+      </div>
+    </div>
+
+    <div>
       <mercuryo />
     </div>
   </div>
@@ -44,10 +50,10 @@
   scoped
 >
   .swap-page-content {
-    max-width: 440px;
+    max-width: 488px;
     width: 100%;
   }
   .page-padding {
-    margin-top: calc(var(--app-ui-header-base-height) + var(--app-ui-header-scroll-padding));
+    padding-top: calc(var(--app-ui-header-base-height) + var(--app-ui-header-scroll-padding));
   }
 </style>
