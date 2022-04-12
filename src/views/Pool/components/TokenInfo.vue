@@ -11,8 +11,9 @@
     <ui-poligon-button
       :to="{ name: 'swap' }"
       variant="accent"
-      >Buy</ui-poligon-button
     >
+      Buy
+    </ui-poligon-button>
   </div>
 </template>
 

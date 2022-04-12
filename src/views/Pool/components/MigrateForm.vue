@@ -3,6 +3,7 @@
     <div class="relative border border-white px-16 py-18 rounded-24 mb-18">
       <ui-poligon
         class="absolute top-2 right-0 transform-cpu translate-x-1/2 -translate-y-1/2 z-10"
+        variant="green-original"
         animated
       >
         Open

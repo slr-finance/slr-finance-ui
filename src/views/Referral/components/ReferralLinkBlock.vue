@@ -11,7 +11,7 @@
     </div>
     <ui-poligon
       class="absolute transform translate-x-18 -translate-y-1/2 top-0 right-0"
-      variant="accent"
+      variant="violet"
       animated
     >
       Share

@@ -13,7 +13,7 @@
             {{ poolInfo.page.description }}
           </div>
 
-          <h2 class="title text-40 uppercase font-title text-page-active mb-8 leading-140 cursor-default">
+          <h2 class="title text-40 uppercase font-title mb-8 leading-140 cursor-default">
             {{ poolInfo.name }} <span class="opacity-60">staking planet</span>
           </h2>
 

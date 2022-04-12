@@ -116,9 +116,6 @@
 
   .ui-button {
     @apply inline-flex justify-center items-center transition duration-150;
-
-    color: var(--page-active-color, #fff);
-    border-color: var(--page-active-color, #fff);
   }
 
   .ui-button.-contrast {
@@ -126,11 +123,11 @@
   }
 
   .ui-button.-primary {
-    @apply bg-aqua text-black border-none;
+    @apply bg-green-atomic text-black border-none;
   }
 
   .ui-button.-accent {
-    @apply bg-purple text-white border-none;
+    @apply bg-violet text-white border-none;
   }
 
   .ui-button.-pale {

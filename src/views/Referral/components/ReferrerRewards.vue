@@ -5,9 +5,9 @@
       <span class="text-gray">Total rewards</span>
       <span class="text-14 font-title">{{ rewardStr }}</span>
     </div>
-    <div class="flex items-center bg-aqua bg-opacity-10 rounded-12 h-48 pl-18 pr-6 mb-12">
+    <div class="flex items-center bg-green-atomic bg-opacity-10 rounded-12 h-48 pl-18 pr-6 mb-12">
       <div class="flex-1 flex justify-between mr-10">
-        <span class="text-aqua">Unclaim rewards</span>
+        <span class="text-green-atomic">Unclaim rewards</span>
         <span class="text-18 font-title">{{ pendingRewardStr }}</span>
       </div>
       <send-tx-button

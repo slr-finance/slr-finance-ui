@@ -49,14 +49,11 @@
 
 <style lang="postcss">
   .ui-input.-size-50 {
-    @apply h-50 min-w-50 rounded-12 border border-white border-opacity-20 px-18 text-14 text-white;
+    @apply h-50 min-w-50 rounded-12 px-18 text-14;
   }
 
   .ui-input {
-    @apply bg-black;
-
-    color: var(--page-active-color, #fff);
-    border-color: var(--page-active-color, #fff);
+    @apply bg-black text-white border border-white border-opacity-20;
   }
 
   .ui-input > .input {

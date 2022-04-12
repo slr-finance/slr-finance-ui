@@ -2,7 +2,7 @@
   <div class="relative pt-32">
     <ui-poligon
       class="absolute top-32 right-0 transform-gpu translate-x-1/2 -translate-y-1/2 z-20"
-      variant="primary"
+      variant="green-atomic"
       animated
     >
       Active

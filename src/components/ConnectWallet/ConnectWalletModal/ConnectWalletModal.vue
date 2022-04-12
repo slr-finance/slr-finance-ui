@@ -45,7 +45,7 @@
         <transition name="fade">
           <span
             v-if="metamaskDisabled && !checkingMetamask"
-            class="text-purple"
+            class="text-violet"
           >
             Install
           </span>

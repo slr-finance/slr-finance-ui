@@ -1,7 +1,7 @@
 <template>
   <div class="ui-box-corners mb-24 cursor-default">
     <p class="text-14">
-      Will be earned <span class="text-page-active">{{ profitStr }} ({{ profitInDollStr }})</span> for {{ daysStr }}
+      Will be earned <span class="text-white">{{ profitStr }} ({{ profitInDollStr }})</span> for {{ daysStr }}
     </p>
     <p class="text-14 text-white/60">Early unlock penalty fee is {{ withdrawalFeeStr }}</p>
   </div>
