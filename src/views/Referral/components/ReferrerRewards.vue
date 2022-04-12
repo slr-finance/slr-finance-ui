@@ -1,24 +1,30 @@
 <template>
   <ui-widget>
-    <own-inviter class="mb-16" />
-    <div class="bg-white bg-opacity-30 rounded-12 h-48 px-16 flex items-center justify-between mb-10">
-      <span class="text-gray">Total rewards</span>
-      <span class="text-14 font-title">{{ rewardStr }}</span>
-    </div>
-    <div class="flex items-center bg-aqua bg-opacity-10 rounded-12 h-48 pl-18 pr-6 mb-12">
-      <div class="flex-1 flex justify-between mr-10">
-        <span class="text-aqua">Unclaim rewards</span>
-        <span class="text-18 font-title">{{ pendingRewardStr }}</span>
+    <div class="py-12 px-8">
+      <own-inviter class="mb-16" />
+      <div class="bg-white bg-opacity-10 text-14 rounded-12 h-48 px-16 flex items-center justify-between mb-10">
+        <span class="text-gray">Total rewards</span>
+        <span class="font-title">{{ rewardStr }}</span>
       </div>
-      <send-tx-button
-        @click="handleClaim"
-        :txState="claimTxState"
-        :loading="isFetching"
-        :disabled="!isNotEnoughReward"
-        size="36"
+      <div
+        class="flex items-center bg-opacity-10 rounded-12 h-48 pl-18 pr-6"
+        :class="[isEnoughReward ? 'bg-aqua' : 'bg-white']"
       >
-        CLAIM
-      </send-tx-button>
+        <div class="flex-1 flex justify-between mr-10">
+          <span class="text-14" :class="[isEnoughReward ? 'text-aqua' : 'text-gray']">Unclaim rewards</span>
+          <span class="text-18 font-title">{{ pendingRewardStr }}</span>
+        </div>
+        <send-tx-button
+          @click="handleClaim"
+          :txState="claimTxState"
+          :loading="isFetching"
+          :disabled="!isEnoughReward"
+          size="36"
+          v-if="isEnoughReward"
+        >
+          CLAIM
+        </send-tx-button>
+      </div>
     </div>
   </ui-widget>
 </template>
@@ -40,7 +46,7 @@
       const [, refetchSlrBalance] = useSlrBalance()
       const { reward, rewarded, isFetching, refetchRewards } = useReferrerRewards()
       const pendingReward = computed(() => reward.value.minus(rewarded.value))
-      const isNotEnoughReward = computed(() => pendingReward.value.gt(0))
+      const isEnoughReward = computed(() => pendingReward.value.gt(0))
       const pendingRewardStr = useTokenAmountFormat(pendingReward, 'SLR')
       const rewardStr = useTokenAmountFormat(reward, 'SLR')
 
@@ -49,7 +55,7 @@
       watch(claimTxState, ({ isSuccess }) => isSuccess && refetchRewardsAndSlrBalance())
 
       return {
-        isNotEnoughReward,
+        isEnoughReward,
         pendingRewardStr,
         rewardStr,
         isFetching,
