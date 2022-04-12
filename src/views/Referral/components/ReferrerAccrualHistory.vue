@@ -27,7 +27,7 @@
               class="bg-opacity-20 px-6 rounded-18 text-center min-h-24"
               :class="{
                 'text-yellow bg-yellow': item.action === 1,
-                'text-aqua bg-aqua': item.action === 2,
+                'text-green-atomic bg-green-atomic': item.action === 2,
                 // 'text-pink bg-pink': true,
               }"
             >
@@ -39,7 +39,7 @@
         </template>
       </div>
       <ui-button
-        variant="pale"
+        variant="gray-800"
         size="48"
         class="w-full 875:hidden"
         @click="showAllReferrals"

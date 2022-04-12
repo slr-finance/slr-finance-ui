@@ -49,14 +49,19 @@
 
 <style lang="postcss">
   .ui-input.-size-50 {
-    @apply h-50 min-w-50 rounded-12 border border-white border-opacity-20 px-18 text-14 text-white;
+    @apply h-50 min-w-50 rounded-12 px-18 text-14 transition-colors duration-200;
   }
 
   .ui-input {
-    @apply bg-black;
+    @apply bg-black text-white border border-white border-opacity-20;
+  }
 
-    color: var(--page-active-color, #fff);
-    border-color: var(--page-active-color, #fff);
+  .ui-input:hover {
+    @apply border-opacity-40;
+  }
+
+  .ui-input:focus-within {
+    @apply border-opacity-100;
   }
 
   .ui-input > .input {

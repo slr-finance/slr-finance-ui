@@ -34,7 +34,7 @@
         type: String,
       },
       variant: {
-        validator: (value: string) => ['primary', 'contrast', 'default', 'accent', 'pale'].includes(value),
+        validator: (value: string) => ['green-atomic', 'white', 'default', 'violet', 'gray-800'].includes(value),
         default: 'default',
       },
     },
@@ -116,24 +116,21 @@
 
   .ui-button {
     @apply inline-flex justify-center items-center transition duration-150;
-
-    color: var(--page-active-color, #fff);
-    border-color: var(--page-active-color, #fff);
   }
 
-  .ui-button.-contrast {
+  .ui-button.-white {
     @apply bg-white text-black border-none;
   }
 
-  .ui-button.-primary {
-    @apply bg-aqua text-black border-none;
+  .ui-button.-green-atomic {
+    @apply bg-green-atomic text-black border-none;
   }
 
-  .ui-button.-accent {
-    @apply bg-purple text-white border-none;
+  .ui-button.-violet {
+    @apply bg-violet text-white border-none;
   }
 
-  .ui-button.-pale {
-    @apply bg-white bg-opacity-10 text-white border-none;
+  .ui-button.-gray-800 {
+    @apply bg-gray-800 text-white border-none;
   }
 </style>

@@ -14,7 +14,7 @@ export const fetchStaker = async (stakerAddress: string) => {
     },
   ]
 
-  POOLS_INFO.map(poolInfo => {
+  POOLS_INFO.map((poolInfo) => {
     calls.push({
       address: contractsAddresses.StakingService,
       name: 'getStakerHistory',
@@ -24,7 +24,7 @@ export const fetchStaker = async (stakerAddress: string) => {
 
   const [[stakerRaw, ...stakerHistoryRaw]] = await multicall(StakingAbi, calls)
 
-  const history = stakerHistoryRaw.map(stakerHistoryItem => ({
+  const history = stakerHistoryRaw.map((stakerHistoryItem) => ({
     poolId: stakerHistoryItem.poolId,
     amount: parseWei(stakerHistoryItem.amount, 18),
     earned: parseWei(stakerHistoryItem.earned, 18),

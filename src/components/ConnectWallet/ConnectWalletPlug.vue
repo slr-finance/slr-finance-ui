@@ -7,7 +7,7 @@
       :size="size"
       @click="open"
       class="w-full"
-      variant="contrast"
+      variant="white"
     >
       {{ isIncorrectChainId && isActivated ? 'Wrong chain' : text }}
     </ui-button>

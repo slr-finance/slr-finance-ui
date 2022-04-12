@@ -56,7 +56,7 @@
               :disabled="false"
               class="w-full"
               size="48"
-              variant="accent"
+              variant="violet"
             >
               Swap {{ swapParams.tokenInSymbol }} to {{ swapParams.tokenOutSymbol }}
             </send-tx-button>

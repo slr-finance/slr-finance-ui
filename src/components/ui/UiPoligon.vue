@@ -48,10 +48,15 @@
         validator: (val: number) => ['12', '6'].includes(val.toString()),
       },
       variant: {
-        validator: (value: string) => ['primary', 'contrast', 'default', 'accent'].includes(value),
+        validator: (value: string) =>
+          ['white', 'default', 'violet', 'green-original', 'green-atomic', 'yellow'].includes(value),
         default: 'default',
       },
       opacity: {
+        type: Boolean,
+        default: false,
+      },
+      animated: {
         type: Boolean,
         default: false,
       },
@@ -64,6 +69,7 @@
       })
       const classList = computed(() => {
         return {
+          '-animated': props.animated,
           '-opacity': props.opacity,
           [`-size-${props.size}`]: true,
           'cursor-default': props.tag === 'div',
@@ -81,6 +87,10 @@
     @apply opacity-30;
   }
 
+  .ui-poligon.-animated > .wrapper > .svg {
+    animation: ui-poligon-spin 30s linear infinite;
+  }
+
   .ui-poligon.-size-50 > .wrapper {
     @apply w-50 h-50 text-12;
   }
@@ -89,24 +99,47 @@
     @apply text-black;
   }
 
-  .ui-poligon.-primary > .wrapper {
-    @apply text-aqua;
+  .ui-poligon.-green-atomic > .wrapper {
+    @apply text-green-atomic;
   }
-  .ui-poligon.-primary > .wrapper > .content {
+  .ui-poligon.-green-atomic > .wrapper > .content {
     @apply text-black;
   }
 
-  .ui-poligon.-accent > .wrapper {
-    @apply text-purple;
+  .ui-poligon.-violet > .wrapper {
+    @apply text-violet;
   }
-  .ui-poligon.-accent > .wrapper > .content {
+  .ui-poligon.-violet > .wrapper > .content {
     @apply text-white;
   }
 
-  .ui-poligon.-contrast > .wrapper {
+  .ui-poligon.-white > .wrapper {
     @apply text-white;
   }
-  .ui-poligon.-contrast > .wrapper > .content {
+  .ui-poligon.-white > .wrapper > .content {
     @apply text-black;
+  }
+
+  .ui-poligon.-green-original > .wrapper {
+    @apply text-green-original;
+  }
+  .ui-poligon.-green-original > .wrapper > .content {
+    @apply text-black;
+  }
+
+  .ui-poligon.-yellow > .wrapper {
+    @apply text-yellow;
+  }
+  .ui-poligon.-yellow > .wrapper > .content {
+    @apply text-black;
+  }
+
+  @keyframes ui-poligon-spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
   }
 </style>

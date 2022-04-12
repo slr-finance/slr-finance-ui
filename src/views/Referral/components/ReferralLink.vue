@@ -8,11 +8,11 @@
     </span>
 
     <button
-      class="flex justify-center items-center rounded-10 bg-opacity-20 bg-purple min-w-40 w-40 h-40"
+      class="flex justify-center items-center rounded-10 bg-opacity-20 bg-violet min-w-40 w-40 h-40"
       @click="handleCopy"
     >
       <ui-icon
-        class="text-purple"
+        class="text-violet"
         size="18"
         name="copy"
       />

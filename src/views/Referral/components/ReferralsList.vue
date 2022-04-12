@@ -32,7 +32,7 @@
         </template>
       </div>
       <ui-button
-        variant="pale"
+        variant="gray-800"
         size="48"
         class="w-full 875:hidden"
         @click="showAllReferrals"

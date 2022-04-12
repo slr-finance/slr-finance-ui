@@ -10,13 +10,10 @@ const fractionDigits = [
   { maxVal: Number.POSITIVE_INFINITY, digits: 0 },
 ]
 
-export const useTokenAmountFormat = (
-  amount: MaybeRef<BigNumber | number>,
-  symbol: string | Ref<string> = '',
-) => {
+export const useTokenAmountFormat = (amount: MaybeRef<BigNumber | number>, symbol: string | Ref<string> = '') => {
   const options = computed(() => {
     const amountVal = unref(amount)
-    let maximumFractionDigits:number
+    let maximumFractionDigits: number
 
     if (BigNumber.isBigNumber(amountVal)) {
       maximumFractionDigits = fractionDigits.find(({ maxVal }) => amountVal.lt(maxVal))?.digits ?? 0

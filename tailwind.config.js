@@ -52,15 +52,14 @@ module.exports = {
     colors: {
       transparent: colors.transparent,
       'green-atomic': colors['green-atomic'],
+      'green-original': colors['green-original'],
       black: colors.black,
       red: colors.red,
       white: colors.white,
       bnb: colors.bnb,
-      purple: colors.purple,
-      aqua: colors.aqua,
+      violet: colors.violet,
       yellow: colors.yellow,
       pink: colors.pink,
-      'page-active': colors['page-active'],
       gray: {
         DEFAULT: colors.gray['500'],
         ...colors.gray,

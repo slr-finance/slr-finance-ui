@@ -8,10 +8,10 @@
       </div>
       <div
         class="flex items-center bg-opacity-10 rounded-12 h-48 pl-18 pr-6"
-        :class="[isEnoughReward ? 'bg-aqua' : 'bg-white']"
+        :class="[isEnoughReward ? 'bg-green-atomic' : 'bg-white']"
       >
         <div class="flex-1 flex justify-between mr-10">
-          <span class="text-14" :class="[isEnoughReward ? 'text-aqua' : 'text-gray']">Unclaim rewards</span>
+          <span class="text-14" :class="[isEnoughReward ? 'text-green-atomic' : 'text-gray']">Unclaim rewards</span>
           <span class="text-18 font-title">{{ pendingRewardStr }}</span>
         </div>
         <send-tx-button
@@ -22,7 +22,7 @@
           size="36"
           v-if="isEnoughReward"
         >
-          CLAIM
+          Claim
         </send-tx-button>
       </div>
     </div>

@@ -1,27 +1,37 @@
 <template>
-  <div class="ui-box-corners p-20">
-    <ui-placeholder
-      icon="finish"
-      title="Staking completed"
+  <div class="relative">
+    <ui-poligon
+      class="absolute top-0 right-0 transform-gpu translate-x-1/2 -translate-y-1/2 z-20"
+      variant="yellow"
+      animated
     >
-      <template #description>
-        <p>
-          Earned
-          <span class="text-white">{{ ernedStr }}</span>
-          for
-          <span class="text-white">{{ daysStr }} days</span>
-        </p>
-      </template>
+      Ended
+    </ui-poligon>
 
-      <ui-button
-        size="48"
-        class="w-full"
-        variant="accent"
-        :to="i18nRouteHelper({ name: stakerPool.routeName })"
+    <div class="ui-box-corners">
+      <ui-placeholder
+        icon="finish"
+        title="Staking completed"
       >
-        Go to active pool
-      </ui-button>
-    </ui-placeholder>
+        <template #description>
+          <p>
+            Earned
+            <span class="text-white">{{ ernedStr }}</span>
+            for
+            <span class="text-white">{{ daysStr }} days</span>
+          </p>
+        </template>
+
+        <ui-button
+          size="48"
+          class="w-full"
+          variant="violet"
+          :to="i18nRouteHelper({ name: stakerPool.routeName })"
+        >
+          Go to active pool
+        </ui-button>
+      </ui-placeholder>
+    </div>
   </div>
 </template>
 
@@ -29,6 +39,7 @@
   import { computed, defineComponent } from 'vue'
   import UiButton from '@/components/ui/UiButton.vue'
   import UiPlaceholder from '@/components/ui/UiPlaceholder.vue'
+  import UiPoligon from '@/components/ui/UiPoligon.vue'
 
   import { useStaker } from '@/store/hooks/useStaker'
   import { usePoolInfo } from '../hooks/usePoolInfo'
@@ -41,7 +52,7 @@
       poolId: {
         type: Number,
         required: true,
-      }
+      },
     },
     setup(props) {
       const [stakerState] = useStaker()
@@ -50,7 +61,7 @@
       const history = computed(() => {
         const poolIdVal = props.poolId
 
-        return stakerState.value.history.find((item => item.poolId === poolIdVal))
+        return stakerState.value.history.find((item) => item.poolId === poolIdVal)
       })
       const erned = computed(() => history.value?.earned ?? BIG_ZERO)
       const daysStr = computed(() => Math.ceil((history.value?.lock ?? 0) / (60 * 60 * 24)).toString())
@@ -58,6 +69,6 @@
 
       return { stakerPool, ernedStr, history, daysStr }
     },
-    components: { UiButton, UiPlaceholder },
+    components: { UiButton, UiPlaceholder, UiPoligon },
   })
 </script>

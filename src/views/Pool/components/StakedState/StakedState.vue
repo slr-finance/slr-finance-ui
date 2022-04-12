@@ -2,7 +2,8 @@
   <div class="relative pt-32">
     <ui-poligon
       class="absolute top-32 right-0 transform-gpu translate-x-1/2 -translate-y-1/2 z-20"
-      variant="primary"
+      variant="green-atomic"
+      animated
     >
       Active
     </ui-poligon>
@@ -17,7 +18,7 @@
 
         <div class="space-x-6">
           <ui-button
-            variant="accent"
+            variant="violet"
             size="40"
             @click="() => handleOpenAddForm()"
           >
@@ -29,7 +30,7 @@
           </ui-button>
 
           <ui-button
-            variant="pale"
+            variant="gray-800"
             size="40"
             @click="() => handleOpenRewardForm()"
           >
