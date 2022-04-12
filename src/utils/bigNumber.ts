@@ -21,7 +21,7 @@ export const bigTenPow = (exponent: number): BigNumber => BIG_TEN.pow(exponent)
 
 export const weiToBig = (value: BigNumber, decimals: number) => value.div(bigTenPow(decimals))
 
-export const bigToWei = (value: BigNumber, decimals: number) =>
-  BigNumberEthers.from(value.times(bigTenPow(decimals)).toFixed())
+export const bigToWei = (value: BigNumber, decimals: number, roundingMode: BigNumber.RoundingMode = BigNumber.ROUND_DOWN) =>
+  BigNumberEthers.from(value.times(bigTenPow(decimals)).integerValue(roundingMode).toFixed())
 
 export const parseWei = (wei: BigNumberEthers, decimals: number) => weiToBig(ethersToBigNumber(wei), decimals)

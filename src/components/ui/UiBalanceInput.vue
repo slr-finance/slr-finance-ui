@@ -112,7 +112,11 @@
       const valueBn = useVModel(props, 'value', emit, { passive: true }) as Ref<BigNumber>
       const valueStr = ref(valueBn.value.toFixed())
 
-      watch(valueBn, (value) => (valueStr.value = value.isFinite() ? value.toFixed() : ''))
+      watch(valueBn, (value, prevValue) => {
+        if (!prevValue.eq(value)) {
+          valueStr.value = value.isFinite() ? value.toFixed() : ''
+        }
+      })
       watch(valueStr, (str) => {
         valueBn.value = markRaw(stringToBn(str, valueBn.value))
       })

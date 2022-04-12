@@ -4,6 +4,7 @@ import { ref, computed, markRaw, Ref, ComputedRef } from 'vue'
 import { fetchReserves } from '@/utils/tokens/fetchReserves'
 import { BigNumber as BigNumberEthers } from 'ethers'
 import { bigToWei, BIG_ONE, parseWei } from '@/utils/bigNumber'
+import { useIntervalFn } from '@vueuse/core'
 
 export enum TradeType {
   EXACT_INPUT = 0,
@@ -49,7 +50,6 @@ function getAmountOut(
   reserveOut: BigNumberEthers,
   fee: number,
 ): BigNumberEthers {
-  console.log('getAmountOut fee', fee)
   if (reserveIn.eq(0)) {
     return BigNumberEthers.from(0)
   }
@@ -120,6 +120,15 @@ export const useSwap = () => {
 
     pairReserves.value[token0] = reserves[0]
     pairReserves.value[token1] = reserves[1]
+
+    const swapParamsVal = swapParams.value
+
+    // Recalculate opposite amount swapping
+    if (swapParamsVal.tradeType === TradeType.EXACT_INPUT) {
+      handleTypeInput(amountIn.value)
+    } else {
+      handleTypeOutput(amountOut.value)
+    }
   }
 
   const swapParams: Ref<SwapParams> = ref({
@@ -202,7 +211,7 @@ export const useSwap = () => {
     return swapParamsVal.amountIn.lte(0) && swapParamsVal.amountOut.lte(0)
   })
 
-  fetchPairState()
+  useIntervalFn(fetchPairState, 10000, { immediateCallback: true })
 
   return {
     handleTypeInput,
