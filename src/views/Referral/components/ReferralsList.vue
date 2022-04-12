@@ -1,8 +1,11 @@
 <template>
   <div>
-    <div class="mb-20 text-18 flex items-center uppercase font-title">
+    <div class="mb-24 text-18 flex items-center uppercase relative w-max font-title">
       Referral list
-      <div class="w-max bg-yellow text-black flex items-center rounded-16 h-32 px-10 text-14 ml-16">
+      <div
+        class="w-max bg-yellow text-black flex items-center rounded-16 h-32 px-10 text-14 ml-16 absolute -right-36"
+        v-if="numberOfReferrals > 0"
+      >
         {{ numberOfReferrals }}
       </div>
     </div>
