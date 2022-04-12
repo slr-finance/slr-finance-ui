@@ -34,8 +34,8 @@
         validator: (val: string) => ['50'].includes(val),
       },
       variant: {
-        validator: (value: string) => ['primary', 'contrast', 'accent', 'default'].includes(value),
-        default: 'default',
+        validator: (value: string) => ['white', 'default', 'violet', 'green-original', 'green-atomic', 'yellow'].includes(value),
+        default: 'green-atomic',
       },
     },
     setup(props) {

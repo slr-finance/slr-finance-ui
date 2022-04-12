@@ -4,6 +4,7 @@ module.exports = {
     300: '#1A1A1A',
     400: '#151515',
     500: '#6C7479',
+    800: '#1A1A1A',
   },
   'green-atomic': '#40E7FF',
   'green-original': '#36C692',

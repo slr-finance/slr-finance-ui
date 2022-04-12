@@ -17,7 +17,7 @@
         :disabled="!isNotEnoughReward"
         size="36"
       >
-        CLAIM
+        Claim
       </send-tx-button>
     </div>
   </ui-widget>

@@ -10,7 +10,7 @@
     </div>
     <ui-poligon-button
       :to="{ name: 'swap' }"
-      variant="accent"
+      variant="violet"
     >
       Buy
     </ui-poligon-button>

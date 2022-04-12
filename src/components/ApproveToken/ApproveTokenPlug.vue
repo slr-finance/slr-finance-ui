@@ -8,7 +8,7 @@
       :txState="approveTxState"
       :loading="isFetchingAllowance"
       class="w-full"
-      variant="contrast"
+      variant="white"
       size="48"
     >
       {{ text }}

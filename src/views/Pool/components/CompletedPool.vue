@@ -25,7 +25,7 @@
         <ui-button
           size="48"
           class="w-full"
-          variant="accent"
+          variant="violet"
           :to="i18nRouteHelper({ name: stakerPool.routeName })"
         >
           Go to active pool

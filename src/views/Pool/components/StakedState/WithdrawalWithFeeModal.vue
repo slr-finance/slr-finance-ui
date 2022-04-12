@@ -6,7 +6,7 @@
       @click="handleUnstakeWithFee"
       :txState="unstakeWithFeeTxState"
       size="48"
-      variant="primary"
+      variant="green-atomic"
     >
       Withdrawal to wallet with {{ withdrawalFeeStr }} fee
     </send-tx-button>

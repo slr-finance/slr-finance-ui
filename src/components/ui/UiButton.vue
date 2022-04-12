@@ -34,7 +34,7 @@
         type: String,
       },
       variant: {
-        validator: (value: string) => ['primary', 'contrast', 'default', 'accent', 'pale'].includes(value),
+        validator: (value: string) => ['green-atomic', 'white', 'default', 'violet', 'gray-800'].includes(value),
         default: 'default',
       },
     },
@@ -118,19 +118,19 @@
     @apply inline-flex justify-center items-center transition duration-150;
   }
 
-  .ui-button.-contrast {
+  .ui-button.-white {
     @apply bg-white text-black border-none;
   }
 
-  .ui-button.-primary {
+  .ui-button.-green-atomic {
     @apply bg-green-atomic text-black border-none;
   }
 
-  .ui-button.-accent {
+  .ui-button.-violet {
     @apply bg-violet text-white border-none;
   }
 
-  .ui-button.-pale {
-    @apply bg-white bg-opacity-10 text-white border-none;
+  .ui-button.-gray-800 {
+    @apply bg-gray-800 text-white border-none;
   }
 </style>

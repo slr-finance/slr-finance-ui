@@ -30,7 +30,7 @@
           :disabled="false"
           class="w-full"
           size="48"
-          variant="accent"
+          variant="violet"
         >
           Stake on {{ daysStr }}
         </send-tx-button>

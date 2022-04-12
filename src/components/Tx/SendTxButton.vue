@@ -39,8 +39,8 @@
         type: [Number, String],
       },
       variant: {
-        validator: (value: string) => ['primary', 'contrast'].includes(value),
-        default: 'primary',
+        validator: (value: string) => ['green-atomic', 'white', 'default', 'violet', 'gray-800'].includes(value),
+        default: 'green-atomic',
       },
     },
     setup(props) {

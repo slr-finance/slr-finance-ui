@@ -8,7 +8,7 @@
       <ui-button
         class="w-full"
         size="48"
-        variant="accent"
+        variant="violet"
         :to="activePoolLink"
       >
         Go to active pool

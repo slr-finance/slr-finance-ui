@@ -20,7 +20,7 @@
         v-if="nextPoolId > poolId"
         :to="i18nRouteHelper({ name: nextPool.routeName })"
         class="mb-12 w-full"
-        variant="accent"
+        variant="violet"
         size="48"
       >
         Migrate to {{ nextPool.name }} pool without fee
@@ -30,7 +30,7 @@
         @click="handleUnstake"
         :tx-state="unstakeTxState"
         class="mb-12 w-full"
-        variant="accent"
+        variant="violet"
         size="48"
       >
         Withdrawal to wallet

@@ -18,7 +18,7 @@
 
         <div class="space-x-6">
           <ui-button
-            variant="accent"
+            variant="violet"
             size="40"
             @click="() => handleOpenAddForm()"
           >
@@ -30,7 +30,7 @@
           </ui-button>
 
           <ui-button
-            variant="pale"
+            variant="gray-800"
             size="40"
             @click="() => handleOpenRewardForm()"
           >
