@@ -30,7 +30,6 @@ export const fetchStaker = async (stakerAddress: string) => {
     earned: parseWei(stakerHistoryItem.earned, 18),
     lock: stakerHistoryItem.lock,
   }))
-  console.log(stakerHistoryRaw, history)
   const result = {
     fetchStatus: FetchingStatus.FETCHED,
     isStakinFinished: stakerRaw.startStaking + stakerRaw.lock < stakerRaw.timestamp,
