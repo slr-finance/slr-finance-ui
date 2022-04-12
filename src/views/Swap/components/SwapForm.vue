@@ -8,18 +8,14 @@
       :iconName="tokenInIconName"
       @input="handleTypeInput"
     />
+
     <div class="relative h-8">
-      <button
+      <swap-side-button
         @click="swapSide"
-        type="button"
-        class="h-36 w-36 rounded-10 bg-[#333333] flex justify-center items-center absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
-      >
-        <ui-icon
-          name="arrow-pixel-both"
-          size="14"
-        />
-      </button>
+        class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+      />
     </div>
+
     <ui-balance-input
       label="To"
       class="mb-20"
@@ -31,10 +27,10 @@
     />
 
     <div
-      class="h-48 flex justify-center items-center rounded-10 bg-gray bg-opacity-30 text-12 text-white text-opacity-60"
-      v-if="insufficientLiquidity"
+      class="h-48 flex justify-center items-center rounded-10 bg-gray bg-opacity-30 text-12 text-white text-opacity-60 cursor-default"
+      v-if="isInsufficientLiquidity || isZeroAmount"
     >
-      Insufficient liquidity for this trade
+      {{ isZeroAmount ? 'Enter an amount' : 'Insufficient liquidity for this trade' }}
     </div>
 
     <template v-else>
@@ -89,7 +85,6 @@
 
   import UiBalanceInput from '@/components/ui/UiBalanceInput.vue'
   import UiButton from '@/components/ui/UiButton.vue'
-  import UiIcon from '@/components/ui/UiIcon.vue'
 
   import ApproveTokenPlug from '@/components/ApproveToken/ApproveTokenPlug.vue'
   import ConnectWalletPlug from '@/components/ConnectWallet/ConnectWalletPlug.vue'
@@ -106,7 +101,7 @@
   import PriceImpact from './PriceImpact.vue'
   import TradeInfo from './TradeInfo.vue'
   import TradePrice from './TradePrice.vue'
-
+  import SwapSideButton from './SwapSideButton.vue'
   import BigNumber from 'bignumber.js'
 
   export default defineComponent({
@@ -119,7 +114,8 @@
         handleTypeOutput,
         fetchPairState,
         swapParams,
-        insufficientLiquidity,
+        isInsufficientLiquidity,
+        isZeroAmount,
         tokenInIconName,
         tokenOutIconName,
         amountIn,
@@ -156,7 +152,8 @@
         tokenInIconName,
         tokenOutIconName,
         swapParams,
-        insufficientLiquidity,
+        isInsufficientLiquidity,
+        isZeroAmount,
         amountIn,
         amountOut,
         priceImpact,
@@ -169,13 +166,13 @@
     components: {
       UiButton,
       UiBalanceInput,
-      UiIcon,
       ApproveTokenPlug,
       ConnectWalletPlug,
       SendTxButton,
       PriceImpact,
       TradeInfo,
       TradePrice,
+      SwapSideButton,
     },
   })
 </script>

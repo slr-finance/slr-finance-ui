@@ -81,7 +81,7 @@ const DEX_FEE = 0.002
 export const useSwap = () => {
   const tokenInIconName = ref('bnb')
   const tokenOutIconName = ref('slr')
-  const insufficientLiquidity = ref(false)
+  const isInsufficientLiquidity = ref(false)
   const priceImpact = ref(markRaw(new BigNumber(0))) as Ref<BigNumber>
   const amountIn = ref(markRaw(new BigNumber(0))) as Ref<BigNumber>
   const amountOut = ref(markRaw(new BigNumber(0))) as Ref<BigNumber>
@@ -160,16 +160,16 @@ export const useSwap = () => {
     const amountInWei = bigToWei(value, 18)
     const amountOutWei = getAmountOut(amountInWei, reserveInWei.value, reserveOutWei.value, DEX_FEE * 10000)
     const amountOutMinWei = getAmountOut(amountInWei, reserveInWei.value, reserveOutWei.value, dexFeeWithTokenFee.value)
-    const insufficientLiquidityBool = amountOutWei.lte(0)
+    const isInsufficientLiquidityBool = amountOutWei.lte(0)
 
-    insufficientLiquidity.value = insufficientLiquidityBool
+    isInsufficientLiquidity.value = isInsufficientLiquidityBool
     swapParams.value.amountIn = amountInWei
     swapParams.value.amountInMax = amountInWei
     swapParams.value.amountOut = amountOutWei
     swapParams.value.amountOutMin = amountOutMinWei
     swapParams.value.tradeType = TradeType.EXACT_INPUT
 
-    amountOut.value = insufficientLiquidityBool ? new BigNumber(0) : parseWei(amountOutWei, 18)
+    amountOut.value = isInsufficientLiquidityBool ? new BigNumber(0) : parseWei(amountOutWei, 18)
     amountIn.value = value
 
     updatePriceImpact(amountInWei, amountOutWei)
@@ -181,20 +181,26 @@ export const useSwap = () => {
     const amountOutWei = bigToWei(value, 18)
     const amountInWei = getAmountIn(amountOutWei, reserveInWei, reserveOutWei, DEX_FEE * 10000)
     const amountInMaxWei = getAmountIn(amountOutWei, reserveInWei, reserveOutWei, dexFeeWithTokenFee.value)
-    const insufficientLiquidityBool = amountInWei.lte(0)
+    const isInsufficientLiquidityBool = amountInWei.lte(0)
 
-    insufficientLiquidity.value = insufficientLiquidityBool
+    isInsufficientLiquidity.value = isInsufficientLiquidityBool
     swapParams.value.amountOut = amountOutWei
     swapParams.value.amountOutMin = amountOutWei
     swapParams.value.amountIn = amountInWei
     swapParams.value.amountInMax = amountInMaxWei
     swapParams.value.tradeType = TradeType.EXACT_OUTPUT
 
-    amountIn.value = insufficientLiquidityBool ? new BigNumber(0) : parseWei(amountInWei, 18)
+    amountIn.value = isInsufficientLiquidityBool ? new BigNumber(0) : parseWei(amountInWei, 18)
     amountOut.value = value
 
     updatePriceImpact(amountInWei, amountOutWei)
   }
+
+  const isZeroAmount = computed(() => {
+    const swapParamsVal = swapParams.value
+
+    return swapParamsVal.amountIn.lte(0) && swapParamsVal.amountOut.lte(0)
+  })
 
   fetchPairState()
 
@@ -205,7 +211,8 @@ export const useSwap = () => {
     swapSide,
     swapParams,
     priceImpact,
-    insufficientLiquidity,
+    isInsufficientLiquidity,
+    isZeroAmount,
     tokenInIconName,
     tokenOutIconName,
     amountIn,
