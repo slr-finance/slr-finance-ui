@@ -1,7 +1,12 @@
 <template>
   <div>
     <div class="relative border border-white px-16 py-18 rounded-24 mb-18">
-      <ui-poligon class="absolute top-2 right-0 transform-cpu translate-x-1/2 -translate-y-1/2 z-10"> Open </ui-poligon>
+      <ui-poligon
+        class="absolute top-2 right-0 transform-cpu translate-x-1/2 -translate-y-1/2 z-10"
+        animated
+      >
+        Open
+      </ui-poligon>
 
       <div class="text-white text-opacity-60 text-12 leading-none mb-12">Migrate amount</div>
       <div class="text-white text-14 leading-none font-title mb-12">{{ reinvestAmountStr }}</div>

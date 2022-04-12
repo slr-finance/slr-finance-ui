@@ -55,6 +55,10 @@
         type: Boolean,
         default: false,
       },
+      animated: {
+        type: Boolean,
+        default: false,
+      },
     },
     setup(props) {
       const d = computed(() => {
@@ -64,6 +68,7 @@
       })
       const classList = computed(() => {
         return {
+          '-animated': props.animated,
           '-opacity': props.opacity,
           [`-size-${props.size}`]: true,
           'cursor-default': props.tag === 'div',
@@ -79,6 +84,10 @@
 <style>
   .ui-poligon.-opacity > .wrapper > .svg {
     @apply opacity-30;
+  }
+
+  .ui-poligon.-animated > .wrapper > .svg {
+    animation: ui-poligon-spin 30s linear infinite;
   }
 
   .ui-poligon.-size-50 > .wrapper {
@@ -108,5 +117,14 @@
   }
   .ui-poligon.-contrast > .wrapper > .content {
     @apply text-black;
+  }
+
+  @keyframes ui-poligon-spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
   }
 </style>
