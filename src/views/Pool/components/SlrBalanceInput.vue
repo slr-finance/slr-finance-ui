@@ -4,8 +4,9 @@
     @update:value.once="handleChangeOnce"
   >
     <template #postfix>
-      <div>
+      <div class="text-12">
         <button
+          class="bg-green-atomic bg-opacity-10 text-green-atomic text-opacity-50 text-12 leading-none rounded-4 px-4 py-6 mr-8"
           type="button"
           @click="handleSetMaxAmount"
         >
