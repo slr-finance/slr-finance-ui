@@ -16,11 +16,7 @@ export const useMigrateTx = (params: UseStakeParams) => {
   const [slrTokenInfo] = useSlrBalance()
   const amountWei = computed(() => bigToWei(unref(params.amount), slrTokenInfo.value.decimals))
   const stakingContract = useStakingContract()
-  const callParams = computed(() => [
-    unref(params.poolId),
-    unref(amountWei),
-    Number(unref(params.days)),
-  ])
+  const callParams = computed(() => [unref(params.poolId), unref(amountWei), Number(unref(params.days))])
 
   return useSendTx(stakingContract, 'migrate', callParams)
 }

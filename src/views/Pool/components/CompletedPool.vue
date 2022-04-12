@@ -52,7 +52,7 @@
       poolId: {
         type: Number,
         required: true,
-      }
+      },
     },
     setup(props) {
       const [stakerState] = useStaker()
@@ -61,7 +61,7 @@
       const history = computed(() => {
         const poolIdVal = props.poolId
 
-        return stakerState.value.history.find((item => item.poolId === poolIdVal))
+        return stakerState.value.history.find((item) => item.poolId === poolIdVal)
       })
       const erned = computed(() => history.value?.earned ?? BIG_ZERO)
       const daysStr = computed(() => Math.ceil((history.value?.lock ?? 0) / (60 * 60 * 24)).toString())

@@ -15,7 +15,7 @@
     <div class="font-title text-12 text-white uppercase leading-none mb-16">{{ title }}</div>
     <div class="font-body text-12 text-white text-opacity-60 leading-none mb-16">
       {{ description }}
-      <slot name="description"/>
+      <slot name="description" />
     </div>
     <slot />
   </div>

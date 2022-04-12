@@ -36,10 +36,10 @@ export type StakerState = {
 }
 
 export type StakerHistory = {
-  poolId: number,
-  amount: BigNumber,
-  earned: BigNumber,
-  lock: number,
+  poolId: number
+  amount: BigNumber
+  earned: BigNumber
+  lock: number
 }
 
 const getDefaultPoolState = (poolId: number): PoolState => ({

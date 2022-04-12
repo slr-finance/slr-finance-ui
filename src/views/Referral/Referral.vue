@@ -4,7 +4,10 @@
       <h1 class="text-38 uppercase font-title">Referral <span class="text-gray">station</span></h1>
       <ui-bread-crumbs
         class="875:flex hidden"
-        :items="[{ to: { name: 'dashboard' }, text: 'Home' }, { to: { name: 'referral' }, text: 'Referral' }]"
+        :items="[
+          { to: { name: 'dashboard' }, text: 'Home' },
+          { to: { name: 'referral' }, text: 'Referral' },
+        ]"
       />
     </div>
     <connect-wallet-plug>

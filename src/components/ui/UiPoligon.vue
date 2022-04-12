@@ -48,7 +48,8 @@
         validator: (val: number) => ['12', '6'].includes(val.toString()),
       },
       variant: {
-        validator: (value: string) => ['white', 'default', 'violet', 'green-original', 'green-atomic', 'yellow'].includes(value),
+        validator: (value: string) =>
+          ['white', 'default', 'violet', 'green-original', 'green-atomic', 'yellow'].includes(value),
         default: 'default',
       },
       opacity: {
