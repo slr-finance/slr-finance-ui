@@ -11,7 +11,11 @@
         :class="[isEnoughReward ? 'bg-green-atomic' : 'bg-white']"
       >
         <div class="flex-1 flex justify-between mr-10">
-          <span class="text-14" :class="[isEnoughReward ? 'text-green-atomic' : 'text-gray']">Unclaim rewards</span>
+          <span
+            class="text-14"
+            :class="[isEnoughReward ? 'text-green-atomic' : 'text-gray']"
+            >Unclaim rewards</span
+          >
           <span class="text-18 font-title">{{ pendingRewardStr }}</span>
         </div>
         <send-tx-button

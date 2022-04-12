@@ -1,5 +1,7 @@
 <template>
-  <div class="border border-white border-opacity-20 pt-18 rounded-12">
+  <label
+    class="ui-balance-input block transition-colors duration-200 border border-white border-opacity-20 pt-18 rounded-12 bg-black"
+  >
     <div class="flex justify-between items-start px-12">
       <div class="text-12 leading-none h-12 text-white text-opacity-60">{{ label }}</div>
       <div class="text-12 leading-none h-12 text-white text-right">
@@ -46,7 +48,7 @@
         </transition>
       </div>
     </div>
-  </div>
+  </label>
 </template>
 
 <script lang="ts">
@@ -115,7 +117,8 @@
         valueBn.value = markRaw(stringToBn(str, valueBn.value))
       })
 
-      const handleSetMax = () => {
+      const handleSetMax = (event: Event) => {
+        event.preventDefault()
         valueBn.value = props.balance
 
         emit('input', props.balance)
@@ -136,6 +139,14 @@
 </script>
 
 <style>
+  .ui-balance-input:hover {
+    @apply border-opacity-40;
+  }
+
+  .ui-balance-input:focus-within {
+    @apply border-opacity-100;
+  }
+
   .ui-balance-input-icon-enter-active,
   .ui-balance-input-icon-leave-active {
     transition: transform 0.3s, opacity 0.3s;

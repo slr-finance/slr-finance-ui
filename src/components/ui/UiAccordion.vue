@@ -1,5 +1,8 @@
 <template>
-  <section class="ui-box-corners p-0" :class="{ 'bg-white bg-opacity-5': isOpen }">
+  <section
+    class="ui-box-corners p-0"
+    :class="{ 'bg-white bg-opacity-5': isOpen }"
+  >
     <div
       @click="toggle"
       class="py-32 px-18 flex items-center justify-between"

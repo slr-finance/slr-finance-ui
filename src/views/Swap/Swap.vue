@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col min-h-full p-ui-page-spacing justify-between items-center">
+  <div class="flex flex-col min-h-full p-ui-page-spacing justify-between items-center relative z-1">
     <div class="page-padding swap-page-content">
       <div class="875:text-center text-left">
         <h1 class="text-white font-title 875:text-38 mb-16 text-28">
@@ -21,6 +21,7 @@
       <mercuryo />
     </div>
   </div>
+  <swap-bg />
 </template>
 
 <script lang="ts">
@@ -29,6 +30,7 @@
   import SwapForm from './components/SwapForm.vue'
   import PowerByDex from './components/PowerByDex.vue'
   import Mercuryo from './components/Mercuryo.vue'
+  import SwapBg from './components/SwapBg.vue'
 
   export default defineComponent({
     name: 'swap-page',
@@ -41,6 +43,7 @@
       SwapForm,
       PowerByDex,
       Mercuryo,
+      SwapBg,
     },
   })
 </script>

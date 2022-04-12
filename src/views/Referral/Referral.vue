@@ -8,7 +8,11 @@
         :to="{ name: 'dashboard' }"
       >
         <div class="flex justify-center items-center">
-          <ui-icon name="arrow-pixel" class="rotate-90" size="14" />
+          <ui-icon
+            name="arrow-pixel"
+            class="rotate-90"
+            size="14"
+          />
         </div>
       </ui-button>
     </div>
@@ -16,11 +20,16 @@
       <div class="mr-48 mb-40 flex justify-between items-start">
         <div>
           <h1 class="text-38 uppercase font-title leading-none">Referral <span class="text-gray">station</span></h1>
-          <p class="text-gray text-16 mt-12">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.</p>
+          <p class="text-gray text-16 mt-12">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.
+          </p>
         </div>
         <ui-bread-crumbs
           class="875:flex hidden"
-          :items="[{ to: { name: 'dashboard' }, text: 'Home' }, { to: { name: 'referral' }, text: 'Referral' }]"
+          :items="[
+            { to: { name: 'dashboard' }, text: 'Home' },
+            { to: { name: 'referral' }, text: 'Referral' },
+          ]"
         />
       </div>
       <connect-wallet-plug>
@@ -28,20 +37,20 @@
           Unlock wallet to get your unique referral link
           <connect-wallet-plug text="Unlock wallet" />
         </template>
-  
+
         <template #default>
           <div class="875:flex 875:space-x-20 875:space-y-0 space-y-24 pr-12">
             <referral-link-block class="flex-1 wrapper" />
             <referrer-rewards class="flex-1 wrapper" />
           </div>
-  
+
           <div class="875:flex 875:space-x-20 875:space-y-0 space-y-24 pr-12 pt-32">
             <referrals-list class="flex-1 wrapper" />
             <referrer-accrual-history class="flex-1 wrapper" />
           </div>
         </template>
       </connect-wallet-plug>
-  
+
       <referral-faq class="600:block hidden pr-12 mt-48" />
     </div>
   </div>
