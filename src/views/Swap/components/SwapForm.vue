@@ -90,19 +90,15 @@
   import ConnectWalletPlug from '@/components/ConnectWallet/ConnectWalletPlug.vue'
   import SendTxButton from '@/components/Tx/SendTxButton.vue'
 
-  import { BIG_ONE, parseWei } from '@/utils/bigNumber'
-
-  import { useTokenAmountFormat } from '@/hooks/formatters/useTokenAmountFormat'
   import { usePercentFormat } from '@/hooks/formatters/usePercentFormat'
 
   import { useSlrBalance } from '@/store/hooks/useBalance'
   import { useSwapTx } from '../hooks/useSwapTx'
-  import { useSwap, TradeType } from '../hooks/useSwap'
+  import { useSwap } from '../hooks/useSwap'
   import PriceImpact from './PriceImpact.vue'
   import TradeInfo from './TradeInfo.vue'
   import TradePrice from './TradePrice.vue'
   import SwapSideButton from './SwapSideButton.vue'
-  import BigNumber from 'bignumber.js'
 
   export default defineComponent({
     name: 'swap-form',

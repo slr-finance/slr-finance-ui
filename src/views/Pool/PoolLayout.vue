@@ -25,7 +25,7 @@
       <pools-navigation :pool-id="poolId" />
       <div
         v-if="isShownPoolsMap"
-        class="fixed bottom-0 right-ui-page-spacing"
+        class="fixed bottom-0 pools-map-wrapper"
       >
         <pools-map />
       </div>
@@ -112,6 +112,10 @@
   }
   .pool-page-transition-enter-active {
     transition: all 0.3s ease-out;
+  }
+
+  .pools-map-wrapper {
+    right: var(--ui-page-right-spacing-with-right-buttons);
   }
 
   .pool-page-transition-leave-active {

@@ -64,30 +64,31 @@ html, body {
  * Ui page spacing [BEGIN]
  */
  body {
-  --ui-page-spacing: 80px;
+  --ui-page-spacing: 64px;
+  --ui-page-right-spacing-with-right-buttons: calc(var(--ui-page-spacing) * 2 + 50px)
 }
 
 @media only screen and (max-width: 1900px) {
-  body {
-    --ui-page-spacing: 64px;
-  }
-}
-
-@media only screen and (max-width: 1360px) {
   body {
     --ui-page-spacing: 40px;
   }
 }
 
-@media only screen and (max-width: 1200px) {
+@media only screen and (max-width: 1360px) {
   body {
     --ui-page-spacing: 32px;
   }
 }
 
-@media only screen and (max-width: 800px) {
+@media only screen and (max-width: 1200px) {
   body {
     --ui-page-spacing: 24px;
+  }
+}
+
+@media only screen and (max-width: 800px) {
+  body {
+    --ui-page-spacing: 18px;
   }
 }
 

@@ -1,7 +1,11 @@
 <template>
   <connect-wallet-modal />
   <app-header />
-  <router-view />
+  <router-view class="flex-1 z-1" />
+
+  <div class="flex flex-col justify-end fixed bottom-ui-page-spacing right-ui-page-spacing z-10">
+    <social-modal-button />
+  </div>
 </template>
 
 <script lang="ts">
@@ -10,6 +14,7 @@
   import { store } from '@/store/store'
   import AppHeader from '@/components/AppHeader'
   import ConnectWalletModal from '@/components/ConnectWallet/ConnectWalletModal'
+  import SocialModalButton from '@/components/SocialModalButton'
   import { stakingModule } from '@/store/modules/stakingModule'
   import { useBlockInfo } from './hooks/useBlockInfo'
 
@@ -31,6 +36,7 @@
     components: {
       AppHeader,
       ConnectWalletModal,
+      SocialModalButton,
     },
   })
 </script>
