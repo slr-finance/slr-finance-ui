@@ -35,7 +35,7 @@
       },
       variant: {
         validator: (value: string) =>
-          ['white', 'default', 'violet', 'green-original', 'green-atomic', 'yellow'].includes(value),
+          ['white', 'default', 'violet', 'green-original', 'green-atomic', 'yellow', 'red'].includes(value),
         default: 'green-atomic',
       },
     },

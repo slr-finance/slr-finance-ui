@@ -34,7 +34,7 @@
         type: String,
       },
       variant: {
-        validator: (value: string) => ['green-atomic', 'white', 'default', 'violet', 'gray-800'].includes(value),
+        validator: (value: string) => ['green-atomic', 'white', 'default', 'violet', 'gray-800', 'red'].includes(value),
         default: 'default',
       },
     },
@@ -132,5 +132,9 @@
 
   .ui-button.-gray-800 {
     @apply bg-gray-800 text-white border-none;
+  }
+
+  .ui-button.-red {
+    @apply bg-red text-white border-none;
   }
 </style>
