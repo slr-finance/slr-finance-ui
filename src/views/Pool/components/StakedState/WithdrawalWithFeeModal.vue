@@ -51,7 +51,9 @@
 
 <script lang="ts">
   import { computed, defineComponent, watch } from 'vue'
+  import { useRouter } from 'vue-router'
   import { useVModel } from '@vueuse/core'
+  import { POOLS_INFO } from '@/config/constants/Pools'
   import { i18nRouteHelper } from '@/i18n'
   import { usePercentFormat } from '@/hooks/formatters/usePercentFormat'
   import { usePool } from '@/store/hooks/usePool'
@@ -95,11 +97,13 @@
       const willBeReceivedStr = useTokenAmountFormat(willBeReceived, 'SLR')
 
       const [handleUnstakeWithFee, unstakeWithFeeTxState] = useUnstakeWithFee(poolId)
+      const router = useRouter()
       const handleUnstaked = async () => {
         Promise.all([refetchStaker(), refetchBalance()])
         isOpenModal.value = false
+        router.push(i18nRouteHelper({ name: POOLS_INFO[0].routeName }))
       }
-      watch(unstakeWithFeeTxState, ({ isSuccess }) => isSuccess && refetchBalanceAndStakerState())
+      watch(unstakeWithFeeTxState, ({ isSuccess }) => isSuccess && handleUnstaked())
 
       return {
         unstakeWithFeeTxState,
