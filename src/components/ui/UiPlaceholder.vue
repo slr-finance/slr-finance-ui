@@ -5,10 +5,11 @@
       size="50"
       class="mb-16"
       opacity
+      :variant="variant"
     >
       <ui-icon
         :name="icon"
-        class="text-white text-opacity-60"
+        class="text-white opacity-60"
         size="18"
       />
     </ui-poligon>
@@ -41,6 +42,11 @@
         type: String,
         default: 'info-circle',
       },
+      variant: {
+        type: String,
+        validator: (val: string) => ['white', 'red'].includes(val),
+        default: 'white',
+      }
     },
     components: {
       UiPoligon,

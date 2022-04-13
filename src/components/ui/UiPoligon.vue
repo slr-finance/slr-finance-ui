@@ -49,7 +49,7 @@
       },
       variant: {
         validator: (value: string) =>
-          ['white', 'default', 'violet', 'green-original', 'green-atomic', 'yellow'].includes(value),
+          ['white', 'default', 'violet', 'green-original', 'green-atomic', 'yellow', 'red'].includes(value),
         default: 'default',
       },
       opacity: {
@@ -132,6 +132,13 @@
   }
   .ui-poligon.-yellow > .wrapper > .content {
     @apply text-black;
+  }
+
+  .ui-poligon.-red > .wrapper {
+    @apply text-red;
+  }
+  .ui-poligon.-red > .wrapper > .content {
+    @apply text-white;
   }
 
   @keyframes ui-poligon-spin {
