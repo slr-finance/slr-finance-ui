@@ -1,4 +1,5 @@
 import 'virtual:svg-icons-register'
+import 'virtual:fonts.css'
 import { createApp } from 'vue'
 import Toast, { POSITION } from 'vue-toastification'
 import 'vue-toastification/dist/index.css'
