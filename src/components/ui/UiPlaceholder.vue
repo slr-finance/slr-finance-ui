@@ -22,7 +22,7 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent, computed } from 'vue'
+  import { defineComponent } from 'vue'
   import UiPoligon from './UiPoligon.vue'
   import UiIcon from './UiIcon.vue'
 
