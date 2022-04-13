@@ -18,7 +18,7 @@
 <script lang="ts">
   import { defineComponent, HTMLAttributes, PropType } from 'vue'
   import { useVModel } from '@vueuse/core'
-  import { get } from 'lodash'
+  import get from 'lodash.get'
 
   export default defineComponent({
     props: {

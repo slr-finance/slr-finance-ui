@@ -64,11 +64,17 @@
     </div>
   </div>
 
-  <ui-modal v-model="isOpenAddModal">
+  <ui-modal
+    v-model="isOpenAddModal"
+    label="Stake in Pool"
+  >
     <stake-more-modal :pool-id="poolId" />
   </ui-modal>
 
-  <ui-modal v-model="isOpenWithdrawalModal">
+  <ui-modal
+    v-model="isOpenWithdrawalModal"
+    label="Withdrawal"
+  >
     <withdrawal-with-fee-modal />
   </ui-modal>
 </template>
@@ -112,10 +118,14 @@
         return Math.max(0, startStaking + lock - lifeTimestamp.value)
       })
       const leftToWaitStr = computed(() => dayjs().add(leftToWait.value, 's').toNow(true))
-      // Sinc local timestamp with blockchain timestamp
-      watch(stakerState, ({ timestamp }) => {
-        lifeTimestamp.value = timestamp
-      })
+      // Sync local timestamp with blockchain timestamp
+      watch(
+        stakerState,
+        ({ timestamp }) => {
+          lifeTimestamp.value = timestamp
+        },
+        { immediate: true },
+      )
 
       const [isOpenAddModal, handleOpenAddForm] = useToggle()
       const [isOpenWithdrawalModal, handleOpenRewardForm] = useToggle()
