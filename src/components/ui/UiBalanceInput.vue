@@ -54,7 +54,7 @@
 <script lang="ts">
   import { defineComponent, computed, ref, watch, markRaw, PropType, Ref } from 'vue'
   import { useTransition, useVModel } from '@vueuse/core'
-  import { get } from 'lodash'
+  import get from 'lodash.get'
   import BigNumber from 'bignumber.js'
   import { BIG_ZERO } from '@/utils/bigNumber'
   import { useTokenAmountFormat } from '@/hooks/formatters/useTokenAmountFormat'
