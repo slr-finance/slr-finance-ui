@@ -11,25 +11,36 @@
     </div>
     <ui-widget>
       <div
-        class="table overflow-auto text-12"
+        class="table relative overflow-auto text-12"
         style="height: 300px"
       >
         <span class="header-item pr-20">#</span>
         <span class="header-item uppercase">address</span>
         <span class="header-item text-right uppercase">date</span>
-        <template
-          v-for="(item, i) of referrals"
-          :key="item.address"
-        >
-          <span class="item pr-20 text-gray leading-none">{{ i + 1 }}</span>
-          <span class="item pr-20 leading-none">{{ item.shortAddress }}</span>
-          <div class="item text-right">
-            <div class="leading-none">{{ item.dateStr }}</div>
-            <div class="text-gray text-11 leading-none">
-              {{ item.timeStr }}
+        <template v-if="referrals.length > 0">
+          <template
+            v-for="(item, i) of referrals"
+            :key="item.address"
+          >
+            <span class="item pr-20 text-gray leading-none">{{ i + 1 }}</span>
+            <span class="item pr-20 leading-none">{{ item.shortAddress }}</span>
+            <div class="item text-right">
+              <div class="leading-none">{{ item.dateStr }}</div>
+              <div class="text-gray text-11 leading-none">
+                {{ item.timeStr }}
+              </div>
             </div>
-          </div>
+          </template>
         </template>
+        <div class="w-full h-full flex items-center justify-center absolute" v-else>
+          <ui-placeholder
+            class="w-full"
+            icon="binocular"
+            title="You don't have referrals"
+          >
+            <p class="text-center leading-[20px] text-gray">Share link and Get 10% from perfomance fee for any transactions and 1% from any rawards</p>
+          </ui-placeholder>
+        </div>
       </div>
       <ui-button
         variant="gray-800"
@@ -59,6 +70,7 @@
   import UiWidget from '@/components/ui/UiWidget.vue'
   import UiButton from '@/components/ui/UiButton.vue'
   import UiIcon from '@/components/ui/UiIcon.vue'
+  import UiPlaceholder from '@/components/ui/UiPlaceholder.vue'
 
   import { useReferrals } from '../hooks/useReferrals'
 
@@ -70,6 +82,7 @@
       UiWidget,
       UiButton,
       UiIcon,
+      UiPlaceholder,
     },
     setup() {
       const { referralsList, isFetching, numberOfReferrals } = useReferrals()

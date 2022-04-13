@@ -11,7 +11,7 @@ import BigNumber from 'bignumber.js'
 import dayjs from 'dayjs'
 import localizedFormat from 'dayjs/plugin/localizedFormat'
 import type { Result } from 'ethers/lib/utils'
-import { REFERRALS_ACTIONS } from '@/config/constants/referrals'
+import { REFERRALS_ACTIONS_LABELS } from '@/config/constants/referrals'
 import { parseWei } from '@/utils/bigNumber'
 
 dayjs.extend(localizedFormat)
@@ -93,7 +93,7 @@ export const useReferrerAccrualHistory = () => {
                     style: 'decimal',
                     maximumFractionDigits: 6,
                   })} SLR`,
-                  actionLabel: REFERRALS_ACTIONS[action],
+                  actionLabel: REFERRALS_ACTIONS_LABELS[action],
                   action,
                 }
               }),
