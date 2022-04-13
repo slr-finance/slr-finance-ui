@@ -1,11 +1,22 @@
 <template>
-  <div>
+  <ui-modal
+    v-model="isOpenModal"
+    label="Withdrawal"
+  >
     <div class="bg-red bg-opacity-10 px-20 py-12 rounded-10 mb-20">
       <ui-placeholder
         title="Please, attend!"
         description="Early withdrawal from staking is subject to commission, wait until the end of the pool and receive funds without commission"
         variant="red"
-      />
+      >
+        <template #icon>
+          <ui-icon
+            name="alert-circle"
+            class="text-red"
+            size="18"
+          />
+        </template>
+      </ui-placeholder>
     </div>
 
     <div class="item mb-20">
@@ -35,24 +46,38 @@
     >
       Withdrawal to wallet with {{ withdrawalFeeStr }} fee
     </send-tx-button>
-  </div>
+  </ui-modal>
 </template>
 
 <script lang="ts">
   import { computed, defineComponent, watch } from 'vue'
-  import { useUnstakeWithFee } from '../../hooks/useUnstakeWithFee'
+  import { useRouter } from 'vue-router'
+  import { useVModel } from '@vueuse/core'
+  import { POOLS_INFO } from '@/config/constants/Pools'
+  import { i18nRouteHelper } from '@/i18n'
   import { usePercentFormat } from '@/hooks/formatters/usePercentFormat'
   import { usePool } from '@/store/hooks/usePool'
   import { useStaker } from '@/store/hooks/useStaker'
   import { useSlrBalance } from '@/store/hooks/useBalance'
-  import SendTxButton from '@/components/Tx/SendTxButton.vue'
   import { useTokenAmountFormat } from '@/hooks/formatters/useTokenAmountFormat'
   import { BIG_ONE } from '@/utils/bigNumber'
+  import SendTxButton from '@/components/Tx/SendTxButton.vue'
   import UiPlaceholder from '@/components/ui/UiPlaceholder.vue'
+  import UiIcon from '@/components/ui/UiIcon.vue'
+  import UiModal from '@/components/ui/UiModal.vue'
+  import { useUnstakeWithFee } from '../../hooks/useUnstakeWithFee'
 
   export default defineComponent({
     name: 'withdrawal-with-fee-modal',
-    setup(props) {
+    props: {
+      isOpen: {
+        type: Boolean,
+        required: true,
+      },
+    },
+    emits: ['update:isOpen'],
+    setup(props, { emit }) {
+      const isOpenModal = useVModel(props, 'isOpen', emit)
       const [stakerState, refetchStaker] = useStaker()
       const [, refetchBalance] = useSlrBalance()
       const poolId = computed(() => stakerState.value.poolId)
@@ -72,8 +97,13 @@
       const willBeReceivedStr = useTokenAmountFormat(willBeReceived, 'SLR')
 
       const [handleUnstakeWithFee, unstakeWithFeeTxState] = useUnstakeWithFee(poolId)
-      const refetchBalanceAndStakerState = () => Promise.all([refetchStaker(), refetchBalance()])
-      watch(unstakeWithFeeTxState, ({ isSuccess }) => isSuccess && refetchBalanceAndStakerState())
+      const router = useRouter()
+      const handleUnstaked = async () => {
+        Promise.all([refetchStaker(), refetchBalance()])
+        isOpenModal.value = false
+        router.push(i18nRouteHelper({ name: POOLS_INFO[0].routeName }))
+      }
+      watch(unstakeWithFeeTxState, ({ isSuccess }) => isSuccess && handleUnstaked())
 
       return {
         unstakeWithFeeTxState,
@@ -82,11 +112,14 @@
         withdrawalFeeAmountStr,
         willBeReceivedStr,
         stakedAndEarnedStr,
+        isOpenModal,
       }
     },
     components: {
       SendTxButton,
       UiPlaceholder,
+      UiIcon,
+      UiModal,
     },
   })
 </script>
