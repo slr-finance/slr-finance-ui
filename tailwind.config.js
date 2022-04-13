@@ -24,6 +24,7 @@ module.exports = {
       48: '48px',
       50: '50px',
       64: '64px',
+      72: '72px',
       80: '80px',
       'ui-page-spacing': 'var(--ui-page-spacing)',
       full: '100%',

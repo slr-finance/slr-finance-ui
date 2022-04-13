@@ -1,19 +1,30 @@
 <template>
-  <div class="pools-map relative overflow-hidden pointer-events-none select-none rounded-t-18 bg-black">
-    <div class="uppercase text-12 font-title p-18">Solar Farming System</div>
-    <div>
-      <div
-        v-for="pool in pools"
-        :key="pool.id"
-        :style="{ left: `${pool.position.x}px`, top: `${pool.position.y}px` }"
-        :class="{ '-active': pool.id === stakerPoolId, '-ended': pool.id < stakerPoolId }"
-        class="pool absolute transform -translate-x-1/2 -translate-y-1/2 rounded-full"
-      >
-        <div :style="{ width: `${pool.position.radius}px`, height: `${pool.position.radius}px` }"></div>
-        <div class="pool-info text-10 whitespace-nowrap">
-          <div class="apy text-white text-opacity-70 font-title">APY {{ pool.apyStr }}%</div>
-          <div class="your-point text-8 text-yellow">Your point</div>
-          <div class="ended text-8 text-white text-opacity-70">Ended</div>
+  <div>
+    <div class="pools-map relative overflow-hidden pointer-events-none select-none rounded-t-18 bg-black">
+      <picture>
+        <source srcset="/images/pools/map/bg.webp" type="image/webp">
+        <img
+          src="/images/pools/map/bg.jpg"
+          class="absolute inset-0"
+          width="394"
+          height="246"
+        >
+      </picture>
+      <div class="uppercase text-12 font-title p-18 relative z-1">Solar Farming System</div>
+      <div>
+        <div
+          v-for="pool in pools"
+          :key="pool.id"
+          :style="{ left: `${pool.position.x}px`, top: `${pool.position.y}px` }"
+          :class="{ '-active': pool.id === stakerPoolId, '-ended': pool.id < stakerPoolId }"
+          class="pool absolute z-1 transform -translate-x-1/2 -translate-y-1/2 rounded-full"
+        >
+          <div :style="{ width: `${pool.position.radius}px`, height: `${pool.position.radius}px` }"></div>
+          <div class="pool-info text-10 whitespace-nowrap">
+            <div class="apy text-white text-opacity-70 font-title">APY {{ pool.apyStr }}%</div>
+            <div class="your-point text-8 text-yellow">Your point</div>
+            <div class="ended text-8 text-white text-opacity-70">Ended</div>
+          </div>
         </div>
       </div>
     </div>
@@ -40,6 +51,7 @@
 
   export default defineComponent({
     name: 'pools-list',
+    inheritAttrs: true,
     setup() {
       const poolsStates = usePools()
       const pools = computed(() => {
@@ -72,9 +84,6 @@
   .pools-map {
     width: 394px;
     height: 246px;
-    background-size: 100% 100%;
-    background-repeat: no-repeat;
-    background-image: url(/images/pools/map/bg.jpg);
   }
   .pools-map .pool.-active {
     @apply transition-all duration-500;

@@ -1,34 +1,36 @@
 <template>
   <div class="px-ui-page-spacing pb-ui-page-spacing flex min-h-full bg-black">
-    <pools-list
-      class="staking-pools-list mr-ui-page-spacing relative z-10"
+    <div
       v-if="isShownPoolsList"
-    />
+      class="mr-ui-page-spacing relative z-10 w-72"
+    >
+      <pools-list/>
+    </div>
 
-    <router-view v-slot="{ Component }">
-      <transition
-        name="pool-page-transition"
-        mode="out-in"
-      >
-        <component
-          class="flex-1 overflow-x-hidden page-padding"
-          :is="Component"
-          :key="$route.name"
-        />
-      </transition>
-    </router-view>
+    <div class="flex-1 page-padding">
+      <router-view v-slot="{ Component }">
+        <transition
+          name="pool-page-transition"
+          mode="out-in"
+        >
+          <component
+            :is="Component"
+            :key="$route.name"
+          />
+        </transition>
+      </router-view>
+    </div>
 
     <div
       v-if="isShownPoolsNav"
       class="page-padding flex flex-col justify-between items-end"
     >
       <pools-navigation :pool-id="poolId" />
-      <div
-        v-if="isShownPoolsMap"
+        
+      <pools-map
         class="fixed bottom-0 pools-map-wrapper"
-      >
-        <pools-map />
-      </div>
+        v-if="isShownPoolsMap"
+      />
     </div>
   </div>
 </template>
