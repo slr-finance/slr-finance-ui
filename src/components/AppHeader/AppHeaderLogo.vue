@@ -4,11 +4,13 @@
     class="app-header-logo flex items-center relative z-10 leading-none"
     :to="{ name: 'dashboard' }"
   >
-    <ui-icon
-      name="slr-logo"
-      class="logo"
-    />
-    <div class="title flex items-center justify-start">
+    <div class="logo-wrapper">
+      <ui-icon
+        name="slr-logo"
+        class="logo"
+      />
+    </div>
+    <div class="title flex items-center justify-start uppercase">
       SLR
       <div class="dot rounded-full"></div>
       FINANCE
@@ -34,19 +36,22 @@
   })
 </script>
 
-<style>
+<style lang="postcss">
   .app-header-logo:not(.-mobile) {
     min-width: 300px;
   }
-  .app-header-logo:not(.-mobile) > .logo {
-    @apply w-50 h-50 mr-32;
+  .app-header-logo:not(.-mobile) > .logo-wrapper {
+    @apply w-72 flex justify-center items-center mr-ui-page-spacing;
+  }
+  .app-header-logo:not(.-mobile) > .logo-wrapper > .logo {
+    @apply w-50 h-50;
   }
 
   .app-header-logo:not(.-mobile) > .title {
     @apply text-18;
   }
 
-  .app-header-logo.-mobile > .logo {
+  .app-header-logo.-mobile > .logo-wrapper > .logo {
     @apply w-36 h-36 mr-16;
   }
 
