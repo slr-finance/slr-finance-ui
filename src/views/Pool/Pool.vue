@@ -8,13 +8,13 @@
     <section class="staking-widget">
       <div class="flex-1 flex flex-col justify-between space-y-32">
         <div class="flex-1 flex flex-col">
-          <div class="text-12 text-white/60 mb-8 h-24 flex items-center cursor-default">
-            <div class="w-20 h-20 border border-white rounded-full mr-8" />
+          <div class="text-12 text-white/60 mb-8 py-2 flex items-start cursor-default">
+            <div class="w-20 h-20 border border-white rounded-full mr-8 flex-grow-0 flex-shrink-0" />
             {{ poolInfo.page.description }}
           </div>
 
           <h2 class="title text-40 uppercase font-title mb-8 leading-140 cursor-default">
-            {{ poolInfo.name }} <span class="opacity-60">staking planet</span>
+            {{ poolInfo.name }} <span class="opacity-60">staking {{ poolInfo.page.objectTypeName }}</span>
           </h2>
 
           <p class="text-16 text-white/40 leading-125 mb-20 cursor-default">

@@ -4,6 +4,7 @@ export type PoolType = {
   routeName: string
   page: {
     description: string
+    objectTypeName: string
     videoFolder: string
     icon: string
   }
@@ -15,7 +16,8 @@ export const POOLS_INFO: PoolType[] = [
     routeName: 'pool-neptune',
     id: 1,
     page: {
-      description: 'the first planet of the income path',
+      description: 'The first planet of the income path',
+      objectTypeName: 'planet',
       videoFolder: '/planets/neptune',
       icon: 'pool-neptune',
     },
@@ -25,7 +27,8 @@ export const POOLS_INFO: PoolType[] = [
     routeName: 'pool-uranus',
     id: 2,
     page: {
-      description: 'the first planet of the income path',
+      description: 'The seventh planet from the Sun',
+      objectTypeName: 'planet',
       videoFolder: '/planets/uranus',
       icon: 'pool-uranus',
     },
@@ -35,7 +38,8 @@ export const POOLS_INFO: PoolType[] = [
     routeName: 'pool-saturn',
     id: 3,
     page: {
-      description: 'the first planet of the income path',
+      description: 'The sixth planet from the Sun and the second-largest in the Solar System',
+      objectTypeName: 'planet',
       videoFolder: '/planets/saturn',
       icon: 'pool-saturn',
     },
@@ -45,7 +49,8 @@ export const POOLS_INFO: PoolType[] = [
     routeName: 'pool-jupiter',
     id: 4,
     page: {
-      description: 'the first planet of the income path',
+      description: 'The fifth planet from the Sun and the largest in the Solar System',
+      objectTypeName: 'planet',
       videoFolder: '/planets/jupiter',
       icon: 'pool-jupiter',
     },
@@ -55,7 +60,8 @@ export const POOLS_INFO: PoolType[] = [
     routeName: 'pool-mars',
     id: 5,
     page: {
-      description: 'the first planet of the income path',
+      description: 'The fourth planet from the Sun and is often called the "Red Planet"',
+      objectTypeName: 'planet',
       videoFolder: '/planets/mars',
       icon: 'pool-mars',
     },
@@ -65,7 +71,8 @@ export const POOLS_INFO: PoolType[] = [
     routeName: 'pool-earth',
     id: 6,
     page: {
-      description: 'the first planet of the income path',
+      description: 'The third planet from the Sun',
+      objectTypeName: 'planet',
       videoFolder: '/planets/earth',
       icon: 'pool-earth',
     },
@@ -75,7 +82,8 @@ export const POOLS_INFO: PoolType[] = [
     routeName: 'pool-venus',
     id: 7,
     page: {
-      description: 'the first planet of the income path',
+      description: 'The second planet from the Sun',
+      objectTypeName: 'planet',
       videoFolder: '/planets/venus',
       icon: 'pool-venus',
     },
@@ -85,19 +93,21 @@ export const POOLS_INFO: PoolType[] = [
     routeName: 'pool-mercury',
     id: 8,
     page: {
-      description: 'the first planet of the income path',
+      description: 'The smallest planet in the Solar System',
+      objectTypeName: 'planet',
       videoFolder: '/planets/mercury',
       icon: 'pool-mercury',
     },
   },
   {
-    name: 'Solar',
-    routeName: 'pool-solar',
+    name: 'Sun',
+    routeName: 'pool-sun',
     id: 9,
     page: {
-      description: 'the first planet of the income path',
-      videoFolder: '/planets/solar',
-      icon: 'pool-solar',
+      description: 'The star at the center of the Solar System',
+      objectTypeName: 'star',
+      videoFolder: '/planets/sun',
+      icon: 'pool-sun',
     },
   },
 ]
