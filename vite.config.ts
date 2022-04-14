@@ -44,7 +44,7 @@ export default defineConfig({
         ],
         display: 'block',
         preload: true,
-      }
+      },
     }),
   ],
   build: {

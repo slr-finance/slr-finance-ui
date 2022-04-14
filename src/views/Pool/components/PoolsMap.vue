@@ -2,13 +2,16 @@
   <div>
     <div class="pools-map relative overflow-hidden pointer-events-none select-none rounded-t-18 bg-black">
       <picture>
-        <source srcset="/images/pools/map/bg.webp" type="image/webp">
+        <source
+          srcset="/images/pools/map/bg.webp"
+          type="image/webp"
+        />
         <img
           src="/images/pools/map/bg.jpg"
           class="absolute inset-0"
           width="394"
           height="246"
-        >
+        />
       </picture>
       <div class="uppercase text-12 font-title p-18 relative z-1">Solar Farming System</div>
       <div>

@@ -124,12 +124,15 @@
   })
 </script>
 
-<style lang="postcss" scoped>
-.item {
-  @apply flex justify-between items-center text-14 text-white;
-}
+<style
+  lang="postcss"
+  scoped
+>
+  .item {
+    @apply flex justify-between items-center text-14 text-white;
+  }
 
-.item > .label {
-  @apply text-gray-500;
-}
+  .item > .label {
+    @apply text-gray-500;
+  }
 </style>

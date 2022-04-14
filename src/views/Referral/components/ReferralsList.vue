@@ -32,13 +32,18 @@
             </div>
           </template>
         </template>
-        <div class="w-full h-full flex items-center justify-center absolute" v-else>
+        <div
+          class="w-full h-full flex items-center justify-center absolute"
+          v-else
+        >
           <ui-placeholder
             class="w-full"
             icon="binocular"
             title="You don't have referrals"
           >
-            <p class="text-center leading-[20px] text-gray">Share link and Get 10% from perfomance fee for any transactions and 1% from any rawards</p>
+            <p class="text-center leading-[20px] text-gray">
+              Share link and Get 10% from perfomance fee for any transactions and 1% from any rawards
+            </p>
           </ui-placeholder>
         </div>
       </div>

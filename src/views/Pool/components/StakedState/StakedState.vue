@@ -71,7 +71,7 @@
     <stake-more-modal :pool-id="poolId" />
   </ui-modal>
 
-  <withdrawal-with-fee-modal v-model:is-open="isOpenWithdrawalModal"/>
+  <withdrawal-with-fee-modal v-model:is-open="isOpenWithdrawalModal" />
 </template>
 
 <script lang="ts">

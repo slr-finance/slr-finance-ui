@@ -4,7 +4,7 @@
       v-if="isShownPoolsList"
       class="mr-ui-page-spacing relative z-10 w-72"
     >
-      <pools-list/>
+      <pools-list />
     </div>
 
     <div class="flex-1 page-padding">
@@ -26,7 +26,7 @@
       class="page-padding flex flex-col justify-between items-end"
     >
       <pools-navigation :pool-id="poolId" />
-        
+
       <pools-map
         class="fixed bottom-0 pools-map-wrapper"
         v-if="isShownPoolsMap"

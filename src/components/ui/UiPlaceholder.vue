@@ -48,7 +48,7 @@
         type: String,
         validator: (val: string) => ['white', 'red'].includes(val),
         default: 'white',
-      }
+      },
     },
     components: {
       UiPoligon,

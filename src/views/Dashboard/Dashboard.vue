@@ -10,6 +10,7 @@
     <div>pendingInvestStr: {{ pendingInvestStr }}</div>
     <div>liquidityPriceStr: {{ liquidityPriceStr }}</div>
     <div>slrPriceStr: {{ slrPriceStr }}</div>
+    <div>totalStakedStr: {{ totalStakedStr }}</div>
   </div>
 </template>
 
@@ -20,6 +21,7 @@
   import { useSlrLiquidityPrice } from '@/store/hooks/useSlrLiquidityPrice'
   import { useSlrPrice } from '@/store/hooks/useSlrPrice'
   import { useMilkyWayInfo } from './hooks/useMilkyWayInfo'
+  import { useTotalStakedInAllPools } from '@/store/hooks/useTotalStakedInAllPools'
 
   export default defineComponent({
     setup() {
@@ -45,6 +47,9 @@
       const slrPrice = useSlrPrice()
       const slrPriceStr = useUsdFormat(slrPrice)
 
+      const totalStaked = useTotalStakedInAllPools()
+      const totalStakedStr = useTokenAmountFormat(totalStaked, 'SLR')
+
       return {
         totalBaybackStr,
         currentBnbBalanceStr,
@@ -56,6 +61,8 @@
 
         liquidityPriceStr,
         slrPriceStr,
+
+        totalStakedStr,
       }
     },
     components: {},
