@@ -34,11 +34,11 @@ export const useUsdFormat = (amount: MaybeRef<BigNumber | number>) => {
     const amountVal = unref(amount)
 
     if (BigNumber.isBigNumber(amountVal)) {
-      if (amountVal.lt(minDispaly)) {
+      if (amountVal.lt(minDispaly) && !amountVal.eq(0)) {
         return minDispalyStr
       }
     } else {
-      if (amountVal < minDispaly) {
+      if (amountVal < minDispaly && amountVal !== 0) {
         return minDispalyStr
       }
     }
