@@ -24,16 +24,22 @@
         :tokenAddress="stakedTokenAddress"
         :spenderAddress="poolAddress"
       >
-        <send-tx-button
-          @click="handleStake"
-          :txState="stakeTxState"
-          :disabled="false"
-          class="w-full"
-          size="48"
-          variant="violet"
+        <insufficient-balance-plug
+          token-symbol="SLR"
+          :amount="amount"
+          :balance="slrBalance"
         >
-          Stake on {{ daysStr }}
-        </send-tx-button>
+          <send-tx-button
+            @click="handleStake"
+            :txState="stakeTxState"
+            :disabled="false"
+            class="w-full"
+            size="48"
+            variant="violet"
+          >
+            Stake on {{ daysStr }}
+          </send-tx-button>
+        </insufficient-balance-plug>
       </approve-token-plug>
     </connect-wallet-plug>
   </div>
@@ -45,6 +51,7 @@
   import SlrBalanceInput from './SlrBalanceInput.vue'
   import ConnectWalletPlug from '@/components/ConnectWallet/ConnectWalletPlug.vue'
   import ApproveTokenPlug from '@/components/ApproveToken/ApproveTokenPlug.vue'
+  import InsufficientBalancePlug from '@/components/ApproveToken/InsufficientBalancePlug.vue'
   import StakingProfit from './StakingProfit.vue'
   import { usePool } from '@/store/hooks/usePool'
   import { useSlrBalance } from '@/store/hooks/useBalance'
@@ -72,7 +79,8 @@
       const poolState = usePool(toRef(props, 'poolId'))
       const [stakerState, refetchStaker] = useStaker()
 
-      const [, refetchBalance] = useSlrBalance()
+      const [slrBalanceInfo, refetchBalance] = useSlrBalance()
+      const slrBalance = computed(() => slrBalanceInfo.value.balance)
       const poolId = computed(() => poolState.value.id)
       const amount = ref(new BigNumber(0)) as Ref<BigNumber>
       const isChanged = ref(false)
@@ -97,6 +105,7 @@
         stakedTokenAddress: contractsAddresses.SolarToken,
         poolAddress: contractsAddresses.StakingService,
         daysStr,
+        slrBalance,
       }
     },
     components: {
@@ -107,6 +116,7 @@
       SendTxButton,
       StakingProfit,
       ApproveTokenPlug,
+      InsufficientBalancePlug,
     },
   })
 </script>

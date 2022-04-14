@@ -49,15 +49,22 @@
         :tokenAddress="stakedTokenAddress"
         :spenderAddress="poolAddress"
       >
-        <send-tx-button
-          @click="handleMigrate"
-          class="w-full"
-          size="48"
-          variant="violet"
-          :tx-state="migrateTxState"
+        <insufficient-balance-plug
+          allow-zero
+          token-symbol="SLR"
+          :amount="amount"
+          :balance="slrBalance"
         >
-          Migrate to {{ poolInfo.name }} pool with {{ poolApyStr }} APY and zero performance fee
-        </send-tx-button>
+          <send-tx-button
+            @click="handleMigrate"
+            class="w-full"
+            size="48"
+            variant="violet"
+            :tx-state="migrateTxState"
+          >
+            Migrate to {{ poolInfo.name }} pool with {{ poolApyStr }} APY and zero performance fee
+          </send-tx-button>
+        </insufficient-balance-plug>
       </approve-token-plug>
     </connect-wallet-plug>
   </div>
@@ -68,6 +75,7 @@
   import SendTxButton from '@/components/Tx/SendTxButton.vue'
   import UiButton from '@/components/ui/UiButton.vue'
   import ApproveTokenPlug from '@/components/ApproveToken/ApproveTokenPlug.vue'
+  import InsufficientBalancePlug from '@/components/ApproveToken/InsufficientBalancePlug.vue'
   import ConnectWalletPlug from '@/components/ConnectWallet/ConnectWalletPlug.vue'
   import StakingProfit from './StakingProfit.vue'
   import TimelockInput from './TimelockInput.vue'
@@ -98,7 +106,8 @@
       const amount = ref(new BigNumber(0)) as Ref<BigNumber>
       const totalAmount = computed(() => amount.value.plus(reinvestAmount.value))
       const [stakerState, refetchStaker] = useStaker()
-      const [, refetchSlrBalance] = useSlrBalance()
+      const [slrBalanceInfo, refetchSlrBalance] = useSlrBalance()
+      const slrBalance = computed(() => slrBalanceInfo.value.balance)
 
       const reinvestAmount = computed(() => {
         const { amount, reward } = stakerState.value
@@ -121,6 +130,7 @@
 
       return {
         amount,
+        slrBalance,
         reinvestAmountStr,
 
         days,
@@ -143,6 +153,7 @@
       SlrBalanceInput,
       ApproveTokenPlug,
       ConnectWalletPlug,
+      InsufficientBalancePlug,
 
       UiIcon,
       UiPoligon,

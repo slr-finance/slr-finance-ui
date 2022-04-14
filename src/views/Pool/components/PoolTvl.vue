@@ -1,9 +1,28 @@
 <template>
   <div class="flex justify-between items-center text-white text-opacity-60 text-12">
-    <div>Total pool staked</div>
+    <div class="flex justify-center items-center">
+      <picture>
+        <source
+          srcset="/images/pools/point/point.webp"
+          type="image/webp"
+        />
+        <img
+          src="/images/pools/point/point.jpg"
+          class="rounded-8 pointer-events-none select-none mr-20"
+          width="30"
+          height="30"
+        />
+      </picture>
+      Total pool staked
+    </div>
     <div
-      class="flex justify-between items-center cursor-default border border-white border-opacity-20 px-12 py-8 rounded-8"
+      class="flex justify-center items-center cursor-default border border-white border-opacity-20 px-12 py-8 rounded-8"
     >
+      <ui-icon
+        name="lock"
+        size="14"
+        class="mr-6"
+      />
       {{ tvlStr }}
     </div>
   </div>
