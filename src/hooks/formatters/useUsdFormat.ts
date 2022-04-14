@@ -1,18 +1,48 @@
+import { computed, unref } from 'vue'
+import { MaybeRef } from '@vueuse/core'
 import BigNumber from 'bignumber.js'
-import { computed, Ref, unref } from 'vue'
+import { findDigits } from './helpers'
 import { useNumberFormat } from './useNumberFormat'
 
-const toLocaleStringOptions = {
+const fractionDigits = [
+  { maxVal: 0.01, digits: 6 },
+  { maxVal: 0.5, digits: 4 },
+  { maxVal: 10000, digits: 2 },
+  { maxVal: Number.POSITIVE_INFINITY, digits: 0 },
+]
+
+const minDispaly = 0.000001
+const minDispalyStr = `> ${minDispaly.toLocaleString('en-En', {
   style: 'currency',
   currency: 'USD',
-  maximumFractionDigits: 4,
-}
+  maximumFractionDigits: 6,
+})}`
 
-const minDispaly = 0.01
-const minDispalyStr = `> ${minDispaly.toLocaleString('en-En', toLocaleStringOptions)}`
+export const useUsdFormat = (amount: MaybeRef<BigNumber | number>) => {
+  const options = computed(() => {
+    const amountVal = unref(amount)
 
-export const useUsdFormat = (bignumber: Ref<BigNumber>) => {
-  const usdStr = useNumberFormat(bignumber, toLocaleStringOptions)
+    return {
+      maximumFractionDigits: findDigits(fractionDigits, amountVal),
+      style: 'currency',
+      currency: 'USD',
+    }
+  })
+  const usdStr = useNumberFormat(amount, options)
 
-  return computed(() => (unref(bignumber).lt(minDispaly) ? minDispalyStr : unref(usdStr)))
+  return computed(() => {
+    const amountVal = unref(amount)
+
+    if (BigNumber.isBigNumber(amountVal)) {
+      if (amountVal.lt(minDispaly)) {
+        return minDispalyStr
+      }
+    } else {
+      if (amountVal < minDispaly) {
+        return minDispalyStr
+      }
+    }
+
+    return unref(usdStr)
+  })
 }

@@ -1,6 +1,7 @@
+import { unref, computed } from 'vue'
 import { MaybeRef } from '@vueuse/core'
 import BigNumber from 'bignumber.js'
-import { Ref, unref, computed } from 'vue'
+import { findDigits } from './helpers'
 import { useNumberFormat } from './useNumberFormat'
 
 const fractionDigits = [
@@ -10,19 +11,12 @@ const fractionDigits = [
   { maxVal: Number.POSITIVE_INFINITY, digits: 0 },
 ]
 
-export const useTokenAmountFormat = (amount: MaybeRef<BigNumber | number>, symbol: string | Ref<string> = '') => {
+export const useTokenAmountFormat = (amount: MaybeRef<BigNumber | number>, symbol: MaybeRef<string> = '') => {
   const options = computed(() => {
     const amountVal = unref(amount)
-    let maximumFractionDigits: number
-
-    if (BigNumber.isBigNumber(amountVal)) {
-      maximumFractionDigits = fractionDigits.find(({ maxVal }) => amountVal.lt(maxVal))?.digits ?? 0
-    } else {
-      maximumFractionDigits = fractionDigits.find(({ maxVal }) => amountVal < maxVal)?.digits ?? 0
-    }
 
     return {
-      maximumFractionDigits,
+      maximumFractionDigits: findDigits(fractionDigits, amountVal),
       style: 'decimal',
     }
   })
