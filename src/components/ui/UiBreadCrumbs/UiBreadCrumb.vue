@@ -1,16 +1,16 @@
 <template>
-  <button
+  <router-link
     class="button"
-    :class="classList"
-    @click="handleClick"
+    active-class="-active"
+    :to="to"
   >
     <span>{{ text }}</span>
-  </button>
+  </router-link>
 </template>
 
 <script lang="ts">
   import { defineComponent, computed, PropType } from 'vue'
-  import { RouteLocationRaw, RouteRecord, useRoute, useRouter } from 'vue-router'
+  import { RouteRecord } from 'vue-router'
 
   export type TProps = {
     to: Partial<RouteRecord>
@@ -28,23 +28,6 @@
         type: [String, Object] as PropType<TProps['to']>,
         require: true,
       },
-    },
-    setup(props) {
-      const to = props.to as RouteRecord
-
-      const router = useRouter()
-      const route = useRoute()
-
-      const classList = computed(() => ({
-        '-active': route.name === to.name,
-      }))
-
-      const handleClick = () => router.push(to as RouteLocationRaw)
-
-      return {
-        classList,
-        handleClick,
-      }
     },
   })
 </script>
