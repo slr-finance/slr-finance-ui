@@ -24,7 +24,6 @@
 <script lang="ts">
   import { computed, defineComponent, unref } from 'vue'
   import { useEthers } from '@/hooks/dapp/useEthers'
-  import get from 'lodash.get'
   import { useClipboard } from '@vueuse/core'
   import { REFERRER_QUERY_PARAM } from '@/config/constants/referrals'
   import { DOMAIN } from '@/config/constants/main'
@@ -39,7 +38,7 @@
       const { address } = useEthers()
       const isCorrectAddress = computed(() => isAddress(address.value))
       const referralLink = computed(() => `${DOMAIN}?${REFERRER_QUERY_PARAM}=${unref(address)}`)
-      const { copy, copied } = useClipboard()
+      const { copy } = useClipboard()
       const { success, error } = useSingleToast()
 
       const handleCopy = () => {
@@ -51,7 +50,7 @@
         }
       }
 
-      return { copy, copied, referralLink, isCorrectAddress, handleCopy }
+      return { copy, referralLink, isCorrectAddress, handleCopy }
     },
   })
 </script>
