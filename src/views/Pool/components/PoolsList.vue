@@ -46,7 +46,7 @@
       const navEl = templateRef('nav')
       const { height: navHeight } = useElementSize(navEl)
       const classList = computed(() => {
-        if (height.value - 90 > navHeight.value) {
+        if (height.value - 140 > navHeight.value) {
           return '-fixed'
         }
       })
@@ -60,7 +60,7 @@
 <style lang="postcss">
   .pools-list {
     width: 72px;
-    padding-top: 80px;
+    padding-top: 130px;
   }
   .pools-list.-fixed > .nav {
     position: fixed;

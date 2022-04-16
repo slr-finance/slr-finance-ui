@@ -46,7 +46,7 @@
   import UiIcon from './UiIcon.vue'
 
   export default defineComponent({
-    name: 'UiModal',
+    name: 'ui-modal',
     props: {
       modelValue: {
         type: Boolean,
