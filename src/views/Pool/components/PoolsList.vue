@@ -78,7 +78,7 @@
   .pools-list.-sticky {
   }
   .pools-list-link-icon {
-    @apply text-[#6C7479] rounded-12 transition-colors duration-200;
+    @apply text-gray rounded-12 transition-colors duration-200;
   }
 
   .pools-list-link-icon:hover {
