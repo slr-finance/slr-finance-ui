@@ -2,10 +2,9 @@ import path from 'path'
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
-// import inject from '@rollup/plugin-inject'
 import { visualizer } from 'rollup-plugin-visualizer'
-import { terser } from 'rollup-plugin-terser'
 import viteFonts from 'vite-plugin-fonts'
+import { splitVendorChunkPlugin } from 'vite'
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -46,15 +45,26 @@ export default defineConfig({
         preload: true,
       },
     }),
+    splitVendorChunkPlugin(),
   ],
   build: {
+    minify: 'terser',
+    terserOptions: {
+      ecma: 2020,
+      safari10: true,
+      ie8: false,
+      module: false,
+      toplevel: true,
+      compress: {
+        ecma: 2020,
+        passes: 4,
+      },
+    },
     rollupOptions: {
       plugins: [
-        // inject({ Buffer: ['buffer', 'Buffer'] }),
         visualizer((opts) => {
           return { filename: path.join(opts.dir, 'stats.html') }
         }),
-        terser({ toplevel: true, compress: { passes: 3, side_effects: true, toplevel: true } }),
       ],
     },
     commonjsOptions: {
