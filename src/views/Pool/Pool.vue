@@ -3,7 +3,10 @@
     ref="container"
     class="pool-page"
   >
-    <pool-bg :pool-id="poolId" />
+    <pool-bg
+      v-memo="[poolId]"
+      :pool-id="poolId"
+    />
 
     <section class="staking-widget">
       <div class="flex-1 flex flex-col justify-between space-y-32">
@@ -65,6 +68,7 @@
           >
             <disable-pool-state
               :pool-id="poolId"
+              v-memo="[poolId]"
               class="w-full"
             />
           </div>

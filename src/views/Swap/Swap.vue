@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-col min-h-full p-ui-page-spacing justify-between items-center relative z-1">
     <div class="page-padding swap-page-content">
-      <div class="875:text-center text-left">
+      <div v-once class="875:text-center text-left">
         <h1 class="text-white font-title 875:text-38 mb-16 text-28">
           <span class="text-white text-opacity-60">Make</span>
           a space swap
@@ -21,7 +21,7 @@
       <mercuryo />
     </div>
   </div>
-  <swap-bg />
+  <swap-bg v-once/>
 </template>
 
 <script lang="ts">

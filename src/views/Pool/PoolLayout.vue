@@ -25,7 +25,10 @@
       v-if="isShownPoolsNav"
       class="page-padding flex flex-col justify-between items-end"
     >
-      <pools-navigation :pool-id="poolId" />
+      <pools-navigation
+        v-memo="[poolId]"
+        :pool-id="poolId"
+      />
 
       <pools-map
         class="fixed bottom-0 pools-map-wrapper"

@@ -9,10 +9,14 @@
       class="nav rounded-24 bg-white bg-opacity-[0.082]"
     >
       <ul class="space-y-16 p-16 my-16">
-        <li v-for="link in poolsLinks">
+        <li 
+          v-for="link in poolsLinks"
+          :key="link.to.name"
+        >
           <router-link
             :to="link.to"
             class="p-6 block pools-list-link-icon"
+            active-class="-active"
           >
             <ui-icon
               :name="link.icon"
@@ -26,7 +30,7 @@
 </template>
 
 <script lang="ts">
-  import { computed, defineComponent, ref, unref } from 'vue'
+  import { computed, defineComponent } from 'vue'
   import { POOLS_INFO } from '@/config/constants/Pools'
   import { templateRef, useElementSize, useWindowSize } from '@vueuse/core'
   import UiIcon from '@/components/ui/UiIcon.vue'
@@ -78,15 +82,14 @@
   .pools-list.-sticky {
   }
   .pools-list-link-icon {
-    @apply text-[#6C7479] rounded-12 transition-colors duration-200;
+    @apply text-gray rounded-12 transition-colors duration-200;
   }
 
   .pools-list-link-icon:hover {
     @apply text-[#748088];
   }
 
-  .pools-list-link-icon.router-link-active {
-    @apply text-white;
-    background: #6f0dff;
+  .pools-list-link-icon.-active {
+    @apply text-white bg-violet;
   }
 </style>
