@@ -7,6 +7,7 @@ export type PoolType = {
     objectTypeName: string
     videoFolder: string
     icon: string
+    aboutPool: string
   }
 }
 
@@ -20,6 +21,8 @@ export const POOLS_INFO: PoolType[] = [
       objectTypeName: 'planet',
       videoFolder: '/planets/neptune',
       icon: 'pool-neptune',
+      aboutPool:
+        'The first planet of the solar farming system, the first step of your earnings, start your flight from it to the golden sun and high APY',
     },
   },
   {
@@ -31,6 +34,8 @@ export const POOLS_INFO: PoolType[] = [
       objectTypeName: 'planet',
       videoFolder: '/planets/uranus',
       icon: 'pool-uranus',
+      aboutPool:
+        'The first planet of the solar farming system, the first step of your earnings, start your flight from it to the golden sun and high APY',
     },
   },
   {
@@ -42,6 +47,8 @@ export const POOLS_INFO: PoolType[] = [
       objectTypeName: 'planet',
       videoFolder: '/planets/saturn',
       icon: 'pool-saturn',
+      aboutPool:
+        'The first planet of the solar farming system, the first step of your earnings, start your flight from it to the golden sun and high APY',
     },
   },
   {
@@ -53,6 +60,8 @@ export const POOLS_INFO: PoolType[] = [
       objectTypeName: 'planet',
       videoFolder: '/planets/jupiter',
       icon: 'pool-jupiter',
+      aboutPool:
+        'The first planet of the solar farming system, the first step of your earnings, start your flight from it to the golden sun and high APY',
     },
   },
   {
@@ -64,6 +73,8 @@ export const POOLS_INFO: PoolType[] = [
       objectTypeName: 'planet',
       videoFolder: '/planets/mars',
       icon: 'pool-mars',
+      aboutPool:
+        'The first planet of the solar farming system, the first step of your earnings, start your flight from it to the golden sun and high APY',
     },
   },
   {
@@ -75,6 +86,8 @@ export const POOLS_INFO: PoolType[] = [
       objectTypeName: 'planet',
       videoFolder: '/planets/earth',
       icon: 'pool-earth',
+      aboutPool:
+        'The first planet of the solar farming system, the first step of your earnings, start your flight from it to the golden sun and high APY',
     },
   },
   {
@@ -86,6 +99,8 @@ export const POOLS_INFO: PoolType[] = [
       objectTypeName: 'planet',
       videoFolder: '/planets/venus',
       icon: 'pool-venus',
+      aboutPool:
+        'The first planet of the solar farming system, the first step of your earnings, start your flight from it to the golden sun and high APY',
     },
   },
   {
@@ -97,6 +112,8 @@ export const POOLS_INFO: PoolType[] = [
       objectTypeName: 'planet',
       videoFolder: '/planets/mercury',
       icon: 'pool-mercury',
+      aboutPool:
+        'The first planet of the solar farming system, the first step of your earnings, start your flight from it to the golden sun and high APY',
     },
   },
   {
@@ -108,6 +125,8 @@ export const POOLS_INFO: PoolType[] = [
       objectTypeName: 'star',
       videoFolder: '/planets/sun',
       icon: 'pool-sun',
+      aboutPool:
+        'The first planet of the solar farming system, the first step of your earnings, start your flight from it to the golden sun and high APY',
     },
   },
 ]

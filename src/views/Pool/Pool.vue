@@ -3,7 +3,7 @@
     ref="container"
     class="pool-page"
   >
-    <pool-planet :pool-id="poolId" />
+    <pool-bg :pool-id="poolId" />
 
     <section class="staking-widget">
       <div class="flex-1 flex flex-col justify-between space-y-32">
@@ -75,10 +75,7 @@
             :pool-id="poolId"
             class="mb-24"
           />
-          <div class="text-14 mb-32">
-            The first planet of the solar farming system, the first step of your earnings, start your flight from it to
-            the golden sun and high APY
-          </div>
+          <div class="text-14 mb-32">{{ poolInfo.page.aboutPool }}</div>
           <token-info />
         </div>
       </div>
@@ -105,8 +102,7 @@
   import StakerInfo from './components/StakerInfo.vue'
   import StakedState from './components/StakedState'
   import DisablePoolState from './components/DisablePoolState.vue'
-  import StakingWidget from './components/StakeWidget.vue'
-  import PoolPlanet from './components/PoolPlanet.vue'
+  import PoolBg from './components/PoolBg.vue'
 
   export default defineComponent({
     name: 'staking-widget',
@@ -177,7 +173,7 @@
       StakedState,
       DisablePoolState,
       UiGalaxyLoader,
-      PoolPlanet,
+      PoolBg,
     },
   })
 </script>

@@ -1,8 +1,8 @@
 import { ref } from 'vue'
 
-export const useGas = () => {
-  const gasPrice = ref(1)
+const gasPrice = ref(5)
 
+export const useGas = () => {
   return {
     gasPrice,
   }

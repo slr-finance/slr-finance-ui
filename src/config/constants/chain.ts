@@ -1,9 +1,9 @@
-export const CHAIN_ID = 97
-
 export enum ChainId {
   Bnb = 56,
   Testnet = 97,
 }
+
+export const CHAIN_ID = ChainId.Testnet
 
 export const CHAIN_NAMES = {
   [ChainId.Bnb]: 'BNB',
