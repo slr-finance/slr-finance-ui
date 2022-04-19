@@ -1,14 +1,11 @@
 <template>
-  <div
-    ref="container"
-    class="pool-page"
-  >
+  <div class="pool-page">
     <pool-bg
       v-memo="[poolId]"
       :pool-id="poolId"
     />
 
-    <section class="staking-widget">
+    <section class="staking-widget h-full relative z-ui-page-content page-content flex flex-col justify-center">
       <div class="flex-1 flex flex-col justify-between space-y-32">
         <div class="flex-1 flex flex-col">
           <div class="text-12 text-white/60 mb-8 py-2 flex items-start cursor-default">
@@ -184,28 +181,11 @@
 
 <style lang="postcss">
   .pool-page {
-    @apply grid;
-
     min-height: 100% !important; /* browser fill */
     height: auto;
-
-    grid-template: 'pool';
-    grid-template-columns: minmax(min-content, 1200px);
-    grid-template-rows: 1fr;
-    gap: 8px;
-    background-size: contain;
   }
 
   .pool-page > .staking-widget {
-    @apply h-full relative z-40 flex flex-col justify-center;
-
     max-width: 321px;
-    grid-area: pool;
-  }
-
-  .pool-page > .staking-nav {
-    @apply h-full relative z-40;
-
-    grid-area: nav;
   }
 </style>

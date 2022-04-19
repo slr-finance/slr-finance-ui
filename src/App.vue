@@ -1,7 +1,7 @@
 <template>
   <connect-wallet-modal />
   <app-header />
-  <router-view class="flex-1 z-1" />
+  <router-view />
 
   <div class="flex flex-col justify-end fixed bottom-ui-page-spacing right-ui-page-spacing z-10">
     <social-modal-button />

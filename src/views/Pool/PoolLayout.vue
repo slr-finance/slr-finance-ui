@@ -1,8 +1,8 @@
 <template>
-  <div class="px-ui-page-spacing pb-ui-page-spacing flex min-h-full bg-black">
+  <div class="px-ui-page-spacing pb-ui-page-spacing flex flex-1 min-h-full bg-black">
     <div
       v-if="isShownPoolsList"
-      class="mr-ui-page-spacing relative z-10 w-72"
+      class="mr-ui-page-spacing relative z-ui-page-content w-72"
     >
       <pools-list />
     </div>

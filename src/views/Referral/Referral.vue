@@ -1,10 +1,13 @@
 <template>
-  <div class="pt-64 875:pl-40 pl-12 mt-64 flex relative z-1">
-    <div class="mr-40 875:block hidden">
+  <div class="pt-64 px-ui-page-spacing mt-64 flex relative z-ui-page-content">
+    <div
+      v-if="isShownBackButton"
+      class="pr-ui-page-spacing flex-shrink-0 w-72 box-content flex justify-center items-start"
+    >
       <ui-button
         size="50"
         class="w-50 h-50 rounded-16"
-        variant="pale"
+        variant="gray-800"
         :to="{ name: 'dashboard' }"
       >
         <div class="flex justify-center items-center">
@@ -16,8 +19,8 @@
         </div>
       </ui-button>
     </div>
-    <div class="w-full">
-      <div class="mr-48 mb-40 flex justify-between items-start">
+    <div class="flex-1">
+      <div class="mb-40 flex justify-between items-start">
         <div>
           <h1 class="text-38 uppercase font-title leading-none">Referral <span class="text-gray">station</span></h1>
           <p class="text-gray text-16 mt-12">
@@ -25,7 +28,7 @@
           </p>
         </div>
         <ui-bread-crumbs
-          class="875:flex hidden"
+          v-if="isShownBreadCrumbs"
           :items="[
             { to: { name: 'dashboard' }, text: 'Home' },
             { to: { name: 'referral' }, text: 'Referral' },
@@ -39,28 +42,29 @@
         </template>
 
         <template #default>
-          <div class="875:flex 875:space-x-20 875:space-y-0 space-y-24 pr-12">
+          <div class="875:flex 875:space-x-20 875:space-y-0 space-y-24">
             <referral-link-block class="flex-1 wrapper" />
             <referrer-rewards class="flex-1 wrapper" />
           </div>
 
-          <div class="875:flex 875:space-x-20 875:space-y-0 space-y-24 pr-12 pt-32">
+          <div class="875:flex 875:space-x-20 875:space-y-0 space-y-24 pt-32">
             <referrals-list class="flex-1 wrapper" />
             <referrer-accrual-history class="flex-1 wrapper" />
           </div>
         </template>
       </connect-wallet-plug>
 
-      <referral-faq class="600:block hidden pr-12 mt-48" />
+      <referral-faq class="600:block hidden mt-48" />
     </div>
   </div>
-  <referral-bg/>
+  <referral-bg v-once />
 </template>
 
 <script lang="ts">
   import { defineComponent } from 'vue'
+  import { useBreakpoints } from '@vueuse/core'
   import ConnectWalletPlug from '@/components/ConnectWallet/ConnectWalletPlug.vue'
-  import UiBreadCrumbs from '@/components/ui/UiBreadCrumbs/UiBreadCrumbs.vue'
+  import UiBreadCrumbsAsync from '@/components/ui/UiBreadCrumbs/UiBreadCrumbsAsync'
   import UiButton from '@/components/ui/UiButton.vue'
   import UiIcon from '@/components/ui/UiIcon.vue'
   import ReferralsList from './components/ReferralsList.vue'
@@ -71,7 +75,17 @@
   import ReferralBg from './components/ReferralBg.vue'
 
   export default defineComponent({
-    setup() {},
+    setup() {
+      const { isShownBackButton, isShownBreadCrumbs } = useBreakpoints({
+        isShownBackButton: 980,
+        isShownBreadCrumbs: 875,
+      })
+
+      return {
+        isShownBackButton,
+        isShownBreadCrumbs,
+      }
+    },
     components: {
       ConnectWalletPlug,
       ReferralsList,
@@ -80,7 +94,7 @@
       ReferrerAccrualHistory,
       ReferralFaq,
       ReferralBg,
-      UiBreadCrumbs,
+      UiBreadCrumbs: UiBreadCrumbsAsync,
       UiButton,
       UiIcon,
     },

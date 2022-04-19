@@ -10,7 +10,7 @@
       to="#header-mobile-menu-place"
       v-if="isOpen"
     >
-      <nav class="fixed z-mobile-menu w-full h-full bg-black app-header-mobile-menu-content">
+      <nav class="fixed top-0 left-0 z-mobile-menu w-full h-full bg-black app-header-mobile-menu-content">
         <ul class="flex flex-col space-y-32">
           <li
             class="h-full"

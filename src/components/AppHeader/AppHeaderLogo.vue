@@ -6,6 +6,7 @@
   >
     <div class="logo-wrapper">
       <ui-icon
+        size="50"
         name="slr-logo"
         class="logo"
       />
