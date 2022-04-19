@@ -94,8 +94,9 @@ module.exports = {
     aspectRatio: {
       auto: 'auto',
       1: '1/1',
-      'pool-video': '1250 / 1080',
-      'pool-video-gradient': '500 / 1080',
+      'pool-video': '125 / 108',
+      'pool-video-gradient': '25 / 54',
+      'referral-bg-video': '20 / 27',
     },
     zIndex: {
       header: 1001,

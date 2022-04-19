@@ -14,7 +14,7 @@ export const linksList = [
     route: i18nRouteHelper({ name: 'pool' }),
   },
   {
-    label: 'Refferal',
+    label: 'Referral',
     route: i18nRouteHelper({ name: 'referral' }),
   },
 ]

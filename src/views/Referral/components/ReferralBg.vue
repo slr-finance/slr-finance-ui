@@ -1,7 +1,6 @@
 <template>
   <div
-    class="pointer-events-none w-full flex justify-end items-stretch fixed left-1/2 transform -translate-x-1/2 bottom-0 aspect-swap-video"
-    style="max-width: 866px"
+    class="pointer-events-none h-full flex justify-end items-stretch fixed right-0 top-0 aspect-referral-bg-video"
   >
     <video
       class="w-full h-full"
@@ -19,12 +18,12 @@
   import { playVideoFromCache } from '@/utils/video/cacheVideo'
 
   export default defineComponent({
-    name: 'swap-bg',
+    name: 'referral-bg',
     setup() {
       const videoRef = templateRef<HTMLVideoElement>('video')
 
       onMounted(() => {
-        playVideoFromCache(videoRef.value, '/swap')
+        playVideoFromCache(videoRef.value, '/referral')
       })
     },
   })

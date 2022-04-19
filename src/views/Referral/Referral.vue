@@ -1,5 +1,5 @@
 <template>
-  <div class="pt-64 875:pl-40 pl-12 mt-64 flex">
+  <div class="pt-64 875:pl-40 pl-12 mt-64 flex relative z-1">
     <div class="mr-40 875:block hidden">
       <ui-button
         size="50"
@@ -54,6 +54,7 @@
       <referral-faq class="600:block hidden pr-12 mt-48" />
     </div>
   </div>
+  <referral-bg/>
 </template>
 
 <script lang="ts">
@@ -67,6 +68,7 @@
   import ReferrerRewards from './components/ReferrerRewards.vue'
   import ReferrerAccrualHistory from './components/ReferrerAccrualHistory.vue'
   import ReferralFaq from './components/ReferralFaq.vue'
+  import ReferralBg from './components/ReferralBg.vue'
 
   export default defineComponent({
     setup() {},
@@ -77,6 +79,7 @@
       ReferrerRewards,
       ReferrerAccrualHistory,
       ReferralFaq,
+      ReferralBg,
       UiBreadCrumbs,
       UiButton,
       UiIcon,
