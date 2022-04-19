@@ -40,6 +40,9 @@ module.exports = {
       28: '28px',
       38: '38px',
       40: '40px',
+      'ui-page-title': 'var(--ui-page-title-size)',
+      'ui-page-description': 'var(--ui-page-description-size)',
+      'ui-page-label': 'var(--ui-page-label-size)',
     },
     lineHeight: {
       none: 1,

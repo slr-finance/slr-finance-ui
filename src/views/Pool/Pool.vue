@@ -1,11 +1,13 @@
 <template>
-  <div class="pool-page">
+  <div class="pool-page flex">
     <pool-bg
       v-memo="[poolId]"
       :pool-id="poolId"
     />
 
-    <section class="staking-widget h-full relative z-ui-page-content page-content flex flex-col justify-center">
+    <section
+      class="staking-widget min-h-full h-auto relative z-ui-page-content page-content flex flex-col justify-center"
+    >
       <div class="flex-1 flex flex-col justify-between space-y-32">
         <div class="flex-1 flex flex-col">
           <div class="text-12 text-white/60 mb-8 py-2 flex items-start cursor-default">
@@ -13,11 +15,11 @@
             {{ poolInfo.page.description }}
           </div>
 
-          <h2 class="title text-40 uppercase font-title mb-8 leading-140 cursor-default">
+          <h2 class="title text-ui-page-title uppercase font-title mb-8 leading-140 cursor-default">
             {{ poolInfo.name }} <span class="opacity-60">staking {{ poolInfo.page.objectTypeName }}</span>
           </h2>
 
-          <p class="text-16 text-white/40 leading-125 mb-20 cursor-default">
+          <p class="text-ui-page-description text-white/40 leading-125 mb-20 cursor-default">
             Fixed APY:
             <span class="text-yellow text-opacity-80">{{ apyStr }}</span>
           </p>

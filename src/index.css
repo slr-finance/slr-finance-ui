@@ -49,6 +49,9 @@ html, body {
  * Ui page spacing [BEGIN]
  */
  body {
+  --ui-page-title-size: 38px;
+  --ui-page-description-size: 16px;
+  --ui-page-label-size: 18px;
   --ui-page-spacing: 64px;
   --ui-page-right-spacing-with-right-buttons: calc(var(--ui-page-spacing) * 2 + 50px)
 }
@@ -74,18 +77,32 @@ html, body {
 @media only screen and (max-width: 800px) {
   body {
     --ui-page-spacing: 18px;
+    --ui-page-title-size: 32px;
+    --ui-page-description-size: 15px;
+    --ui-page-label-size: 17px;
+    --ui-page-label-size: 16px;
   }
 }
 
 @media only screen and (max-width: 400px) {
   body {
     --ui-page-spacing: 12px;
+    --ui-page-title-size: 28px;
+    --ui-page-description-size: 14px;
+    --ui-page-label-size: 15px;
   }
 }
 
 @media only screen and (max-width: 320px) {
   body {
     --ui-page-spacing: 8px;
+    --ui-page-label-size: 14px;
+  }
+}
+
+@media only screen and (max-width: 300px) {
+  body {
+    --ui-page-label-size: 12px;
   }
 }
 
@@ -100,4 +117,37 @@ html, body {
 }
 /**
  * Ui page spacing [END]
+ */
+
+/**
+ * Ui scroll bar [BEGIN]
+ */
+.ui-scrollbar {
+  overflow-x: auto;
+  overflow-y: scroll;
+}
+.ui-scrollbar::-webkit-scrollbar {
+  width: 8px;
+}
+
+.ui-scrollbar::-webkit-scrollbar-track {
+  @apply bg-black;
+}
+
+.ui-scrollbar::-webkit-scrollbar-thumb {
+  @apply bg-black;
+  transition: background-color 0.3s;
+  border-radius: 4px;
+}
+
+.ui-scrollbar:hover::-webkit-scrollbar-thumb {
+  @apply bg-gray-700;
+  border-radius: 4px;
+}
+
+.ui-scrollbar::-webkit-scrollbar-thumb:hover {
+  @apply bg-gray-600;
+}
+/**
+ * Ui scroll bar [END]
  */

@@ -19,12 +19,14 @@
         </div>
       </ui-button>
     </div>
-    <div class="flex-1">
+    <div class="flex-1 w-full">
       <div class="mb-40 flex justify-between items-start">
         <div>
-          <h1 class="text-38 uppercase font-title leading-none">Referral <span class="text-gray">station</span></h1>
-          <p class="text-gray text-16 mt-12">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.
+          <h1 class="text-ui-page-title uppercase font-title leading-140">
+            Referral <span class="text-gray">station</span>
+          </h1>
+          <p class="text-gray text-ui-page-description mt-12">
+            Earn up to 10% from friends’ preformane fees on SLR and 10% from their earnings on Launchpools
           </p>
         </div>
         <ui-bread-crumbs
@@ -42,14 +44,11 @@
         </template>
 
         <template #default>
-          <div class="875:flex 875:space-x-20 875:space-y-0 space-y-24">
-            <referral-link-block class="flex-1 wrapper" />
-            <referrer-rewards class="flex-1 wrapper" />
-          </div>
-
-          <div class="875:flex 875:space-x-20 875:space-y-0 space-y-24 pt-32">
-            <referrals-list class="flex-1 wrapper" />
-            <referrer-accrual-history class="flex-1 wrapper" />
+          <div class="content-layout">
+            <referral-link-block />
+            <referrer-rewards />
+            <referrals-list />
+            <referrer-accrual-history />
           </div>
         </template>
       </connect-wallet-plug>
@@ -57,7 +56,7 @@
       <referral-faq class="600:block hidden mt-48" />
     </div>
   </div>
-  <referral-bg v-once />
+  <referral-bg v-if="isShownBgVideo" />
 </template>
 
 <script lang="ts">
@@ -70,20 +69,22 @@
   import ReferralsList from './components/ReferralsList.vue'
   import ReferralLinkBlock from './components/ReferralLinkBlock.vue'
   import ReferrerRewards from './components/ReferrerRewards.vue'
-  import ReferrerAccrualHistory from './components/ReferrerAccrualHistory.vue'
+  import ReferrerAccrualHistory from './components/ReferrerAccrualHistory/ReferrerAccrualHistory.vue'
   import ReferralFaq from './components/ReferralFaq.vue'
   import ReferralBg from './components/ReferralBg.vue'
 
   export default defineComponent({
     setup() {
-      const { isShownBackButton, isShownBreadCrumbs } = useBreakpoints({
+      const { isShownBackButton, isShownBreadCrumbs, isShownBgVideo } = useBreakpoints({
         isShownBackButton: 980,
         isShownBreadCrumbs: 875,
+        isShownBgVideo: 1200,
       })
 
       return {
         isShownBackButton,
         isShownBreadCrumbs,
+        isShownBgVideo,
       }
     },
     components: {
@@ -105,7 +106,27 @@
   scoped
   lang="postcss"
 >
-  .wrapper {
-    @apply 875:max-w-[408px];
+  .content-layout {
+    display: grid;
+    grid-gap: 32px 20px;
+    grid-template-areas:
+      'link rewards'
+      'referrals history';
+
+    grid-template-columns: repeat(2, minmax(270px, 1fr));
+    grid-template-rows: 227px 380px;
+    max-width: 850px;
+  }
+
+  @media screen and (max-width: 875px) {
+    .content-layout {
+      grid-template-areas:
+        'link'
+        'rewards'
+        'referrals'
+        'history';
+      grid-template-columns: 100%;
+      grid-template-rows: repeat(2, minmax(227px, max-content)) 380px minmax(380px, max-content);
+    }
   }
 </style>

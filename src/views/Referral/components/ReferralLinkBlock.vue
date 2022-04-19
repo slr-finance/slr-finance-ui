@@ -1,7 +1,15 @@
 <template>
   <ui-widget class="relative">
-    <div class="px-8 pt-12 pb-20">
-      <p class="mb-18">
+    <template #bage>
+      <ui-poligon
+        variant="violet"
+        animated
+      >
+        Share
+      </ui-poligon>
+    </template>
+    <div class="pt-12 pb-20">
+      <p class="mb-18 text-14">
         Share link and <span class="text-yellow">Get 10%</span> from perfomance fee for any transactions and
         <span class="text-yellow">1%</span> from any rawards
       </p>
@@ -10,13 +18,6 @@
         Share link
         <social-links />
       </div>
-      <ui-poligon
-        class="absolute transform translate-x-18 -translate-y-1/2 top-0 right-0"
-        variant="violet"
-        animated
-      >
-        Share
-      </ui-poligon>
     </div>
   </ui-widget>
 </template>
