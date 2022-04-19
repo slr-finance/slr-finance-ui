@@ -9,7 +9,7 @@
       class="nav rounded-24 bg-white bg-opacity-[0.082]"
     >
       <ul class="space-y-16 p-16 my-16">
-        <li 
+        <li
           v-for="link in poolsLinks"
           :key="link.to.name"
         >

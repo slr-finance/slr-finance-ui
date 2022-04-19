@@ -1,7 +1,7 @@
 <template>
   <div class="flex items-center">
     <ui-bread-crumb
-      class="first:rounded-l-8"
+      class="first:rounded-l-8 last:mr-[15px]"
       v-for="(item, i) of items"
       :key="i"
       v-bind="item"

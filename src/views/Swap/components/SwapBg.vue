@@ -1,6 +1,6 @@
 <template>
   <div
-    class="pointer-events-none w-full flex justify-end items-stretch fixed left-1/2 transform -translate-x-1/2 bottom-0 aspect-swap-video"
+    class="pointer-events-none w-full flex justify-end items-stretch fixed z-bg-video left-1/2 transform -translate-x-1/2 bottom-0 aspect-swap-video"
     style="max-width: 866px"
   >
     <video
