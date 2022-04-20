@@ -9,7 +9,7 @@
 </template>
 
 <script lang="ts">
-  import { computed, defineComponent, PropType, unref } from 'vue'
+  import { computed, defineComponent, PropType } from 'vue'
   import BigNumber from 'bignumber.js'
 
   export default defineComponent({
@@ -29,7 +29,7 @@
       },
       balance: {
         type: Object as PropType<BigNumber>,
-        required: false,
+        required: true,
       },
     },
     setup(props) {
