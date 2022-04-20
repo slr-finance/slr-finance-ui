@@ -24,7 +24,7 @@
         </div>
       </div>
     </div>
-    <connected-wallet-modal/>
+    <connected-wallet-modal />
   </connect-wallet-plug>
 </template>
 

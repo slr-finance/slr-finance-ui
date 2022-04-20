@@ -201,6 +201,7 @@ export const useWallet = () => {
     provider: provider as Ref<WalletProvider | null>,
     status,
     walletName,
+    walletIconName: 'metamask',
     error,
   }
 }

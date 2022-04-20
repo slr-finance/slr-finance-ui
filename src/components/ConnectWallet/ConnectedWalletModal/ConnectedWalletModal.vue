@@ -5,32 +5,44 @@
   >
     <div class="bg-gray-800 bg-opacity-60 rounded-8 pt-12 pl-16 pb-16">
       <div class="flex items-center justify-between">
-        <span class="text-12 text-gray">Connected to MetaMask</span>
+        <span class="text-12 text-gray">Connected to {{ walletName }}</span>
         <div class="bg-black rounded-full w-32 h-32 flex justify-center items-center mr-12">
           <ui-icon
             prefix="icon-wallets"
-            name="metamask"
+            :name="walletIconName"
             size="16"
           />
         </div>
       </div>
-      <div class="mt-6 text-[17px] text-white mr-16">{{ trimedAddress }}</div>
+      <div class="mt-2 text-[17px] text-white mr-16">{{ trimedAddress }}</div>
       <div class="flex pb-12 border-b border-gray-800 mt-6 mr-16">
-        <button class="text-violet text-14" @click="handleCopy">
+        <button
+          type="button"
+          class="text-violet text-14"
+          @click="handleCopy"
+        >
           <div class="flex items-end">
             <span class="mr-6">Copy Address</span>
-            <ui-icon class="text-violet text-opacity-50" name="copy-hollow" size="18" />
+            <ui-icon
+              class="text-violet text-opacity-50"
+              name="copy-hollow"
+              size="18"
+            />
           </div>
         </button>
         <a
-          class="text-violet text-14 ml-16"
-          href="#"
+          class="text-violet text-14 ml-16 block"
+          :href="bscScanAddress"
           target="_blank"
           rel="noopener noreferrer"
         >
           <div class="flex items-end">
             <span class="mr-6">View on BscScan</span>
-            <ui-icon class="text-violet text-opacity-50" name="external" size="18" />
+            <ui-icon
+              class="text-violet text-opacity-50"
+              name="external"
+              size="18"
+            />
           </div>
         </a>
       </div>
@@ -67,6 +79,7 @@
   import { useTokenAmountFormat } from '@/hooks/formatters/useTokenAmountFormat'
   import { useClipboard } from '@vueuse/core'
   import { useSingleToast } from '@/hooks/useSingleToast'
+  import { useBscScanAddress } from '@/hooks/useBscScanAddress'
 
   export default defineComponent({
     setup() {
@@ -75,9 +88,10 @@
       const trimedAddress = computed(() => shortenAddress(address.value, 4))
       const [slrInfo] = useSlrBalance()
       const slrBalance = computed(() => slrInfo.value.balance)
-      const { disconnect } = useWallet()
+      const { disconnect, walletName, walletIconName } = useWallet()
       const slrBalanceStr = useTokenAmountFormat(slrBalance)
       const bnbBalanceStr = useTokenAmountFormat(bnbBalance)
+      const bscScanAddress = useBscScanAddress(address)
 
       const { copy } = useClipboard()
       const { success, error } = useSingleToast()
@@ -96,6 +110,9 @@
         trimedAddress,
         slrBalanceStr,
         bnbBalanceStr,
+        walletName,
+        walletIconName,
+        bscScanAddress,
         disconnect,
         handleCopy,
       }
