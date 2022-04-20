@@ -101,6 +101,9 @@ module.exports = {
     zIndex: {
       header: 1001,
       'mobile-menu': 1000,
+      'bg-video': 0,
+      modal: 1100,
+      'ui-page-content': 1,
       1: 1,
       10: 10,
       20: 20,

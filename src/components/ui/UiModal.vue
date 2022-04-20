@@ -3,7 +3,7 @@
     <transition name="ui-modal">
       <div
         v-if="isOpen"
-        class="ui-modal fixed z-50 inset-0 flex overflow-auto"
+        class="ui-modal fixed z-modal inset-0 flex overflow-auto"
         tabindex="-1"
         role="dialog"
       >

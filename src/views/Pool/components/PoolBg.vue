@@ -1,6 +1,6 @@
 <template>
   <div
-    class="pointer-events-none brightness-50 875:brightness-100 flex justify-end items-stretch h-full fixed right-0 top-0 aspect-pool-video before:content-[''] before:block before:absolute before:top-0 before:left-0 before:h-full before:aspect-pool-video-gradient before:bg-gradient-to-r before:from-black before:to-transparent"
+    class="pointer-events-none brightness-50 875:brightness-100 flex justify-end items-stretch h-full fixed z-bg-video right-0 top-0 aspect-pool-video before:content-[''] before:block before:absolute before:top-0 before:left-0 before:h-full before:aspect-pool-video-gradient before:bg-gradient-to-r before:from-black before:to-transparent"
   >
     <video
       class="w-full h-full"
