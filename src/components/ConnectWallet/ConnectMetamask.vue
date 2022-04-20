@@ -4,11 +4,13 @@
     :text="connectWalletText"
   >
     <div
-      @click="disconnect"
       class="bg-black/50 text-12 leading-none rounded-12 text-white pl-16 pr-6 h-48 flex justify-center items-center"
     >
       <div v-if="isBalanceLoaded && !isMobile">{{ balanceStr }}</div>
-      <div class="ml-8 bg-black text-white/60 rounded-10 h-36 px-8 flex justify-center items-center">
+      <div
+        class="ml-8 bg-black text-white/60 rounded-10 h-36 px-8 flex justify-center items-center"
+        @click="open"
+      >
         {{ trimedAddress }}
         <div
           v-if="!isMobile"
@@ -22,6 +24,7 @@
         </div>
       </div>
     </div>
+    <connected-wallet-modal />
   </connect-wallet-plug>
 </template>
 
@@ -35,7 +38,8 @@
   import { useTokenAmountFormat } from '@/hooks/formatters/useTokenAmountFormat'
   import UiIcon from '@/components/ui/UiIcon.vue'
   import { FetchingStatus } from '@/entities/common'
-  import { useWallet } from '@/hooks/dapp/useWallet'
+  import { useConnectedWalletModal } from './hooks/useConnectedWalletModal'
+  import ConnectedWalletModal from './ConnectedWalletModal/ConnectedWalletModal.vue'
 
   export default defineComponent({
     props: {
@@ -45,7 +49,6 @@
       },
     },
     setup(props) {
-      const { disconnect } = useWallet()
       const { address, chainId } = useEthers()
       const trimedAddress = computed(() => shortenAddress(address.value, props.isMobile ? 2 : 4))
       const isCorrectChainId = computed(() => chainId.value === 97)
@@ -55,11 +58,12 @@
       const balanceStr = useTokenAmountFormat(balance, 'SLR')
       const buttonSize = computed(() => (props.isMobile ? 36 : 48))
       const connectWalletText = computed(() => (props.isMobile ? 'Connect' : 'Connect Wallet'))
+      const { open } = useConnectedWalletModal()
 
       return {
         isCorrectChainId,
         trimedAddress,
-        disconnect,
+        open,
         balanceStr,
         buttonSize,
         isBalanceLoaded,
@@ -70,6 +74,7 @@
       UiButton,
       ConnectWalletPlug,
       UiIcon,
+      ConnectedWalletModal,
     },
   })
 </script>
