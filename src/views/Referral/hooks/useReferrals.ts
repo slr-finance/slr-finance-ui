@@ -42,7 +42,7 @@ export const useReferrals = () => {
           isFetching.value = !isNilValue()
           referralsList.value = []
           numberOfReferrals.value = 0
-          const step = 2
+          const step = 20
 
           breakIfValueIsNil()
 

@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-col">
     <span class="text-11 text-gray uppercase">my inviter</span>
-    <span>{{ shortenInviterAddress }}</span>
+    <span class="text-14">{{ shortenInviterAddress }}</span>
   </div>
 </template>
 

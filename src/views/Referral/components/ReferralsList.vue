@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <div class="mb-24 text-18 flex items-center uppercase relative w-max font-title">
+  <div class="flex flex-col">
+    <div class="mb-24 text-ui-page-label flex items-center uppercase relative w-max font-title">
       Referral list
       <div
         class="w-max bg-yellow text-black flex items-center rounded-16 h-32 px-10 text-14 ml-16 absolute -right-36"
@@ -9,11 +9,12 @@
         {{ numberOfReferrals }}
       </div>
     </div>
-    <ui-widget>
-      <div
-        class="table relative overflow-auto text-12"
-        style="height: 300px"
-      >
+    <ui-widget
+      scroll
+      class="flex-1"
+      style="height: 323px"
+    >
+      <div class="table h-full relative overflow-auto text-12">
         <span class="header-item pr-20">#</span>
         <span class="header-item uppercase">address</span>
         <span class="header-item text-right uppercase">date</span>
@@ -32,20 +33,16 @@
             </div>
           </template>
         </template>
-        <div
-          class="w-full h-full flex items-center justify-center absolute"
+        <ui-placeholder
           v-else
+          class="inset-0 absolute"
+          icon="binocular"
+          title="You don't have referrals"
         >
-          <ui-placeholder
-            class="w-full"
-            icon="binocular"
-            title="You don't have referrals"
-          >
-            <p class="text-center leading-[20px] text-gray">
-              Share link and Get 10% from perfomance fee for any transactions and 1% from any rawards
-            </p>
-          </ui-placeholder>
-        </div>
+          <p class="text-center leading-[20px] text-gray">
+            Share link and Get 10% from perfomance fee for any transactions and 1% from any rawards
+          </p>
+        </ui-placeholder>
       </div>
       <ui-button
         variant="gray-800"

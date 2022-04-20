@@ -1,6 +1,6 @@
 <template>
   <ui-widget>
-    <div class="py-12 px-8">
+    <div class="py-12">
       <own-inviter class="mb-16" />
       <div class="bg-white bg-opacity-10 text-14 rounded-12 h-48 px-16 flex items-center justify-between mb-10">
         <span class="text-gray">Total rewards</span>
@@ -16,7 +16,7 @@
             :class="[isEnoughReward ? 'text-green-atomic' : 'text-gray']"
             >Unclaim rewards</span
           >
-          <span class="text-18 font-title">{{ pendingRewardStr }}</span>
+          <span class="text-ui-page-label font-title">{{ pendingRewardStr }}</span>
         </div>
         <send-tx-button
           @click="handleClaim"

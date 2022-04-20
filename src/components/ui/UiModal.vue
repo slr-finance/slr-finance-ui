@@ -17,7 +17,7 @@
         >
           <div
             v-if="label"
-            class="pl-24 font-title text-18 leading-none pr-64 h-36 box-content flex items-center justify-start"
+            class="pl-24 font-title text-ui-page-label leading-none pr-64 h-36 box-content flex items-center justify-start"
           >
             {{ label }}
           </div>

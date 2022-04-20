@@ -1,6 +1,15 @@
 <template>
-  <div class="page-padding">
-    <div>Dashboard</div>
+  <div class="page-padding px-ui-page-spacing">
+    <h1 class="text-white font-title mb-16 text-ui-page-title">
+      <span class="text-white text-opacity-60">Dashboard</span>
+      station
+    </h1>
+
+    <div>
+      <div class="text-26 font-title leading-140">
+        <span class="text-yellow">DEFI 3.0</span> financial protocol operating in BSC
+      </div>
+    </div>
     <div>totalBaybackStr: {{ totalBaybackStr }}</div>
     <div>currentBnbBalanceStr: {{ currentBnbBalanceStr }}</div>
     <div>totalLiquidityBurnedStr: {{ totalLiquidityBurnedStr }}</div>

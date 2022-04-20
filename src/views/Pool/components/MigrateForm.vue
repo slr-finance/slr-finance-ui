@@ -62,7 +62,7 @@
             variant="violet"
             :tx-state="migrateTxState"
           >
-            Migrate to {{ poolInfo.name }} pool with {{ poolApyStr }} APY and zero performance fee
+            Migrate to {{ poolInfo.name }} pool without fee
           </send-tx-button>
         </insufficient-balance-plug>
       </approve-token-plug>
@@ -84,8 +84,6 @@
   import { usePoolInfo } from '../hooks/usePoolInfo'
   import { useMigrateTx } from '../hooks/useMigrateTx'
   import { useSlrBalance } from '@/store/hooks/useBalance'
-  import { usePool } from '@/store/hooks/usePool'
-  import { usePercentFormat } from '@/hooks/formatters/usePercentFormat'
   import contractsAddresses from '@/config/constants/contractsAddresses.json'
   import SlrBalanceInput from './SlrBalanceInput.vue'
 
@@ -119,10 +117,6 @@
       const poolId = toRef(props, 'poolId')
       const poolInfo = usePoolInfo(poolId)
 
-      const poolState = usePool(poolId)
-      const poolApy = computed(() => poolState.value.apy)
-      const poolApyStr = usePercentFormat(poolApy)
-
       const [handleMigrate, migrateTxState] = useMigrateTx({ poolId, amount, days })
       const refetchStakerAndBalance = () => Promise.all([refetchStaker(), refetchSlrBalance()])
 
@@ -137,7 +131,6 @@
         totalAmount,
 
         poolInfo,
-        poolApyStr,
         handleMigrate,
         migrateTxState,
 

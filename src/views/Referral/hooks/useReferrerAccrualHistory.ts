@@ -1,4 +1,4 @@
-import { ref, watch } from 'vue'
+import { Ref, ref, watch } from 'vue'
 import { useEthers } from '@/hooks/dapp/useEthers'
 import { shortenAddress } from '@/utils/address/shortenAddress'
 import { getReferralContract } from '@/utils/contracts/getReferralContract'
@@ -23,7 +23,7 @@ interface AccrualRaw extends Result {
   action: number
 }
 
-type AccrualInfo = {
+export type AccrualInfo = {
   address: string
   shortAddress: string
   timestamp: number
@@ -35,9 +35,15 @@ type AccrualInfo = {
   action: number
 }
 
-export const useReferrerAccrualHistory = () => {
+export type UseReferrerAccrualHistoryReturn = {
+  accrualList: Ref<AccrualInfo[]>
+  isFetching: Ref<boolean>
+  numberOfAccrual: Ref<number>
+}
+
+export const useReferrerAccrualHistory = (): UseReferrerAccrualHistoryReturn => {
   const { address } = useEthers()
-  const accrualList = ref<AccrualInfo[]>([])
+  const accrualList = ref<AccrualInfo[]>([]) as Ref<AccrualInfo[]>
   const isFetching = ref(false)
   const numberOfAccrual = ref(0)
 
@@ -50,7 +56,7 @@ export const useReferrerAccrualHistory = () => {
           isFetching.value = !isNilValue()
           accrualList.value = []
           numberOfAccrual.value = 0
-          const step = 2
+          const step = 20
 
           breakIfValueIsNil()
 

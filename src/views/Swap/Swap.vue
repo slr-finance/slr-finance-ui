@@ -5,12 +5,12 @@
         v-once
         class="875:text-center text-left"
       >
-        <h1 class="text-white font-title 875:text-38 mb-16 text-28">
+        <h1 class="text-white font-title mb-16 text-ui-page-title">
           <span class="text-white text-opacity-60">Make</span>
           a space swap
         </h1>
 
-        <p class="875:text-16 text-white text-opacity-60 text-14 mb-48">
+        <p class="text-ui-page-description text-white text-opacity-60 mb-48">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.
         </p>
       </div>
