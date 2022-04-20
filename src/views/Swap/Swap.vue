@@ -15,7 +15,7 @@
         </p>
       </div>
 
-      <div class="bg-black bg-opacity-10 600:p-24 p-10 rounded-20">
+      <div class="bg-black bg-opacity-30 600:p-24 p-10 rounded-20">
         <swap-form />
       </div>
     </div>

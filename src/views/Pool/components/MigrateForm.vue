@@ -2,11 +2,11 @@
   <div>
     <div class="relative border border-white px-16 py-18 rounded-24 mb-18">
       <ui-poligon
-        class="absolute top-2 right-0 transform-cpu translate-x-1/2 -translate-y-1/2 z-10"
+        class="absolute top-2 right-0 transform-cpu 600:translate-x-1/2 translate-x-ui-page-spacing -translate-y-1/2 z-10"
         variant="green-original"
         animated
       >
-        Open
+        Opened
       </ui-poligon>
 
       <div class="text-white text-opacity-60 text-12 leading-none mb-12">Migrate amount</div>

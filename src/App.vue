@@ -1,4 +1,5 @@
 <template>
+  <connected-wallet-modal />
   <connect-wallet-modal />
   <app-header />
   <router-view />
@@ -13,6 +14,7 @@
   import { useEthers } from '@/hooks/dapp/useEthers'
   import { store } from '@/store/store'
   import AppHeader from '@/components/AppHeader'
+  import ConnectedWalletModal from '@/components/ConnectWallet/ConnectedWalletModal/ConnectedWalletModal.vue'
   import ConnectWalletModal from '@/components/ConnectWallet/ConnectWalletModal'
   import SocialModalButton from '@/components/SocialModalButton'
   import { stakingModule } from '@/store/modules/stakingModule'
@@ -37,6 +39,7 @@
       AppHeader,
       ConnectWalletModal,
       SocialModalButton,
+      ConnectedWalletModal,
     },
   })
 </script>

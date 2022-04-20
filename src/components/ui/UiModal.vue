@@ -3,35 +3,35 @@
     <transition name="ui-modal">
       <div
         v-if="isOpen"
-        class="ui-modal fixed z-modal inset-0 flex overflow-auto"
+        class="ui-modal fixed z-modal inset-0 flex overflow-auto px-ui-page-spacing"
         tabindex="-1"
         role="dialog"
       >
         <div class="ui-modal-backdrop bg-black bg-opacity-70 backdrop-blur-8 fixed z-0 inset-0"></div>
 
         <div
-          class="ui-modal-box overflow-hidden m-auto flex-grow-0 w-full relative z-10 bg-black py-32 border border-white rounded-20"
+          class="ui-modal-box overflow-hidden m-auto flex-grow-0 w-full relative z-10 bg-black 375:py-32 py-24 border border-white rounded-20"
           :style="styleList"
           ref="root"
           tabindex="1"
         >
           <div
             v-if="label"
-            class="pl-24 font-title text-ui-page-label leading-none pr-64 h-36 box-content flex items-center justify-start"
+            class="375:pl-24 pl-16 font-title text-ui-page-label leading-140 pr-64 h-36 box-content flex items-center justify-start"
           >
             {{ label }}
           </div>
           <button
             @click="handleClose"
             :disabled="!closable"
-            class="absolute top-32 right-24 h-36 w-36 p-0 m-0 border border-white rounded-full flex justify-center items-center border-opacity-50 hover:border-opacity-100 transition-colors duration-150 disabled:text-white disabled:text-opacity-30 disabled:hover:border-opacity-50"
+            class="absolute 375:top-32 top-24 375:right-24 right-16 h-36 w-36 p-0 m-0 border border-white rounded-full flex justify-center items-center border-opacity-50 hover:border-opacity-100 transition-colors duration-150 disabled:text-white disabled:text-opacity-30 disabled:hover:border-opacity-50"
           >
             <ui-icon
               name="close"
               size="10"
             />
           </button>
-          <div class="relative overflow-hidden pt-32 px-24">
+          <div class="relative overflow-hidden 375pt-32 pt-24 375:px-24 px-16">
             <slot />
           </div>
         </div>
@@ -41,7 +41,7 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent, ref, watch, computed } from 'vue'
+  import { defineComponent, ref, watch, computed, onBeforeUnmount } from 'vue'
   import { useVModel, useEventListener, useScrollLock } from '@vueuse/core'
   import UiIcon from './UiIcon.vue'
 
@@ -90,6 +90,11 @@
           prevActiveElement = null
         }
       })
+
+      onBeforeUnmount(() => {
+        isLocked.value = false
+      })
+
       return { isOpen, handleClose, styleList }
     },
     components: { UiIcon },

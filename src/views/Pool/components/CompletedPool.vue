@@ -1,7 +1,7 @@
 <template>
   <div class="relative">
     <ui-poligon
-      class="absolute top-0 right-0 transform-gpu translate-x-1/2 -translate-y-1/2 z-20"
+      class="absolute top-0 right-0 transform-gpu 600:translate-x-1/2 translate-x-ui-page-spacing -translate-y-1/2 z-20"
       variant="yellow"
       animated
     >

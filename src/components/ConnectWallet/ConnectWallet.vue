@@ -3,28 +3,8 @@
     :size="buttonSize"
     :text="connectWalletText"
   >
-    <div
-      class="bg-black/50 text-12 leading-none rounded-12 text-white pl-16 pr-6 h-48 flex justify-center items-center"
-    >
-      <div v-if="isBalanceLoaded && !isMobile">{{ balanceStr }}</div>
-      <div
-        class="ml-8 bg-black text-white/60 rounded-10 h-36 px-8 flex justify-center items-center"
-        @click="open"
-      >
-        {{ trimedAddress }}
-        <div
-          v-if="!isMobile"
-          class="bg-bnb w-20 h-20 flex justify-center items-center ml-6 rounded-4"
-        >
-          <ui-icon
-            class="text-white"
-            name="bnb-chain"
-            size="14"
-          />
-        </div>
-      </div>
-    </div>
-    <connected-wallet-modal />
+    <connected-wallet-mobile v-if="isMobile"/>
+    <connected-wallet v-else/>
   </connect-wallet-plug>
 </template>
 
@@ -40,8 +20,11 @@
   import { FetchingStatus } from '@/entities/common'
   import { useConnectedWalletModal } from './hooks/useConnectedWalletModal'
   import ConnectedWalletModal from './ConnectedWalletModal/ConnectedWalletModal.vue'
+  import ConnectedWalletAsync from './ConnectedWallet/ConnectedWalletAsync'
+  import ConnectedWalletMobile from './ConnectedWallet/ConnectedWalletMobile.vue'
 
   export default defineComponent({
+    name: 'connect-wallet',
     props: {
       isMobile: {
         type: Boolean,
@@ -75,6 +58,8 @@
       ConnectWalletPlug,
       UiIcon,
       ConnectedWalletModal,
+      ConnectedWallet: ConnectedWalletAsync,
+      ConnectedWalletMobile,
     },
   })
 </script>

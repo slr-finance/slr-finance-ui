@@ -17,7 +17,7 @@
     />
 
     <div class="relative z-10 ml-16">
-      <connect-metamask :is-mobile="!isLaptop" />
+      <connect-wallet :is-mobile="!isLaptop" />
     </div>
   </header>
   <div id="header-mobile-menu-place"></div>
@@ -26,7 +26,7 @@
 <script lang="ts">
   import { defineComponent } from 'vue'
   import AppHeaderLogo from './AppHeaderLogo.vue'
-  import ConnectMetamask from '@/components/ConnectWallet/ConnectMetamask.vue'
+  import ConnectWallet from '@/components/ConnectWallet/ConnectWallet.vue'
   import { useStyleTag, useBreakpoints, useEventListener } from '@vueuse/core'
   import AppHeaderDesktopNav from './AppHeaderDesktopNav.vue'
   import AppHeaderMobileMenu from './AppHeaderMobileMenu.vue'
@@ -75,7 +75,7 @@
     },
     components: {
       AppHeaderLogo,
-      ConnectMetamask,
+      ConnectWallet,
       AppHeaderDesktopNav,
       AppHeaderMobileMenu,
     },
@@ -89,7 +89,7 @@
   }
 
   .app-header {
-    @apply flex fixed top-0 left-0 w-full items-center;
+    @apply flex fixed top-0 left-0 w-full items-center transition-transform duration-75;
     transform: translateY(calc(var(--app-ui-header-scroll-factor) * var(--app-ui-header-scroll-padding) * -1));
     height: calc(var(--app-ui-header-base-height) + var(--app-ui-header-scroll-padding));
     padding-top: var(--app-ui-header-scroll-padding);

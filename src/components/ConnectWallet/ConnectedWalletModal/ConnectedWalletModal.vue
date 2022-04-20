@@ -15,38 +15,38 @@
         </div>
       </div>
       <div class="mt-2 text-[17px] text-white mr-16">{{ trimedAddress }}</div>
-      <div class="flex pb-12 border-b border-gray-800 mt-6 mr-16">
+      <div class="flex pb-12 border-b border-gray-800 mt-6 mr-16 375:flex-row flex-col 375:space-x-16 space-x-0">
         <button
           type="button"
-          class="text-violet text-14"
+          class="text-violet text-14 mb-8"
           @click="handleCopy"
         >
           <div class="flex items-end">
-            <span class="mr-6">Copy Address</span>
+            <div>Copy Address</div>
             <ui-icon
-              class="text-violet text-opacity-50"
+              class="text-violet text-opacity-50 ml-6"
               name="copy-hollow"
               size="18"
             />
           </div>
         </button>
         <a
-          class="text-violet text-14 ml-16 block"
+          class="text-violet text-14 block mb-8"
           :href="bscScanAddress"
           target="_blank"
           rel="noopener noreferrer"
         >
           <div class="flex items-end">
-            <span class="mr-6">View on BscScan</span>
+            <div>View on BscScan</div>
             <ui-icon
-              class="text-violet text-opacity-50"
+              class="text-violet text-opacity-50 ml-6"
               name="external"
               size="18"
             />
           </div>
         </a>
       </div>
-      <div class="flex justify-between mt-12 mr-16">
+      <div class="flex justify-between pt-4 mr-16">
         <span class="text-gray text-12">BNB Balance</span>
         <span class="text-12">{{ bnbBalanceStr }}</span>
       </div>
@@ -59,7 +59,7 @@
       variant="gray-800"
       size="40"
       class="w-full mt-16"
-      @click="disconnect"
+      @click="handleDisconnect"
     >
       Log out
     </ui-button>
@@ -83,7 +83,7 @@
 
   export default defineComponent({
     setup() {
-      const { isOpen } = useConnectedWalletModal()
+      const { isOpen, close } = useConnectedWalletModal()
       const { address, balance: bnbBalance } = useEthers()
       const trimedAddress = computed(() => shortenAddress(address.value, 4))
       const [slrInfo] = useSlrBalance()
@@ -105,6 +105,11 @@
         }
       }
 
+      const handleDisconnect = () => {
+        close()
+        disconnect()
+      }
+
       return {
         isOpen,
         trimedAddress,
@@ -113,8 +118,8 @@
         walletName,
         walletIconName,
         bscScanAddress,
-        disconnect,
         handleCopy,
+        handleDisconnect,
       }
     },
     components: {

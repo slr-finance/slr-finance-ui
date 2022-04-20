@@ -11,7 +11,10 @@
         class="logo"
       />
     </div>
-    <div class="title flex items-center justify-start uppercase">
+    <div
+      class="title flex items-center justify-start uppercase"
+      v-if="!isMobile"
+    >
       SLR
       <div class="dot rounded-full"></div>
       FINANCE

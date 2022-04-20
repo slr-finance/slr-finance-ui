@@ -4,15 +4,15 @@
     @update:value.once="handleChangeOnce"
   >
     <template #postfix>
-      <div class="text-12">
+      <div class="text-12 flex justify-center items-center space-x-8">
         <button
-          class="bg-green-atomic bg-opacity-10 text-green-atomic text-opacity-50 text-12 leading-none rounded-4 px-4 py-6 mr-8 uppercase hover:bg-opacity-20 hover:text-opacity-100 active:bg-opacity-30 transition-colors duration-200"
+          class="bg-green-atomic bg-opacity-10 text-green-atomic text-opacity-50 text-12 leading-none rounded-4 px-4 py-6 uppercase hover:bg-opacity-20 hover:text-opacity-100 active:bg-opacity-30 transition-colors duration-200"
           type="button"
           @click="handleSetMaxAmount"
         >
           Max
         </button>
-        SLR
+        <div>SLR</div>
       </div>
     </template>
   </ui-input-bn>

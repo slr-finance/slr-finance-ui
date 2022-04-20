@@ -66,5 +66,6 @@
 
   .ui-input > .input {
     @apply bg-transparent outline-none border-0 placeholder-white placeholder-opacity-60;
+    width: 100px;
   }
 </style>
