@@ -5,10 +5,12 @@
       station
     </h1>
 
+
+
+    <buy-and-dao/>
+
     <div>
-      <div class="text-26 font-title leading-140">
-        <span class="text-yellow">DEFI 3.0</span> financial protocol operating in BSC
-      </div>
+      
     </div>
     <div>totalBaybackStr: {{ totalBaybackStr }}</div>
     <div>currentBnbBalanceStr: {{ currentBnbBalanceStr }}</div>
@@ -31,6 +33,7 @@
   import { useSlrPrice } from '@/store/hooks/useSlrPrice'
   import { useMilkyWayInfo } from './hooks/useMilkyWayInfo'
   import { useTotalStakedInAllPools } from '@/store/hooks/useTotalStakedInAllPools'
+  import BuyAndDao from './components/BuyAndDao.vue'
 
   export default defineComponent({
     setup() {
@@ -74,7 +77,9 @@
         totalStakedStr,
       }
     },
-    components: {},
+    components: {
+      BuyAndDao,
+    },
   })
 </script>
 
