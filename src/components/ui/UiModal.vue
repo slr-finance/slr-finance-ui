@@ -24,9 +24,10 @@
           <button
             @click="handleClose"
             :disabled="!closable"
-            class="absolute 375:top-32 top-24 375:right-24 right-16 h-36 w-36 p-0 m-0 border border-white rounded-full flex justify-center items-center border-opacity-50 hover:border-opacity-100 transition-colors duration-150 disabled:text-white disabled:text-opacity-30 disabled:hover:border-opacity-50"
+            class="group absolute 375:top-32 top-24 375:right-24 right-16 h-36 w-36 p-0 m-0 border-opacity-20 active:border-opacity-100 border border-white rounded-full flex justify-center items-center hover:border-opacity-30 transition-colors duration-150 disabled:text-white disabled:text-opacity-30 disabled:hover:border-opacity-50"
           >
             <ui-icon
+              class="text-gray-600 group-hover:text-white group-active:text-white"
               name="close"
               size="10"
             />
@@ -41,7 +42,7 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent, ref, watch, computed, onBeforeUnmount } from 'vue'
+  import { defineComponent, watch, computed, onBeforeUnmount } from 'vue'
   import { useVModel, useEventListener, useScrollLock } from '@vueuse/core'
   import UiIcon from './UiIcon.vue'
 

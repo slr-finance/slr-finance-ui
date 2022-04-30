@@ -36,7 +36,7 @@
 
       <ui-button
         v-if="isShownMoreButton"
-        variant="gray-800"
+        variant="gray"
         size="48"
         class="w-full"
       >
