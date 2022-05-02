@@ -103,7 +103,7 @@
   }
 
   .ui-button.-disabled {
-    @apply border-dashed cursor-not-allowed bg-gray opacity-30;
+    @apply border-none cursor-not-allowed bg-gray bg-opacity-30 text-gray;
   }
 
   .ui-button:not(.-disabled) {
@@ -118,23 +118,23 @@
     @apply inline-flex justify-center items-center transition duration-150;
   }
 
-  .ui-button.-white {
+  .ui-button:not(.-disabled).-white {
     @apply gradient-white-lazurit hover:opacity-[0.85] active:opacity-[0.65] text-black border-none;
   }
 
-  .ui-button.-green-atomic {
+  .ui-button:not(.-disabled).-green-atomic {
     @apply bg-green-atomic text-black border-none;
   }
 
-  .ui-button.-violet {
+  .ui-button:not(.-disabled).-violet {
     @apply bg-violet text-white border-none hover:bg-violet-400 active:bg-violet-600;
   }
 
-  .ui-button.-gray {
+  .ui-button:not(.-disabled).-gray {
     @apply bg-gray bg-opacity-20 hover:bg-opacity-30 active:bg-opacity-10 text-white border-none;
   }
 
-  .ui-button.-red {
+  .ui-button:not(.-disabled).-red {
     @apply bg-red text-white border-none hover:bg-red-400 active:bg-red-600;
   }
 </style>
