@@ -30,7 +30,7 @@
           </ui-button>
 
           <ui-button
-            variant="gray-800"
+            variant="gray"
             size="40"
             @click="() => handleOpenRewardForm()"
           >

@@ -7,7 +7,7 @@
       <ui-button
         size="50"
         class="w-50 h-50 rounded-16"
-        variant="gray-800"
+        variant="gray"
         :to="{ name: 'dashboard' }"
       >
         <div class="flex justify-center items-center">

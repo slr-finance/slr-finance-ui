@@ -90,11 +90,11 @@
   }
   .pools-map .pool.-active {
     @apply transition-all duration-500;
-    box-shadow: 0 0 0 0px theme('colors.violet') inset, 0 0 0 0px rgb(109 13 252 / 20%);
+    box-shadow: 0 0 0 0px theme('colors.violet.500') inset, 0 0 0 0px rgb(109 13 252 / 20%);
   }
 
   .pools-map .pool.-active {
-    box-shadow: 0 0 0 2px theme('colors.violet') inset, 0 0 0 6px rgb(109 13 252 / 20%);
+    box-shadow: 0 0 0 2px theme('colors.violet.500') inset, 0 0 0 6px rgb(109 13 252 / 20%);
   }
 
   .pools-map .pool .pool-info {

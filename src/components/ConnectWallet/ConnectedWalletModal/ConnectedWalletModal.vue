@@ -56,7 +56,7 @@
       </div>
     </div>
     <ui-button
-      variant="gray-800"
+      variant="gray"
       size="40"
       class="w-full mt-16"
       @click="handleDisconnect"

@@ -1,3 +1,4 @@
+const plugin = require('tailwindcss/plugin')
 const colors = require('./colors')
 
 module.exports = {
@@ -58,10 +59,16 @@ module.exports = {
       'green-atomic': colors['green-atomic'],
       'green-original': colors['green-original'],
       black: colors.black,
-      red: colors.red,
+      red: {
+        DEFAULT: colors.red['500'],
+        ...colors.red,
+      },
       white: colors.white,
       bnb: colors.bnb,
-      violet: colors.violet,
+      violet: {
+        DEFAULT: colors.violet['500'],
+        ...colors.violet,
+      },
       yellow: colors.yellow,
       pink: colors.pink,
       gray: {
@@ -122,4 +129,15 @@ module.exports = {
       },
     },
   },
+  plugins: [
+    plugin(({ addUtilities }) => {
+      const gradients = {
+        '.gradient-white-lazurit': {
+          background: 'linear-gradient(100.54deg, #FFFFFF -9.95%, #DDECFA 45.39%, #F7FDFF 96.31%)',
+        },
+      };
+
+      addUtilities(gradients, ['responsive']);
+    }),
+  ],
 }

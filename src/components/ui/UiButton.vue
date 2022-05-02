@@ -75,35 +75,35 @@
 
 <style lang="postcss">
   .ui-button {
-    @apply block uppercase select-none;
+    @apply block uppercase select-none transition-colors;
   }
 
   .ui-button.-size-64 {
-    @apply h-64 min-w-64 opacity-80;
+    @apply h-64 min-w-64;
 
     padding: 0 14px 0 14px;
   }
 
   .ui-button.-size-40 {
-    @apply h-40 min-w-40 rounded-10 border-2 opacity-80 text-12;
+    @apply h-40 min-w-40 rounded-10 border-2 text-12;
 
     padding: 0 8px 0 8px;
   }
 
   .ui-button.-size-48 {
-    @apply h-48 min-w-48 rounded-10 border-2 opacity-80 text-12;
+    @apply h-48 min-w-48 rounded-10 border-2 text-12;
 
     padding: 0 8px 0 8px;
   }
 
   .ui-button.-size-36 {
-    @apply h-36 min-w-48 rounded-10 border-2 opacity-80 text-12;
+    @apply h-36 min-w-48 rounded-10 border-2 text-12;
 
     padding: 0 8px 0 8px;
   }
 
   .ui-button.-disabled {
-    @apply border-dashed cursor-not-allowed opacity-40;
+    @apply border-none cursor-not-allowed bg-gray bg-opacity-30 text-gray;
   }
 
   .ui-button:not(.-disabled) {
@@ -118,23 +118,23 @@
     @apply inline-flex justify-center items-center transition duration-150;
   }
 
-  .ui-button.-white {
-    @apply bg-white text-black border-none;
+  .ui-button:not(.-disabled).-white {
+    @apply gradient-white-lazurit hover:opacity-[0.85] active:opacity-[0.65] text-black border-none;
   }
 
-  .ui-button.-green-atomic {
+  .ui-button:not(.-disabled).-green-atomic {
     @apply bg-green-atomic text-black border-none;
   }
 
-  .ui-button.-violet {
-    @apply bg-violet text-white border-none;
+  .ui-button:not(.-disabled).-violet {
+    @apply bg-violet text-white border-none hover:bg-violet-400 active:bg-violet-600;
   }
 
-  .ui-button.-gray-800 {
-    @apply bg-gray-800 text-white border-none;
+  .ui-button:not(.-disabled).-gray {
+    @apply bg-gray bg-opacity-20 hover:bg-opacity-30 active:bg-opacity-10 text-white border-none;
   }
 
-  .ui-button.-red {
-    @apply bg-red text-white border-none;
+  .ui-button:not(.-disabled).-red {
+    @apply bg-red text-white border-none hover:bg-red-400 active:bg-red-600;
   }
 </style>

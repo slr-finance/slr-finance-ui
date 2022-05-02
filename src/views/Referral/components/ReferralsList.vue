@@ -45,7 +45,7 @@
         </ui-placeholder>
       </div>
       <ui-button
-        variant="gray-800"
+        variant="gray"
         size="48"
         class="w-full 875:hidden"
         @click="showAllReferrals"
