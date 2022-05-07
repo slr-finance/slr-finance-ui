@@ -47,7 +47,6 @@ export const i18n = createI18n({
 export function setI18nLanguage(i18n: I18n<unknown, unknown, unknown, false>, locale: AppLocale) {
   i18n.global.locale.value = locale
   i18n.global.pluralRules[locale] = function (choice: number, choicesLength: number) {
-    console.log(choice)
     if (choice === 1) {
       return 0
     }
@@ -55,7 +54,9 @@ export function setI18nLanguage(i18n: I18n<unknown, unknown, unknown, false>, lo
     return 1
   }
 
-  document.querySelector('html')?.setAttribute('lang', locale)
+  if (!import.meta.env.SSR) {
+    document.querySelector('html')?.setAttribute('lang', locale)
+  }
 }
 
 export async function loadLocaleMessages(i18n: I18n<unknown, unknown, unknown, false>, locale: AppLocale) {

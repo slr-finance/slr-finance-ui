@@ -1,7 +1,6 @@
 <template>
   <header
     class="app-header px-ui-page-spacing z-header pt-32"
-    :class="{ '-mobile': !isDesktop }"
   >
     <div class="app-header-bg backdrop-blur-8 absolute top-0 left-0 w-full h-full z-0 bg-black bg-opacity-40"></div>
     <app-header-logo :is-mobile="!isDesktop" />
@@ -58,19 +57,22 @@
           }
         })
       }
+      
+      const { css } = useStyleTag(getScrollFactorStyle(import.meta.env.SSR ? 0 : window.scrollY))
 
-      const { css } = useStyleTag(getScrollFactorStyle(window.scrollY))
-
-      useEventListener(window, 'scroll', (event) => {
-        handleScroll()
-      })
+      if (!import.meta.env.SSR) {
+        useEventListener(window, 'scroll', (event) => {
+          handleScroll()
+        })
+      }
       // Handle scroll [END]
 
-      const { isDesktop, isLaptop } = useBreakpoints({ isDesktop: 1100, isLaptop: 450 })
+      // const { isDesktop, isLaptop } = useBreakpoints({ isDesktop: 1100, isLaptop: 450 })
+      // console.log({isDesktop,isLaptop} )
 
       return {
-        isDesktop,
-        isLaptop,
+        isDesktop: false,
+        isLaptop: false,
       }
     },
     components: {

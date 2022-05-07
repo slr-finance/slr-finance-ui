@@ -1,10 +1,10 @@
 import 'virtual:svg-icons-register'
 import 'virtual:fonts.css'
-import { createApp, nextTick } from 'vue'
+import { createSSRApp, nextTick } from 'vue'
 import Toast, { POSITION } from 'vue-toastification'
 import 'vue-toastification/dist/index.css'
 import { isAddress } from 'ethers/lib/utils'
-import { router } from '@/router'
+import { createRouter } from '@/router'
 import App from '@/App.vue'
 import '@/index.css'
 import { store } from '@/store/store'
@@ -12,31 +12,27 @@ import { REFERRER_QUERY_PARAM, REFERRER_STORAGE_NAME } from '@/config/constants/
 import { i18n, i18nRouteHelperPlugin } from './i18n'
 
 // Referral [BEGIN]
-let referrer: string | null = localStorage.getItem(REFERRER_STORAGE_NAME)
-const url = new URL(window.location.href)
-const searchParams = new URLSearchParams(url.search)
+if (!import.meta.env.SSR) {
+  let referrer: string | null = localStorage.getItem(REFERRER_STORAGE_NAME)
+  const url = new URL(window.location.href)
+  const searchParams = new URLSearchParams(url.search)
 
-if (!referrer || !isAddress(referrer)) {
-  referrer = searchParams.get(REFERRER_QUERY_PARAM)
+  if (!referrer || !isAddress(referrer)) {
+    referrer = searchParams.get(REFERRER_QUERY_PARAM)
 
-  if (referrer && isAddress(referrer)) {
-    localStorage.setItem(REFERRER_STORAGE_NAME, referrer)
-  } else {
-    referrer = null
+    if (referrer && isAddress(referrer)) {
+      localStorage.setItem(REFERRER_STORAGE_NAME, referrer)
+    } else {
+      referrer = null
+    }
   }
+
+  searchParams.delete(REFERRER_QUERY_PARAM)
+  url.search = searchParams.toString()
+
+  window.history.replaceState({}, '', `${url.pathname.toString()}${url.search}`)
 }
-
-searchParams.delete(REFERRER_QUERY_PARAM)
-url.search = searchParams.toString()
-
-window.history.replaceState({}, '', `${url.pathname.toString()}${url.search}`)
 // Referral [END]
-
-// Mount app [BEGIN]
-const app = createApp(App).use(i18n).use(i18nRouteHelperPlugin).use(router).use(Toast, { position: POSITION.TOP_LEFT })
-
-app.mount('#app')
-// Mount app [END]
 
 const fetchPools = async () => {
   const { stakingModule } = await import('@/store/modules/stakingModule')
@@ -64,15 +60,29 @@ const fetchSlrPrice = async () => {
   }
 }
 
-nextTick(() => {
-  // Fetch pools and slr price [BEGIN]
-  fetchPools()
-  fetchSlrPrice()
-  // Fetch pools and slr price [END]
+if (!import.meta.env.SSR) {
+  nextTick(() => {
+    // Fetch pools and slr price [BEGIN]
+    fetchPools()
+    fetchSlrPrice()
+    // Fetch pools and slr price [END]
+  
+    // Cache video [BEGIN]
+    setTimeout(() => {
+      import('@/utils/video/prefetchPoolsVideo').then(({ prefetchPoolsVideo }) => prefetchPoolsVideo())
+    }, 1000)
+    // Cache video [END]
+  })
+}
 
-  // Cache video [BEGIN]
-  setTimeout(() => {
-    import('@/utils/video/prefetchPoolsVideo').then(({ prefetchPoolsVideo }) => prefetchPoolsVideo())
-  }, 1000)
-  // Cache video [END]
-})
+export const createApp = () => {
+  const router = createRouter()
+
+  const app = createSSRApp(App)
+    .use(i18n)
+    .use(i18nRouteHelperPlugin)
+    .use(router)
+    .use(Toast, { position: POSITION.TOP_LEFT })
+
+  return { app, router }
+}

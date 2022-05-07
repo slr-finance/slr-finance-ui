@@ -46,6 +46,7 @@ export default defineConfig({
     }),
   ],
   build: {
+    ssrManifest: true,
     minify: 'terser',
     terserOptions: {
       ecma: 2020,

@@ -68,28 +68,31 @@
     setup(props, { emit }) {
       let prevActiveElement = null as null | HTMLElement
       const isOpen = useVModel(props, 'modelValue', emit)
-      const isLocked = useScrollLock(document.body)
+      const isLocked = import.meta.env.SSR ? ref(false) : useScrollLock(document.body)
       const styleList = computed(() => ({ maxWidth: props.maxWidth }))
       const handleClose = () => {
         if (props.closable) {
           isOpen.value = false
         }
       }
-      useEventListener(document, 'keyup', ({ key }) => {
-        key === 'Escape' && handleClose()
-      })
-      watch(isOpen, (isOpenVal) => {
-        isLocked.value = isOpenVal
-        if (isOpenVal && document.activeElement && (document.activeElement as HTMLElement).blur) {
-          prevActiveElement = document.activeElement as HTMLElement
-          ;(document.activeElement as HTMLElement).blur()
-        } else {
-          if (prevActiveElement && document.body.contains(prevActiveElement)) {
-            prevActiveElement.focus()
+
+      if (!import.meta.env.SSR) {
+        useEventListener(document, 'keyup', ({ key }) => {
+          key === 'Escape' && handleClose()
+        })
+        watch(isOpen, (isOpenVal) => {
+          isLocked.value = isOpenVal
+          if (isOpenVal && document.activeElement && (document.activeElement as HTMLElement).blur) {
+            prevActiveElement = document.activeElement as HTMLElement
+            ;(document.activeElement as HTMLElement).blur()
+          } else {
+            if (prevActiveElement && document.body.contains(prevActiveElement)) {
+              prevActiveElement.focus()
+            }
+            prevActiveElement = null
           }
-          prevActiveElement = null
-        }
-      })
+        })
+      }
 
       onBeforeUnmount(() => {
         isLocked.value = false
