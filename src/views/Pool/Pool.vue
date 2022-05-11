@@ -1,95 +1,87 @@
 <template>
-  <div class="pool-page flex">
-    <pool-bg
-      v-memo="[poolId]"
-      :pool-id="poolId"
-    />
-
-    <section
-      class="staking-widget min-h-full h-auto relative z-ui-page-content page-content flex flex-col justify-center"
-    >
-      <div class="flex-1 flex flex-col justify-between space-y-32">
-        <div class="flex-1 flex flex-col">
-          <div class="text-12 text-white/60 mb-8 py-2 flex items-start cursor-default">
-            <div class="w-20 h-20 border border-white rounded-full mr-8 flex-grow-0 flex-shrink-0" />
-            {{ poolInfo.page.description }}
-          </div>
-
-          <h2 class="title text-ui-page-title uppercase font-title mb-8 leading-140 cursor-default">
-            {{ poolInfo.name }} <span class="opacity-60">staking {{ poolInfo.page.objectTypeName }}</span>
-          </h2>
-
-          <p class="text-ui-page-description text-white/40 leading-125 mb-20 cursor-default">
-            Fixed APY:
-            <span class="text-yellow text-opacity-80">{{ apyStr }}</span>
-          </p>
-
-          <div
-            v-if="!isStakerLoaded"
-            class="flex flex-1 justify-center items-center py-48"
-          >
-            <ui-galaxy-loader />
-          </div>
-
-          <div
-            v-else-if="isCompletedPool"
-            class="flex-1 flex justify-center items-center mb-20"
-          >
-            <completed-pool
-              :pool-id="poolState.id"
-              class="w-full"
-            />
-          </div>
-
-          <staking-finished
-            v-else-if="isCurrentStakerPoolFinished && isCurrentStakerPool && hasCurrentStakerPoolDeposit"
-            :pool-id="poolId"
-          />
-
-          <stake-form
-            v-else-if="isCurrentStakerPool && !hasCurrentStakerPoolDeposit"
-            :pool-id="poolId"
-          />
-
-          <staked-state
-            v-else-if="isCurrentStakerPool && hasCurrentStakerPoolDeposit"
-            :pool-id="poolId"
-          />
-
-          <migrate-form
-            v-else-if="canMigrateToNextPool"
-            :pool-id="poolId"
-          />
-
-          <div
-            v-else
-            class="flex-1 flex justify-center items-center"
-          >
-            <disable-pool-state
-              :pool-id="poolId"
-              v-memo="[poolId]"
-              class="w-full"
-            />
-          </div>
+  <section
+    class="staking-widget min-h-full h-auto relative z-ui-page-content page-content flex flex-col justify-center"
+  >
+    <div class="flex-1 flex flex-col justify-between space-y-32">
+      <div class="flex-1 flex flex-col">
+        <div class="text-12 text-white/60 mb-8 py-2 flex items-start cursor-default">
+          <div class="w-20 h-20 border border-white rounded-full mr-8 flex-grow-0 flex-shrink-0" />
+          {{ poolInfo.page.description }}
         </div>
 
-        <div>
-          <pool-tvl
-            :pool-id="poolId"
-            class="mb-24"
+        <h2 class="title text-ui-page-title uppercase font-title mb-8 leading-140 cursor-default">
+          {{ poolInfo.name }} <span class="opacity-60">staking {{ poolInfo.page.objectTypeName }}</span>
+        </h2>
+
+        <p class="text-ui-page-description text-white/40 leading-125 mb-20 cursor-default">
+          Fixed APY:
+          <span class="text-yellow text-opacity-80">{{ apyStr }}</span>
+        </p>
+
+        <div
+          v-if="!isStakerLoaded"
+          class="flex flex-1 justify-center items-center py-48"
+        >
+          <ui-galaxy-loader />
+        </div>
+
+        <div
+          v-else-if="isCompletedPool"
+          class="flex-1 flex justify-center items-center mb-20"
+        >
+          <completed-pool
+            :pool-id="poolState.id"
+            class="w-full"
           />
-          <div class="text-14 mb-32">{{ poolInfo.page.aboutPool }}</div>
-          <token-info />
+        </div>
+
+        <staking-finished
+          v-else-if="isCurrentStakerPoolFinished && isCurrentStakerPool && hasCurrentStakerPoolDeposit"
+          :pool-id="poolId"
+        />
+
+        <stake-form
+          v-else-if="isCurrentStakerPool && !hasCurrentStakerPoolDeposit"
+          :pool-id="poolId"
+        />
+
+        <staked-state
+          v-else-if="isCurrentStakerPool && hasCurrentStakerPoolDeposit"
+          :pool-id="poolId"
+        />
+
+        <migrate-form
+          v-else-if="canMigrateToNextPool"
+          :pool-id="poolId"
+        />
+
+        <div
+          v-else
+          class="flex-1 flex justify-center items-center"
+        >
+          <disable-pool-state
+            :pool-id="poolId"
+            v-memo="[poolId]"
+            class="w-full"
+          />
         </div>
       </div>
-    </section>
-  </div>
+
+      <div>
+        <pool-tvl
+          :pool-id="poolId"
+          class="mb-24"
+        />
+        <div class="text-14 mb-32">{{ poolInfo.page.aboutPool }}</div>
+        <token-info />
+      </div>
+    </div>
+  </section>
 </template>
 
 <script lang="ts">
   import { FetchingStatus } from '@/entities/common'
   import { computed, defineComponent, toRef } from 'vue'
-  import { useI18n } from 'vue-i18n'
   import { useEthers } from '@/hooks/dapp/useEthers'
   import { usePercentFormat } from '@/hooks/formatters/usePercentFormat'
   import { usePool } from '@/store/hooks/usePool'
@@ -105,7 +97,6 @@
   import StakerInfo from './components/StakerInfo.vue'
   import StakedState from './components/StakedState'
   import DisablePoolState from './components/DisablePoolState.vue'
-  import PoolBg from './components/PoolBg.vue'
 
   export default defineComponent({
     name: 'staking-widget',
@@ -117,7 +108,6 @@
       },
     },
     setup(props) {
-      const { t } = useI18n()
       const poolId = toRef(props, 'poolId')
       const poolState = usePool(poolId)
       const apy = computed(() => poolState.value.apy)
@@ -176,18 +166,15 @@
       StakedState,
       DisablePoolState,
       UiGalaxyLoader,
-      PoolBg,
     },
   })
 </script>
 
-<style lang="postcss">
-  .pool-page {
-    min-height: 100% !important; /* browser fill */
-    height: auto;
-  }
-
-  .pool-page > .staking-widget {
+<style
+  lang="postcss"
+  scoped
+>
+  .staking-widget {
     max-width: 321px;
   }
 </style>

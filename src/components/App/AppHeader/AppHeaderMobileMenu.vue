@@ -69,6 +69,6 @@
 
 <style>
   .app-header-mobile-menu-content {
-    padding-top: calc(var(--app-ui-header-base-height) + var(--app-ui-header-scroll-padding));
+    padding-top: calc(var(--app-ui-header-height) + var(--app-ui-header-padding));
   }
 </style>

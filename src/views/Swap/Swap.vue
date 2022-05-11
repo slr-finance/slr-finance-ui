@@ -1,6 +1,8 @@
 <template>
-  <div class="flex flex-col min-h-full p-ui-page-spacing justify-between items-center relative z-ui-page-content">
-    <div class="page-padding swap-page-content">
+  <div
+    class="flex flex-1 flex-col min-h-full px-ui-page-spacing pt-ui-page-header-spacing pb-ui-page-bottom-spacing justify-between items-center relative z-ui-page-content"
+  >
+    <div class="swap-page-content">
       <div
         v-once
         class="875:text-center text-left"
@@ -58,8 +60,5 @@
   .swap-page-content {
     max-width: 488px;
     width: 100%;
-  }
-  .page-padding {
-    padding-top: calc(var(--app-ui-header-base-height) + var(--app-ui-header-scroll-padding));
   }
 </style>

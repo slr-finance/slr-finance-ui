@@ -29,11 +29,11 @@
 </template>
 
 <script lang="ts">
-  import { computed, defineComponent, ref, unref } from 'vue'
+  import { computed, defineComponent } from 'vue'
   import UiIcon from '@/components/ui/UiIcon.vue'
   import { useTokenAmountFormat } from '@/hooks/formatters/useTokenAmountFormat'
   import { stakingModule } from '@/store/modules/stakingModule'
-  import { useStore } from 'vuex'
+  import { store } from '@/store/store'
 
   export default defineComponent({
     name: 'pool-tvl',
@@ -44,7 +44,6 @@
       },
     },
     setup(props) {
-      const store = useStore()
       stakingModule.register(store)
       const poolState = computed(() => stakingModule.getters.getPool(props.poolId))
       const totalStaked = computed(() => poolState.value.totalStaked)

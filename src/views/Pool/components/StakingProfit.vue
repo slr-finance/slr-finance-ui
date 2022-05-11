@@ -16,7 +16,6 @@
   import { useProfit } from '../hooks/useProfit'
   import { usePercentFormat } from '@/hooks/formatters/usePercentFormat'
   import BigNumber from 'bignumber.js'
-  import { useI18n } from 'vue-i18n'
 
   export default defineComponent({
     name: 'staking-profit',
@@ -35,7 +34,6 @@
       },
     },
     setup(props) {
-      const { t } = useI18n()
       const poolState = usePool(toRef(props, 'poolId'))
       const amount = toRef(props, 'amount')
 
@@ -43,7 +41,7 @@
       const daysStr = computed(() => {
         const daysValue = days.value
 
-        return t('common.days', [daysValue], daysValue)
+        return `${daysValue} days`
       })
 
       const apr = computed(() => poolState.value.apr)

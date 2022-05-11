@@ -25,7 +25,6 @@
 
 <script lang="ts">
   import { defineComponent } from 'vue'
-  import { i18nRouteHelper } from '@/i18n'
   import { linksList } from './linksList'
 
   export default defineComponent({

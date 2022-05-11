@@ -3,27 +3,27 @@ import { POOLS_INFO } from '../config/constants/Pools'
 
 export const routes: RouteRecordRaw[] = [
   {
-    path: '/:locale?',
+    path: '/',
     name: 'dashboard',
     component: () => import('@/views/Dashboard/Dashboard.vue'),
   },
   {
-    path: '/:locale?/presale',
+    path: '/presale',
     name: 'presale',
     component: () => import('@/views/Presale'),
   },
   {
-    path: '/:locale?/referral',
+    path: '/referral',
     name: 'referral',
     component: () => import('@/views/Referral'),
   },
   {
-    path: '/:locale?/swap',
+    path: '/swap',
     name: 'swap',
     component: () => import('@/views/Swap/Swap.vue'),
   },
   {
-    path: '/:locale?/pool',
+    path: '/pool',
     name: 'pool',
     component: () => import('@/views/Pool/PoolLayout.vue'),
     props: (to) => to.meta,

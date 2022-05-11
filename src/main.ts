@@ -9,7 +9,6 @@ import App from '@/App.vue'
 import '@/index.css'
 import { store } from '@/store/store'
 import { REFERRER_QUERY_PARAM, REFERRER_STORAGE_NAME } from '@/config/constants/referrals'
-import { i18n, i18nRouteHelperPlugin } from './i18n'
 
 // Referral [BEGIN]
 let referrer: string | null = localStorage.getItem(REFERRER_STORAGE_NAME)
@@ -33,7 +32,7 @@ window.history.replaceState({}, '', `${url.pathname.toString()}${url.search}`)
 // Referral [END]
 
 // Mount app [BEGIN]
-const app = createApp(App).use(i18n).use(i18nRouteHelperPlugin).use(router).use(Toast, { position: POSITION.TOP_LEFT })
+const app = createApp(App).use(router).use(Toast, { position: POSITION.TOP_LEFT })
 
 app.mount('#app')
 // Mount app [END]

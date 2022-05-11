@@ -1,14 +1,14 @@
 <template>
   <nav
     ref="root"
-    class="pools-list flex justify-center items-center"
+    class="pools-list"
     :class="classList"
   >
     <div
       ref="nav"
-      class="nav rounded-24 bg-white bg-opacity-[0.082]"
+      class="nav"
     >
-      <ul class="space-y-16 p-16 my-16">
+      <ul class="list">
         <li
           v-for="link in poolsLinks"
           :key="link.to.name"
@@ -20,7 +20,7 @@
           >
             <ui-icon
               :name="link.icon"
-              size="28"
+              :size="iconSize"
             />
           </router-link>
         </li>
@@ -30,10 +30,12 @@
 </template>
 
 <script lang="ts">
-  import { computed, defineComponent } from 'vue'
+  import { defineComponent, watch } from 'vue'
   import { POOLS_INFO } from '@/config/constants/Pools'
-  import { templateRef, useElementSize, useWindowSize } from '@vueuse/core'
+  import { computedEager, templateRef, useElementSize, useWindowSize } from '@vueuse/core'
   import UiIcon from '@/components/ui/UiIcon.vue'
+  import { useHeader } from '@/components/App/AppHeader/hooks/useHeader'
+  import { useMobileBottomNavigation } from '@/components/App/AppMobileBottomNavigation/hooks/useMobileBottomNavigation'
 
   const poolsLinks = POOLS_INFO.map((pool) => {
     return {
@@ -45,38 +47,96 @@
 
   export default defineComponent({
     name: 'pools-list',
-    setup() {
+    props: {
+      isMobile: {
+        type: Boolean,
+        default: true,
+      },
+    },
+    setup(props) {
+      const { size: headerSize } = useHeader()
+      const { size: bottomNavSize } = useMobileBottomNavigation()
+      const navElement = templateRef('nav')
       const { height } = useWindowSize()
-      const navEl = templateRef('nav')
-      const { height: navHeight } = useElementSize(navEl)
-      const classList = computed(() => {
-        if (height.value - 140 > navHeight.value) {
-          return '-fixed'
-        }
+      const { height: navHeight } = useElementSize(navElement, { width: 0, height: 0 }, { box: 'border-box' })
+      const classList = computedEager(() => {
+        const { value: bottomNavSizeVal } = bottomNavSize
+        const { value: headerSizeVal } = headerSize
+        const isFixed =
+          height.value -
+            headerSizeVal.height -
+            headerSizeVal.offset -
+            bottomNavSizeVal.height -
+            bottomNavSizeVal.offset >
+          navHeight.value
+
+        return `${isFixed ? '-fixed' : ''} ${props.isMobile ? '-mobile' : ''}`
       })
 
-      return { poolsLinks, classList }
+      const iconSize = computedEager(() => (props.isMobile ? 22 : 28))
+
+      watch(
+        navHeight,
+        (navHeightVal) => {
+          const { value: navElementVal } = navElement
+
+          if (navElementVal) {
+            navElementVal.style.setProperty('--nav-height', `${navHeightVal}px`)
+          }
+        },
+        { immediate: true },
+      )
+
+      return { poolsLinks, classList, iconSize }
     },
     components: { UiIcon },
   })
 </script>
 
 <style lang="postcss">
-  .pools-list {
-    width: 72px;
-    padding-top: 130px;
+  .pools-list > .nav {
+    @apply bg-white bg-opacity-[0.082];
   }
+
+  .pools-list:not(.-mobile) {
+    @apply w-72;
+  }
+
+  .pools-list.-mobile {
+    width: 52px;
+  }
+
+  .pools-list:not(.-mobile) > .nav {
+    @apply rounded-24;
+  }
+
+  .pools-list.-mobile > .nav {
+    @apply rounded-r-12;
+  }
+
+  .pools-list:not(.-mobile) > .nav > .list {
+    @apply space-y-16 px-16 py-32;
+  }
+
+  .pools-list.-mobile > .nav > .list {
+    @apply space-y-12 py-16;
+
+    padding-left: 9px;
+    padding-right: 9px;
+  }
+
   .pools-list.-fixed > .nav {
     position: fixed;
-    top: 50%;
-    transform: translateY(
+    top: max(
       calc(
-        -50% + var(--app-ui-header-base-height) - (
-            var(--app-ui-header-scroll-padding) + var(--app-ui-header-scroll-factor) *
-              var(--app-ui-header-scroll-padding)
-          ) / 2
-      )
+        (
+            100% - var(--app-ui-header-height) - var(--app-ui-header-offset) - var(--nav-height, 550px) -
+              var(--app-ui-bottom-nav-height) + var(--app-ui-bottom-nav-offset)
+          ) / 2 + var(--app-ui-header-height)
+      ),
+      calc(var(--app-ui-header-height) + var(--app-ui-header-offset))
     );
+    transform: translateY(calc(var(--app-ui-header-scroll-padding) * var(--app-ui-header-scroll-factor, 0) * -0.5));
   }
 
   .pools-list.-sticky {
