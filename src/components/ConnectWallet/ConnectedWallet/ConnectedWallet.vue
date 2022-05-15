@@ -1,7 +1,5 @@
 <template>
-  <div
-    class="bg-black/50 text-12 leading-none rounded-12 text-white pl-16 pr-6 h-48 flex justify-center items-center"
-  >
+  <div class="bg-black/50 text-12 leading-none rounded-12 text-white pl-16 pr-6 h-48 flex justify-center items-center">
     <div v-if="isBalanceLoaded">{{ balanceStr }}</div>
     <div
       class="ml-8 bg-black text-white/60 rounded-10 h-36 px-8 flex justify-center items-center"

@@ -1,5 +1,5 @@
 <template>
-  <div class="pt-64 px-ui-page-spacing mt-64 flex relative z-ui-page-content">
+  <div class="px-ui-page-spacing pt-ui-page-header-spacing pb-ui-page-bottom-spacing flex relative z-ui-page-content">
     <div
       v-if="isShownBackButton"
       class="pr-ui-page-spacing flex-shrink-0 w-72 box-content flex justify-center items-start"

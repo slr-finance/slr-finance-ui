@@ -1,9 +1,0 @@
-{
-  "common": {
-    "time": "Time",
-    "days": "{0} day|{0} days"
-  },
-  "pool": {
-    "fixedApy": "Fixed APY: {0}"
-  }
-}

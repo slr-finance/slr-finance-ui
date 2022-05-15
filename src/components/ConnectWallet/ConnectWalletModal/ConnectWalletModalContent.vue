@@ -57,11 +57,11 @@
 </template>
 
 <script lang="ts">
+  import type { IQRCodeModal } from '@walletconnect/types'
   import { defineComponent, onMounted, ref, watch } from 'vue'
   import { useVModel } from '@vueuse/core'
   import { useWallet } from '@/hooks/dapp/useWallet'
   import { NETWORK_DETAILS } from '@/config/constants/chain'
-  import { IQRCodeModal } from '@walletconnect/types'
   import UiQr from '@/components/ui/UiQr.vue'
   import UiGalaxyLoader from '@/components/ui/UiGalaxyLoader.vue'
   import { useConnectWalletModal } from '../hooks/useConnectWalletModal'

@@ -55,16 +55,12 @@
   import StakingProfit from './StakingProfit.vue'
   import { usePool } from '@/store/hooks/usePool'
   import { useSlrBalance } from '@/store/hooks/useBalance'
-  import { usePercentFormat } from '@/hooks/formatters/usePercentFormat'
   import { useStake } from '../hooks/useStake'
   import SendTxButton from '@/components/Tx/SendTxButton.vue'
-  import { FetchingStatus } from '@/entities/common'
   import BigNumber from 'bignumber.js'
   import TimelockInput from './TimelockInput.vue'
   import contractsAddresses from '@/config/constants/contractsAddresses.json'
-  import { useI18n } from 'vue-i18n'
   import { useStaker } from '@/store/hooks/useStaker'
-  import { useUnstakeWithFee } from '../hooks/useUnstakeWithFee'
 
   export default defineComponent({
     name: 'stake-form',
@@ -75,21 +71,19 @@
       },
     },
     setup(props) {
-      const { t } = useI18n()
       const poolState = usePool(toRef(props, 'poolId'))
-      const [stakerState, refetchStaker] = useStaker()
+      const [, refetchStaker] = useStaker()
 
       const [slrBalanceInfo, refetchBalance] = useSlrBalance()
       const slrBalance = computed(() => slrBalanceInfo.value.balance)
       const poolId = computed(() => poolState.value.id)
       const amount = ref(new BigNumber(0)) as Ref<BigNumber>
-      const isChanged = ref(false)
 
       const days = ref(poolState.value.maxDays)
       const daysStr = computed(() => {
         const daysValue = days.value
 
-        return t('common.days', [daysValue], daysValue)
+        return `${daysValue} days`
       })
 
       const refetchBalanceAndStakerState = () => Promise.all([refetchStaker(), refetchBalance()])
@@ -97,7 +91,6 @@
       watch(stakeTxState, ({ isSuccess }) => isSuccess && refetchBalanceAndStakerState())
 
       return {
-        t,
         amount,
         days,
         handleStake,

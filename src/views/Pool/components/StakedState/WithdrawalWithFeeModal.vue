@@ -54,13 +54,11 @@
   import { useRouter } from 'vue-router'
   import { useVModel } from '@vueuse/core'
   import { POOLS_INFO } from '@/config/constants/Pools'
-  import { i18nRouteHelper } from '@/i18n'
   import { usePercentFormat } from '@/hooks/formatters/usePercentFormat'
   import { usePool } from '@/store/hooks/usePool'
   import { useStaker } from '@/store/hooks/useStaker'
   import { useSlrBalance } from '@/store/hooks/useBalance'
   import { useTokenAmountFormat } from '@/hooks/formatters/useTokenAmountFormat'
-  import { BIG_ONE } from '@/utils/bigNumber'
   import SendTxButton from '@/components/Tx/SendTxButton.vue'
   import UiPlaceholder from '@/components/ui/UiPlaceholder.vue'
   import UiIcon from '@/components/ui/UiIcon.vue'
@@ -101,7 +99,7 @@
       const handleUnstaked = async () => {
         Promise.all([refetchStaker(), refetchBalance()])
         isOpenModal.value = false
-        router.push(i18nRouteHelper({ name: POOLS_INFO[0].routeName }))
+        router.push({ name: POOLS_INFO[0].routeName })
       }
       watch(unstakeWithFeeTxState, ({ isSuccess }) => isSuccess && handleUnstaked())
 

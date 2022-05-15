@@ -18,7 +18,7 @@
       />
       <ui-button
         v-if="nextPoolId > poolId"
-        :to="i18nRouteHelper({ name: nextPool.routeName })"
+        :to="{ name: nextPool.routeName }"
         class="mb-12 w-full"
         variant="violet"
         size="48"

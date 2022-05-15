@@ -3,8 +3,8 @@
     :size="buttonSize"
     :text="connectWalletText"
   >
-    <connected-wallet-mobile v-if="isMobile"/>
-    <connected-wallet v-else/>
+    <connected-wallet-mobile v-if="isMobile" />
+    <connected-wallet v-else />
   </connect-wallet-plug>
 </template>
 

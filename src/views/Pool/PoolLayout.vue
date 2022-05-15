@@ -1,29 +1,38 @@
 <template>
-  <div class="px-ui-page-spacing pb-ui-page-spacing flex flex-1 min-h-full bg-black">
-    <div
-      v-if="isShownPoolsList"
-      class="mr-ui-page-spacing relative z-ui-page-content w-72"
-    >
-      <pools-list />
+  <div
+    class="pr-ui-page-spacing pb-ui-page-bottom-spacing pt-ui-page-header-spacing flex flex-1 min-h-full bg-black"
+    :class="{ 'pl-ui-page-spacing': isDesktopLayout }"
+  >
+    <div class="mr-ui-page-spacing z-ui-page-content">
+      <pools-list :is-mobile="!isDesktopLayout" />
     </div>
 
-    <div class="flex-1 page-padding">
-      <router-view v-slot="{ Component }">
+    <div class="flex-1">
+      <router-view
+        v-slot="{ Component }"
+        v-if="poolId"
+      >
         <transition
           name="pool-page-transition"
           mode="out-in"
         >
-          <component
-            :is="Component"
-            :key="$route.name"
-          />
+          <div
+            class="min-h-full h-auto flex"
+            :key="$route.name || 'none'"
+          >
+            <pool-bg
+              v-if="isDesktopLayout && poolId"
+              :pool-id="poolId"
+            />
+            <component :is="Component" />
+          </div>
         </transition>
       </router-view>
     </div>
 
     <div
       v-if="isShownPoolsNav"
-      class="page-padding flex flex-col justify-between items-end"
+      class="flex flex-col justify-between items-end"
     >
       <pools-navigation
         v-memo="[poolId]"
@@ -44,18 +53,6 @@
   import { useRoute, useRouter } from 'vue-router'
   import { useBreakpoints } from '@vueuse/core'
   import { POOLS_INFO } from '@/config/constants/Pools'
-
-  const PoolsList = defineAsyncComponent(() => {
-    return import('./components/PoolsList.vue')
-  })
-
-  const PoolsNavigation = defineAsyncComponent(() => {
-    return import('./components/PoolsNavigation.vue')
-  })
-
-  const PoolsMap = defineAsyncComponent(() => {
-    return import('./components/PoolsMap.vue')
-  })
 
   export default defineComponent({
     props: {
@@ -88,22 +85,23 @@
         { immediate: true },
       )
 
-      const { isShownPoolsMap, isShownPoolsNav, isShownPoolsList } = useBreakpoints({
+      const { isShownPoolsMap, isShownPoolsNav, isDesktopLayout } = useBreakpoints({
         isShownPoolsMap: 1000,
         isShownPoolsNav: 641,
-        isShownPoolsList: 541,
+        isDesktopLayout: 541,
       })
 
       return {
         isShownPoolsMap,
         isShownPoolsNav,
-        isShownPoolsList,
+        isDesktopLayout,
       }
     },
     components: {
-      PoolsList,
-      PoolsNavigation,
-      PoolsMap,
+      PoolsList: defineAsyncComponent(() => import('./components/PoolsList.vue')),
+      PoolsNavigation: defineAsyncComponent(() => import('./components/PoolsNavigation.vue')),
+      PoolsMap: defineAsyncComponent(() => import('./components/PoolsMap.vue')),
+      PoolBg: defineAsyncComponent(() => import('./components/PoolBg.vue')),
     },
   })
 </script>
@@ -112,9 +110,6 @@
   lang="postcss"
   scoped
 >
-  .page-padding {
-    margin-top: calc(var(--app-ui-header-base-height) + var(--app-ui-header-scroll-padding) + 80px);
-  }
   .pool-page-transition-enter-active {
     transition: all 0.3s ease-out;
   }
