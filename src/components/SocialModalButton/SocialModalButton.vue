@@ -3,19 +3,12 @@
     v-model="isOpen"
     label="telegrams chats and channels"
   >
-    <div class="flex justify-center items-center">
-      <transition
-        name="fade"
-        mode="out-in"
-      >
-        <social-modal-content @click-to-link="close" />
-      </transition>
-    </div>
+    <social-modal-content @click-to-link="close" />
   </ui-modal>
 
   <button
     type="button"
-    class="social-modal-button flex justify-center items-center fixed bottom-ui-page-spacing right-ui-page-spacing z-10 h-50 w-50 before:block before:content-[''] before:w-8 before:h-8 before:rounded-full before:bg-violet before:absolute before:right-0 before:top-0 after:block after:content-[''] after:w-full after:h-full after:rounded-12 after:absolute after:right-0 after:top-0 after:-z-1 after:transition-opacity duration-200"
+    class="social-modal-button flex justify-center items-center fixed bottom-ui-page-bottom-spacing right-ui-page-spacing z-10 h-50 w-50 before:block before:content-[''] before:w-8 before:h-8 before:rounded-full before:bg-violet before:absolute before:right-0 before:top-0 after:block after:content-[''] after:w-full after:h-full after:rounded-12 after:absolute after:right-0 after:top-0 after:-z-1 after:transition-opacity duration-200"
     @click="open"
   >
     <ui-icon
