@@ -26,62 +26,56 @@
       @input="handleTypeOutput"
     />
 
-    <div
-      class="h-48 flex justify-center items-center rounded-10 bg-gray bg-opacity-30 text-12 text-white text-opacity-60 cursor-default"
-      v-if="isInsufficientLiquidity || isZeroAmount"
-    >
-      {{ isZeroAmount ? 'Enter an amount' : 'Insufficient liquidity for this trade' }}
+    <trade-price
+      :swap-params="swapParams"
+      class="mb-12"
+      v-if="!isZeroAmount && !isInsufficientLiquidity"
+    />
+    <div class="mb-20">
+      <connect-wallet-plug text="Connect wallet to trade">
+        <approve-token-plug
+          :text="`Enable ${swapParams.tokenInSymbol}`"
+          :minAllowance="amountIn"
+          :tokenAddress="swapParams.tokenIn"
+          :spenderAddress="routerAddress"
+        >
+          <send-tx-button
+            @click="handleSwap"
+            :txState="swapTxState"
+            :disabled="isDissableSwapButton"
+            class="w-full"
+            size="48"
+            variant="violet"
+          >
+            {{ swapButtonText }}
+          </send-tx-button>
+        </approve-token-plug>
+      </connect-wallet-plug>
     </div>
 
-    <template v-else>
-      <trade-price
+    <div
+      class="text-12"
+      v-if="!isZeroAmount && !isInsufficientLiquidity"
+    >
+      <div class="flex justify-between items-center mb-12">
+        <div class="text-white text-opacity-60">Swap Fee</div>
+        {{ swapFeeStr }}
+      </div>
+      <trade-info
         :swap-params="swapParams"
         class="mb-12"
       />
-      <div class="mb-20">
-        <connect-wallet-plug text="Connect wallet to trade">
-          <approve-token-plug
-            text="Enable"
-            :minAllowance="amountIn"
-            :tokenAddress="swapParams.tokenIn"
-            :spenderAddress="routerAddress"
-          >
-            <send-tx-button
-              @click="handleSwap"
-              :txState="swapTxState"
-              :disabled="false"
-              class="w-full"
-              size="48"
-              variant="violet"
-            >
-              Swap {{ swapParams.tokenInSymbol }} to {{ swapParams.tokenOutSymbol }}
-            </send-tx-button>
-          </approve-token-plug>
-        </connect-wallet-plug>
-      </div>
-
-      <div class="text-12">
-        <div class="flex justify-between items-center mb-12">
-          <div class="text-white text-opacity-60">Swap Fee</div>
-          {{ swapFeeStr }}
-        </div>
-        <trade-info
-          :swap-params="swapParams"
-          class="mb-12"
-        />
-        <price-impact
-          :price-impact="priceImpact"
-          class="mb-12"
-        />
-      </div>
-    </template>
+      <price-impact
+        :price-impact="priceImpact"
+        class="mb-12"
+      />
+    </div>
   </form>
 </template>
 
 <script lang="ts">
-  import { defineComponent, computed, watch } from 'vue'
+  import { defineComponent, watch, watchEffect, ref } from 'vue'
   import contractsAddresses from '@/config/constants/contractsAddresses.json'
-  import { useEthers } from '@/hooks/dapp/useEthers'
 
   import UiBalanceInput from '@/components/ui/UiBalanceInput.vue'
   import UiButton from '@/components/ui/UiButton.vue'
@@ -92,9 +86,9 @@
 
   import { usePercentFormat } from '@/hooks/formatters/usePercentFormat'
 
-  import { useSlrBalance } from '@/store/hooks/useBalance'
   import { useSwapTx } from '../hooks/useSwapTx'
   import { useSwap } from '../hooks/useSwap'
+  import { useSwapTokensBalance } from '../hooks/useSwapTokensBalance'
   import PriceImpact from './PriceImpact.vue'
   import TradeInfo from './TradeInfo.vue'
   import TradePrice from './TradePrice.vue'
@@ -119,24 +113,49 @@
         priceImpact,
         slippage,
         swapFee,
+        isInitalStateFetched,
       } = useSwap()
 
-      const { balance: bnbBalance, fetchBalance: fetchBnbBalance } = useEthers()
-      const [slrTokenInfo, fetchBalance] = useSlrBalance()
-
+      const [tokensBalances, refetchBalances] = useSwapTokensBalance(swapParams)
       const [handleSwap, swapTxState] = useSwapTx(swapParams)
 
       // Refetch balance and pair state after swap [BEGIN]
-      const refetchBalanceAndPairState = () => Promise.all([fetchPairState(), fetchBalance(), fetchBnbBalance()])
+      const refetchBalanceAndPairState = () => Promise.all([fetchPairState(), refetchBalances()])
 
       watch(swapTxState, ({ isSuccess }) => isSuccess && refetchBalanceAndPairState())
       // Refetch balance and pair state after swap [END]
 
-      const tokensBalances = computed(() =>
-        swapParams.value.tokenIn === contractsAddresses.SolarToken
-          ? { in: slrTokenInfo.value.balance, out: bnbBalance.value }
-          : { out: slrTokenInfo.value.balance, in: bnbBalance.value },
-      )
+      // Swap button [BEGIN]
+      const swapButtonText = ref('')
+      const isDissableSwapButton = ref(true)
+
+      watchEffect(() => {
+        const {
+          value: { in: tokenInBalance },
+        } = tokensBalances
+        const {
+          value: { tokenInSymbol, tokenOutSymbol },
+        } = swapParams
+        let text = ''
+        let disabled = true
+
+        if (!isInitalStateFetched.value) {
+          text = `Fetching blockchain data`
+        } else if (tokenInBalance.lt(amountIn.value)) {
+          text = `Insufficient ${tokenInSymbol} balance`
+        } else if (isZeroAmount.value) {
+          text = 'Enter an amount'
+        } else if (isInsufficientLiquidity.value) {
+          text = 'Insufficient liquidity for this trade'
+        } else {
+          text = `Swap ${tokenInSymbol} to ${tokenOutSymbol}`
+          disabled = false
+        }
+
+        swapButtonText.value = text
+        isDissableSwapButton.value = disabled
+      })
+      // Swap button [END]
 
       const swapFeeStr = usePercentFormat(swapFee)
 
@@ -157,6 +176,8 @@
         handleSwap,
         swapTxState,
         tokensBalances,
+        swapButtonText,
+        isDissableSwapButton,
       }
     },
     components: {

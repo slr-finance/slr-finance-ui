@@ -82,6 +82,7 @@ export const useSwap = () => {
   const tokenInIconName = ref('bnb')
   const tokenOutIconName = ref('slr')
   const isInsufficientLiquidity = ref(false)
+  const isInitalStateFetched = ref(false)
   const priceImpact = ref(markRaw(new BigNumber(0))) as Ref<BigNumber>
   const amountIn = ref(markRaw(new BigNumber(0))) as Ref<BigNumber>
   const amountOut = ref(markRaw(new BigNumber(0))) as Ref<BigNumber>
@@ -129,6 +130,8 @@ export const useSwap = () => {
     } else {
       handleTypeOutput(amountOut.value)
     }
+
+    isInitalStateFetched.value = true
   }
 
   const swapParams: Ref<SwapParams> = ref({
@@ -228,5 +231,6 @@ export const useSwap = () => {
     amountOut,
     slippage,
     swapFee,
+    isInitalStateFetched,
   }
 }

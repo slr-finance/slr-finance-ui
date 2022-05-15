@@ -131,7 +131,7 @@
       calc(
         (
             100% - var(--app-ui-header-height) - var(--app-ui-header-offset) - var(--nav-height, 550px) -
-              var(--app-ui-bottom-nav-height) + var(--app-ui-bottom-nav-offset)
+              var(--app-ui-bottom-nav-height, 0px) + var(--app-ui-bottom-nav-offset, 0px)
           ) / 2 + var(--app-ui-header-height)
       ),
       calc(var(--app-ui-header-height) + var(--app-ui-header-offset))

@@ -36,10 +36,6 @@
         type: Object as PropType<BigNumber>,
         default: new BigNumber(0),
       },
-      approveAmount: {
-        type: Object as PropType<BigNumber>,
-        required: false,
-      },
       tokenAddress: {
         type: String,
         required: true,

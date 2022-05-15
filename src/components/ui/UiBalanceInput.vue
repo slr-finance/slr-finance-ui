@@ -143,7 +143,7 @@
   })
 </script>
 
-<style>
+<style lang="postcss">
   .ui-balance-input:hover {
     @apply border-opacity-40;
   }
