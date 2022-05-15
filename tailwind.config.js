@@ -72,7 +72,10 @@ module.exports = {
         DEFAULT: colors.violet['500'],
         ...colors.violet,
       },
-      yellow: colors.yellow,
+      yellow: {
+        DEFAULT: colors.yellow['500'],
+        ...colors.yellow
+      },
       pink: colors.pink,
       gray: {
         DEFAULT: colors.gray['500'],

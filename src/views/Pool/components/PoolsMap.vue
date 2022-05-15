@@ -97,6 +97,14 @@
     box-shadow: 0 0 0 2px theme('colors.violet.500') inset, 0 0 0 6px rgb(109 13 252 / 20%);
   }
 
+  .pools-map .pool.-active {
+    box-shadow: 0 0 0 0px theme('colors.yellow.500') inset, 0 0 0 0px rgb(109 13 252 / 20%);
+  }
+
+  .pools-map .pool.-active {
+    box-shadow: 0 0 0 2px theme('colors.yellow.500') inset, 0 0 0 6px rgb(109 13 252 / 20%);
+  }
+
   .pools-map .pool .pool-info {
     @apply absolute left-1/2 transform -translate-x-1/2 text-center;
   }
@@ -153,5 +161,10 @@
   .pools-map .pool.-active .pool-info::after,
   .pools-map .pool.-active .pool-info::before {
     @apply bg-violet;
+  }
+
+  .pools-map .pool:last-child.-active .pool-info::after,
+  .pools-map .pool:last-child.-active .pool-info::before {
+    @apply bg-yellow;
   }
 </style>

@@ -23,6 +23,8 @@ module.exports = {
     500: '#6D0DFC',
     600: '#650BEB',
   },
-  yellow: '#F2D700',
+  yellow: {
+    500: '#F2D700'
+  },
   pink: '#FF36DF',
 }
