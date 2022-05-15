@@ -19,18 +19,16 @@
     </div>
     <input
       class="input flex-1"
-      v-model="value"
-      :min="min"
-      :max="max"
-      :step="step"
+      @input="handleInput"
+      v-bind="inputProps"
       type="range"
     />
   </label>
 </template>
 
 <script lang="ts">
-  import { computed, defineComponent, vModelCheckbox } from 'vue'
-  import { useVModel } from '@vueuse/core'
+  import { computed, defineComponent } from 'vue'
+  import get from 'lodash.get'
 
   export default defineComponent({
     name: 'ui-input-range',
@@ -54,19 +52,28 @@
     },
     emits: ['update:value'],
     setup(props, { emit }) {
-      const value = computed({
-        set: (value) => (vModel.value = Number(value)),
-        get: () => vModel.value,
-      })
-      const vModel = useVModel(props, 'value', emit, { passive: true })
-      const percent = computed(() => (value.value - props.min) / (props.max - props.min))
+      const percent = computed(() => (props.value - props.min) / (props.max - props.min))
       const rangeStyleList = computed(() => ({
         transform: `translateX(${(percent.value - 1) * 100}%)`,
       }))
       const valueSide = computed(() => (percent.value > 0.5 ? 'left' : 'right'))
 
+      const handleInput = (event: Event) => {
+        emit('update:value', Number(get(event, ['target', 'value'], '0')))
+      }
+
+      const inputProps = computed(() => {
+        return {
+          value: props.value,
+          min: props.min,
+          max: props.max,
+          step: props.step,
+        }
+      })
+
       return {
-        value,
+        handleInput,
+        inputProps,
         rangeStyleList,
         valueSide,
       }

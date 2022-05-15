@@ -18,6 +18,7 @@
       <input
         class="bg-transparent leading-140 h-48 outline-none border-0 placeholder-white placeholder-opacity-60 pt-12 pl-16 pb-18 text-18 flex-1 min-w-64"
         v-model="valueStr"
+        inputmode="decimal"
         @input="handleInput"
       />
       <div
