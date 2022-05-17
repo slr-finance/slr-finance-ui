@@ -7,7 +7,10 @@
           Avb. <span class="text-violet">{{ bnbBalanceStr }}</span>
         </div>
       </div>
-      <ui-input-bn v-model:value="amountIn" class="mt-6">
+      <ui-input-bn
+        v-model:value="amountIn"
+        class="mt-6"
+      >
         <template #postfix>
           <div class="text-12 flex justify-center items-center space-x-8">
             <button
@@ -112,8 +115,8 @@
       const bnbBalanceStr = useTokenAmountFormat(bnbBalance, 'BNB')
 
       const handleSetMaxAmount = () => {
-        amountInStr.value = useTokenAmountFormat(bnbBalance).value;
-      };
+        amountInStr.value = useTokenAmountFormat(bnbBalance).value
+      }
 
       return {
         handleBuy,

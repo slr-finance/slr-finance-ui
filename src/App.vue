@@ -1,14 +1,13 @@
 <template>
-  <connected-wallet-modal />
-  <connect-wallet-modal />
-  <app-header :is-desktop="isDesktopLayout" />
-
   <div class="flex flex-col min-h-full">
     <router-view />
     <app-mobile-bottom-navigation v-if="!isDesktopLayout" />
   </div>
 
+  <app-header :is-desktop="isDesktopLayout" />
   <social-modal-button v-if="isDesktopLayout" />
+  <connected-wallet-modal />
+  <connect-wallet-modal />
 </template>
 
 <script lang="ts">

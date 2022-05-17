@@ -32,6 +32,7 @@ export type BuyPresaleTokenPayload = {
 export const usePresale = () => {
   const { address, signer } = useEthers()
   const isFetching = ref(false)
+  const phase = ref(undefined) as Ref<undefined | number>
   const tokenOutDecimals = ref(0)
   const tokenInDecimals = ref(0)
   const presaleTokenBalance = ref(new BigNumber(0)) as Ref<BigNumber>
@@ -43,6 +44,9 @@ export const usePresale = () => {
   const tokenOutAddress = ref('')
   const totalSupply = ref(new BigNumber(0)) as Ref<BigNumber>
   const joined = ref(false)
+
+  // TMP
+  phase.value = 0
 
   const handleFetchPresaleInfo = async () => {
     await runAsyncWithParamChecking(
@@ -189,5 +193,6 @@ export const usePresale = () => {
     totalSupply,
     joined,
     joinPresale,
+    phase,
   }
 }

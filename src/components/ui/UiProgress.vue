@@ -1,8 +1,18 @@
 <template>
-  <div class="progress-wrapper" :class="classList" role="progressbar">
-    <div class="progress" :style="progressStyleList"/>
-    <div class="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2" role="presentation">
-      <slot name="content"/>
+  <div
+    class="progress-wrapper"
+    :class="classList"
+    role="progressbar"
+  >
+    <div
+      class="progress"
+      :style="progressStyleList"
+    />
+    <div
+      class="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2"
+      role="presentation"
+    >
+      <slot name="content" />
     </div>
   </div>
 </template>
@@ -55,15 +65,15 @@
 </script>
 
 <style lang="postcss">
-.progress-wrapper {
-  @apply rounded-[35px] bg-black relative overflow-hidden;
-}
+  .progress-wrapper {
+    @apply rounded-[35px] bg-black relative overflow-hidden;
+  }
 
-.progress-wrapper.-size-24 {
-  @apply h-24;
-}
+  .progress-wrapper.-size-24 {
+    @apply h-24;
+  }
 
-.progress-wrapper.-default .progress {
-  @apply bg-green-original h-full;
-}
+  .progress-wrapper.-default .progress {
+    @apply bg-green-original h-full;
+  }
 </style>

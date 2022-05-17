@@ -28,6 +28,7 @@ module.exports = {
       72: '72px',
       80: '80px',
       'ui-page-spacing': 'var(--ui-page-spacing)',
+      'ui-page-inner-spacing': 'var(--ui-page-inner-spacing)',
       'ui-page-header-spacing': 'calc(var(--app-ui-header-height) + var(--app-ui-header-offset))',
       'ui-page-bottom-spacing': 'calc(var(--app-ui-bottom-nav-height, 0px) + var(--app-ui-bottom-nav-offset, 42px))',
       full: '100%',
@@ -131,6 +132,7 @@ module.exports = {
     },
     extend: {
       screens: {
+        500: '500px',
         600: '600px',
         875: '875px',
         375: '375px',

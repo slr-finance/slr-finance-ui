@@ -1,11 +1,23 @@
 <template>
-  <div class="pt-[126px] 875:px-0 px-16">
-    <div class="flex flex-col items-center max-w-[800px] mx-auto">
+  <div class="px-ui-page-spacing pt-ui-page-header-spacing pb-ui-page-bottom-spacing flex flex-col flex-1">
+    <div
+      class="w-full h-full flex-1 flex justify-center items-center"
+      v-if="isFetching"
+    >
+      <ui-galaxy-loader />
+    </div>
+    <div
+      v-else
+      class="flex flex-col items-center max-w-[800px] mx-auto"
+    >
       <div class="text-center">
-        <h1 class="text-38 text-white uppercase font-title">
-          <span class="text-gray">PHASE-1</span> space PRESALE
+        <h1 class="text-ui-page-title text-white uppercase font-title">
+          <span class="text-gray">phase-{{ phase }}</span>
+          space presale
         </h1>
-        <p class="text-gray max-w-[433px] mt-10">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.</p>
+        <p class="text-ui-page-description text-gray max-w-[433px] mt-10">
+          Three-phase ITO using "overflow" method to make sure everyone will have a spot in the presale.
+        </p>
       </div>
       <div class="875:flex w-full mt-24">
         <div class="flex-1">
@@ -39,6 +51,7 @@
   import PresaleForm from './components/PresaleForm.vue'
   import ConnectWalletPlug from '@/components/ConnectWallet/ConnectWalletPlug.vue'
   import UiButton from '@/components/ui/UiButton.vue'
+  import UiGalaxyLoader from '@/components/ui/UiGalaxyLoader.vue'
   import { usePresale } from './hooks/usePresale'
   import contractsAddresses from '@/config/constants/contractsAddresses.json'
   import DepositPresaleTokenForm from './components/DepositPresaleTokenForm.vue'
@@ -60,6 +73,7 @@
         endWhiteListBlock,
         tokenPrice,
         tokenOutAddress,
+        phase,
       } = usePresale()
 
       const [presaleTokenInfo] = useBalance(contractsAddresses.PresaleService)
@@ -71,6 +85,7 @@
       }
 
       return {
+        phase,
         isFetching,
         tokenOutAddress,
         isWhiteListClosed,
@@ -85,6 +100,14 @@
         tokenOutDecimals,
       }
     },
-    components: { PresaleForm, ConnectWalletPlug, UiButton, DepositPresaleTokenForm, PresaleDetails, PresaleInformation },
+    components: {
+      PresaleForm,
+      ConnectWalletPlug,
+      UiButton,
+      DepositPresaleTokenForm,
+      PresaleDetails,
+      PresaleInformation,
+      UiGalaxyLoader,
+    },
   })
 </script>
