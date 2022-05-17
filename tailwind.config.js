@@ -38,6 +38,7 @@ module.exports = {
       14: '14px',
       16: '16px',
       18: '18px',
+      24: '24px',
       28: '28px',
       38: '38px',
       40: '40px',
@@ -75,6 +76,7 @@ module.exports = {
         DEFAULT: colors.gray['500'],
         ...colors.gray,
       },
+      orange: colors.orange,
     },
     minWidth: {
       40: '40px',
