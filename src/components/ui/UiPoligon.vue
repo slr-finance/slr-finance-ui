@@ -49,7 +49,7 @@
       },
       variant: {
         validator: (value: string) =>
-          ['white', 'default', 'violet', 'green-original', 'green-atomic', 'yellow', 'red'].includes(value),
+          ['white', 'default', 'violet', 'green-original', 'green-atomic', 'yellow', 'red', 'orange'].includes(value),
         default: 'default',
       },
       opacity: {
@@ -82,7 +82,7 @@
   })
 </script>
 
-<style>
+<style lang="postcss">
   .ui-poligon.-opacity > .wrapper > .svg {
     @apply opacity-30;
   }
@@ -138,6 +138,13 @@
     @apply text-red;
   }
   .ui-poligon.-red > .wrapper > .content {
+    @apply text-white;
+  }
+
+  .ui-poligon.-orange > .wrapper {
+    @apply text-orange;
+  }
+  .ui-poligon.-orange > .wrapper > .content {
     @apply text-white;
   }
 
