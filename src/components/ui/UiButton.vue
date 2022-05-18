@@ -11,6 +11,15 @@
 
 <script lang="ts">
   import { computed, defineComponent, PropType } from 'vue'
+  import { RouteLocationRaw } from 'vue-router'
+
+  type ButtonProps = {
+    to?: RouteLocationRaw
+    type?: string 
+    href?: string 
+    disabled?: boolean,
+    class: Record<string, boolean>
+  }
 
   export default defineComponent({
     name: 'ui-button',
@@ -28,7 +37,7 @@
         default: 64,
       },
       to: {
-        type: Object,
+        type: Object as PropType<RouteLocationRaw>,
       },
       href: {
         type: String,
@@ -40,17 +49,29 @@
     },
     setup(props) {
       const componentProps = computed(() => {
-        return {
-          to: props.to ? props.to : undefined,
-          href: props.href ? props.href : undefined,
-          type: props.to || props.href ? undefined : props.type,
-          disabled: props.disabled,
+        const isLink = Boolean(props.to || props.href)
+        const buttonProps:ButtonProps = {
           class: {
             '-disabled': props.disabled,
             [`-size-${props.size}`]: true,
             [`-${props.variant}`]: true,
           },
         }
+
+        if (isLink) {
+          buttonProps.type = props.type
+          buttonProps.disabled = props.disabled
+        }
+
+        if (props.to) {
+          buttonProps.to = props.to
+        }
+
+        if (props.href) {
+          buttonProps.href = props.href
+        }
+
+        return buttonProps
       })
 
       const componentName = computed(() => {
