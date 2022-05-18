@@ -49,7 +49,6 @@
     },
     setup(props) {
       const componentProps = computed(() => {
-        const isLink = Boolean(props.to || props.href)
         const buttonProps:ButtonProps = {
           class: {
             '-disabled': props.disabled,
@@ -58,17 +57,13 @@
           },
         }
 
-        if (isLink) {
-          buttonProps.type = props.type
-          buttonProps.disabled = props.disabled
-        }
-
         if (props.to) {
           buttonProps.to = props.to
-        }
-
-        if (props.href) {
+        } else if (props.href) {
           buttonProps.href = props.href
+        } else {
+          buttonProps.type = props.type
+          buttonProps.disabled = props.disabled
         }
 
         return buttonProps
