@@ -1,6 +1,7 @@
 <template>
   <div class="rounded-12 bg-gray-800 bg-opacity-70 px-ui-page-inner-spacing py-24 relative">
     <ui-poligon
+      animated
       variant="violet"
       class="absolute top-0 right-0 transform translate-x-4 400:translate-x-8 600:translate-x-12 875:translate-x-18 -translate-y-18"
       >info</ui-poligon

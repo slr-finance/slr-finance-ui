@@ -103,7 +103,7 @@
   }
 
   .presale-details > .wrapper > .referral-widget {
-    width: 340px;
+    width: 337px;
   }
 
   .presale-details.-open > .toggle-button {
