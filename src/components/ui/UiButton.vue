@@ -15,9 +15,9 @@
 
   type ButtonProps = {
     to?: RouteLocationRaw
-    type?: string 
-    href?: string 
-    disabled?: boolean,
+    type?: string
+    href?: string
+    disabled?: boolean
     class: Record<string, boolean>
   }
 
@@ -49,7 +49,7 @@
     },
     setup(props) {
       const componentProps = computed(() => {
-        const buttonProps:ButtonProps = {
+        const buttonProps: ButtonProps = {
           class: {
             '-disabled': props.disabled,
             [`-size-${props.size}`]: true,

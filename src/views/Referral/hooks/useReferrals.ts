@@ -8,10 +8,7 @@ import contractsAddresses from '@/config/constants/contractsAddresses.json'
 import { BigNumber as BigNumberEthers } from 'ethers'
 import { runAsyncWithParamChecking } from '@/hooks/runAsyncWithParamChecking'
 import dayjs from 'dayjs'
-import localizedFormat from 'dayjs/plugin/localizedFormat'
 import type { Result } from 'ethers/lib/utils'
-
-dayjs.extend(localizedFormat)
 
 interface ReferralInfoRaw extends Result {
   account: string
@@ -74,7 +71,7 @@ export const useReferrals = () => {
                   address: account,
                   shortAddress: shortenAddress(account),
                   timestamp,
-                  dateStr: date.format('DD.MM.YY'),
+                  dateStr: date.format('YYYY-MM-DD'),
                   timeStr: date.format('HH:MM'),
                 }
               }),

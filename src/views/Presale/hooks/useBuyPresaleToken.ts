@@ -7,20 +7,14 @@ import BigNumber from 'bignumber.js'
 import { MaybeRef } from '@vueuse/core'
 import { bigToWei } from '@/utils/bigNumber'
 
-export const useBuyPresaleToken = (
-  amountIn: MaybeRef<BigNumber>,
-  amountOut: MaybeRef<BigNumber>,
-  tokenInDecimals: MaybeRef<number>,
-  tokenOutDecimals: MaybeRef<number>,
-) => {
+export const useBuyPresaleToken = (amountIn: MaybeRef<BigNumber>, amountOut: MaybeRef<BigNumber>) => {
   const { signer } = useEthers()
   const referrer = getReferrerFromLocalstorage()
   const presaleContract = computed(() => getPresaleContract(unref(signer)))
-  const params = computed(() => [
-    bigToWei(unref(amountIn), unref(tokenInDecimals)),
-    bigToWei(unref(amountOut), unref(tokenOutDecimals)),
-    referrer,
-  ])
+  const params = computed(() => [bigToWei(unref(amountOut), 18), referrer])
+  const options = computed(() => ({
+    value: bigToWei(unref(amountIn), 18),
+  }))
 
-  return useSendTx(presaleContract, 'buy', params)
+  return useSendTx(presaleContract, 'buy', params, options)
 }

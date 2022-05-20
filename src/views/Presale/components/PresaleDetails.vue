@@ -1,6 +1,6 @@
 <template>
   <div
-    class="presale-details bg-gray-300 bg-opacity-50 rounded-12 overflow-hidden relative w-full"
+    class="presale-details bg-gray-300 bg-opacity-80 rounded-12 overflow-hidden relative w-full"
     :class="classList"
   >
     <div class="wrapper px-ui-page-inner-spacing items-start">
@@ -44,7 +44,7 @@
           </li>
         </ul>
       </div>
-      <presale-referral-program-widget class="referral-widget flex-shrink-0 mt-[22px]" />
+      <presale-referral-program-widget class="referral-widget flex-shrink-0 my-24" />
     </div>
     <button
       class="toggle-button w-full text-gray text-11 uppercase h-[44px] bottom-0 backdrop-blur-4"
@@ -86,7 +86,10 @@
   })
 </script>
 
-<style scoped>
+<style
+  lang="postcss"
+  scoped
+>
   .presale-details {
     overflow-anchor: none;
   }

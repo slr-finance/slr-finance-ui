@@ -18,12 +18,10 @@
           <span class="text-yellow text-opacity-80">{{ apyStr }}</span>
         </p>
 
-        <div
+        <ui-galaxy-loader
           v-if="!isStakerLoaded"
-          class="flex flex-1 justify-center items-center py-48"
-        >
-          <ui-galaxy-loader />
-        </div>
+          class="flex-1 py-48"
+        />
 
         <div
           v-else-if="isCompletedPool"

@@ -18,7 +18,6 @@
   import { useBalance } from '@/store/hooks/useBalance'
   import contractsAddresses from '@/config/constants/contractsAddresses.json'
   import { FetchingStatus } from '@/entities/common'
-  import { useTokenAmountFormat } from '@/hooks/formatters/useTokenAmountFormat'
 
   export default defineComponent({
     components: { SendTxButton },
