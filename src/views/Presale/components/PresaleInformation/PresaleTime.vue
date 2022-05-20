@@ -6,7 +6,7 @@
 
 <script lang="ts">
   import { computedEager, useInterval } from '@vueuse/shared'
-  import { defineComponent, watch } from 'vue'
+  import { computed, defineComponent, watch } from 'vue'
   import dayjs from 'dayjs'
   import { useTimeToFormat } from '@/hooks/formatters/useTimeToFormat'
   import { useBlockInfo } from '@/hooks/useBlockInfo'
@@ -34,7 +34,8 @@
         return Math.max(0, currentPhasesTime.value - blockTimestamp.value - lifeTimestamp.value)
       })
       const countdownTimeStr = useTimeToFormat(0, countdownTime)
-      const expirationDateStr = computedEager(() => dayjs.unix(currentPhasesTime.value).format('MMMM D, YYYY h:mm A'))
+      const timeZoneOffset = new Date().getTimezoneOffset() * 60
+      const expirationDateStr = computed(() => dayjs.unix(currentPhasesTime.value + timeZoneOffset).format('MMMM D, YYYY HH:mm UTC'))
 
       const label = computedEager(() => {
         const phaseVal = currentPhase.value
