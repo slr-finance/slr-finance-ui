@@ -26,15 +26,15 @@ const currentPhasePrice = computedEager(() => {
 const methods = [
   {
     name: 'totalSupply',
-    handler: (valRaw: BigNumberEthers) => (totalSupply.value = parseWei(valRaw, 18)),
+    handler: (valRaw: BigNumberEthers) => totalSupply.value = parseWei(valRaw, 18),
   },
   {
     name: 'getPhase',
-    handler: (valRaw: number) => (currentPhase.value = valRaw),
+    handler: (valRaw: number) => currentPhase.value = valRaw,
   },
   {
     name: 'getPrices',
-    handler: (valRaw: BigNumberEthers[]) => (prices.value = valRaw.map((priceRaw) => parseWei(priceRaw, 18))),
+    handler: (valRaw: BigNumberEthers[]) => prices.value = valRaw.map((priceRaw) => parseWei(priceRaw, 18)),
   },
   {
     name: 'getPhasesMaxAmount',
@@ -43,11 +43,11 @@ const methods = [
   },
   {
     name: 'getPhasesAmount',
-    handler: (valRaw: BigNumberEthers[]) => (phasesAmount.value = valRaw.map((amountRaw) => parseWei(amountRaw, 18))),
+    handler: (valRaw: BigNumberEthers[]) => phasesAmount.value = valRaw.map((amountRaw) => parseWei(amountRaw, 18)),
   },
   {
     name: 'getPhasesTime',
-    handler: (valRaw: BigNumberEthers[]) => (phasesTime.value = valRaw.map((timeRaw) => timeRaw.toNumber())),
+    handler: (valRaw: BigNumberEthers[]) => phasesTime.value = valRaw.map((timeRaw) => timeRaw.toNumber()),
   },
 ]
 

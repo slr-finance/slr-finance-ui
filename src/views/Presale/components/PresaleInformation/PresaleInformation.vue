@@ -10,13 +10,21 @@
       </ui-poligon
     >
 
-    <ui-galaxy-loader v-if="isFetching"/>
-    <presale-time v-else-if="currentPhase < 4" />
-    <white-list-state v-if="currentPhase == 0" />
-    <presale-launched-state v-else-if="currentPhase < 4" />
-    <presale-ended-state v-else />
+    <ui-galaxy-loader
+      v-if="isFetching"
+      class="w-full h-full"
+    />
 
-    <slot name="footer"/>
+    <template v-else>
+      <presale-time v-if="currentPhase < 4" />
+      <white-list-state v-if="currentPhase == 0" />
+      <presale-launched-state v-else-if="currentPhase < 4" />
+      <presale-ended-state v-else />
+      <slot
+        v-if="!isFetching"
+        name="footer"
+      />
+    </template>
   </div>
 </template>
 

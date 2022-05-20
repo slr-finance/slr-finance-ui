@@ -8,8 +8,8 @@
   </div>
 
   <div
-    class="flex flex-col 500:flex-row justify-between mt-12"
     v-if="currentPhase < 3"
+    class="flex flex-col 500:flex-row justify-between mt-12"
   >
     <p class="text-gray text-14">Tomorow Presale price</p>
     <presale-price
@@ -20,6 +20,7 @@
 
   <div class="text-gray mt-12">Sold within the phase</div>
   <ui-progress
+    v-if="currentPhase < 3"
     class="mt-6"
     :max="soldInfo.max"
     :value="soldInfo.volume"
@@ -28,6 +29,10 @@
       <span class="font-title text-14">{{ soldInfo.volumeStr }}/{{ soldInfo.maxStr }} BNB</span>
     </template>
   </ui-progress>
+
+  <div v-else>
+    unlimited
+  </div>
 </template>
 
 <script lang="ts">
@@ -39,17 +44,23 @@
   export default defineComponent({
     name: 'presale-launched-state',
     setup() {
-      const { phasesMaxAmount, phasesAmount, currentPhase } = usePresale()
+      const { phasesMaxAmount, phasesAmount, currentPhase, currentPhasePrice } = usePresale()
       const soldInfo = computed(() => {
         const currentPhaseVal = currentPhase.value
-        const volume = phasesAmount.value[currentPhaseVal].toNumber()
-        const max = phasesMaxAmount.value[currentPhaseVal].toNumber()
+        const currentPhasePriceVal = currentPhasePrice.value
+        let volume = 0
+        let max = 0
+
+        if (currentPhaseVal > 0 && currentPhaseVal < 3) {
+          volume = phasesAmount.value[currentPhaseVal - 1].times(currentPhasePriceVal).toNumber()
+          max = phasesMaxAmount.value[currentPhaseVal - 1].times(currentPhasePriceVal).toNumber()
+        }
 
         return {
           volume,
           max,
           volumeStr: volume.toLocaleString('en-En', { style: 'decimal', maximumFractionDigits: 2 }),
-          maxStr: max.toLocaleString('en-En', { style: 'decimal', maximumFractionDigits: 2 }),
+          maxStr: max.toLocaleString('en-En', { style: 'decimal', maximumFractionDigits: 0 }),
         }
       })
 
