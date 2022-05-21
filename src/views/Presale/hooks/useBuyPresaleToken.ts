@@ -10,7 +10,7 @@ import { bigToWei } from '@/utils/bigNumber'
 export const useBuyPresaleToken = (amountIn: MaybeRef<BigNumber>, amountOut: MaybeRef<BigNumber>) => {
   const { signer } = useEthers()
   const referrer = getReferrerFromLocalstorage()
-  const presaleContract = computed(() => getPresaleContract(unref(signer)))
+  const presaleContract = computed(() => getPresaleContract(signer.value))
   const params = computed(() => [bigToWei(unref(amountOut), 18), referrer])
   const options = computed(() => ({
     value: bigToWei(unref(amountIn), 18),

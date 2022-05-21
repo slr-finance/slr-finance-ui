@@ -25,9 +25,9 @@
           <white-list-form v-if="currentPhase === 0" />
           <presale-form v-else-if="currentPhase > 0 && currentPhase < 4" />
           <deposit-presale-token-form v-else />
-
           <presale-information />
-          <presale-details class="875:col-span-2" />
+          <presale-details class="875:col-span-2" v-if="currentPhase < 4" />
+          <presale-ended class="875:col-span-2" v-else />
         </div>
       </div>
     </transition>
@@ -44,6 +44,7 @@
   import DepositPresaleTokenForm from './components/DepositPresaleTokenForm.vue'
   import PresaleDetails from './components/PresaleDetails.vue'
   import PresaleInformation from './components/PresaleInformation'
+  import PresaleEnded from './components/PresaleEnded.vue'
   import WhiteListForm from './components/WhiteListForm.vue'
   import PresaleBg from './components/PresaleBg.vue'
 
@@ -63,6 +64,7 @@
       DepositPresaleTokenForm,
       PresaleDetails,
       PresaleInformation,
+      PresaleEnded,
       UiGalaxyLoader,
       WhiteListForm,
       PresaleBg,
