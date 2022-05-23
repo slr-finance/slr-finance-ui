@@ -53,14 +53,16 @@
   import { useWhiteList } from '../hooks/useWhiteList'
   import { usePresale } from '../hooks/usePresale'
   import { BIG_ONE } from '@/utils/bigNumber'
+  import { useTokenAmountFormat } from '@/hooks/formatters/useTokenAmountFormat'
 
   export default defineComponent({
     name: 'white-list-form',
     setup() {
       const [handleJoin, joinTxState] = useJoinWhiteList()
       const [refetch, isJoined, isFetching] = useWhiteList()
-      const { currentPhasePrice } = usePresale()
-      const priceStr = computed(() => BIG_ONE.div(currentPhasePrice.value).toString())
+      const { prices } = usePresale()
+      const price = computed(() => BIG_ONE.div(prices.value[0]))
+      const priceStr = useTokenAmountFormat(price)
 
       watch(joinTxState, ({ isSuccess }) => isSuccess && refetch())
 

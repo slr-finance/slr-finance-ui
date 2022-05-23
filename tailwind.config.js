@@ -54,6 +54,7 @@ module.exports = {
       none: 1,
       125: 1.25,
       140: 1.4,
+      192: 1.92,
     },
     fontFamily: {
       title: ['Niketo'],
