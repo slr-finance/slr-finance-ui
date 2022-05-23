@@ -75,9 +75,7 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent, computed, ref, watch, WritableComputedRef } from 'vue'
-  import dayjs from 'dayjs'
-  import relativeTime from 'dayjs/plugin/relativeTime'
+  import { defineComponent, computed, watch } from 'vue'
   import { useInterval, useToggle, useTransition } from '@vueuse/core'
   import UiButton from '@/components/ui/UiButton.vue'
   import UiIcon from '@/components/ui/UiIcon.vue'
@@ -87,8 +85,7 @@
   import { useTokenAmountFormat } from '@/hooks/formatters/useTokenAmountFormat'
   import WithdrawalWithFeeModal from './WithdrawalWithFeeModal.vue'
   import StakeMoreModal from './StakeMoreModal.vue'
-
-  dayjs.extend(relativeTime)
+  import { useTimeToFormat } from '@/hooks/formatters/useTimeToFormat'
 
   export default defineComponent({
     name: 'staked-form',
@@ -112,7 +109,8 @@
 
         return Math.max(0, startStaking + lock - lifeTimestamp.value)
       })
-      const leftToWaitStr = computed(() => dayjs().add(leftToWait.value, 's').toNow(true))
+      const leftToWaitStr = useTimeToFormat(0, leftToWait)
+
       // Sync local timestamp with blockchain timestamp
       watch(
         stakerState,

@@ -1,6 +1,13 @@
 <template>
-  <ui-widget>
-    <form class="flex flex-col items-stretch px-8 pb-4">
+  <div class="flex flex-col items-stretch px-ui-page-inner-spacing py-24 border rounded-12 bg-black">
+    <ui-galaxy-loader
+      v-if="isFetchingWhiteList"
+      class="w-full h-full"
+    />
+    <div v-else-if="!isJoined && isActivated">
+      Тебя нет в вайт листе, покупай потом по фул прайсу
+    </div>
+    <template v-else>
       <div class="flex justify-between">
         <span class="text-gray">Buy</span>
         <div class="text-gray">
@@ -25,12 +32,15 @@
         </template>
       </ui-input-bn>
 
-      <div class="flex justify-between text-14 mt-32">
+      <div class="flex flex-col 500:flex-row justify-between text-14 mt-32">
         <span class="text-gray">Presale price</span>
-        <span class="text-white">{{ tokenPrice }} per 1 BNB</span>
+        <presale-price
+          :phase="currentPhase"
+          class="text-white"
+        />
       </div>
 
-      <div class="flex justify-between text-14 mt-12 mb-20">
+      <div class="flex flex-col 500:flex-row justify-between text-14 mt-12 mb-20">
         <div class="flex items-center">
           <ui-icon
             size="18"
@@ -38,103 +48,78 @@
           />
           <span class="text-gray ml-6">Your recieve </span>
         </div>
-        <span class="text-white">100.20 SLR</span>
+        <span class="text-white">{{ amountOutStr }}</span>
       </div>
 
-      <approve-token-plug
-        :minAllowance="amountIn"
-        :tokenAddress="tokenOutAddress"
-        :spenderAddress="presaleAddress"
-      >
+      <connect-wallet-plug text="Connect wallet to take part in the presale">
         <send-tx-button
           @click="handleBuy"
           :txState="buyTxState"
+          :disabled="isInsufficientBalance"
           size="40"
           variant="violet"
         >
-          Buy
+          {{ isInsufficientBalance ? 'Insufficient BNB balance' : 'Buy' }}
         </send-tx-button>
-      </approve-token-plug>
-    </form>
-  </ui-widget>
+      </connect-wallet-plug>
+    </template>
+  </div>
 </template>
 
 <script lang="ts">
-  import { computed, defineComponent, PropType, Ref, ref, toRef } from 'vue'
-  import SendTxButton from '@/components/Tx/SendTxButton.vue'
-  import UiInputBn from '@/components/ui/UiInputBn.vue'
-
-  import { syncRef } from '@vueuse/core'
+  import { computed, ComputedRef, defineComponent, Ref, ref } from 'vue'
   import BigNumber from 'bignumber.js'
-  import ApproveTokenPlug from '@/components/ApproveToken/ApproveTokenPlug.vue'
-  import UiWidget from '@/components/ui/UiWidget.vue'
   import UiIcon from '@/components/ui/UiIcon.vue'
-
-  import contractsAddresses from '@/config/constants/contractsAddresses.json'
+  import UiInputBn from '@/components/ui/UiInputBn.vue'
+  import SendTxButton from '@/components/Tx/SendTxButton.vue'
+  import ConnectWalletPlug from '@/components/ConnectWallet/ConnectWalletPlug.vue'
+  import PresalePrice from './PresalePrice.vue'
   import { useBuyPresaleToken } from '../hooks/useBuyPresaleToken'
   import { useTokenAmountFormat } from '@/hooks/formatters/useTokenAmountFormat'
   import { useEthers } from '@/hooks/dapp/useEthers'
+  import { usePresale } from '../hooks/usePresale'
+  import { useWhiteList } from '../hooks/useWhiteList'
+  import UiGalaxyLoader from '@/components/ui/UiGalaxyLoader.vue'
 
   export default defineComponent({
-    props: {
-      price: {
-        type: Object as PropType<BigNumber>,
-        required: true,
-      },
-      tokenOutAddress: {
-        type: String,
-        required: true,
-      },
-      tokenInDecimals: {
-        type: Number,
-        required: true,
-      },
-      tokenOutDecimals: {
-        type: Number,
-        required: true,
-      },
-    },
-    setup(props) {
-      const amountInStr = ref('0')
-      const amountIn = computed(() => new BigNumber(amountInStr.value.replaceAll(/[^0-9]/g, '')))
-      const amountOut = ref(new BigNumber(0)) as Ref<BigNumber>
-      const calcAmountIn = computed(() => amountOut.value.times(props.price))
-      const calcAmountInStr = computed(() => amountIn.value.toNumber().toLocaleString())
-      const calcAmountOut = computed(() => amountIn.value.div(props.price))
+    setup() {
+      const { currentPhase, currentPhasePrice } = usePresale()
+      const [, isJoined, isFetchingWhiteList ] = useWhiteList()
+      const { isActivated } = useEthers()
       const { balance: bnbBalance } = useEthers()
-
-      syncRef(calcAmountIn, amountIn)
-      syncRef(calcAmountOut, amountOut)
-      syncRef(calcAmountInStr, amountInStr)
-
-      const tokenInDecimals = toRef(props, 'tokenInDecimals')
-      const tokenOutDecimals = toRef(props, 'tokenOutDecimals')
-      const [handleBuy, buyTxState] = useBuyPresaleToken(amountIn, amountOut, tokenInDecimals, tokenOutDecimals)
-
-      const tokenPrice = useTokenAmountFormat(props.price)
+      const amountIn = ref(new BigNumber(0)) as Ref<BigNumber>
+      const amountOut = computed(() => amountIn.value.div(currentPhasePrice.value)) as ComputedRef<BigNumber>
       const bnbBalanceStr = useTokenAmountFormat(bnbBalance, 'BNB')
+      const amountOutStr = useTokenAmountFormat(amountOut, 'SLR')
+      const isInsufficientBalance = computed(() => amountIn.value.gt(bnbBalance.value))
+
+      const [handleBuy, buyTxState] = useBuyPresaleToken(amountIn, amountOut)
 
       const handleSetMaxAmount = () => {
-        amountInStr.value = useTokenAmountFormat(bnbBalance).value
+        amountIn.value = bnbBalance.value
       }
 
       return {
+        currentPhase,
         handleBuy,
         handleSetMaxAmount,
         amountIn,
-        amountOut,
-        presaleAddress: contractsAddresses.PresaleService,
         buyTxState,
-        tokenPrice,
         bnbBalanceStr,
+        amountOutStr,
+        isInsufficientBalance,
+        isJoined,
+        isFetchingWhiteList,
+        isActivated,
       }
     },
     components: {
-      SendTxButton,
       UiInputBn,
-      ApproveTokenPlug,
-      UiWidget,
       UiIcon,
+      SendTxButton,
+      ConnectWalletPlug,
+      PresalePrice,
+        UiGalaxyLoader,
     },
   })
 </script>

@@ -1,12 +1,10 @@
 <template>
   <div class="w-full">
     <transition name="fade">
-      <div
+      <ui-galaxy-loader
         v-if="isLoading"
-        class="backdrop-blur-4 absolute top-0 left-0 w-full h-full bg-black bg-opacity-60 flex justify-center items-center"
-      >
-        <ui-galaxy-loader />
-      </div>
+        class="backdrop-blur-4 absolute top-0 left-0 w-full h-full bg-black bg-opacity-60"
+      />
     </transition>
 
     <div v-if="isOpenQr">

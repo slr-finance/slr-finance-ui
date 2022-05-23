@@ -5,21 +5,37 @@
       station
     </h1>
 
-    <div>
-      <div class="text-26 font-title leading-140">
-        <span class="text-yellow">DEFI 3.0</span> financial protocol operating in BSC
+    <div class="grid gap-28 grid-cols-2">
+      <div class="border border-gray-800 rounded-12 px-ui-page-inner-spacing py-24">
+        <div>
+          <div class="text-28 font-title leading-140">
+            <span class="text-yellow">DEFI 3.0</span> financial protocol operating in BSC
+          </div>
+        </div>
+        <div>totalBaybackStr: {{ totalBaybackStr }}</div>
+        <div>currentBnbBalanceStr: {{ currentBnbBalanceStr }}</div>
+        <div>totalLiquidityBurnedStr: {{ totalLiquidityBurnedStr }}</div>
+        <div>totalWilkyWayRewardsStr: {{ totalWilkyWayRewardsStr }}</div>
+        <div>totalWilkyWayInvestedStr: {{ totalWilkyWayInvestedStr }}</div>
+        <div>pendingBuyBackAndBurnStr: {{ pendingBuyBackAndBurnStr }}</div>
+        <div>pendingInvestStr: {{ pendingInvestStr }}</div>
+        <div>liquidityPriceStr: {{ liquidityPriceStr }}</div>
+        <div>slrPriceStr: {{ slrPriceStr }}</div>
+        <div>totalStakedStr: {{ totalStakedStr }}</div>
       </div>
+      <presale-information bage-text="ITO">
+        <template #footer>
+          <ui-button
+            :to="{ name: 'presale'}"
+            variant="violet"
+            size="48"
+            class="w-full mt-28"
+          >
+            Go to presale
+          </ui-button>
+        </template>
+      </presale-information>
     </div>
-    <div>totalBaybackStr: {{ totalBaybackStr }}</div>
-    <div>currentBnbBalanceStr: {{ currentBnbBalanceStr }}</div>
-    <div>totalLiquidityBurnedStr: {{ totalLiquidityBurnedStr }}</div>
-    <div>totalWilkyWayRewardsStr: {{ totalWilkyWayRewardsStr }}</div>
-    <div>totalWilkyWayInvestedStr: {{ totalWilkyWayInvestedStr }}</div>
-    <div>pendingBuyBackAndBurnStr: {{ pendingBuyBackAndBurnStr }}</div>
-    <div>pendingInvestStr: {{ pendingInvestStr }}</div>
-    <div>liquidityPriceStr: {{ liquidityPriceStr }}</div>
-    <div>slrPriceStr: {{ slrPriceStr }}</div>
-    <div>totalStakedStr: {{ totalStakedStr }}</div>
   </div>
 </template>
 
@@ -31,6 +47,8 @@
   import { useSlrPrice } from '@/store/hooks/useSlrPrice'
   import { useMilkyWayInfo } from './hooks/useMilkyWayInfo'
   import { useTotalStakedInAllPools } from '@/store/hooks/useTotalStakedInAllPools'
+  import PresaleInformation from '@/views/Presale/components/PresaleInformation'
+import UiButton from '@/components/ui/UiButton.vue'
 
   export default defineComponent({
     setup() {
@@ -74,7 +92,10 @@
         totalStakedStr,
       }
     },
-    components: {},
+    components: {
+      PresaleInformation,
+        UiButton,
+    },
   })
 </script>
 

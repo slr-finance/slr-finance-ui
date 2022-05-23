@@ -6,7 +6,7 @@ import 'vue-toastification/dist/index.css'
 import { isAddress } from 'ethers/lib/utils'
 import { router } from '@/router'
 import App from '@/App.vue'
-import '@/index.css'
+import '@/index.postcss'
 import { store } from '@/store/store'
 import { REFERRER_QUERY_PARAM, REFERRER_STORAGE_NAME } from '@/config/constants/referrals'
 

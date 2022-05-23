@@ -1,113 +1,73 @@
 <template>
   <div class="px-ui-page-spacing pt-ui-page-header-spacing pb-ui-page-bottom-spacing flex flex-col flex-1">
-    <div
-      class="w-full h-full flex-1 flex justify-center items-center"
-      v-if="isFetching"
+    <transition
+      mode="out-in"
+      name="fade"
     >
-      <ui-galaxy-loader />
-    </div>
-    <div
-      v-else
-      class="flex flex-col items-center max-w-[800px] mx-auto"
-    >
-      <div class="text-center">
-        <h1 class="text-ui-page-title text-white uppercase font-title">
-          <span class="text-gray">phase-{{ phase }}</span>
-          space presale
-        </h1>
-        <p class="text-ui-page-description text-gray max-w-[433px] mt-10">
-          Three-phase ITO using "overflow" method to make sure everyone will have a spot in the presale.
-        </p>
-      </div>
-      <div class="875:flex w-full mt-24">
-        <div class="flex-1">
-          <connect-wallet-plug>
-            <template #plug> Тут будет форма когда кошель подключишь </template>
-            <div v-if="isFetching">Загрузка данных пресейла</div>
-            <template v-else>
-              <!-- presaleTokenBalance: {{ presaleTokenBalance }} {{ presaleTokenBalanceFetchingStatus }} -->
-
-              <deposit-presale-token-form v-if="!isPresaleEnded" />
-
-              <presale-form
-                v-else
-                :price="tokenPrice"
-                :tokenOutAddress="tokenOutAddress"
-                :tokenInDecimals="tokenInDecimals"
-                :tokenOutDecimals="tokenOutDecimals"
-              />
-            </template>
-          </connect-wallet-plug>
+      <ui-galaxy-loader
+        class="w-full h-full flex-1 relative z-1"
+        v-if="isFetching"
+      />
+      <div
+        v-else
+        class="flex flex-col items-center max-w-[800px] mx-auto relative z-1"
+      >
+        <div class="text-center">
+          <h1 class="text-ui-page-title text-white uppercase font-title">
+            <span class="text-gray">phase-{{ currentPhase }}</span>
+            space presale
+          </h1>
+          <p class="text-ui-page-description text-gray max-w-[433px] mt-10">
+            Three-phase ITO using "overflow" method to make sure everyone will have a spot in the presale.
+          </p>
         </div>
-        <presale-information class="flex-1 875:ml-28 875:mt-0 mt-24" />
+        <div class="grid w-full gap-28 grid-cols-1 mt-28 875:grid-cols-2">
+          <white-list-form v-if="currentPhase === 0" />
+          <presale-form v-else-if="currentPhase > 0 && currentPhase < 4" />
+          <deposit-presale-token-form v-else />
+          <presale-information />
+          <presale-details class="875:col-span-2" v-if="currentPhase < 4" />
+          <presale-ended class="875:col-span-2" v-else />
+        </div>
       </div>
-      <presale-details class="mt-28" />
-    </div>
+    </transition>
+    <presale-bg />
   </div>
 </template>
 
 <script lang="ts">
-  import { computed, defineComponent } from 'vue'
+  import { defineComponent } from 'vue'
   import PresaleForm from './components/PresaleForm.vue'
-  import ConnectWalletPlug from '@/components/ConnectWallet/ConnectWalletPlug.vue'
   import UiButton from '@/components/ui/UiButton.vue'
   import UiGalaxyLoader from '@/components/ui/UiGalaxyLoader.vue'
   import { usePresale } from './hooks/usePresale'
-  import contractsAddresses from '@/config/constants/contractsAddresses.json'
   import DepositPresaleTokenForm from './components/DepositPresaleTokenForm.vue'
   import PresaleDetails from './components/PresaleDetails.vue'
-  import PresaleInformation from './components/PresaleInformation.vue'
-  import { useBalance } from '@/store/hooks/useBalance'
+  import PresaleInformation from './components/PresaleInformation'
+  import PresaleEnded from './components/PresaleEnded.vue'
+  import WhiteListForm from './components/WhiteListForm.vue'
+  import PresaleBg from './components/PresaleBg.vue'
 
   export default defineComponent({
     name: 'presale-view',
     setup() {
-      const {
-        tokenInDecimals,
-        tokenOutDecimals,
-        isFetching,
-        isWhiteListClosed,
-        isPresaleEnded,
-        joinPresale,
-        joined,
-        endWhiteListBlock,
-        tokenPrice,
-        tokenOutAddress,
-        phase,
-      } = usePresale()
-
-      const [presaleTokenInfo] = useBalance(contractsAddresses.PresaleService)
-      const presaleTokenBalance = computed(() => presaleTokenInfo.value.balance)
-      const presaleTokenBalanceFetchingStatus = computed(() => presaleTokenInfo.value.fetchStatus)
-
-      const handleJoinPresale = async () => {
-        await joinPresale()
-      }
+      const { currentPhase, isFetching } =  usePresale()
 
       return {
-        phase,
+        currentPhase,
         isFetching,
-        tokenOutAddress,
-        isWhiteListClosed,
-        isPresaleEnded,
-        presaleTokenBalance,
-        presaleTokenBalanceFetchingStatus,
-        joined,
-        endWhiteListBlock,
-        tokenPrice,
-        handleJoinPresale,
-        tokenInDecimals,
-        tokenOutDecimals,
       }
     },
     components: {
       PresaleForm,
-      ConnectWalletPlug,
       UiButton,
       DepositPresaleTokenForm,
       PresaleDetails,
       PresaleInformation,
+      PresaleEnded,
       UiGalaxyLoader,
+      WhiteListForm,
+      PresaleBg,
     },
   })
 </script>

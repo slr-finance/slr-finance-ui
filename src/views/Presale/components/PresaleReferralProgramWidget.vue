@@ -12,7 +12,11 @@
     </div>
     <p class="text-14 leading-[22px] text-white mt-20 mr-6">
       1% BNB referral reward distributed instantly to referrer wallet via presale contract. Create your referral link on
-      <router-link class="ui-link" :to="{ name: 'referral' }">app.slr.finance/referrals</router-link>
+      <router-link
+        class="ui-link"
+        :to="{ name: 'referral' }"
+        >app.slr.finance/referrals</router-link
+      >
     </p>
     <div class="flex items-start mt-8">
       <ui-button
@@ -22,7 +26,7 @@
         :to="{ name: 'referral' }"
         >Earn now</ui-button
       >
-      <div class="bg-image ml-8 flex-1 h-full"/>
+      <div class="bg-image ml-8 flex-1 h-full" />
     </div>
   </div>
 </template>
@@ -39,11 +43,11 @@
 </script>
 
 <style scoped>
-.presale-referral-program-widget .bg-image {
-  height: 140px;
-  background-image: url('/presale/referral-bg.jpg');
-  background-size: contain;
-  background-position: right bottom;
-  background-repeat: no-repeat;
-}
+  .presale-referral-program-widget .bg-image {
+    height: 140px;
+    background-image: url('/presale/referral-bg.jpg');
+    background-size: contain;
+    background-position: right bottom;
+    background-repeat: no-repeat;
+  }
 </style>

@@ -9,12 +9,9 @@ import { BigNumber as BigNumberEthers } from 'ethers'
 import { runAsyncWithParamChecking } from '@/hooks/runAsyncWithParamChecking'
 import BigNumber from 'bignumber.js'
 import dayjs from 'dayjs'
-import localizedFormat from 'dayjs/plugin/localizedFormat'
 import type { Result } from 'ethers/lib/utils'
 import { REFERRALS_ACTIONS_LABELS } from '@/config/constants/referrals'
 import { parseWei } from '@/utils/bigNumber'
-
-dayjs.extend(localizedFormat)
 
 interface AccrualRaw extends Result {
   from: string
@@ -93,7 +90,7 @@ export const useReferrerAccrualHistory = (): UseReferrerAccrualHistoryReturn => 
                   shortAddress: shortenAddress(from),
                   timestamp,
                   amount,
-                  dateStr: date.format('DD.MM.YY'),
+                  dateStr: date.format('YYYY-MM-DD'),
                   timeStr: date.format('HH:MM'),
                   amountStr: `${amount.toNumber().toLocaleString('en-En', {
                     style: 'decimal',

@@ -1,198 +1,91 @@
+import type { BigNumber as BigNumberEthers } from 'ethers'
 import PresaleAbi from '@/config/abi/Presale.json'
-import { Ref, ref, watch } from 'vue'
-import { useEthers } from '@/hooks/dapp/useEthers'
-import { BigNumber as BigNumberEthers, constants, ContractTransaction } from 'ethers'
-import BigNumber from 'bignumber.js'
-import { runAsyncWithParamChecking } from '@/hooks/runAsyncWithParamChecking'
-import { getPresaleContract } from '@/utils/contracts/getPresaleContract'
-import { Call, multicall } from '@/utils/contracts/multicall'
 import contractsAddresses from '@/config/constants/contractsAddresses.json'
-import { isAddress, Result } from 'ethers/lib/utils'
-import { ethersToBigNumber, parseWei } from '@/utils/bigNumber'
+import { parseWei } from '@/utils/bigNumber'
+import { Call, multicall } from '@/utils/contracts/multicall'
+import BigNumber from 'bignumber.js'
+import { Ref, ref } from 'vue'
+import { computedEager } from '@vueuse/core'
 
-type PresaleInfoRaw = [
-  [number] & Result,
-  [number] & Result,
-  [BigNumberEthers] & Result,
-  [string] & Result,
-  [BigNumberEthers] & Result,
-  [BigNumberEthers] & Result,
-  [BigNumberEthers] & Result,
-  [boolean] & Result,
-  [boolean] & Result,
-  ([BigNumberEthers] & Result) | undefined,
-  ([boolean] & Result) | undefined,
+const presaleServiceAddress = contractsAddresses.PresaleService
+
+const totalSupply = ref(new BigNumber(0)) as Ref<BigNumber>
+const currentPhase = ref(0)
+const prices = ref([new BigNumber(0), new BigNumber(0), new BigNumber(0)]) as Ref<BigNumber[]>
+const phasesMaxAmount = ref([new BigNumber(0), new BigNumber(0), new BigNumber(0)]) as Ref<BigNumber[]>
+const phasesAmount = ref([new BigNumber(0), new BigNumber(0), new BigNumber(0)]) as Ref<BigNumber[]>
+const phasesTime = ref([0, 0, 0, 0])
+const isFetching = ref(false)
+const isInitalFetched = ref(false)
+const currentPhasePrice = computedEager(() => {
+  const currentPhaseVal = currentPhase.value
+
+  return currentPhaseVal > 0 && currentPhaseVal < 4 ? prices.value[currentPhaseVal - 1] : new BigNumber(0)
+})
+
+const methods = [
+  {
+    name: 'totalSupply',
+    handler: (valRaw: BigNumberEthers) => totalSupply.value = parseWei(valRaw, 18),
+  },
+  {
+    name: 'getPhase',
+    handler: (valRaw: number) => currentPhase.value = valRaw,
+  },
+  {
+    name: 'getPrices',
+    handler: (valRaw: BigNumberEthers[]) => prices.value = valRaw.map((priceRaw) => parseWei(priceRaw, 18)),
+  },
+  {
+    name: 'getPhasesMaxAmount',
+    handler: (valRaw: BigNumberEthers[]) =>
+      (phasesMaxAmount.value = valRaw.map((maxAmountRaw) => parseWei(maxAmountRaw, 18))),
+  },
+  {
+    name: 'getPhasesAmount',
+    handler: (valRaw: BigNumberEthers[]) => phasesAmount.value = valRaw.map((amountRaw) => parseWei(amountRaw, 18)),
+  },
+  {
+    name: 'getPhasesTime',
+    handler: (valRaw: BigNumberEthers[]) => phasesTime.value = valRaw.map((timeRaw) => timeRaw.toNumber()),
+  },
 ]
 
-export type BuyPresaleTokenPayload = {
-  amountIn: BigNumber
-  amountOut: BigNumber
+let calls: Call[] = methods.map(({ name }) => ({
+  address: presaleServiceAddress,
+  name,
+}))
+
+const fetchPresaleState = async () => {
+  isFetching.value = true
+
+  try {
+    const [rawData] = await multicall(PresaleAbi, calls)
+    methods.forEach(({ handler }, index) => handler(rawData[index][0]))
+
+    isInitalFetched.value = true
+  } catch (error) {
+    console.error(error)
+  } finally {
+    isFetching.value = false
+  }
 }
 
 export const usePresale = () => {
-  const { address, signer } = useEthers()
-  const isFetching = ref(false)
-  const phase = ref(undefined) as Ref<undefined | number>
-  const tokenOutDecimals = ref(0)
-  const tokenInDecimals = ref(0)
-  const presaleTokenBalance = ref(new BigNumber(0)) as Ref<BigNumber>
-  const isPresaleEnded = ref(false)
-  const isWhiteListClosed = ref(false)
-  const tokenPrice = ref(new BigNumber(0)) as Ref<BigNumber>
-  const endPresaleBlock = ref(0)
-  const endWhiteListBlock = ref(0)
-  const tokenOutAddress = ref('')
-  const totalSupply = ref(new BigNumber(0)) as Ref<BigNumber>
-  const joined = ref(false)
-
-  // TMP
-  phase.value = 0
-
-  const handleFetchPresaleInfo = async () => {
-    await runAsyncWithParamChecking(
-      address,
-      async (addressVal, { breakIfValueChanged, breakIfValueIsNil, isNilValue }) => {
-        isFetching.value = !isNilValue()
-        presaleTokenBalance.value = new BigNumber(0)
-        isPresaleEnded.value = false
-        isWhiteListClosed.value = false
-        tokenPrice.value = new BigNumber(0)
-        endPresaleBlock.value = 0
-        endWhiteListBlock.value = 0
-        tokenOutAddress.value = ''
-        totalSupply.value = new BigNumber(0)
-        joined.value = false
-
-        let calls: Call[] = [
-          {
-            address: contractsAddresses.PresaleService,
-            name: 'decimals',
-          },
-          {
-            address: contractsAddresses.PresaleService,
-            name: 'soldTokenDecimals',
-          },
-          {
-            address: contractsAddresses.PresaleService,
-            name: 'totalSupply',
-          },
-          {
-            address: contractsAddresses.PresaleService,
-            name: 'soldTokenAddress',
-          },
-          {
-            address: contractsAddresses.PresaleService,
-            name: 'endWhiteListBlock',
-          },
-          {
-            address: contractsAddresses.PresaleService,
-            name: 'endPresaleBlock',
-          },
-          {
-            address: contractsAddresses.PresaleService,
-            name: 'tokenPrice',
-          },
-          {
-            address: contractsAddresses.PresaleService,
-            name: 'isPresaleEnded',
-          },
-          {
-            address: contractsAddresses.PresaleService,
-            name: 'isWhiteListClosed',
-          },
-        ]
-
-        if (!isNilValue()) {
-          calls.push(
-            {
-              address: contractsAddresses.PresaleService,
-              name: 'balanceOf',
-              params: [addressVal],
-            },
-            {
-              address: contractsAddresses.PresaleService,
-              name: 'joined',
-              params: [addressVal],
-            },
-          )
-        }
-
-        const [
-          [
-            [tokenOutDecimalsVal],
-            [tokenInDecimalsVal],
-            [totalSupplyVal],
-            [tokenOutAddressVal],
-            [endWhiteListBlockVal],
-            [endPresaleBlockVal],
-            [tokenPriceVal],
-            [isPresaleEndedVal],
-            [isWhiteListClosedVal],
-            [presaleTokenBalanceBn] = [],
-            [joinedVal] = [],
-          ],
-        ] = await multicall<PresaleInfoRaw>(PresaleAbi, calls)
-
-        tokenOutDecimals.value = tokenOutDecimalsVal
-        tokenInDecimals.value = tokenInDecimalsVal
-        totalSupply.value = parseWei(totalSupplyVal, tokenOutDecimalsVal)
-        tokenOutAddress.value = tokenOutAddressVal
-        endWhiteListBlock.value = ethersToBigNumber(endWhiteListBlockVal).toNumber()
-        endPresaleBlock.value = ethersToBigNumber(endPresaleBlockVal).toNumber()
-        tokenPrice.value = parseWei(tokenPriceVal, tokenInDecimalsVal)
-        isPresaleEnded.value = isPresaleEndedVal
-        isWhiteListClosed.value = isWhiteListClosedVal
-        presaleTokenBalance.value = presaleTokenBalanceBn
-          ? parseWei(presaleTokenBalanceBn, tokenOutDecimalsVal)
-          : new BigNumber(0)
-        joined.value = joinedVal ? joinedVal : false
-
-        breakIfValueChanged()
-
-        isFetching.value = false
-      },
-    )
-  }
-
-  watch(address, async () => handleFetchPresaleInfo(), { immediate: true })
-
-  const joinPresale = async () => {
-    return await runAsyncWithParamChecking(signer, async (signerVal, { breakIfValueChanged }) => {
-      if (!signerVal) {
-        throw new Error('[useReferrerRewards:clameReward]: signer is null')
-      }
-
-      let referrer: string | null = localStorage.getItem('referrer')
-      referrer = referrer && isAddress(referrer) ? referrer : constants.AddressZero
-
-      const tx: ContractTransaction = await getPresaleContract(signerVal).functions.join(referrer)
-
-      breakIfValueChanged()
-
-      const receipt = await tx.wait(1)
-
-      breakIfValueChanged()
-
-      handleFetchPresaleInfo()
-
-      return receipt.status
-    })
+  if (!isInitalFetched.value && !isFetching.value) {
+    fetchPresaleState()
   }
 
   return {
+    fetchPresale: fetchPresaleState,
     isFetching,
-    tokenOutDecimals,
-    tokenInDecimals,
-    presaleTokenBalance,
-    isPresaleEnded,
-    isWhiteListClosed,
-    tokenPrice,
-    endPresaleBlock,
-    endWhiteListBlock,
-    tokenOutAddress,
+    isInitalFetched,
     totalSupply,
-    joined,
-    joinPresale,
-    phase,
+    currentPhase,
+    currentPhasePrice,
+    prices,
+    phasesMaxAmount,
+    phasesAmount,
+    phasesTime,
   }
 }
