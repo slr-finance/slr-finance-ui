@@ -11,7 +11,7 @@
       >
     </div>
     <p class="text-14 leading-[22px] text-white mt-20 mr-6">
-      1% BNB referral reward distributed instantly to referrer wallet via presale contract. Create your referral link on
+      Earn {{ referrerRewardPercentStr }} on your referral's investments, for all presale phases. Create your referral link on
       <router-link
         class="ui-link"
         :to="{ name: 'referral' }"
@@ -35,9 +35,17 @@
   import { defineComponent } from 'vue'
   import UiButton from '@/components/ui/UiButton.vue'
   import UiPoligon from '@/components/ui/UiPoligon.vue'
+import { usePresale } from '../hooks/usePresale'
+import { usePercentFormat } from '@/hooks/formatters/usePercentFormat'
 
   export default defineComponent({
     name: 'presale-referral-program-widget',
+    setup() {
+      const { referrerRewardPercent } = usePresale()
+      const referrerRewardPercentStr = usePercentFormat(referrerRewardPercent)
+
+      return { referrerRewardPercentStr }
+    },
     components: { UiButton, UiPoligon },
   })
 </script>

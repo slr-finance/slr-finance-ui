@@ -11,7 +11,7 @@
     >
 
     <ui-galaxy-loader
-      v-if="isFetching"
+      v-if="isFetching && !isInitalFetched"
       class="w-full h-full"
     />
 
@@ -45,10 +45,11 @@
       }
     },
     setup() {
-      const { currentPhase, isFetching } = usePresale()
+      const { currentPhase, isFetching, isInitalFetched } = usePresale()
 
       return {
         isFetching,
+        isInitalFetched,
         currentPhase,
       }
     },

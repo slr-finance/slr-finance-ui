@@ -5,37 +5,20 @@
 </template>
 
 <script lang="ts">
-  import { computedEager, useInterval } from '@vueuse/shared'
-  import { computed, defineComponent, watch } from 'vue'
+  import { computedEager } from '@vueuse/shared'
+  import { computed, defineComponent } from 'vue'
   import dayjs from 'dayjs'
   import { useTimeToFormat } from '@/hooks/formatters/useTimeToFormat'
-  import { useBlockInfo } from '@/hooks/useBlockInfo'
   import { usePresale } from '../../hooks/usePresale'
 
   export default defineComponent({
     name: 'presale-time',
     setup() {
-      const { currentPhase, phasesTime } = usePresale()
-      const { blockTimestamp } = useBlockInfo()
+      const { currentPhase, currentPhaseCountdown, currentPhaseEndTime } = usePresale()
 
-      const lifeTimestamp = useInterval(1000)
-      watch(blockTimestamp, () => (lifeTimestamp.value = 0))
-
-      const currentPhasesTime = computedEager(() => {
-        const currentPhaseVal = currentPhase.value
-
-        if (currentPhaseVal === 4) {
-          return 0
-        }
-
-        return phasesTime.value[currentPhaseVal]
-      })
-      const countdownTime = computedEager(() => {
-        return Math.max(0, currentPhasesTime.value - blockTimestamp.value - lifeTimestamp.value)
-      })
-      const countdownTimeStr = useTimeToFormat(0, countdownTime)
+      const countdownTimeStr = useTimeToFormat(0, currentPhaseCountdown)
       const timeZoneOffset = new Date().getTimezoneOffset() * 60
-      const expirationDateStr = computed(() => dayjs.unix(currentPhasesTime.value + timeZoneOffset).format('MMMM D, YYYY HH:mm UTC'))
+      const expirationDateStr = computed(() => dayjs.unix(currentPhaseEndTime.value + timeZoneOffset).format('MMMM D, YYYY HH:mm UTC'))
 
       const label = computedEager(() => {
         const phaseVal = currentPhase.value

@@ -6,7 +6,7 @@
     >
       <ui-galaxy-loader
         class="w-full h-full flex-1 relative z-1"
-        v-if="isFetching"
+        v-if="isFetching && !isInitalFetched"
       />
       <div
         v-else
@@ -18,7 +18,7 @@
             space presale
           </h1>
           <p class="text-ui-page-description text-gray max-w-[433px] mt-10">
-            Three-phase ITO using "overflow" method to make sure everyone will have a spot in the presale.
+            Three-phase pre-sale with up to 15% discount of the launch price
           </p>
         </div>
         <div class="grid w-full gap-28 grid-cols-1 mt-28 875:grid-cols-2">
@@ -51,11 +51,12 @@
   export default defineComponent({
     name: 'presale-view',
     setup() {
-      const { currentPhase, isFetching } =  usePresale()
+      const { currentPhase, isFetching, isInitalFetched } =  usePresale()
 
       return {
         currentPhase,
         isFetching,
+        isInitalFetched,
       }
     },
     components: {

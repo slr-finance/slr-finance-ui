@@ -5,11 +5,11 @@ import { useBlockInfo } from '@/hooks/useBlockInfo'
 import { useSendTx } from '@/hooks/useSendTx'
 import { MaybeRef } from '@vueuse/core'
 import { BigNumber as BigNumberEthers } from 'ethers'
-import { computed, toRef, unref } from 'vue'
+import { computed, unref } from 'vue'
 import { SwapParams, TradeType } from './useSwap'
 
 const useSwapParams = (swapParams: MaybeRef<SwapParams>) => {
-  const { blockTimestamp } = useBlockInfo()
+  const { blockTimestampSync } = useBlockInfo()
   const { address } = useEthers()
 
   const swapOptions = computed(() => {
@@ -18,7 +18,7 @@ const useSwapParams = (swapParams: MaybeRef<SwapParams>) => {
     let method: string
     let params: any[] = []
     let options = { value: BigNumberEthers.from(0) }
-    const deadline = blockTimestamp.value + 60
+    const deadline = blockTimestampSync.value + 60
 
     if (tokenIn === contractsAddresses.BnbToken) {
       if (tradeType === TradeType.EXACT_INPUT) {
