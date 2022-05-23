@@ -4,9 +4,7 @@
       v-if="isFetchingWhiteList"
       class="w-full h-full"
     />
-    <div v-else-if="!isJoined && isActivated">
-      Тебя нет в вайт листе, покупай потом по фул прайсу
-    </div>
+    <div v-else-if="!isJoined && isActivated">Тебя нет в вайт листе, покупай потом по фул прайсу</div>
     <template v-else>
       <div class="flex justify-between">
         <span class="text-gray">Buy</span>
@@ -84,7 +82,7 @@
   export default defineComponent({
     setup() {
       const { currentPhase, currentPhasePrice } = usePresale()
-      const [, isJoined, isFetchingWhiteList ] = useWhiteList()
+      const [, isJoined, isFetchingWhiteList] = useWhiteList()
       const { isActivated } = useEthers()
       const { balance: bnbBalance } = useEthers()
       const amountIn = ref(new BigNumber(0)) as Ref<BigNumber>
@@ -119,7 +117,7 @@
       SendTxButton,
       ConnectWalletPlug,
       PresalePrice,
-        UiGalaxyLoader,
+      UiGalaxyLoader,
     },
   })
 </script>

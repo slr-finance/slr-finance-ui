@@ -7,7 +7,6 @@
 <script lang="ts">
   import { computedEager } from '@vueuse/shared'
   import { computed, defineComponent } from 'vue'
-  import dayjs from 'dayjs'
   import { useTimeToFormat } from '@/hooks/formatters/useTimeToFormat'
   import { usePresale } from '../../hooks/usePresale'
 
@@ -17,8 +16,17 @@
       const { currentPhase, currentPhaseCountdown, currentPhaseEndTime } = usePresale()
 
       const countdownTimeStr = useTimeToFormat(0, currentPhaseCountdown)
-      const timeZoneOffset = new Date().getTimezoneOffset() * 60
-      const expirationDateStr = computed(() => dayjs.unix(currentPhaseEndTime.value + timeZoneOffset).format('MMMM D, YYYY HH:mm UTC'))
+      const expirationDateStr = computed(() =>
+        new Date(currentPhaseEndTime.value * 1000).toLocaleTimeString('en-En', {
+          year: 'numeric',
+          month: 'long',
+          day: '2-digit',
+          hour: '2-digit',
+          minute: '2-digit',
+          timeZone: 'UTC',
+          timeZoneName: 'short',
+        }),
+      )
 
       const label = computedEager(() => {
         const phaseVal = currentPhase.value

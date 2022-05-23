@@ -1,7 +1,7 @@
 import type { BigNumber as BigNumberEthers } from 'ethers'
 import PresaleAbi from '@/config/abi/Presale.json'
 import contractsAddresses from '@/config/constants/contractsAddresses.json'
-import { parseWei } from '@/utils/bigNumber'
+import { BIG_ONE, parseWei } from '@/utils/bigNumber'
 import { Call, multicall } from '@/utils/contracts/multicall'
 import BigNumber from 'bignumber.js'
 import { computed, ComputedRef, Ref, ref, watch } from 'vue'
@@ -28,6 +28,11 @@ const phasesAmount = ref([new BigNumber(0), new BigNumber(0), new BigNumber(0)])
 // Phases prices [BEGIN]
 const prices = ref([new BigNumber(0), new BigNumber(0), new BigNumber(0)]) as Ref<BigNumber[]>
 const launchingPrice = ref(new BigNumber(0)) as Ref<BigNumber>
+const phasesDiscounts = computed(() => {
+  const launchingPriceVal = launchingPrice.value
+
+  return prices.value.map((price) => BIG_ONE.minus(price.div(launchingPriceVal)))
+})
 
 const currentPhasePrice = computed(() => {
   const currentPhaseVal = currentPhase.value
@@ -56,15 +61,15 @@ setInterval(() => {
 const methods = [
   {
     name: 'totalSupply',
-    handler: (valRaw: BigNumberEthers) => totalSupply.value = parseWei(valRaw, 18),
+    handler: (valRaw: BigNumberEthers) => (totalSupply.value = parseWei(valRaw, 18)),
   },
   {
     name: 'getPhase',
-    handler: (valRaw: number) => currentPhase.value = valRaw,
+    handler: (valRaw: number) => (currentPhase.value = valRaw),
   },
   {
     name: 'getPrices',
-    handler: (valRaw: BigNumberEthers[]) => prices.value = valRaw.map((priceRaw) => parseWei(priceRaw, 18)),
+    handler: (valRaw: BigNumberEthers[]) => (prices.value = valRaw.map((priceRaw) => parseWei(priceRaw, 18))),
   },
   {
     name: 'getPhasesMaxAmount',
@@ -73,32 +78,32 @@ const methods = [
   },
   {
     name: 'getPhasesAmount',
-    handler: (valRaw: BigNumberEthers[]) => phasesAmount.value = valRaw.map((amountRaw) => parseWei(amountRaw, 18)),
+    handler: (valRaw: BigNumberEthers[]) => (phasesAmount.value = valRaw.map((amountRaw) => parseWei(amountRaw, 18))),
   },
   {
     name: 'getPhasesTime',
-    handler: (valRaw: BigNumberEthers[]) => phasesTime.value = valRaw.map((timeRaw) => timeRaw.toNumber()),
+    handler: (valRaw: BigNumberEthers[]) => (phasesTime.value = valRaw.map((timeRaw) => timeRaw.toNumber())),
   },
   {
     name: 'referrerRewardPercent',
-    handler: (valRaw: BigNumberEthers) => referrerRewardPercentRaw.value = valRaw.toNumber(),
+    handler: (valRaw: BigNumberEthers) => (referrerRewardPercentRaw.value = valRaw.toNumber()),
   },
   {
     name: 'referrerRewardDivider',
-    handler: (valRaw: BigNumberEthers) => referrerRewardDivider.value = valRaw.toNumber(),
+    handler: (valRaw: BigNumberEthers) => (referrerRewardDivider.value = valRaw.toNumber()),
   },
   {
     name: 'getCurrentPhaseCountdown',
-    handler: (valRaw: number) => currentPhaseCountdown.value = valRaw,
+    handler: (valRaw: number) => (currentPhaseCountdown.value = valRaw),
   },
   {
     name: 'getCurrentPhaseEndTime',
-    handler: (valRaw: number) => currentPhaseEndTime.value = valRaw,
+    handler: (valRaw: number) => (currentPhaseEndTime.value = valRaw),
   },
   {
     name: 'launchingTokenPrice',
-    handler: (valRaw: BigNumberEthers) => launchingPrice.value = parseWei(valRaw, 18)
-  }
+    handler: (valRaw: BigNumberEthers) => (launchingPrice.value = parseWei(valRaw, 18)),
+  },
 ]
 
 let calls: Call[] = methods.map(({ name }) => ({
@@ -146,6 +151,7 @@ export const usePresale = () => {
     currentPhase,
     currentPhasePrice,
     prices,
+    phasesDiscounts,
     launchingPrice,
     phasesMaxAmount,
     phasesAmount,

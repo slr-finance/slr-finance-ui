@@ -1,17 +1,18 @@
 <template>
   <div
-    class="presale-referral-program-widget border border-white border-opacity-30 rounded-18 bg-black min-h-[326px] flex flex-col pt-28 pl-20 overflow-hidden"
+    class="presale-referral-program-widget border border-white border-opacity-30 rounded-18 bg-black min-h-[326px] flex flex-col pt-28 pl-ui-page-inner-spacing overflow-hidden"
   >
-    <div class="flex items-center">
-      <h3 class="text-white text-28 font-title mr-6">referral program</h3>
+    <div class="flex items-center mr-ui-page-inner-spacing">
+      <h3 class="text-white flex-1 text-28 font-title mr-4">referral program</h3>
       <ui-poligon
         corners="6"
         variant="orange"
         >earn</ui-poligon
       >
     </div>
-    <p class="text-14 leading-[22px] text-white mt-20 mr-6">
-      Earn {{ referrerRewardPercentStr }} on your referral's investments, for all presale phases. Create your referral link on
+    <p class="text-14 leading-[22px] text-white mt-20 mr-ui-page-spacing">
+      Earn {{ referrerRewardPercentStr }} on your referral's investments, for all presale phases. Create your referral
+      link on
       <router-link
         class="ui-link"
         :to="{ name: 'referral' }"
@@ -35,8 +36,8 @@
   import { defineComponent } from 'vue'
   import UiButton from '@/components/ui/UiButton.vue'
   import UiPoligon from '@/components/ui/UiPoligon.vue'
-import { usePresale } from '../hooks/usePresale'
-import { usePercentFormat } from '@/hooks/formatters/usePercentFormat'
+  import { usePresale } from '../hooks/usePresale'
+  import { usePercentFormat } from '@/hooks/formatters/usePercentFormat'
 
   export default defineComponent({
     name: 'presale-referral-program-widget',
