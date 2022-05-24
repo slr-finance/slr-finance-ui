@@ -1,24 +1,20 @@
 <template>
   <section
-    class="ui-box-corners p-0"
-    :class="{ 'bg-white bg-opacity-5': isOpen }"
+    class="ui-accordion ui-box-corners p-0 overflow-hidden transition-all duration-500 rounded-10"
+    :class="{ '-open': isOpen }"
   >
     <div
       @click="toggle"
-      class="py-32 px-18 flex items-center justify-between"
+      class="header px-18 flex items-center justify-between cursor-pointer text-ui-page-description"
     >
       <span>{{ title }}</span>
       <ui-icon
         name="arrow-pixel"
-        class="min-w-[12px]"
+        class="arrow flex-shrink-0 transition-transform duration-150 mr-6"
         size="12"
-        :class="{ 'rotate-180': isOpen }"
       />
     </div>
-    <div
-      v-show="isOpen"
-      class="px-18 pb-32"
-    >
+    <div class="px-18 pt-12 pb-32">
       <slot />
     </div>
   </section>
@@ -47,3 +43,25 @@
     },
   })
 </script>
+
+<style scoped>
+.ui-accordion:not(.-open){
+  max-height: 88px;
+  overflow-anchor: none;
+}
+
+.ui-accordion.-open {
+  @apply bg-white bg-opacity-5;
+
+  max-height: 1000px;
+  height: auto;
+}
+
+.ui-accordion > .header {
+  height: 88px;
+}
+
+.ui-accordion.-open > .header > .arrow {
+  transform: scale(-100%);
+}
+</style>

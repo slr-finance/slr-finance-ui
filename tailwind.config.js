@@ -149,18 +149,8 @@ module.exports = {
           colors['green-atomic'],
           0,
         )})`,
+        'white-lazurit-gradient': 'linear-gradient(100deg, #FFFFFF -10%, #DDECFA 45%, #F7FDFF 96%)',
       },
     },
   },
-  plugins: [
-    plugin(({ addUtilities }) => {
-      const gradients = {
-        '.gradient-white-lazurit': {
-          background: 'linear-gradient(100.54deg, #FFFFFF -9.95%, #DDECFA 45.39%, #F7FDFF 96.31%)',
-        },
-      }
-
-      addUtilities(gradients, ['responsive'])
-    }),
-  ],
 }

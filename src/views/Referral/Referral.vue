@@ -53,7 +53,7 @@
         </template>
       </connect-wallet-plug>
 
-      <referral-faq class="600:block hidden mt-48" />
+      <referral-faq class="mt-48" />
     </div>
   </div>
   <referral-bg v-if="isShownBgVideo" />
