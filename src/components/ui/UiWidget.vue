@@ -1,6 +1,6 @@
 <template>
   <section
-    class="rounded-12 border border-white py-20 bg-black flex flex-col relative"
+    class="ui-widget transition-colors duration-150 rounded-12 border py-20 bg-black flex flex-col relative"
     :class="classList.root"
   >
     <div
@@ -22,25 +22,48 @@
   import { defineComponent, computed } from 'vue'
 
   export default defineComponent({
-    name: 'referrals-link-block',
+    name: 'ui-widget',
     props: {
       scroll: {
         type: Boolean,
         default: false,
       },
+      color: {
+        type: String,
+        default: 'white',
+        validator: (val: string) => ['green-original', 'white'].includes(val),
+      },
     },
     setup(props) {
-      const classList = computed(() => ({
-        content: {
-          'pr-4 pl-16 ui-scrollbar': props.scroll,
-          'px-16': !props.scroll,
-        },
-        root: {
-          'pr-4': props.scroll,
-        },
-      }))
+      const classList = computed(() => {
+        const classes: Record<string, string[]> = {
+          content: [],
+          root: [`-${props.color}`],
+        }
+
+        if (props.scroll) {
+          classes.content.push('pr-4 pl-16 ui-scrollbar')
+          classes.root.push('pr-4')
+        } else {
+          classes.content.push('px-16')
+        }
+
+        return classes
+      })
 
       return { classList }
     },
   })
 </script>
+
+<style
+  lang="postcss"
+  scoped
+>
+  .-white {
+    @apply border-white;
+  }
+  .-green-original {
+    @apply border-green-original;
+  }
+</style>

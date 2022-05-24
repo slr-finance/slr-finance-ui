@@ -11,7 +11,7 @@
       Get SOLAR tokens
     </send-tx-button>
   </div>
-  <ui-galaxy-loader v-else/>
+  <ui-galaxy-loader v-else />
 </template>
 
 <script lang="ts">
@@ -51,7 +51,7 @@
         depositPresaleTokenTxState,
         isDisabled,
         isFetchedPresaleSlrBalance,
-        presaleSlrAmountStr
+        presaleSlrAmountStr,
       }
     },
   })

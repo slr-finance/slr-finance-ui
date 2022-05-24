@@ -26,7 +26,7 @@
       <presale-information bage-text="ITO">
         <template #footer>
           <ui-button
-            :to="{ name: 'presale'}"
+            :to="{ name: 'presale' }"
             variant="violet"
             size="48"
             class="w-full mt-28"
@@ -48,7 +48,7 @@
   import { useMilkyWayInfo } from './hooks/useMilkyWayInfo'
   import { useTotalStakedInAllPools } from '@/store/hooks/useTotalStakedInAllPools'
   import PresaleInformation from '@/views/Presale/components/PresaleInformation'
-import UiButton from '@/components/ui/UiButton.vue'
+  import UiButton from '@/components/ui/UiButton.vue'
 
   export default defineComponent({
     setup() {
@@ -94,7 +94,7 @@ import UiButton from '@/components/ui/UiButton.vue'
     },
     components: {
       PresaleInformation,
-        UiButton,
+      UiButton,
     },
   })
 </script>

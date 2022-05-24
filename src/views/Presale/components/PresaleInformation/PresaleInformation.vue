@@ -5,13 +5,12 @@
       animated
       variant="violet"
       class="absolute top-0 right-0 transform translate-x-4 400:translate-x-8 600:translate-x-12 875:translate-x-18 -translate-y-18"
-      >
-        {{ bageText }}
-      </ui-poligon
     >
+      {{ bageText }}
+    </ui-poligon>
 
     <ui-galaxy-loader
-      v-if="isFetching"
+      v-if="isFetching && !isInitalFetched"
       class="w-full h-full"
     />
 
@@ -42,13 +41,14 @@
       bageText: {
         type: String,
         default: 'Info',
-      }
+      },
     },
     setup() {
-      const { currentPhase, isFetching } = usePresale()
+      const { currentPhase, isFetching, isInitalFetched } = usePresale()
 
       return {
         isFetching,
+        isInitalFetched,
         currentPhase,
       }
     },

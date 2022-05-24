@@ -30,9 +30,7 @@
     </template>
   </ui-progress>
 
-  <div v-else>
-    unlimited
-  </div>
+  <div v-else>unlimited</div>
 </template>
 
 <script lang="ts">

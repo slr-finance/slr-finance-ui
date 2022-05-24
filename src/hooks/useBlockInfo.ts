@@ -2,8 +2,10 @@ import { ref } from 'vue'
 import { multicall } from '@/utils/contracts/multicall'
 import MulticallAbi from '@/config/abi/Multicall.json'
 import contractsAddresses from '@/config/constants/contractsAddresses.json'
+import { useInterval } from '@vueuse/core'
 
-const blockTimestamp = ref(0)
+const blockTimestampSync = ref(0)
+const blockTimestamp = useInterval(1000)
 const blockNumber = ref(0)
 
 const loopBlock = async () => {
@@ -12,8 +14,11 @@ const loopBlock = async () => {
       { name: 'getCurrentBlockTimestamp', address: contractsAddresses.Multicall },
     ])
 
+    const fetchedBlockTimestamp = blockTimestampRaw.toNumber()
+
     blockNumber.value = blockNumberRaw.toNumber()
-    blockTimestamp.value = blockTimestampRaw.toNumber()
+    blockTimestampSync.value = fetchedBlockTimestamp
+    blockTimestamp.value = fetchedBlockTimestamp
   } catch (error) {
     console.error(error)
   } finally {
@@ -24,5 +29,5 @@ const loopBlock = async () => {
 loopBlock()
 
 export const useBlockInfo = () => {
-  return { blockTimestamp, blockNumber }
+  return { blockTimestampSync, blockTimestamp, blockNumber }
 }

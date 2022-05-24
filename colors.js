@@ -1,4 +1,14 @@
-module.exports = {
+exports.addAlpha = (color, opacity = 1) => {
+  return (
+    color +
+    Math.round(Math.min(Math.max(opacity, 0), 1) * 255)
+      .toString(16)
+      .toUpperCase()
+      .padStart(2, '0')
+  )
+}
+
+exports.colors = {
   transparent: 'transparent',
   gray: {
     300: '#1A1A1A',

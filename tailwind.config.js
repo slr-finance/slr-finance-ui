@@ -1,5 +1,5 @@
 const plugin = require('tailwindcss/plugin')
-const colors = require('./colors')
+const { colors, addAlpha } = require('./colors')
 
 module.exports = {
   content: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
@@ -54,6 +54,7 @@ module.exports = {
       none: 1,
       125: 1.25,
       140: 1.4,
+      192: 1.92,
     },
     fontFamily: {
       title: ['Niketo'],
@@ -130,12 +131,24 @@ module.exports = {
       40: 40,
       50: 50,
     },
+    backgroundImage: {
+      'green-original-gradient': `linear-gradient(${addAlpha(colors['green-original'], 0.15)}, ${addAlpha(
+        colors['green-original'],
+        0,
+      )})`,
+      'green-atomic-gradient': `linear-gradient(${addAlpha(colors['green-atomic'], 0.15)}, ${addAlpha(
+        colors['green-atomic'],
+        0,
+      )})`,
+    },
     extend: {
       screens: {
         500: '500px',
         600: '600px',
         875: '875px',
+        420: '420px',
         375: '375px',
+        320: '320px',
       },
     },
   },

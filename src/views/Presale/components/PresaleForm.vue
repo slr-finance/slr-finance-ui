@@ -4,9 +4,7 @@
       v-if="isFetchingWhiteList"
       class="w-full h-full"
     />
-    <div v-else-if="!isJoined && isActivated">
-      Тебя нет в вайт листе, покупай потом по фул прайсу
-    </div>
+    <div v-else-if="!isJoined && isActivated">Тебя нет в вайт листе, покупай потом по фул прайсу</div>
     <template v-else>
       <div class="flex justify-between">
         <span class="text-gray">Buy</span>
@@ -55,11 +53,11 @@
         <send-tx-button
           @click="handleBuy"
           :txState="buyTxState"
-          :disabled="isInsufficientBalance"
+          :disabled="buttonData.disabled"
           size="40"
           variant="violet"
         >
-          {{ isInsufficientBalance ? 'Insufficient BNB balance' : 'Buy' }}
+          {{ buttonData.text }}
         </send-tx-button>
       </connect-wallet-plug>
     </template>
@@ -84,14 +82,24 @@
   export default defineComponent({
     setup() {
       const { currentPhase, currentPhasePrice } = usePresale()
-      const [, isJoined, isFetchingWhiteList ] = useWhiteList()
+      const [, isJoined, isFetchingWhiteList] = useWhiteList()
       const { isActivated } = useEthers()
       const { balance: bnbBalance } = useEthers()
       const amountIn = ref(new BigNumber(0)) as Ref<BigNumber>
       const amountOut = computed(() => amountIn.value.div(currentPhasePrice.value)) as ComputedRef<BigNumber>
       const bnbBalanceStr = useTokenAmountFormat(bnbBalance, 'BNB')
       const amountOutStr = useTokenAmountFormat(amountOut, 'SLR')
-      const isInsufficientBalance = computed(() => amountIn.value.gt(bnbBalance.value))
+
+      const buttonData = computed(() => {
+        const amountInVal = amountIn.value
+        const isInsufficientBalance = amountInVal.gt(bnbBalance.value)
+        const isEmtyAmount = amountInVal.eq(0)
+
+        return {
+          disabled: isInsufficientBalance || isEmtyAmount,
+          text: isInsufficientBalance ? 'Insufficient BNB balance' : isEmtyAmount ? 'Enter an amount' : 'Buy',
+        }
+      })
 
       const [handleBuy, buyTxState] = useBuyPresaleToken(amountIn, amountOut)
 
@@ -107,10 +115,10 @@
         buyTxState,
         bnbBalanceStr,
         amountOutStr,
-        isInsufficientBalance,
         isJoined,
         isFetchingWhiteList,
         isActivated,
+        buttonData,
       }
     },
     components: {
@@ -119,7 +127,7 @@
       SendTxButton,
       ConnectWalletPlug,
       PresalePrice,
-        UiGalaxyLoader,
+      UiGalaxyLoader,
     },
   })
 </script>
