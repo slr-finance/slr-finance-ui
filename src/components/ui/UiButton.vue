@@ -135,7 +135,7 @@
   }
 
   .ui-button:not(.-disabled).-white {
-    @apply gradient-white-lazurit hover:opacity-[0.85] active:opacity-[0.65] text-black border-none;
+    @apply bg-white-lazurit-gradient hover:opacity-[0.85] active:opacity-[0.65] text-black border-none;
   }
 
   .ui-button:not(.-disabled).-green-atomic {
