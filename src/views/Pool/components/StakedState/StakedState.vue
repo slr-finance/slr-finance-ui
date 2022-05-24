@@ -52,7 +52,7 @@
         </div>
 
         <div
-          class="rounded-12 bg-gradient-to-t from-transparent to-green-atomic bg-op py-14 px-6"
+          class="rounded-12 bg-green-atomic-gradient py-14 px-6"
           style="min-width: 130px"
         >
           <div class="text-green-atomic text-12 leading-none mb-8">Time to unlock</div>

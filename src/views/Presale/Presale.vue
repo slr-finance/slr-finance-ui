@@ -52,7 +52,7 @@
   import PresaleDetails from './components/PresaleDetails.vue'
   import PresaleInformation from './components/PresaleInformation'
   import PresaleEnded from './components/PresaleEnded.vue'
-  import WhiteListForm from './components/WhiteListForm.vue'
+  import WhiteListForm from './components/WhiteListForm'
   import PresaleBg from './components/PresaleBg.vue'
 
   export default defineComponent({

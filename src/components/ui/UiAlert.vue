@@ -13,7 +13,7 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent, computed } from 'vue'
+  import { defineComponent } from 'vue'
   import UiIcon from './UiIcon.vue'
 
   export default defineComponent({

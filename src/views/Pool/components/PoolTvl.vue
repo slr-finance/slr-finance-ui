@@ -1,7 +1,7 @@
 <template>
-  <div class="flex justify-between items-center text-white text-opacity-60 text-12">
-    <div class="flex justify-center items-center">
-      <picture>
+  <div class="flex flex-wrap justify-between items-center text-white text-opacity-60 text-12">
+    <div class="flex justify-center items-center mr-8 mt-8">
+      <picture v-if="isShownImage">
         <source
           srcset="/images/pools/point/point.webp"
           type="image/webp"
@@ -16,7 +16,7 @@
       Total pool staked
     </div>
     <div
-      class="flex justify-center items-center cursor-default border border-white border-opacity-20 px-12 py-8 rounded-8"
+      class="flex justify-center items-center cursor-default border border-white border-opacity-20 px-12 py-8 mt-8 rounded-8"
     >
       <ui-icon
         name="lock"
@@ -31,9 +31,10 @@
 <script lang="ts">
   import { computed, defineComponent } from 'vue'
   import UiIcon from '@/components/ui/UiIcon.vue'
-  import { useTokenAmountFormat } from '@/hooks/formatters/useTokenAmountFormat'
   import { stakingModule } from '@/store/modules/stakingModule'
   import { store } from '@/store/store'
+  import { useBreakpoints } from '@vueuse/core'
+  import { tokenAmountFormat } from '@/utils/strFormat/tokenAmountFormat'
 
   export default defineComponent({
     name: 'pool-tvl',
@@ -46,10 +47,13 @@
     setup(props) {
       stakingModule.register(store)
       const poolState = computed(() => stakingModule.getters.getPool(props.poolId))
-      const totalStaked = computed(() => poolState.value.totalStaked)
-      const tvlStr = useTokenAmountFormat(totalStaked, 'SLR')
+      const tvlStr = computed(() => tokenAmountFormat(poolState.value.totalStaked, 'SLR'))
 
-      return { tvlStr }
+      const { isShownImage } = useBreakpoints({
+        isShownImage: 380,
+      })
+
+      return { tvlStr, isShownImage }
     },
     components: { UiIcon },
   })

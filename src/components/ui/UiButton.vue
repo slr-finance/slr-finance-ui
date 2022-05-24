@@ -43,7 +43,7 @@
         type: String,
       },
       variant: {
-        validator: (value: string) => ['green-atomic', 'white', 'default', 'violet', 'gray-800', 'red'].includes(value),
+        validator: (value: string) => ['green-atomic', 'white', 'default', 'violet', 'gray', 'red'].includes(value),
         default: 'default',
       },
     },
@@ -101,19 +101,19 @@
   }
 
   .ui-button.-size-40 {
-    @apply h-40 min-w-40 rounded-10 border-2 text-12;
+    @apply h-40 min-w-40 rounded-10 text-12;
 
     padding: 0 8px 0 8px;
   }
 
   .ui-button.-size-48 {
-    @apply h-48 min-w-48 rounded-10 border-2 text-12;
+    @apply h-48 min-w-48 rounded-10 text-12;
 
     padding: 0 8px 0 8px;
   }
 
   .ui-button.-size-36 {
-    @apply h-36 min-w-48 rounded-10 border-2 text-12;
+    @apply h-36 min-w-48 rounded-10 text-12;
 
     padding: 0 8px 0 8px;
   }
