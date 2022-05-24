@@ -1,23 +1,24 @@
+import type { Result } from 'ethers/lib/utils'
 import { Ref, ref, watch } from 'vue'
-import { useEthers } from '@/hooks/dapp/useEthers'
+import BigNumber from 'bignumber.js'
+import dayjs from 'dayjs'
+import { BigNumber as BigNumberEthers } from 'ethers'
+import ReferralAbi from '@/config/abi/Referral.json'
+import contractsAddresses from '@/config/constants/contractsAddresses'
+import { REFERRALS_ACTIONS, REFERRALS_ACTIONS_LABELS } from '@/config/constants/referrals'
+import { parseWei } from '@/utils/bigNumber'
 import { shortenAddress } from '@/utils/address/shortenAddress'
 import { getReferralContract } from '@/utils/contracts/getReferralContract'
 import { multicall, Call } from '@/utils/contracts/multicall'
-import ReferralAbi from '@/config/abi/Referral.json'
-import contractsAddresses from '@/config/constants/contractsAddresses'
-import { BigNumber as BigNumberEthers } from 'ethers'
+import { tokenAmountFormat } from '@/utils/strFormat/tokenAmountFormat'
+import { useEthers } from '@/hooks/dapp/useEthers'
 import { runAsyncWithParamChecking } from '@/hooks/runAsyncWithParamChecking'
-import BigNumber from 'bignumber.js'
-import dayjs from 'dayjs'
-import type { Result } from 'ethers/lib/utils'
-import { REFERRALS_ACTIONS_LABELS } from '@/config/constants/referrals'
-import { parseWei } from '@/utils/bigNumber'
 
 interface AccrualRaw extends Result {
   from: string
   timestamp: number
   amount: BigNumberEthers
-  action: number
+  action: REFERRALS_ACTIONS
 }
 
 export type AccrualInfo = {
@@ -92,10 +93,7 @@ export const useReferrerAccrualHistory = (): UseReferrerAccrualHistoryReturn => 
                   amount,
                   dateStr: date.format('YYYY-MM-DD'),
                   timeStr: date.format('HH:MM'),
-                  amountStr: `${amount.toNumber().toLocaleString('en-En', {
-                    style: 'decimal',
-                    maximumFractionDigits: 6,
-                  })} SLR`,
+                  amountStr: tokenAmountFormat(amount, 'SLR'),
                   actionLabel: REFERRALS_ACTIONS_LABELS[action],
                   action,
                 }

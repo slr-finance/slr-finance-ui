@@ -9,7 +9,7 @@ export enum REFERRALS_ACTIONS {
   Buy = 5,
 }
 
-export const REFERRALS_ACTIONS_LABELS: Record<number, string> = {
+export const REFERRALS_ACTIONS_LABELS: Record<REFERRALS_ACTIONS, string> = {
   [REFERRALS_ACTIONS.Presale]: 'Presale',
   [REFERRALS_ACTIONS.Staking]: 'Staking',
   [REFERRALS_ACTIONS.Transfer]: 'Transfer',

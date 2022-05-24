@@ -130,6 +130,7 @@
   import { usePercentFormat } from '@/hooks/formatters/usePercentFormat'
   import { tokenAmountFormat } from '@/utils/strFormat/tokenAmountFormat'
   import { usdFormat } from '@/utils/strFormat/usdFormat'
+  import { dateFromUnix } from '@/utils/date/dateFromUnix'
   import UiExternalLink from '@/components/ui/UiExternalLink.vue'
 
   export default defineComponent({
@@ -163,7 +164,7 @@
       })
       const phasesTimeData = computed(() =>
         phasesTime.value.map((time) =>
-          new Date(time * 1000).toLocaleTimeString('en-En', {
+          dateFromUnix(time).toLocaleTimeString('en-En', {
             weekday: 'long',
             year: 'numeric',
             month: 'long',
