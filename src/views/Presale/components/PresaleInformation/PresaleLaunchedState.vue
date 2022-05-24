@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col 500:flex-row justify-between mt-12">
+  <div class="flex flex-col justify-between mt-12">
     <p class="text-gray text-14">Today Presale price</p>
     <presale-price
       class="text-white text-14"
@@ -9,7 +9,7 @@
 
   <div
     v-if="currentPhase < 3"
-    class="flex flex-col 500:flex-row justify-between mt-12"
+    class="flex flex-col justify-between mt-12"
   >
     <p class="text-gray text-14">Tomorow Presale price</p>
     <presale-price
@@ -30,7 +30,7 @@
     </template>
   </ui-progress>
 
-  <div v-else>unlimited</div>
+  <div v-else>unlimit</div>
 </template>
 
 <script lang="ts">

@@ -126,7 +126,7 @@
   import PresaleReferralProgramWidget from './PresaleReferralProgramWidget.vue'
   import { useTokenAmountFormat } from '@/hooks/formatters/useTokenAmountFormat'
   import { usePresale } from '../hooks/usePresale'
-  import { BIG_ONE, BIG_ZERO } from '@/utils/bigNumber'
+  import { BIG_ONE } from '@/utils/bigNumber'
   import { usePercentFormat } from '@/hooks/formatters/usePercentFormat'
   import { tokenAmountFormat } from '@/utils/strFormat/tokenAmountFormat'
   import { usdFormat } from '@/utils/strFormat/usdFormat'

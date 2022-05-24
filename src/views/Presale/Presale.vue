@@ -22,7 +22,7 @@
           </p>
         </div>
         <div class="grid w-full gap-28 grid-cols-1 mt-28 875:grid-cols-2">
-          <white-list-form v-if="currentPhase === 0" />
+          <white-list-form v-if="currentPhase === 1" />
           <presale-form v-else-if="currentPhase > 0 && currentPhase < 4" />
           <deposit-presale-token-form v-else />
           <presale-information />
