@@ -59,7 +59,7 @@
   import SendTxButton from '@/components/Tx/SendTxButton.vue'
   import BigNumber from 'bignumber.js'
   import TimelockInput from './TimelockInput.vue'
-  import contractsAddresses from '@/config/constants/contractsAddresses.json'
+  import contractsAddresses from '@/config/constants/contractsAddresses'
   import { useStaker } from '@/store/hooks/useStaker'
 
   export default defineComponent({

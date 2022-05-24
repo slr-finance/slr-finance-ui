@@ -31,7 +31,7 @@
 
 <script lang="ts">
   import { defineComponent } from 'vue'
-  import contractsAddresses from '@/config/constants/contractsAddresses.json'
+  import contractsAddresses from '@/config/constants/contractsAddresses'
   import SwapForm from './components/SwapForm.vue'
   import PowerByDex from './components/PowerByDex.vue'
   import Mercuryo from './components/Mercuryo.vue'

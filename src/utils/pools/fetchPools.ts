@@ -1,5 +1,5 @@
 import { Call, multicall } from '@/utils/contracts/multicall'
-import contractsAddresses from '@/config/constants/contractsAddresses.json'
+import contractsAddresses from '@/config/constants/contractsAddresses'
 import StakingAbi from '@/config/abi/Staking.json'
 import { getApy } from '@/utils/math/getApy'
 import { ethersToBigNumber, parseWei } from '@/utils/bigNumber'

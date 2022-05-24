@@ -19,7 +19,7 @@
   import { useBurnPresaleToken } from '../hooks/useBurnPresaleToken'
   import { computed, defineComponent, watch } from 'vue'
   import { useBalance } from '@/store/hooks/useBalance'
-  import contractsAddresses from '@/config/constants/contractsAddresses.json'
+  import contractsAddresses from '@/config/constants/contractsAddresses'
   import { FetchingStatus } from '@/entities/common'
   import { useTokenAmountFormat } from '@/hooks/formatters/useTokenAmountFormat'
   import UiGalaxyLoader from '@/components/ui/UiGalaxyLoader.vue'

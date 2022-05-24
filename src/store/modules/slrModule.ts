@@ -2,7 +2,7 @@ import { FetchingStatus } from '@/entities/common'
 import BigNumber from 'bignumber.js'
 import { createModule } from 'vuexok'
 import { fetchPrice } from '@/utils/tokens/fetchPrice'
-import contractsAddresses from '@/config/constants/contractsAddresses.json'
+import contractsAddresses from '@/config/constants/contractsAddresses'
 
 export const slrModule = createModule('slr', {
   state: {

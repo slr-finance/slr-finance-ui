@@ -10,7 +10,7 @@
 
 <script lang="ts">
   import { defineComponent } from 'vue'
-  import contractsAddresses from '@/config/constants/contractsAddresses.json'
+  import contractsAddresses from '@/config/constants/contractsAddresses'
 
   export default defineComponent({
     name: 'link-to-dex',

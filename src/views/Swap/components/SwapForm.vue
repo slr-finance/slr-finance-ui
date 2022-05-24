@@ -75,7 +75,7 @@
 
 <script lang="ts">
   import { defineComponent, watch, watchEffect, ref } from 'vue'
-  import contractsAddresses from '@/config/constants/contractsAddresses.json'
+  import contractsAddresses from '@/config/constants/contractsAddresses'
 
   import UiBalanceInput from '@/components/ui/UiBalanceInput.vue'
   import UiButton from '@/components/ui/UiButton.vue'

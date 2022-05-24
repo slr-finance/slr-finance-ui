@@ -3,7 +3,7 @@ export enum ChainId {
   Testnet = 97,
 }
 
-export const CHAIN_ID = ChainId.Testnet
+export const CHAIN_ID = import.meta.env.VITE_CHAIN === 'TESTNET' ? ChainId.Testnet : ChainId.Bnb
 
 export const CHAIN_NAMES = {
   [ChainId.Bnb]: 'BNB',
