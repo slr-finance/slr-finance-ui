@@ -1,10 +1,14 @@
 <template>
-  <div>
-    <p class="text-gray text-16 leading-none mb-12">White list open</p>
-    <p class="text-white text-24 leading-none font-title uppercase mb-16">Join to whitelist</p>
+  <div class="flex flex-col">
+    <div class="flex-1">
+      <p class="text-gray text-16 leading-none mb-12">White list open</p>
+      <p class="text-white text-24 leading-none font-title uppercase mb-16">Join to whitelist</p>
 
-    <div class="inline-block bg-green-original rounded-full px-8 py-4 leading-none text-14 mb-16">
-      {{ priceStr }} SLR per 1 BNB
+      <p class="mb-8 text-16">Taking part in whitelisted pre-sale makes investors part of a privileged group of individuals who are buying tokens before anyone else.</p>
+      <presale-price
+        :phase="1"
+        class="inline-block bg-green-original rounded-full px-8 py-4 leading-none text-14 mb-16"
+      />
     </div>
 
     <connect-wallet-plug text="Connect wallet to join the whitelist">
@@ -30,6 +34,7 @@
   import { useTokenAmountFormat } from '@/hooks/formatters/useTokenAmountFormat'
   import { useWhiteList } from '../../hooks/useWhiteList'
   import { useJoinWhiteList } from '../../hooks/useJoinWhiteList'
+  import PresalePrice from '../PresalePrice.vue'
 
   export default defineComponent({
     name: 'white-list-join',
@@ -51,6 +56,7 @@
     components: {
       SendTxButton,
       ConnectWalletPlug,
+      PresalePrice,
     },
   })
 </script>
