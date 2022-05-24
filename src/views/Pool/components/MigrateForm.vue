@@ -26,8 +26,12 @@
         </div>
       </div>
 
-      <div class="text-12 text-white mb-12">Add to farming</div>
-      <slr-balance-input v-model:value="amount" />
+      <div class="text-12 text-white mb-12">Add to staking</div>
+      <slr-balance-input
+        v-model:value="amount"
+        class="mb-8"
+      />
+      <ui-alert class="text-violet"> The amount cannot be greater than the size of the migration amount </ui-alert>
     </div>
 
     <timelock-input
@@ -61,8 +65,9 @@
             size="48"
             variant="violet"
             :tx-state="migrateTxState"
+            :disabled="buttonData.isDisabled"
           >
-            Migrate to {{ poolInfo.name }} pool without fee
+            {{ buttonData.text }}
           </send-tx-button>
         </insufficient-balance-plug>
       </approve-token-plug>
@@ -71,25 +76,26 @@
 </template>
 
 <script lang="ts">
+  import { computed, defineComponent, toRef, watch, ref, Ref } from 'vue'
   import BigNumber from 'bignumber.js'
+  import contractsAddresses from '@/config/constants/contractsAddresses.json'
   import SendTxButton from '@/components/Tx/SendTxButton.vue'
   import UiButton from '@/components/ui/UiButton.vue'
+  import UiIcon from '@/components/ui/UiIcon.vue'
+  import UiPoligon from '@/components/ui/UiPoligon.vue'
+  import UiAlert from '@/components/ui/UiAlert.vue'
   import ApproveTokenPlug from '@/components/ApproveToken/ApproveTokenPlug.vue'
   import InsufficientBalancePlug from '@/components/ApproveToken/InsufficientBalancePlug.vue'
   import ConnectWalletPlug from '@/components/ConnectWallet/ConnectWalletPlug.vue'
   import StakingProfit from './StakingProfit.vue'
   import TimelockInput from './TimelockInput.vue'
+  import SlrBalanceInput from './SlrBalanceInput.vue'
   import { useStaker } from '@/store/hooks/useStaker'
-  import { computed, defineComponent, toRef, watch, ref, Ref, ComputedRef } from 'vue'
   import { usePoolInfo } from '../hooks/usePoolInfo'
   import { useMigrateTx } from '../hooks/useMigrateTx'
   import { useSlrBalance } from '@/store/hooks/useBalance'
-  import contractsAddresses from '@/config/constants/contractsAddresses.json'
-  import SlrBalanceInput from './SlrBalanceInput.vue'
-
-  import UiIcon from '@/components/ui/UiIcon.vue'
-  import UiPoligon from '@/components/ui/UiPoligon.vue'
   import { useTokenAmountFormat } from '@/hooks/formatters/useTokenAmountFormat'
+  import { tokenAmountFormat } from '@/utils/strFormat/tokenAmountFormat'
 
   export default defineComponent({
     name: 'migrate-form',
@@ -119,6 +125,17 @@
 
       const [handleMigrate, migrateTxState] = useMigrateTx({ poolId, amount, days })
       const refetchStakerAndBalance = () => Promise.all([refetchStaker(), refetchSlrBalance()])
+      const buttonData = computed(() => {
+        const reinvestAmountVal = reinvestAmount.value
+        const isIncorrectAmount = reinvestAmountVal.lte(amount.value)
+
+        return {
+          isDisabled: isIncorrectAmount,
+          text: isIncorrectAmount
+            ? `Quantity must not exceed ${tokenAmountFormat(reinvestAmountVal, 'SLR')}`
+            : `Migrate to ${poolInfo.value.name} pool without fee`,
+        }
+      })
 
       watch(migrateTxState, ({ isSuccess }) => isSuccess && refetchStakerAndBalance())
 
@@ -130,9 +147,9 @@
         days,
         totalAmount,
 
-        poolInfo,
         handleMigrate,
         migrateTxState,
+        buttonData,
 
         stakedTokenAddress: contractsAddresses.SolarToken,
         poolAddress: contractsAddresses.StakingService,
@@ -140,7 +157,6 @@
     },
     components: {
       SendTxButton,
-      UiButton,
       StakingProfit,
       TimelockInput,
       SlrBalanceInput,
@@ -148,8 +164,10 @@
       ConnectWalletPlug,
       InsufficientBalancePlug,
 
+      UiButton,
       UiIcon,
       UiPoligon,
+      UiAlert,
     },
   })
 </script>

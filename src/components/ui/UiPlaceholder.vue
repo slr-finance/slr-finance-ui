@@ -1,9 +1,9 @@
 <template>
-  <div class="flex flex-col justify-center items-center">
+  <div class="flex flex-col justify-center items-center text-center leading-192">
     <ui-poligon
       corners="6"
       size="50"
-      class="mb-16"
+      class="mb-12"
       opacity
       :variant="variant"
     >
@@ -15,8 +15,8 @@
         />
       </slot>
     </ui-poligon>
-    <div class="font-title text-12 text-white uppercase leading-none mb-16">{{ title }}</div>
-    <div class="font-body text-12 text-white text-opacity-60 leading-none mb-16">
+    <div class="font-title text-12 text-white uppercase leading-192 mb-12">{{ title }}</div>
+    <div class="font-body text-12 text-white text-opacity-60 mb-12">
       {{ description }}
       <slot name="description" />
     </div>

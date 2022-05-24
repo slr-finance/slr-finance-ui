@@ -60,11 +60,8 @@
       class="inset-0 absolute"
       icon="binocular"
       title="You don't have referrals"
-    >
-      <p class="text-center leading-[20px] text-gray">
-        Share link and Get 10% from perfomance fee for any transactions and 1% from any rawards
-      </p>
-    </ui-placeholder>
+      description="Share link and Get 10% from perfomance fee for any transactions and 1% from any rawards"
+    />
   </div>
 </template>
 

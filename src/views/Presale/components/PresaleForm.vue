@@ -53,11 +53,11 @@
         <send-tx-button
           @click="handleBuy"
           :txState="buyTxState"
-          :disabled="isInsufficientBalance"
+          :disabled="buttonData.disabled"
           size="40"
           variant="violet"
         >
-          {{ isInsufficientBalance ? 'Insufficient BNB balance' : 'Buy' }}
+          {{ buttonData.text }}
         </send-tx-button>
       </connect-wallet-plug>
     </template>
@@ -89,7 +89,17 @@
       const amountOut = computed(() => amountIn.value.div(currentPhasePrice.value)) as ComputedRef<BigNumber>
       const bnbBalanceStr = useTokenAmountFormat(bnbBalance, 'BNB')
       const amountOutStr = useTokenAmountFormat(amountOut, 'SLR')
-      const isInsufficientBalance = computed(() => amountIn.value.gt(bnbBalance.value))
+
+      const buttonData = computed(() => {
+        const amountInVal = amountIn.value
+        const isInsufficientBalance = amountInVal.gt(bnbBalance.value)
+        const isEmtyAmount = amountInVal.eq(0)
+
+        return {
+          disabled: isInsufficientBalance || isEmtyAmount,
+          text: isInsufficientBalance ? 'Insufficient BNB balance' : isEmtyAmount ? 'Enter an amount' : 'Buy',
+        }
+      })
 
       const [handleBuy, buyTxState] = useBuyPresaleToken(amountIn, amountOut)
 
@@ -105,10 +115,10 @@
         buyTxState,
         bnbBalanceStr,
         amountOutStr,
-        isInsufficientBalance,
         isJoined,
         isFetchingWhiteList,
         isActivated,
+        buttonData,
       }
     },
     components: {

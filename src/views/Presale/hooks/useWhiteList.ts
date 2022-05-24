@@ -7,6 +7,7 @@ const contract = getPresaleContract()
 const { address: userAddress } = useEthers()
 const isJoined = ref(false)
 const isFetching = ref(false)
+const isInitalFetched = ref(false)
 
 const fetch = async () => {
   isFetching.value = true
@@ -17,6 +18,7 @@ const fetch = async () => {
         breakIfValueIsNil()
         breakIfValueChanged()
         isJoined.value = await contract.joined(userAddressVal)
+        isInitalFetched.value = true
         breakIfValueChanged()
       } catch (error) {
         isJoined.value = false
@@ -25,19 +27,17 @@ const fetch = async () => {
       }
     })
   } catch (error) {
+    console.error('useWhiteList')
+    console.error(error)
   } finally {
     isFetching.value = false
   }
 }
 
+watch(userAddress, () => fetch(), { immediate: true })
+
 type UseWhiteListReturns = [() => Promise<void>, Ref<boolean>, Ref<boolean>]
 
 export const useWhiteList = (): UseWhiteListReturns => {
-  if (!isFetching.value) {
-    fetch()
-  }
-
-  watch(userAddress, () => fetch())
-
   return [fetch, isJoined, isFetching]
 }
