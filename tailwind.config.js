@@ -131,16 +131,6 @@ module.exports = {
       40: 40,
       50: 50,
     },
-    backgroundImage: {
-      'green-original-gradient': `linear-gradient(${addAlpha(colors['green-original'], 0.15)}, ${addAlpha(
-        colors['green-original'],
-        0,
-      )})`,
-      'green-atomic-gradient': `linear-gradient(${addAlpha(colors['green-atomic'], 0.15)}, ${addAlpha(
-        colors['green-atomic'],
-        0,
-      )})`,
-    },
     extend: {
       screens: {
         500: '500px',
@@ -149,6 +139,16 @@ module.exports = {
         420: '420px',
         375: '375px',
         320: '320px',
+      },
+      backgroundImage: {
+        'green-original-gradient': `linear-gradient(${addAlpha(colors['green-original'], 0.15)}, ${addAlpha(
+          colors['green-original'],
+          0,
+        )})`,
+        'green-atomic-gradient': `linear-gradient(${addAlpha(colors['green-atomic'], 0.15)}, ${addAlpha(
+          colors['green-atomic'],
+          0,
+        )})`,
       },
     },
   },
