@@ -3,6 +3,7 @@ import WalletConnectProvider from '@walletconnect/web3-provider'
 import { markRaw, ref, computed, Ref } from 'vue'
 import { useEthers } from '@/hooks/dapp/useEthers'
 import { loadWalletConnect } from '@/utils/wallet/loadWalletConnect'
+import { CHAIN_ID, NETWORK_DETAILS } from '@/config/constants/chain'
 
 export type WalletName = 'none' | 'metamask' | 'walletconnect'
 export type ConnectionState = 'none' | 'connecting' | 'connected'
@@ -66,6 +67,12 @@ export const useWallet = () => {
     provider.value = markRaw(_provider)
     walletName.value = name
     status.value = 'connected'
+
+    const { chainId } = NETWORK_DETAILS[CHAIN_ID]
+
+    if ((window.ethereum as any).chainId !== chainId) {
+      await Metamask.switchChain(provider.value as MetaMaskProvider, CHAIN_ID)
+    }
 
     // EIP-1193 subscriber
     subscribeDisconnect()
@@ -156,6 +163,12 @@ export const useWallet = () => {
             error.value = 'Failed when changing chain: missing provider'
             console.error('Failed when changing chain: missing provider')
             return
+          }
+
+          const { chainId } = NETWORK_DETAILS[CHAIN_ID]
+
+          if (hexChainId !== chainId) {
+            await Metamask.switchChain(provider.value, CHAIN_ID)
           }
 
           try {
