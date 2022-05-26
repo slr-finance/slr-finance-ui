@@ -15,7 +15,10 @@
 
         <p class="text-ui-page-description text-white/40 leading-125 mb-20 cursor-default">
           Fixed APY:
-          <span class="text-yellow text-opacity-80">{{ apyStr }}</span>
+          <ui-text-placeholder
+            :text="apyStr"
+            class="text-yellow text-opacity-80 min-w-64"
+          />
         </p>
 
         <ui-galaxy-loader
@@ -81,7 +84,6 @@
   import { FetchingStatus } from '@/entities/common'
   import { computed, defineComponent, toRef } from 'vue'
   import { useEthers } from '@/hooks/dapp/useEthers'
-  import { usePercentFormat } from '@/hooks/formatters/usePercentFormat'
   import { usePool } from '@/store/hooks/usePool'
   import { useStaker } from '@/store/hooks/useStaker'
   import UiGalaxyLoader from '@/components/ui/UiGalaxyLoader.vue'
@@ -95,6 +97,8 @@
   import StakerInfo from './components/StakerInfo.vue'
   import StakedState from './components/StakedState'
   import DisablePoolState from './components/DisablePoolState.vue'
+  import UiTextPlaceholder from '@/components/ui/UiTextPlaceholder.vue'
+  import { percentFormat } from '@/utils/strFormat/percentFormat'
 
   export default defineComponent({
     name: 'staking-widget',
@@ -108,9 +112,12 @@
     setup(props) {
       const poolId = toRef(props, 'poolId')
       const poolState = usePool(poolId)
-      const apy = computed(() => poolState.value.apy)
+      const apyStr = computed(() => {
+        const poolStateVal = poolState.value
+
+        return poolStateVal.fetchStatus === FetchingStatus.FETCHED ? percentFormat(poolStateVal.apy) : ''
+      })
       const poolInfo = usePoolInfo(poolId)
-      const apyStr = usePercentFormat(apy)
       const { isActivated } = useEthers()
       const [stakerState] = useStaker()
       const isStakerLoaded = computed(
@@ -164,6 +171,7 @@
       StakedState,
       DisablePoolState,
       UiGalaxyLoader,
+      UiTextPlaceholder,
     },
   })
 </script>

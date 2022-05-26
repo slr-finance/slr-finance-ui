@@ -10,7 +10,7 @@
       <span>{{ title }}</span>
       <ui-icon
         name="arrow-pixel"
-        class="arrow flex-shrink-0 transition-transform duration-150 mr-6"
+        class="arrow flex-shrink-0 transition-transform duration-150 ml-12"
         size="12"
       />
     </div>
@@ -45,23 +45,23 @@
 </script>
 
 <style scoped>
-.ui-accordion:not(.-open){
-  max-height: 88px;
-  overflow-anchor: none;
-}
+  .ui-accordion:not(.-open) {
+    max-height: 88px;
+    overflow-anchor: none;
+  }
 
-.ui-accordion.-open {
-  @apply bg-white bg-opacity-5;
+  .ui-accordion.-open {
+    @apply bg-white bg-opacity-5;
 
-  max-height: 1000px;
-  height: auto;
-}
+    max-height: 1000px;
+    height: auto;
+  }
 
-.ui-accordion > .header {
-  height: 88px;
-}
+  .ui-accordion > .header {
+    height: 88px;
+  }
 
-.ui-accordion.-open > .header > .arrow {
-  transform: scale(-100%);
-}
+  .ui-accordion.-open > .header > .arrow {
+    transform: scale(-100%);
+  }
 </style>
