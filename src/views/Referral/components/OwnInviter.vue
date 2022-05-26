@@ -1,7 +1,10 @@
 <template>
-  <div class="flex flex-col">
+  <div class="flex flex-col items-start">
     <span class="text-11 text-gray uppercase">my inviter</span>
-    <span class="text-14">{{ shortenInviterAddress }}</span>
+    <ui-text-placeholder
+      class="text-14 min-w-104"
+      :text="shortenInviterAddress"
+    />
   </div>
 </template>
 
@@ -9,8 +12,10 @@
   import { computed, defineComponent } from 'vue'
   import { useOwnInviter } from '@/hooks/useOwnInviter'
   import { shortenAddress } from '@/utils/address/shortenAddress'
+  import UiTextPlaceholder from '@/components/ui/UiTextPlaceholder.vue'
 
   export default defineComponent({
+    name: 'own-inviter',
     setup() {
       const { inviterAddress } = useOwnInviter()
       const shortenInviterAddress = computed(() => shortenAddress(inviterAddress.value))
@@ -19,5 +24,6 @@
         shortenInviterAddress,
       }
     },
+    components: { UiTextPlaceholder },
   })
 </script>
