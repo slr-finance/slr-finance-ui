@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-col items-start">
-    <span class="text-11 text-gray uppercase">my inviter</span>
+    <span class="text-11 text-gray uppercase">My inviter</span>
     <ui-text-placeholder
       class="text-14 min-w-104"
       :text="shortenInviterAddress"
