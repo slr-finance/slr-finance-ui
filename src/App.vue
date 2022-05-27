@@ -21,6 +21,8 @@
   import ConnectWalletModal from '@/components/ConnectWallet/ConnectWalletModal'
   import { stakingModule } from '@/store/modules/stakingModule'
   import { useBlockInfo } from './hooks/useBlockInfo'
+  import { LATEST_CONNECTED_PROVIDER } from '@/config/constants/localStorage'
+  import { useWallet, WalletName } from './hooks/dapp/useWallet'
 
   export default defineComponent({
     props: {
@@ -29,6 +31,14 @@
       },
     },
     setup() {
+      const { connect } = useWallet()
+
+      const latestConnectedProvider = localStorage.getItem(LATEST_CONNECTED_PROVIDER) as WalletName | null 
+
+      if (latestConnectedProvider === 'metamask') {
+        connect(latestConnectedProvider)
+      }
+
       stakingModule.register(store)
 
       const { address } = useEthers()
