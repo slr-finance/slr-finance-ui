@@ -40,7 +40,7 @@
       size: {
         type: String,
         default: '50',
-        validator: (val: string) => ['50'].includes(val),
+        validator: (val: string) => ['50', '64'].includes(val),
       },
       corners: {
         type: [Number, String],
@@ -93,6 +93,10 @@
 
   .ui-poligon.-size-50 > .wrapper {
     @apply w-50 h-50 text-12;
+  }
+
+  .ui-poligon.-size-64 > .wrapper {
+    @apply w-64 h-64 text-12;
   }
 
   .ui-poligon.-default > .wrapper > .content {

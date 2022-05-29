@@ -3,7 +3,6 @@ import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import { visualizer } from 'rollup-plugin-visualizer'
-import viteFonts from 'vite-plugin-fonts'
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -25,24 +24,6 @@ export default defineConfig({
       ],
       // Specify symbolId format
       symbolId: 'icon-[dir]-[name]',
-    }),
-    viteFonts({
-      custom: {
-        families: [
-          {
-            name: 'Karelia',
-            local: 'Karelia',
-            src: './src/assets/fonts/Karelia-Outtakes.*',
-          },
-          {
-            name: 'Niketo',
-            local: 'Niketo',
-            src: './src/assets/fonts/niketo.*',
-          },
-        ],
-        display: 'block',
-        preload: true,
-      },
     }),
   ],
   build: {

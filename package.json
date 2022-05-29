@@ -42,7 +42,6 @@
     "typescript": "4.5.4",
     "util": "0.12.4",
     "vite": "2.8.0",
-    "vite-plugin-fonts": "0.3.0",
     "vue-tsc": "0.29.8"
   }
 }
