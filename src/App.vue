@@ -33,7 +33,7 @@
     setup() {
       const { connect } = useWallet()
 
-      const latestConnectedProvider = localStorage.getItem(LATEST_CONNECTED_PROVIDER) as WalletName | null 
+      const latestConnectedProvider = localStorage.getItem(LATEST_CONNECTED_PROVIDER) as WalletName | null
 
       if (latestConnectedProvider === 'metamask') {
         connect(latestConnectedProvider)

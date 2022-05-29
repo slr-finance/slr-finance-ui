@@ -39,7 +39,7 @@
       </div>
       <connect-wallet-plug>
         <template #plug>
-          <referral-promo-state/>
+          <referral-promo-state />
         </template>
 
         <template #default>

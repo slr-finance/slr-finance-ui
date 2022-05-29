@@ -13,14 +13,10 @@
           <li>
             <p>
               Held directly on
-              <router-link
-                class="ui-link"
-                :to="{ name: 'presale' }"
-              >
-                https://app.slr.finance/presale </router-link
-              >, to participate: Connect your wallet, enter the amount of BNB you wish to send and click buy. SLR
-              presale tokens (PresaleSLR) will be instantly returned via our presale contract. Do not use exchange
-              accounts or don't sent BNB directly presale contract.
+              <ui-link :to="{ name: 'presale' }">https://app.slr.finance/presale </ui-link>, to participate: Connect
+              your wallet, enter the amount of BNB you wish to send and click buy. SLR presale tokens (PresaleSLR) will
+              be instantly returned via our presale contract. Do not use exchange accounts or don't sent BNB directly
+              presale contract.
             </p>
             <p>
               After you bought SLR presale tokens (PresaleSLR), just hold it until presale end. SLR presale tokens
@@ -30,12 +26,7 @@
               SLR presale tokens (PresaleSLR) will be swapped to SLR (Official Token) after presale end ({{
                 phasesTimeData[3]
               }}) at
-              <router-link
-                class="ui-link"
-                :to="{ name: 'presale' }"
-              >
-                https://app.slr.finance/presale
-              </router-link>
+              <ui-link :to="{ name: 'presale' }"> https://app.slr.finance/presale </ui-link>
               with 1:1 ratio and without performance fee.
             </p>
           </li>
@@ -70,12 +61,7 @@
                 <p class="title">Phase 4:</p>
                 <p>
                   Pancake listing and opening swap SLR presale tokens (PresaleSLR) to SLR (Official Token) at
-                  <router-link
-                    class="ui-link"
-                    :to="{ name: 'presale' }"
-                  >
-                    https://app.slr.finance/presale
-                  </router-link>
+                  <ui-link :to="{ name: 'presale' }"> https://app.slr.finance/presale </ui-link>
                   with 1:1 ratio and without performance fee.
                 </p>
               </li>
@@ -123,6 +109,8 @@
   import { computedEager, useToggle } from '@vueuse/shared'
   import UiButton from '@/components/ui/UiButton.vue'
   import UiIcon from '@/components/ui/UiIcon.vue'
+  import UiExternalLink from '@/components/ui/UiExternalLink.vue'
+  import UiLink from '@/components/ui/UiLink.vue'
   import PresaleReferralProgramWidget from './PresaleReferralProgramWidget.vue'
   import { useTokenAmountFormat } from '@/hooks/formatters/useTokenAmountFormat'
   import { usePresale } from '../hooks/usePresale'
@@ -131,11 +119,9 @@
   import { tokenAmountFormat } from '@/utils/strFormat/tokenAmountFormat'
   import { usdFormat } from '@/utils/strFormat/usdFormat'
   import { dateFromUnix } from '@/utils/date/dateFromUnix'
-  import UiExternalLink from '@/components/ui/UiExternalLink.vue'
 
   export default defineComponent({
     name: 'presale-details',
-    components: { PresaleReferralProgramWidget, UiButton, UiIcon, UiExternalLink },
     setup() {
       const { phasesMaxAmount, prices, launchingPrice, phasesDiscounts, phasesTime } = usePresale()
       const [isOpen, toggle] = useToggle()
@@ -187,6 +173,7 @@
         phasesTimeData,
       }
     },
+    components: { PresaleReferralProgramWidget, UiButton, UiIcon, UiExternalLink, UiLink },
   })
 </script>
 

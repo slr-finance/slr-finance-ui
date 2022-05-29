@@ -16,21 +16,21 @@
             class="h-full"
             v-for="link in links"
           >
-            <router-link
-              class="ui-link text-14 flex flex-col justify-center items-center leading-none h-full"
+            <ui-link
+              class="text-14 flex flex-col justify-center items-center leading-none h-full"
               :to="link.route"
             >
               {{ link.label }}
-            </router-link>
+            </ui-link>
           </li>
           <li class="h-full">
-            <a
-              class="ui-link text-14 flex flex-col justify-center items-center leading-none h-full"
+            <ui-link
+              class="text-14 flex flex-col justify-center items-center leading-none h-full"
               href="https://docs.slr.finance"
               rel="noopener noreferrer"
             >
               <div>Knowledge base</div>
-            </a>
+            </ui-link>
           </li>
         </ul>
       </nav>
@@ -44,11 +44,13 @@
   import { useToggle } from '@vueuse/shared'
   import { linksList } from './linksList'
   import UiIcon from '@/components/ui/UiIcon.vue'
+  import UiLink from '@/components/ui/UiLink.vue'
 
   export default defineComponent({
     name: 'app-header-mobile-menu',
     components: {
       UiIcon,
+      UiLink,
     },
     setup() {
       const [isOpen, toggle] = useToggle()

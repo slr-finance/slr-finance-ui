@@ -12,7 +12,7 @@
         class="wrapper flex flex-col justify-start"
       >
         <router-link
-          class="firstItem ui-link h-40 flex justify-between items-center"
+          class="firstItem link h-40 flex justify-between items-center"
           v-if="prevPoolName"
           :to="prevPoolRoute"
         >
@@ -25,7 +25,7 @@
           />
         </router-link>
         <router-link
-          class="ui-link h-40 flex justify-between items-center"
+          class="link h-40 flex justify-between items-center"
           v-if="nextPoolName"
           :to="nextPoolRoute"
         >
@@ -124,8 +124,12 @@
     height: 40px;
   }
 
-  .ui-link {
+  .link {
     @apply outline-none text-white;
+  }
+
+  .link:hover {
+    @apply outline-none text-gray-500;
   }
 
   .fade-enter-active,

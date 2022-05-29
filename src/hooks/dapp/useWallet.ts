@@ -102,9 +102,9 @@ export const useWallet = () => {
     clear()
     localStorage.removeItem(LATEST_CONNECTED_PROVIDER)
   }
-  
+
   // ========================= EIP-1193 subscriber =========================
-  
+
   const subscribeDisconnect = () => {
     switch (walletName.value) {
       case 'metamask': {
