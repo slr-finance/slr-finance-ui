@@ -8,6 +8,7 @@ export const useConnectedWalletModal = () => {
   }
   const close = () => {
     isOpen.value = false
+    document.body.style.overflow = 'initial'
   }
 
   return {

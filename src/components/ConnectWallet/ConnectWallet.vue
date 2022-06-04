@@ -18,7 +18,6 @@
   import { useTokenAmountFormat } from '@/hooks/formatters/useTokenAmountFormat'
   import UiIcon from '@/components/ui/UiIcon.vue'
   import { FetchingStatus } from '@/entities/common'
-  import { useConnectedWalletModal } from './hooks/useConnectedWalletModal'
   import ConnectedWalletModal from './ConnectedWalletModal/ConnectedWalletModal.vue'
   import ConnectedWalletAsync from './ConnectedWallet/ConnectedWalletAsync'
   import ConnectedWalletMobile from './ConnectedWallet/ConnectedWalletMobile.vue'
@@ -41,12 +40,10 @@
       const balanceStr = useTokenAmountFormat(balance, 'SLR')
       const buttonSize = computed(() => (props.isMobile ? 36 : 48))
       const connectWalletText = computed(() => (props.isMobile ? 'Connect' : 'Connect Wallet'))
-      const { open } = useConnectedWalletModal()
 
       return {
         isCorrectChainId,
         trimedAddress,
-        open,
         balanceStr,
         buttonSize,
         isBalanceLoaded,
