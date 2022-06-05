@@ -14,7 +14,7 @@
           active-class="-active"
         >
           <ui-icon
-            prefix="icon-mobile-navigation"
+            prefix="ui-icon-mobile-navigation"
             size="24"
             :name="link.icon"
             class="mb-10"
@@ -28,7 +28,7 @@
 
 <script lang="ts">
   import { defineComponent, onUnmounted } from 'vue'
-  import UiIcon from '@/components/ui/UiIcon.vue'
+  import UiIcon from '@/components/ui/UiIcon'
   import { useMobileBottomNavigation } from './hooks/useMobileBottomNavigation'
 
   const links = [

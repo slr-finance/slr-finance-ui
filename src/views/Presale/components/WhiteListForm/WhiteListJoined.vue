@@ -34,13 +34,13 @@
           rel="noopener noreferrer"
         >
           <ui-icon
-            prefix="icon-card"
+            prefix="ui-icon-card"
             name="visa"
             size="16"
             class="mr-4"
           />
           <ui-icon
-            prefix="icon-card"
+            prefix="ui-icon-card"
             name="mastercard"
             size="16"
             class="mr-6"
@@ -56,7 +56,7 @@
         >
           <ui-icon
             name="binance"
-            prefix="icon-card"
+            prefix="ui-icon-card"
             size="16"
             class="mr-6"
           />
@@ -71,7 +71,7 @@
   import { computed, defineComponent } from 'vue'
   import { computedEager } from '@vueuse/shared'
   import UiExternalLink from '@/components/ui/UiExternalLink.vue'
-  import UiIcon from '@/components/ui/UiIcon.vue'
+  import UiIcon from '@/components/ui/UiIcon'
   import { useEthers } from '@/hooks/dapp/useEthers'
   import { useTokenAmountFormat } from '@/hooks/formatters/useTokenAmountFormat'
   import { tokenAmountFormat } from '@/utils/strFormat/tokenAmountFormat'

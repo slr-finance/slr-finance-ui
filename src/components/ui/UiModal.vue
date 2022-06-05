@@ -44,7 +44,7 @@
 <script lang="ts">
   import { defineComponent, watch, computed, onBeforeUnmount } from 'vue'
   import { useVModel, useEventListener, useScrollLock } from '@vueuse/core'
-  import UiIcon from './UiIcon.vue'
+  import UiIcon from './UiIcon'
 
   export default defineComponent({
     name: 'ui-modal',

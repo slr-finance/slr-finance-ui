@@ -23,7 +23,7 @@
 <script lang="ts">
   import { defineComponent } from 'vue'
   import { useToggle } from '@vueuse/core'
-  import UiIcon from './UiIcon.vue'
+  import UiIcon from './UiIcon'
 
   export default defineComponent({
     name: 'ui-accordion',

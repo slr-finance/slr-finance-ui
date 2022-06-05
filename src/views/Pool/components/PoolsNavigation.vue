@@ -45,7 +45,7 @@
   import { computed, defineComponent, ref, unref } from 'vue'
   import { MAX_POOL_ID, POOLS_INFO } from '@/config/constants/Pools'
   import UiButton from '@/components/ui/UiButton.vue'
-  import UiIcon from '@/components/ui/UiIcon.vue'
+  import UiIcon from '@/components/ui/UiIcon'
   import { usePool } from '@/store/hooks/usePool'
   import { BIG_ZERO } from '@/utils/bigNumber'
   import { usePercentFormat } from '@/hooks/formatters/usePercentFormat'

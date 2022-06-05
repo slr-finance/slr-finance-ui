@@ -20,7 +20,7 @@ export const POOLS_INFO: PoolType[] = [
       description: 'The first planet of the income path',
       objectTypeName: 'planet',
       videoFolder: '/planets/neptune',
-      icon: 'pool-neptune',
+      icon: 'neptune',
       aboutPool:
         'The first planet of the solar farming system, the first step of your earnings, start your flight from it to the golden sun and high APY',
     },
@@ -33,7 +33,7 @@ export const POOLS_INFO: PoolType[] = [
       description: 'The seventh planet from the Sun',
       objectTypeName: 'planet',
       videoFolder: '/planets/uranus',
-      icon: 'pool-uranus',
+      icon: 'uranus',
       aboutPool:
         'The first planet of the solar farming system, the first step of your earnings, start your flight from it to the golden sun and high APY',
     },
@@ -46,7 +46,7 @@ export const POOLS_INFO: PoolType[] = [
       description: 'The sixth planet from the Sun and the second-largest in the Solar System',
       objectTypeName: 'planet',
       videoFolder: '/planets/saturn',
-      icon: 'pool-saturn',
+      icon: 'saturn',
       aboutPool:
         'The first planet of the solar farming system, the first step of your earnings, start your flight from it to the golden sun and high APY',
     },
@@ -59,7 +59,7 @@ export const POOLS_INFO: PoolType[] = [
       description: 'The fifth planet from the Sun and the largest in the Solar System',
       objectTypeName: 'planet',
       videoFolder: '/planets/jupiter',
-      icon: 'pool-jupiter',
+      icon: 'jupiter',
       aboutPool:
         'The first planet of the solar farming system, the first step of your earnings, start your flight from it to the golden sun and high APY',
     },
@@ -72,7 +72,7 @@ export const POOLS_INFO: PoolType[] = [
       description: 'The fourth planet from the Sun and is often called the "Red Planet"',
       objectTypeName: 'planet',
       videoFolder: '/planets/mars',
-      icon: 'pool-mars',
+      icon: 'mars',
       aboutPool:
         'The first planet of the solar farming system, the first step of your earnings, start your flight from it to the golden sun and high APY',
     },
@@ -85,7 +85,7 @@ export const POOLS_INFO: PoolType[] = [
       description: 'The third planet from the Sun',
       objectTypeName: 'planet',
       videoFolder: '/planets/earth',
-      icon: 'pool-earth',
+      icon: 'earth',
       aboutPool:
         'The first planet of the solar farming system, the first step of your earnings, start your flight from it to the golden sun and high APY',
     },
@@ -98,7 +98,7 @@ export const POOLS_INFO: PoolType[] = [
       description: 'The second planet from the Sun',
       objectTypeName: 'planet',
       videoFolder: '/planets/venus',
-      icon: 'pool-venus',
+      icon: 'venus',
       aboutPool:
         'The first planet of the solar farming system, the first step of your earnings, start your flight from it to the golden sun and high APY',
     },
@@ -111,7 +111,7 @@ export const POOLS_INFO: PoolType[] = [
       description: 'The smallest planet in the Solar System',
       objectTypeName: 'planet',
       videoFolder: '/planets/mercury',
-      icon: 'pool-mercury',
+      icon: 'mercury',
       aboutPool:
         'The first planet of the solar farming system, the first step of your earnings, start your flight from it to the golden sun and high APY',
     },
@@ -124,7 +124,7 @@ export const POOLS_INFO: PoolType[] = [
       description: 'The star at the center of the Solar System',
       objectTypeName: 'star',
       videoFolder: '/planets/sun',
-      icon: 'pool-sun',
+      icon: 'sun',
       aboutPool:
         'The first planet of the solar farming system, the first step of your earnings, start your flight from it to the golden sun and high APY',
     },

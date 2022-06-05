@@ -16,14 +16,15 @@ export default defineConfig({
     createSvgIconsPlugin({
       // Specify the icon folder to be cached
       iconDirs: [
-        path.resolve(process.cwd(), 'src/assets/icons'),
-        path.resolve(process.cwd(), 'src/assets/icons/wallets'),
-        path.resolve(process.cwd(), 'src/assets/icons/currency'),
-        path.resolve(process.cwd(), 'src/assets/icons/card'),
-        path.resolve(process.cwd(), 'src/assets/icons/social'),
+        path.resolve(process.cwd(), 'src/components/ui/UiIcon/icons'),
+        path.resolve(process.cwd(), 'src/components/ui/UiIcon/icons/pools'),
+        path.resolve(process.cwd(), 'src/components/ui/UiIcon/icons/wallets'),
+        path.resolve(process.cwd(), 'src/components/ui/UiIcon/icons/currency'),
+        path.resolve(process.cwd(), 'src/components/ui/UiIcon/icons/card'),
+        path.resolve(process.cwd(), 'src/components/ui/UiIcon/icons/social'),
       ],
-      // Specify symbolId format
-      symbolId: 'icon-[dir]-[name]',
+      inject: 'body-last',
+      symbolId: 'ui-icon-[dir]-[name]',
     }),
   ],
   build: {

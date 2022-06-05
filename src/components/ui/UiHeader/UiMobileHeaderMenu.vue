@@ -42,7 +42,7 @@
   import { defineComponent, PropType, watch } from 'vue'
   import { useRoute } from 'vue-router'
   import { useToggle } from '@vueuse/shared'
-  import UiIcon from '../UiIcon.vue'
+  import UiIcon from '../UiIcon'
   import UiLink from '../UiLink.vue'
 
   export default defineComponent({

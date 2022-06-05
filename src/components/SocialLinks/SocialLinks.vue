@@ -35,7 +35,7 @@
 
 <script lang="ts">
   import { defineComponent } from 'vue'
-  import UiIcon from '@/components/ui/UiIcon.vue'
+  import UiIcon from '@/components/ui/UiIcon'
 
   export default defineComponent({
     name: 'social-links',

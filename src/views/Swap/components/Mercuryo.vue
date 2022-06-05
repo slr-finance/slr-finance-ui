@@ -5,13 +5,13 @@
     target="_blank"
   >
     <ui-icon
-      prefix="icon-card"
+      prefix="ui-icon-card"
       name="visa"
       size="16"
       class="mr-4"
     />
     <ui-icon
-      prefix="icon-card"
+      prefix="ui-icon-card"
       name="mastercard"
       size="16"
       class="mr-6"
@@ -24,13 +24,13 @@
     target="_blank"
   >
     <ui-icon
-      prefix="icon-card"
+      prefix="ui-icon-card"
       name="visa"
       size="16"
       class="mr-4"
     />
     <ui-icon
-      prefix="icon-card"
+      prefix="ui-icon-card"
       name="mastercard"
       size="16"
       class="mr-6"
@@ -42,7 +42,7 @@
     target="_blank"
   >
     <ui-icon
-      prefix="icon-card"
+      prefix="ui-icon-card"
       name="binance"
       size="16"
       class="mr-6"
@@ -54,7 +54,7 @@
 <script lang="ts">
   import { defineComponent, computed } from 'vue'
   import UiButton from '@/components/ui/UiButton.vue'
-  import UiIcon from '@/components/ui/UiIcon.vue'
+  import UiIcon from '@/components/ui/UiIcon'
   import { useEthers } from '@/hooks/dapp/useEthers'
 
   export default defineComponent({

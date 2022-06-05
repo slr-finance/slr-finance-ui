@@ -30,7 +30,7 @@
         >
           <ui-icon
             class="mt-2"
-            prefix="icon-currency"
+            prefix="ui-icon-currency"
             size="18"
             :name="iconName"
             :key="iconName"
@@ -59,7 +59,7 @@
   import BigNumber from 'bignumber.js'
   import { BIG_ZERO } from '@/utils/bigNumber'
   import { useTokenAmountFormat } from '@/hooks/formatters/useTokenAmountFormat'
-  import UiIcon from './UiIcon.vue'
+  import UiIcon from './UiIcon'
 
   const stringToBn = (value: string, defaultBn: BigNumber = BIG_ZERO) => {
     const preparedStr = value.replace(/[^\d,\.]/g, '').replace(/([\.,])(?=\d*[\.,])/g, '')

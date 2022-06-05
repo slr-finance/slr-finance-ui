@@ -67,7 +67,7 @@
 <script lang="ts">
   import { computed, ComputedRef, defineComponent, Ref, ref } from 'vue'
   import BigNumber from 'bignumber.js'
-  import UiIcon from '@/components/ui/UiIcon.vue'
+  import UiIcon from '@/components/ui/UiIcon'
   import UiInputBn from '@/components/ui/UiInputBn.vue'
   import SendTxButton from '@/components/Tx/SendTxButton.vue'
   import ConnectWalletPlug from '@/components/ConnectWallet/ConnectWalletPlug.vue'

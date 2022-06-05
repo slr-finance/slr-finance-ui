@@ -68,7 +68,7 @@
 <script lang="ts">
   import { computed, defineComponent, PropType } from 'vue'
   import AccrualLabel from './AccrualLabel.vue'
-  import UiIcon from '@/components/ui/UiIcon.vue'
+  import UiIcon from '@/components/ui/UiIcon'
   import UiButton from '@/components/ui/UiButton.vue'
   import UiPlaceholder from '@/components/ui/UiPlaceholder.vue'
   import { AccrualInfo } from '../../hooks/useReferrerAccrualHistory'

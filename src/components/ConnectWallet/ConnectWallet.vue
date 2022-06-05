@@ -16,7 +16,7 @@
   import ConnectWalletPlug from './ConnectWalletPlug.vue'
   import { useSlrBalance } from '@/store/hooks/useBalance'
   import { useTokenAmountFormat } from '@/hooks/formatters/useTokenAmountFormat'
-  import UiIcon from '@/components/ui/UiIcon.vue'
+  import UiIcon from '@/components/ui/UiIcon'
   import { FetchingStatus } from '@/entities/common'
   import { useConnectedWalletModal } from './hooks/useConnectedWalletModal'
   import ConnectedWalletModal from './ConnectedWalletModal/ConnectedWalletModal.vue'

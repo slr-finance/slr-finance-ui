@@ -14,7 +14,7 @@
 
 <script lang="ts">
   import { defineComponent } from 'vue'
-  import UiIcon from './UiIcon.vue'
+  import UiIcon from './UiIcon'
 
   export default defineComponent({
     name: 'ui-alert',

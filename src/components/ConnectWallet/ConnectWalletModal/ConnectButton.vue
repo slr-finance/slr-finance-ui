@@ -5,7 +5,7 @@
     <div class="flex justify-between items-center mb-16">
       <div class="bg-black rounded-full w-32 h-32 flex justify-center items-center">
         <ui-icon
-          prefix="icon-wallets"
+          prefix="ui-icon-wallets"
           :name="iconName"
           size="16"
         />
@@ -24,7 +24,7 @@
 
 <script lang="ts">
   import { defineComponent, onMounted, ref, watch } from 'vue'
-  import UiIcon from '@/components/ui/UiIcon.vue'
+  import UiIcon from '@/components/ui/UiIcon'
 
   export default defineComponent({
     name: 'connect-button',

@@ -19,7 +19,7 @@
   import { shortenAddress } from '@/utils/address/shortenAddress'
   import { useSlrBalance } from '@/store/hooks/useBalance'
   import { useTokenAmountFormat } from '@/hooks/formatters/useTokenAmountFormat'
-  import UiIcon from '@/components/ui/UiIcon.vue'
+  import UiIcon from '@/components/ui/UiIcon'
   import { FetchingStatus } from '@/entities/common'
   import { useConnectedWalletModal } from '../hooks/useConnectedWalletModal'
 

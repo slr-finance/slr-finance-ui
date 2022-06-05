@@ -64,7 +64,7 @@
   import ConnectWalletPlug from '@/components/ConnectWallet/ConnectWalletPlug.vue'
   import UiBreadCrumbsAsync from '@/components/ui/UiBreadCrumbs/UiBreadCrumbsAsync'
   import UiButton from '@/components/ui/UiButton.vue'
-  import UiIcon from '@/components/ui/UiIcon.vue'
+  import UiIcon from '@/components/ui/UiIcon'
   import ReferralsList from './components/ReferralsList.vue'
   import ReferralLinkBlock from './components/ReferralLinkBlock.vue'
   import ReferrerRewards from './components/ReferrerRewards.vue'

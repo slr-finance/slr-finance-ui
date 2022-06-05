@@ -8,7 +8,7 @@
         <span class="text-12 text-gray">Connected to {{ walletName }}</span>
         <div class="bg-black rounded-full w-32 h-32 flex justify-center items-center mr-12">
           <ui-icon
-            prefix="icon-wallets"
+            prefix="ui-icon-wallets"
             :name="walletIconName"
             size="16"
           />
@@ -70,7 +70,7 @@
   import { computed, defineComponent, unref } from 'vue'
   import { useConnectedWalletModal } from '../hooks/useConnectedWalletModal'
   import UiModal from '@/components/ui/UiModal.vue'
-  import UiIcon from '@/components/ui/UiIcon.vue'
+  import UiIcon from '@/components/ui/UiIcon'
   import UiButton from '@/components/ui/UiButton.vue'
   import { shortenAddress } from '@/utils/address/shortenAddress'
   import { useEthers } from '@/hooks/dapp/useEthers'

@@ -68,7 +68,7 @@
   import { defineComponent, computed, ref, unref } from 'vue'
   import UiWidget from '@/components/ui/UiWidget.vue'
   import UiButton from '@/components/ui/UiButton.vue'
-  import UiIcon from '@/components/ui/UiIcon.vue'
+  import UiIcon from '@/components/ui/UiIcon'
   import UiPlaceholder from '@/components/ui/UiPlaceholder.vue'
 
   import { useReferrals } from '../hooks/useReferrals'

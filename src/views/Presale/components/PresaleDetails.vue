@@ -108,7 +108,7 @@
   import { computed, defineComponent } from 'vue'
   import { computedEager, useToggle } from '@vueuse/shared'
   import UiButton from '@/components/ui/UiButton.vue'
-  import UiIcon from '@/components/ui/UiIcon.vue'
+  import UiIcon from '@/components/ui/UiIcon'
   import UiExternalLink from '@/components/ui/UiExternalLink.vue'
   import UiLink from '@/components/ui/UiLink.vue'
   import PresaleReferralProgramWidget from './PresaleReferralProgramWidget.vue'
