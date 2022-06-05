@@ -7,6 +7,7 @@ In the first step install `vite-plugin-svg-icons` and use config:
       // Specify the icon folder to be cached
       iconDirs: [
         path.resolve(process.cwd(), 'PATH_TO_UI_KIT/UiIcon/icons'),
+        path.resolve(process.cwd(), 'PATH_TO_UI_KIT/UiIcon/icons/social'),
         path.resolve(process.cwd(), 'PATH_TO_UI_KIT/UiIcon/icons/pools'),
         path.resolve(process.cwd(), 'PATH_TO_UI_KIT/UiIcon/icons/wallets'),
         path.resolve(process.cwd(), 'PATH_TO_UI_KIT/UiIcon/icons/currency'),

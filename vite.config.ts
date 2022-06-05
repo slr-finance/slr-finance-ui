@@ -17,6 +17,7 @@ export default defineConfig({
       // Specify the icon folder to be cached
       iconDirs: [
         path.resolve(process.cwd(), 'src/components/ui/UiIcon/icons'),
+        path.resolve(process.cwd(), 'src/components/ui/UiIcon/icons/social'),
         path.resolve(process.cwd(), 'src/components/ui/UiIcon/icons/pools'),
         path.resolve(process.cwd(), 'src/components/ui/UiIcon/icons/wallets'),
         path.resolve(process.cwd(), 'src/components/ui/UiIcon/icons/currency'),

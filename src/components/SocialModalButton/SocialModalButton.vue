@@ -13,6 +13,7 @@
   >
     <ui-icon
       name="telegram-flat"
+      prefix="ui-icon-social"
       size="18"
     />
   </button>

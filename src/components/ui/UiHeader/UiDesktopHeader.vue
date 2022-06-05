@@ -5,13 +5,9 @@
   >
     <div class="app-header-bg backdrop-blur-8 absolute top-0 left-0 w-full h-full z-0 bg-black bg-opacity-30" />
     <div class="flex items-center relative z-10 w-full h-full">
-      <slot
-        v-if="isDesktop"
-        name="desktop-logo"
-      />
-      <slot
-        v-else
-        name="laptop-logo"
+      <ui-header-logo
+        :is-mobile="!isDesktop"
+        :logo-link="logoLink"
       />
 
       <ul class="ml-18 flex-1 flex space-x-32 h-full">
@@ -45,13 +41,11 @@
 </template>
 
 <script lang="ts">
+  import type { RouteLocationRaw } from 'vue-router'
   import { defineComponent, onUnmounted, PropType } from 'vue'
-  // import AppHeaderLogo from './AppHeaderLogo.vue'
-  // import ConnectWallet from '@/components/ConnectWallet/ConnectWallet.vue'
   import { useStyleTag, useBreakpoints, useEventListener } from '@vueuse/core'
   import UiLink, { UiLinkProps } from '../UiLink.vue'
-  // import AppHeaderDesktopNav from './AppHeaderDesktopNav.vue'
-  // import AppHeaderMobileMenu from './AppHeaderMobileMenu.vue'
+  import UiHeaderLogo from './UiHeaderLogo.vue'
 
   const checkWindow = (ifExist = () => {}, ifNotExist = () => {}) => {
     if (typeof window !== 'undefined') {
@@ -70,6 +64,9 @@
   export default defineComponent({
     name: 'app-header-desktop',
     props: {
+      logoLink: {
+        type: [String, Object] as PropType<RouteLocationRaw>,
+      },
       links: {
         type: Array as PropType<UiLinkProps[]>
       },
@@ -120,11 +117,8 @@
       }
     },
     components: {
-        UiLink
-      // AppHeaderLogo,
-      // ConnectWallet,
-      // AppHeaderDesktopNav,
-      // AppHeaderMobileMenu,
+        UiLink,
+        UiHeaderLogo,
     },
   })
 </script>

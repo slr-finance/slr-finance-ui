@@ -6,15 +6,7 @@
     <template #action>
       <connect-wallet/>
     </template>
-    <template #desktop-logo>
-      <app-header-logo/>
-    </template>
-    <template #laptop-logo>
-      <app-header-logo is-mobile />
-    </template>
-    <template #mobile-logo>
-      <app-header-logo is-mobile />
-    </template>
+
     <template #mobile-action>
       <div class="flex space-x-8">
         <app-header-mobile-token-price />
@@ -30,7 +22,6 @@ import type { UiLinkProps } from '@/components/ui/UiLink.vue'
 import UiButton from '@/components/ui/UiButton.vue'
 import UiHeader from '@/components/ui/UiHeader'
 import ConnectWallet from '@/components/ConnectWallet/ConnectWallet.vue'
-import AppHeaderLogo from './AppHeaderLogo.vue'
 import AppHeaderMobileTokenPrice from './AppHeaderMobileTokenPrice.vue'
 
 const links:UiLinkProps[] = [
@@ -61,7 +52,6 @@ export default defineComponent({
     UiHeader,
     UiButton,
     ConnectWallet,
-    AppHeaderLogo,
     AppHeaderMobileTokenPrice,
   }
 })
