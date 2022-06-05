@@ -56,7 +56,7 @@
   }
 
   const getScrollFactorStyle = (scrollY: number) => {
-    const scrollFactor = Math.min(scrollY, 97) / 100
+    const scrollFactor = Math.min(scrollY, 97) / 97
 
     return `:root { --app-ui-header-scroll-factor: ${scrollFactor}`
   }

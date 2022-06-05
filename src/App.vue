@@ -15,6 +15,7 @@
   import { useBreakpoints } from '@vueuse/core'
   import { useEthers } from '@/hooks/dapp/useEthers'
   import { store } from '@/store/store'
+  import { HeaderType, useHeader } from '@/components/ui/UiHeader/hooks/useHeader'
   import AppHeader from '@/components/App/AppHeader/AppHeader.vue'
   import AppMobileBottomNavigation from '@/components/App/AppMobileBottomNavigation/AppMobileBottomNavigation.vue'
   import ConnectedWalletModal from '@/components/ConnectWallet/ConnectedWalletModal/ConnectedWalletModal.vue'
@@ -50,6 +51,14 @@
       const { isDesktopLayout } = useBreakpoints({
         isDesktopLayout: 580,
       })
+
+      const { setHeaderType } = useHeader()
+
+      watch(
+        isDesktopLayout,
+        (isDesktopVal) => setHeaderType(isDesktopVal ? HeaderType.DEFAULT_DESKTOP : HeaderType.DEFAULT_MOBILE),
+        { immediate: true },
+      )
 
       return {
         isDesktopLayout,

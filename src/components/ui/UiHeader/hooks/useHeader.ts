@@ -1,40 +1,43 @@
-import { ref, watch } from 'vue'
-
-const size = ref({
-  height: 0,
-  offset: 0,
-})
-
-if (typeof window !== 'undefined') {
-  watch(size, ({ height, offset }) => {
-    if (window?.document) {
-      window.document.documentElement.style.setProperty('--app-ui-header-height', `${height}px`)
-      window.document.documentElement.style.setProperty('--app-ui-header-offset', `${offset}px`)
-    }
-  })
-}
+import { ref, Ref } from 'vue'
 
 export enum HeaderType {
   DEFAULT_DESKTOP,
   DEFAULT_MOBILE,
 }
 
+const HEADER_SIZE = {
+  [HeaderType.DEFAULT_DESKTOP]: {
+    height: 96,
+    offset: 64,
+  },
+  [HeaderType.DEFAULT_MOBILE]: {
+    height: 72,
+    offset: 16,
+  },
+}
+
+const size = ref({
+  height: 0,
+  offset: 0,
+})
+
+const type = ref() as Ref<HeaderType|undefined>
+
 export const useHeader = () => {
-  const setHeaderType = (type: HeaderType) => {
-    size.value =
-      type == HeaderType.DEFAULT_DESKTOP
-        ? {
-            height: 96,
-            offset: 64,
-          }
-        : {
-            height: 72,
-            offset: 16,
-          }
+  const setHeaderType = (headerType: HeaderType) => {
+    const headerSize = HEADER_SIZE[headerType]
+    type.value = headerType
+    size.value = headerSize
+
+    if (typeof window !== 'undefined' && window.document) {
+      window.document.documentElement.style.setProperty('--app-ui-header-height', `${headerSize.height}px`)
+      window.document.documentElement.style.setProperty('--app-ui-header-offset', `${headerSize.offset}px`)
+    }
   }
 
   return {
     size,
+    type,
     setHeaderType,
   }
 }

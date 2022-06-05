@@ -1,6 +1,6 @@
 <template>
   <ui-desktop-header
-    v-if="isDesktop"
+    v-if="type == HeaderType.DEFAULT_DESKTOP"
     :links="desktopMenu"
     :logo-link="logoLink"
   >
@@ -23,8 +23,7 @@
 <script lang="ts">
   import type { RouteLocationRaw } from 'vue-router'
   import type { UiLinkProps } from '../UiLink.vue'
-  import { defineAsyncComponent, defineComponent, PropType, watch } from 'vue'
-  import { useBreakpoints } from '@vueuse/core'
+  import { defineAsyncComponent, defineComponent, PropType } from 'vue'
   import UiMobileHeader from './UiMobileHeader.vue'
   import { HeaderType, useHeader } from './hooks/useHeader'
 
@@ -43,16 +42,9 @@
       }
     },
     setup() {
-      const { isDesktop } = useBreakpoints({ isDesktop: 750 })
-      const { setHeaderType } = useHeader()
+      const { type } = useHeader()
 
-      watch(
-        isDesktop,
-        (isDesktopVal) => setHeaderType(isDesktopVal ? HeaderType.DEFAULT_DESKTOP : HeaderType.DEFAULT_MOBILE),
-        { immediate: true },
-      )
-
-      return { isDesktop }
+      return { type, HeaderType }
     },
     components: {
       UiDesktopHeader: defineAsyncComponent({
