@@ -4,7 +4,7 @@
     <app-mobile-bottom-navigation v-if="!isDesktopLayout" />
   </div>
 
-  <app-header :is-desktop="isDesktopLayout" />
+  <app-header />
   <social-modal-button v-if="isDesktopLayout" />
   <connected-wallet-modal />
   <connect-wallet-modal />

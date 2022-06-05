@@ -5,12 +5,14 @@ const size = ref({
   offset: 0,
 })
 
-watch(size, ({ height, offset }) => {
-  if (window?.document) {
-    window.document.documentElement.style.setProperty('--app-ui-header-height', `${height}px`)
-    window.document.documentElement.style.setProperty('--app-ui-header-offset', `${offset}px`)
-  }
-})
+if (typeof window !== 'undefined') {
+  watch(size, ({ height, offset }) => {
+    if (window?.document) {
+      window.document.documentElement.style.setProperty('--app-ui-header-height', `${height}px`)
+      window.document.documentElement.style.setProperty('--app-ui-header-offset', `${offset}px`)
+    }
+  })
+}
 
 export enum HeaderType {
   DEFAULT_DESKTOP,

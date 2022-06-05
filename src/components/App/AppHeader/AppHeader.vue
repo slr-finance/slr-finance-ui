@@ -1,34 +1,68 @@
 <template>
-  <app-header-desktop v-if="isDesktop" />
-  <app-header-mobile v-else />
+  <ui-header
+    :desktop-menu="links"
+    :mobile-menu="links"
+  >
+    <template #action>
+      <connect-wallet/>
+    </template>
+    <template #desktop-logo>
+      <app-header-logo/>
+    </template>
+    <template #laptop-logo>
+      <app-header-logo is-mobile />
+    </template>
+    <template #mobile-logo>
+      <app-header-logo is-mobile />
+    </template>
+    <template #mobile-action>
+      <div class="flex space-x-8">
+        <app-header-mobile-token-price />
+        <connect-wallet is-mobile />
+      </div>
+    </template>
+  </ui-header>
 </template>
 
 <script lang="ts">
-  import { defineAsyncComponent, defineComponent, watch } from 'vue'
-  import AppHeaderMobile from './AppHeaderMobile.vue'
-  import { HeaderType, useHeader } from './hooks/useHeader'
+import { defineComponent } from 'vue'
+import type { UiLinkProps } from '@/components/ui/UiLink.vue'
+import UiButton from '@/components/ui/UiButton.vue'
+import UiHeader from '@/components/ui/UiHeader'
+import ConnectWallet from '@/components/ConnectWallet/ConnectWallet.vue'
+import AppHeaderLogo from './AppHeaderLogo.vue'
+import AppHeaderMobileTokenPrice from './AppHeaderMobileTokenPrice.vue'
 
-  export default defineComponent({
-    props: {
-      isDesktop: {
-        type: Boolean,
-        required: true,
-      },
-    },
-    setup(props) {
-      const { setHeaderType } = useHeader()
+const links:UiLinkProps[] = [
+  {
+    text: 'Swap',
+    to: { name: 'swap' },
+  },
+  {
+    text: 'Presale',
+    to: { name: 'presale' },
+  },
+  {
+    text: 'Staking',
+    to: { name: 'pool' },
+  },
+  {
+    text: 'Referral',
+    to: { name: 'referral' },
+  },
+]
 
-      watch(
-        () => props.isDesktop,
-        (isDesktop) => setHeaderType(isDesktop ? HeaderType.DEFAULT_DESKTOP : HeaderType.DEFAULT_MOBILE),
-        { immediate: true },
-      )
-    },
-    components: {
-      AppHeaderDesktop: defineAsyncComponent({
-        loader: () => import('./AppHeaderDesktop.vue'),
-      }),
-      AppHeaderMobile,
-    },
-  })
+export default defineComponent({
+  name: 'app-header',
+  setup() {    
+    return { links }
+  },
+  components: {
+    UiHeader,
+    UiButton,
+    ConnectWallet,
+    AppHeaderLogo,
+    AppHeaderMobileTokenPrice,
+  }
+})
 </script>

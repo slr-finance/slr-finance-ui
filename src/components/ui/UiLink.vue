@@ -16,10 +16,12 @@
     text?: string
     to?: RouteLocationRaw
     href?: string
+    target?: string
   }
 
   export default defineComponent({
     name: 'ui-link',
+    inheritAttrs: true,
     props: {
       text: {
         type: String,
@@ -30,6 +32,9 @@
       href: {
         type: String,
       },
+      target: {
+        type: String,
+      }
     },
     setup(props) {
       const componentProps = computed(() => {
@@ -39,13 +44,14 @@
           linkProps.to = props.to
         } else if (props.href) {
           linkProps.href = props.href
+          linkProps.target = props.target
         }
 
         return linkProps
       })
 
       const componentName = computed(() => {
-        return props.to ? 'router-link' : props.href ? 'a' : 'button'
+        return props.to ? 'router-link' : (props.href ? 'a' : 'button')
       })
 
       return {

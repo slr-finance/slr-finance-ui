@@ -7,21 +7,20 @@
       @click="toggle"
     />
     <teleport
-      to="#header-mobile-menu-place"
+      to="#ui-mobile-header-menu-place"
       v-if="isOpen"
     >
-      <nav class="fixed top-0 left-0 z-mobile-menu w-full h-full bg-black app-header-mobile-menu-content">
+      <nav class="fixed top-0 left-0 z-mobile-menu w-full h-full bg-black ui-mobile-header-menu-content">
         <ul class="flex flex-col space-y-32">
           <li
             class="h-full"
-            v-for="link in links"
+            :key="index"
+            v-for="(link, index) in links"
           >
             <ui-link
               class="text-14 flex flex-col justify-center items-center leading-none h-full"
-              :to="link.route"
-            >
-              {{ link.label }}
-            </ui-link>
+              v-bind="link"
+            />
           </li>
           <li class="h-full">
             <ui-link
@@ -39,18 +38,20 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent, watch } from 'vue'
+  import type { UiLinkProps } from '../UiLink.vue'
+  import { defineComponent, PropType, watch } from 'vue'
   import { useRoute } from 'vue-router'
   import { useToggle } from '@vueuse/shared'
-  import { linksList } from './linksList'
-  import UiIcon from '@/components/ui/UiIcon.vue'
-  import UiLink from '@/components/ui/UiLink.vue'
+  import UiIcon from '../UiIcon.vue'
+  import UiLink from '../UiLink.vue'
 
   export default defineComponent({
-    name: 'app-header-mobile-menu',
-    components: {
-      UiIcon,
-      UiLink,
+    name: 'ui-mobile-header-menu',
+    props: {
+      links: {
+        type: Array as PropType<UiLinkProps[]>,
+        required: true,
+      },
     },
     setup() {
       const [isOpen, toggle] = useToggle()
@@ -63,14 +64,17 @@
       return {
         isOpen,
         toggle: () => toggle(),
-        links: linksList,
       }
+    },
+    components: {
+      UiIcon,
+      UiLink,
     },
   })
 </script>
 
 <style>
-  .app-header-mobile-menu-content {
-    padding-top: calc(var(--app-ui-header-height) + var(--app-ui-header-padding));
+  .ui-mobile-header-menu-content {
+    padding-top: calc(var(--app-ui-header-height) + var(--app-ui-header-offset));
   }
 </style>
