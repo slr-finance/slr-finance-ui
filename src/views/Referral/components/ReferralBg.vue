@@ -6,6 +6,7 @@
       class="w-full h-full"
       ref="video"
       autoplay
+      playsinline
       loop
       muted
     />
