@@ -1,6 +1,3 @@
-export const REFERRER_QUERY_PARAM = 'r'
-export const REFERRER_STORAGE_NAME = 'referrer'
-
 export enum REFERRALS_ACTIONS {
   Presale = 1,
   Staking = 2,
