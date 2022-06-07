@@ -6,7 +6,7 @@ import { balanceModule, TokenInfo } from '../modules/balanceModule'
 import { store } from '../store'
 import erc20Abi from '@/config/abi/Erc20.json'
 import { BigNumber as BigNumberEthers } from 'ethers'
-import contractsAddresses from '@/config/constants/contractsAddresses.json'
+import contractsAddresses from '@/config/constants/contractsAddresses'
 import { isAddress } from 'ethers/lib/utils'
 import { FetchingStatus } from '@/entities/common'
 

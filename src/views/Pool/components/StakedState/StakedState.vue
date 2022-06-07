@@ -78,7 +78,7 @@
   import { defineComponent, computed, watch } from 'vue'
   import { useInterval, useToggle, useTransition } from '@vueuse/core'
   import UiButton from '@/components/ui/UiButton.vue'
-  import UiIcon from '@/components/ui/UiIcon.vue'
+  import UiIcon from '@/components/ui/UiIcon'
   import UiPoligon from '@/components/ui/UiPoligon.vue'
   import UiModal from '@/components/ui/UiModal.vue'
   import { useStaker } from '@/store/hooks/useStaker'

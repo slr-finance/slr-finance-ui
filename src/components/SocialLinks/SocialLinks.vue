@@ -7,6 +7,7 @@
     >
       <ui-icon
         name="twitter"
+        prefix="ui-icon-social"
         size="20"
       />
     </a>
@@ -17,6 +18,7 @@
     >
       <ui-icon
         name="facebook"
+        prefix="ui-icon-social"
         size="20"
       />
     </a>
@@ -27,6 +29,7 @@
     >
       <ui-icon
         name="instagram"
+        prefix="ui-icon-social"
         size="20"
       />
     </a>
@@ -35,7 +38,7 @@
 
 <script lang="ts">
   import { defineComponent } from 'vue'
-  import UiIcon from '@/components/ui/UiIcon.vue'
+  import UiIcon from '@/components/ui/UiIcon'
 
   export default defineComponent({
     name: 'social-links',

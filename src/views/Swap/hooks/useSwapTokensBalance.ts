@@ -1,5 +1,5 @@
 import { computed, ComputedRef, Ref } from 'vue'
-import contractsAddresses from '@/config/constants/contractsAddresses.json'
+import contractsAddresses from '@/config/constants/contractsAddresses'
 import { useEthers } from '@/hooks/dapp/useEthers'
 import { useSlrBalance } from '@/store/hooks/useBalance'
 import { SwapParams } from './useSwap'

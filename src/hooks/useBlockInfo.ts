@@ -1,7 +1,7 @@
 import { ref } from 'vue'
 import { multicall } from '@/utils/contracts/multicall'
 import MulticallAbi from '@/config/abi/Multicall.json'
-import contractsAddresses from '@/config/constants/contractsAddresses.json'
+import contractsAddresses from '@/config/constants/contractsAddresses'
 import { useInterval } from '@vueuse/core'
 
 const blockTimestampSync = ref(0)

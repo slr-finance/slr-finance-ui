@@ -4,7 +4,10 @@
       <p class="text-gray text-16 leading-none mb-12">White list open</p>
       <p class="text-white text-24 leading-none font-title uppercase mb-16">Join to whitelist</p>
 
-      <p class="mb-8 text-16">Taking part in whitelisted pre-sale makes investors part of a privileged group of individuals who are buying tokens before anyone else.</p>
+      <p class="mb-8 text-16">
+        Taking part in whitelisted pre-sale makes investors part of a privileged group of individuals who are buying
+        tokens before anyone else.
+      </p>
       <presale-price
         :phase="1"
         class="inline-block bg-green-original rounded-full px-8 py-4 leading-none text-14 mb-16"

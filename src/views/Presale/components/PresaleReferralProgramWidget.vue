@@ -13,11 +13,7 @@
     <p class="text-14 leading-[22px] text-white mt-20 mr-ui-page-spacing">
       Earn {{ referrerRewardPercentStr }} on your referral's investments, for all presale phases. Create your referral
       link on
-      <router-link
-        class="ui-link"
-        :to="{ name: 'referral' }"
-        >app.slr.finance/referrals</router-link
-      >
+      <ui-link :to="{ name: 'referral' }"> app.slr.finance/referrals </ui-link>
     </p>
     <div class="flex items-start mt-8">
       <ui-button

@@ -61,7 +61,7 @@
   import { useTokenAmountFormat } from '@/hooks/formatters/useTokenAmountFormat'
   import SendTxButton from '@/components/Tx/SendTxButton.vue'
   import UiPlaceholder from '@/components/ui/UiPlaceholder.vue'
-  import UiIcon from '@/components/ui/UiIcon.vue'
+  import UiIcon from '@/components/ui/UiIcon'
   import UiModal from '@/components/ui/UiModal.vue'
   import { useUnstakeWithFee } from '../../hooks/useUnstakeWithFee'
 

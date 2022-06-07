@@ -39,8 +39,7 @@
       </div>
       <connect-wallet-plug>
         <template #plug>
-          Unlock wallet to get your unique referral link
-          <connect-wallet-plug text="Unlock wallet" />
+          <referral-promo-state />
         </template>
 
         <template #default>
@@ -65,13 +64,14 @@
   import ConnectWalletPlug from '@/components/ConnectWallet/ConnectWalletPlug.vue'
   import UiBreadCrumbsAsync from '@/components/ui/UiBreadCrumbs/UiBreadCrumbsAsync'
   import UiButton from '@/components/ui/UiButton.vue'
-  import UiIcon from '@/components/ui/UiIcon.vue'
+  import UiIcon from '@/components/ui/UiIcon'
   import ReferralsList from './components/ReferralsList.vue'
   import ReferralLinkBlock from './components/ReferralLinkBlock.vue'
   import ReferrerRewards from './components/ReferrerRewards.vue'
   import ReferrerAccrualHistory from './components/ReferrerAccrualHistory/ReferrerAccrualHistory.vue'
   import ReferralFaq from './components/ReferralFaq.vue'
   import ReferralBg from './components/ReferralBg.vue'
+  import ReferralPromoState from './components/ReferralPromoState.vue'
 
   export default defineComponent({
     setup() {
@@ -95,6 +95,7 @@
       ReferrerAccrualHistory,
       ReferralFaq,
       ReferralBg,
+      ReferralPromoState,
       UiBreadCrumbs: UiBreadCrumbsAsync,
       UiButton,
       UiIcon,

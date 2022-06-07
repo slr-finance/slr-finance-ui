@@ -30,7 +30,7 @@
 
 <script lang="ts">
   import { computed, defineComponent } from 'vue'
-  import UiIcon from '@/components/ui/UiIcon.vue'
+  import UiIcon from '@/components/ui/UiIcon'
   import { stakingModule } from '@/store/modules/stakingModule'
   import { store } from '@/store/store'
   import { useBreakpoints } from '@vueuse/core'

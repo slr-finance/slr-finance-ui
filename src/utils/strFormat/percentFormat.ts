@@ -2,7 +2,7 @@ import BigNumber from 'bignumber.js'
 import { numberFormat } from './numberFormat'
 
 export const percentFormat = (fraction: BigNumber | number) => {
-  let percent:number
+  let percent: number
 
   if (BigNumber.isBigNumber(fraction)) {
     percent = fraction.times(100).toNumber()

@@ -1,34 +1,16 @@
 import 'virtual:svg-icons-register'
-import 'virtual:fonts.css'
+import '@/index.postcss'
+import '@/components/ui/index.postcss'
 import { createApp, nextTick } from 'vue'
 import Toast, { POSITION } from 'vue-toastification'
 import 'vue-toastification/dist/index.css'
-import { isAddress } from 'ethers/lib/utils'
 import { router } from '@/router'
 import App from '@/App.vue'
-import '@/index.postcss'
 import { store } from '@/store/store'
-import { REFERRER_QUERY_PARAM, REFERRER_STORAGE_NAME } from '@/config/constants/referrals'
+import { initReferral } from './libs/referral'
 
 // Referral [BEGIN]
-let referrer: string | null = localStorage.getItem(REFERRER_STORAGE_NAME)
-const url = new URL(window.location.href)
-const searchParams = new URLSearchParams(url.search)
-
-if (!referrer || !isAddress(referrer)) {
-  referrer = searchParams.get(REFERRER_QUERY_PARAM)
-
-  if (referrer && isAddress(referrer)) {
-    localStorage.setItem(REFERRER_STORAGE_NAME, referrer)
-  } else {
-    referrer = null
-  }
-}
-
-searchParams.delete(REFERRER_QUERY_PARAM)
-url.search = searchParams.toString()
-
-window.history.replaceState({}, '', `${url.pathname.toString()}${url.search}`)
+initReferral()
 // Referral [END]
 
 // Mount app [BEGIN]

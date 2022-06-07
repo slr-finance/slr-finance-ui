@@ -36,7 +36,7 @@
 
 <script lang="ts">
   import { computed, defineComponent } from 'vue'
-  import UiIcon from '@/components/ui/UiIcon.vue'
+  import UiIcon from '@/components/ui/UiIcon'
   import { usePools } from '@/store/hooks/usePools'
   import { useStaker } from '@/store/hooks/useStaker'
 

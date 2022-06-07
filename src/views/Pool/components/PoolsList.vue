@@ -19,6 +19,7 @@
             active-class="-active"
           >
             <ui-icon
+              prefix="ui-icon-pools"
               :name="link.icon"
               :size="iconSize"
             />
@@ -33,8 +34,8 @@
   import { defineComponent, watch } from 'vue'
   import { POOLS_INFO } from '@/config/constants/Pools'
   import { computedEager, templateRef, useElementSize, useWindowSize } from '@vueuse/core'
-  import UiIcon from '@/components/ui/UiIcon.vue'
-  import { useHeader } from '@/components/App/AppHeader/hooks/useHeader'
+  import UiIcon from '@/components/ui/UiIcon'
+  import { useHeader } from '@/components/ui/UiHeader/hooks/useHeader'
   import { useMobileBottomNavigation } from '@/components/App/AppMobileBottomNavigation/hooks/useMobileBottomNavigation'
 
   const poolsLinks = POOLS_INFO.map((pool) => {

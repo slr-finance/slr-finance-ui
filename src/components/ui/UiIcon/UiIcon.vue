@@ -20,7 +20,7 @@
     props: {
       prefix: {
         type: String,
-        default: 'icon',
+        default: 'ui-icon',
       },
       name: {
         type: String,

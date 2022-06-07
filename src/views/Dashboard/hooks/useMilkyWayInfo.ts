@@ -1,5 +1,5 @@
 import { markRaw, onMounted, ref, Ref } from 'vue'
-import contractsAddresses from '@/config/constants/contractsAddresses.json'
+import contractsAddresses from '@/config/constants/contractsAddresses'
 import MilkyWayAbi from '@/config/abi/MilkyWay.json'
 import Erc20Abi from '@/config/abi/Erc20.json'
 import { Call, multicall } from '@/utils/contracts/multicall'

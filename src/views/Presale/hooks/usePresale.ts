@@ -1,6 +1,6 @@
 import type { BigNumber as BigNumberEthers } from 'ethers'
 import PresaleAbi from '@/config/abi/Presale.json'
-import contractsAddresses from '@/config/constants/contractsAddresses.json'
+import contractsAddresses from '@/config/constants/contractsAddresses'
 import { BIG_ONE, parseWei } from '@/utils/bigNumber'
 import { Call, multicall } from '@/utils/contracts/multicall'
 import BigNumber from 'bignumber.js'

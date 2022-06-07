@@ -7,6 +7,7 @@
 <script lang="ts">
   import { computedEager } from '@vueuse/shared'
   import { computed, defineComponent } from 'vue'
+  import { dateFromUnix } from '@/utils/date/dateFromUnix'
   import { useTimeToFormat } from '@/hooks/formatters/useTimeToFormat'
   import { usePresale } from '../../hooks/usePresale'
 
@@ -17,7 +18,7 @@
 
       const countdownTimeStr = useTimeToFormat(0, currentPhaseCountdown)
       const expirationDateStr = computed(() =>
-        new Date(currentPhaseEndTime.value * 1000).toLocaleTimeString('en-En', {
+        dateFromUnix(currentPhaseEndTime.value).toLocaleTimeString('en-En', {
           year: 'numeric',
           month: 'long',
           day: '2-digit',
@@ -35,8 +36,10 @@
           return 'Presale starts in'
         } else if (phaseVal === 4) {
           return 'Presale ended'
+        } else if (phaseVal === 3) {
+          return 'Presale ends in'
         } else {
-          return 'Presale information'
+          return 'Phase ends in'
         }
       })
 

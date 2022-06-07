@@ -3,6 +3,8 @@ import WalletConnectProvider from '@walletconnect/web3-provider'
 import { markRaw, ref, computed, Ref } from 'vue'
 import { useEthers } from '@/hooks/dapp/useEthers'
 import { loadWalletConnect } from '@/utils/wallet/loadWalletConnect'
+import { CHAIN_ID, NETWORK_DETAILS } from '@/config/constants/chain'
+import { LATEST_CONNECTED_PROVIDER } from '@/config/constants/localStorage'
 
 export type WalletName = 'none' | 'metamask' | 'walletconnect'
 export type ConnectionState = 'none' | 'connecting' | 'connected'
@@ -66,6 +68,13 @@ export const useWallet = () => {
     provider.value = markRaw(_provider)
     walletName.value = name
     status.value = 'connected'
+    localStorage.setItem(LATEST_CONNECTED_PROVIDER, name)
+
+    const { chainId } = NETWORK_DETAILS[CHAIN_ID]
+
+    if ((window.ethereum as any).chainId !== chainId) {
+      await Metamask.switchChain(provider.value as MetaMaskProvider, CHAIN_ID)
+    }
 
     // EIP-1193 subscriber
     subscribeDisconnect()
@@ -91,6 +100,7 @@ export const useWallet = () => {
       }
     }
     clear()
+    localStorage.removeItem(LATEST_CONNECTED_PROVIDER)
   }
 
   // ========================= EIP-1193 subscriber =========================
@@ -99,6 +109,7 @@ export const useWallet = () => {
     switch (walletName.value) {
       case 'metamask': {
         ;(provider.value as MetaMaskProvider).on('disconnect', (err: MetaMaskProviderRpcError) => {
+          localStorage.removeItem(LATEST_CONNECTED_PROVIDER)
           clear()
         })
 
@@ -109,6 +120,7 @@ export const useWallet = () => {
         // Q: why it trigger twice when user click disconnect?
         // source code: https://github.com/WalletConnect/walletconnect-monorepo/blob/0871582be273f8c21bb1351315d649ea47ee70b7/packages/providers/web3-provider/src/index.ts#L277
         ;(provider.value as WalletConnectProvider).on('disconnect', (code: number, reason: string) => {
+          localStorage.removeItem(LATEST_CONNECTED_PROVIDER)
           clear()
         })
         break
@@ -156,6 +168,12 @@ export const useWallet = () => {
             error.value = 'Failed when changing chain: missing provider'
             console.error('Failed when changing chain: missing provider')
             return
+          }
+
+          const { chainId } = NETWORK_DETAILS[CHAIN_ID]
+
+          if (hexChainId !== chainId) {
+            await Metamask.switchChain(provider.value, CHAIN_ID)
           }
 
           try {

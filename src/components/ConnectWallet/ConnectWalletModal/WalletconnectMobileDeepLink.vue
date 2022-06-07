@@ -4,7 +4,7 @@
     size="48"
   >
     <ui-icon
-      prefix="icon-wallets"
+      prefix="ui-icon-wallets"
       size="18"
       :name="walletInfo.iconName"
     />
@@ -14,7 +14,7 @@
 
 <script lang="ts">
   import { defineComponent, computed, PropType } from 'vue'
-  import UiIcon from '@/components/ui/UiIcon.vue'
+  import UiIcon from '@/components/ui/UiIcon'
   import UiButton from '@/components/ui/UiButton.vue'
 
   const walletDeepLinkInfo = {

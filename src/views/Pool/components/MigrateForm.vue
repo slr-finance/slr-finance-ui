@@ -78,10 +78,10 @@
 <script lang="ts">
   import { computed, defineComponent, toRef, watch, ref, Ref } from 'vue'
   import BigNumber from 'bignumber.js'
-  import contractsAddresses from '@/config/constants/contractsAddresses.json'
+  import contractsAddresses from '@/config/constants/contractsAddresses'
   import SendTxButton from '@/components/Tx/SendTxButton.vue'
   import UiButton from '@/components/ui/UiButton.vue'
-  import UiIcon from '@/components/ui/UiIcon.vue'
+  import UiIcon from '@/components/ui/UiIcon'
   import UiPoligon from '@/components/ui/UiPoligon.vue'
   import UiAlert from '@/components/ui/UiAlert.vue'
   import ApproveTokenPlug from '@/components/ApproveToken/ApproveTokenPlug.vue'

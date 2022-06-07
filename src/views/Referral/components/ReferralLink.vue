@@ -25,11 +25,11 @@
   import { computed, defineComponent, unref } from 'vue'
   import { useEthers } from '@/hooks/dapp/useEthers'
   import { useClipboard } from '@vueuse/core'
-  import { REFERRER_QUERY_PARAM } from '@/config/constants/referrals'
   import { DOMAIN } from '@/config/constants/main'
   import { isAddress } from '@ethersproject/address'
-  import UiIcon from '@/components/ui/UiIcon.vue'
+  import UiIcon from '@/components/ui/UiIcon'
   import { useSingleToast } from '@/hooks/useSingleToast'
+  import { REFERRER_QUERY_PARAM } from '@/libs/referral'
 
   export default defineComponent({
     name: 'referral-link',

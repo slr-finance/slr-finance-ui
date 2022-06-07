@@ -2,7 +2,8 @@
   <div class="w-full">
     <div class="text-12 text-white text-opacity-60 mb-12 leading-none">Channels</div>
     <social-item
-      v-for="item in channels"
+      v-for="(item, index) in channels"
+      :key="index"
       :link="item.link"
       :label="item.label"
       :description="item.description"
@@ -12,7 +13,8 @@
 
     <div class="text-12 text-white text-opacity-60 mt-28 mb-12 leading-none">Chats</div>
     <social-item
-      v-for="item in chats"
+      v-for="(item, index) in chats"
+      :key="index"
       :link="item.link"
       :label="item.label"
       :description="item.description"

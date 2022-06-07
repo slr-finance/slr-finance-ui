@@ -4,7 +4,7 @@
     <app-mobile-bottom-navigation v-if="!isDesktopLayout" />
   </div>
 
-  <app-header :is-desktop="isDesktopLayout" />
+  <app-header />
   <social-modal-button v-if="isDesktopLayout" />
   <connected-wallet-modal />
   <connect-wallet-modal />
@@ -15,12 +15,15 @@
   import { useBreakpoints } from '@vueuse/core'
   import { useEthers } from '@/hooks/dapp/useEthers'
   import { store } from '@/store/store'
+  import { HeaderType, useHeader } from '@/components/ui/UiHeader/hooks/useHeader'
   import AppHeader from '@/components/App/AppHeader/AppHeader.vue'
   import AppMobileBottomNavigation from '@/components/App/AppMobileBottomNavigation/AppMobileBottomNavigation.vue'
   import ConnectedWalletModal from '@/components/ConnectWallet/ConnectedWalletModal/ConnectedWalletModal.vue'
   import ConnectWalletModal from '@/components/ConnectWallet/ConnectWalletModal'
   import { stakingModule } from '@/store/modules/stakingModule'
   import { useBlockInfo } from './hooks/useBlockInfo'
+  import { LATEST_CONNECTED_PROVIDER } from '@/config/constants/localStorage'
+  import { useWallet, WalletName } from './hooks/dapp/useWallet'
 
   export default defineComponent({
     props: {
@@ -29,6 +32,14 @@
       },
     },
     setup() {
+      const { connect } = useWallet()
+
+      const latestConnectedProvider = localStorage.getItem(LATEST_CONNECTED_PROVIDER) as WalletName | null
+
+      if (latestConnectedProvider === 'metamask') {
+        connect(latestConnectedProvider)
+      }
+
       stakingModule.register(store)
 
       const { address } = useEthers()
@@ -40,6 +51,14 @@
       const { isDesktopLayout } = useBreakpoints({
         isDesktopLayout: 580,
       })
+
+      const { setHeaderType } = useHeader()
+
+      watch(
+        isDesktopLayout,
+        (isDesktopVal) => setHeaderType(isDesktopVal ? HeaderType.DEFAULT_DESKTOP : HeaderType.DEFAULT_MOBILE),
+        { immediate: true },
+      )
 
       return {
         isDesktopLayout,

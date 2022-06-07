@@ -2,10 +2,10 @@ import { computed, unref } from 'vue'
 import { useSendTx } from '@/hooks/useSendTx'
 import { MaybeRef } from '@vueuse/core'
 import BigNumber from 'bignumber.js'
-import { getReferrerFromLocalstorage } from '@/utils/getReferrerFromLocalstorage'
 import { useSlrBalance } from '@/store/hooks/useBalance'
 import { useStakingContract } from '@/hooks/contracts/useStakingContract'
 import { bigToWei } from '@/utils/bigNumber'
+import { getReferrerFromCookies } from '@/libs/referral'
 
 type UseStakeParams = {
   poolId: MaybeRef<number>
@@ -21,7 +21,7 @@ export const useStake = (params: UseStakeParams) => {
     unref(params.poolId),
     unref(amountWei),
     Number(unref(params.days)),
-    getReferrerFromLocalstorage(),
+    getReferrerFromCookies(),
   ])
 
   return useSendTx(stakingContract, 'stake', callParams)

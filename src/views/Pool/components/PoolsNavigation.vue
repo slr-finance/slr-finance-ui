@@ -12,7 +12,7 @@
         class="wrapper flex flex-col justify-start"
       >
         <router-link
-          class="firstItem ui-link h-40 flex justify-between items-center"
+          class="firstItem link h-40 flex justify-between items-center"
           v-if="prevPoolName"
           :to="prevPoolRoute"
         >
@@ -25,7 +25,7 @@
           />
         </router-link>
         <router-link
-          class="ui-link h-40 flex justify-between items-center"
+          class="link h-40 flex justify-between items-center"
           v-if="nextPoolName"
           :to="nextPoolRoute"
         >
@@ -45,7 +45,7 @@
   import { computed, defineComponent, ref, unref } from 'vue'
   import { MAX_POOL_ID, POOLS_INFO } from '@/config/constants/Pools'
   import UiButton from '@/components/ui/UiButton.vue'
-  import UiIcon from '@/components/ui/UiIcon.vue'
+  import UiIcon from '@/components/ui/UiIcon'
   import { usePool } from '@/store/hooks/usePool'
   import { BIG_ZERO } from '@/utils/bigNumber'
   import { usePercentFormat } from '@/hooks/formatters/usePercentFormat'
@@ -124,8 +124,12 @@
     height: 40px;
   }
 
-  .ui-link {
+  .link {
     @apply outline-none text-white;
+  }
+
+  .link:hover {
+    @apply outline-none text-gray-500;
   }
 
   .fade-enter-active,

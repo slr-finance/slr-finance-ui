@@ -1,5 +1,5 @@
 <template>
-  <link-to-dex class="flex justify-center items-start leading-none ui-link">
+  <link-to-dex class="flex justify-center items-start leading-none">
     Power by
     <img
       src="/images/swap/pancake-full-white.svg"

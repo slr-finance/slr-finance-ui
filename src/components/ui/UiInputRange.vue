@@ -1,5 +1,8 @@
 <template>
-  <label class="ui-input-range -size-64">
+  <label
+    class="ui-input-range"
+    :class="classList"
+  >
     <div class="range-wrapper">
       <div
         class="range"
@@ -21,6 +24,7 @@
       class="input flex-1"
       @input="handleInput"
       v-bind="inputProps"
+      :disabled="fetching"
       type="range"
     />
   </label>
@@ -29,6 +33,7 @@
 <script lang="ts">
   import { computed, defineComponent } from 'vue'
   import get from 'lodash.get'
+  import { computedEager } from '@vueuse/shared'
 
   export default defineComponent({
     name: 'ui-input-range',
@@ -49,10 +54,14 @@
         type: Number,
         default: 1,
       },
+      fetching: {
+        type: Boolean,
+      },
     },
     emits: ['update:value'],
     setup(props, { emit }) {
       const percent = computed(() => (props.value - props.min) / (props.max - props.min))
+      const classList = computedEager(() => (props.fetching ? '-fetching' : ''))
       const rangeStyleList = computed(() => ({
         transform: `translateX(${(percent.value - 1) * 100}%)`,
       }))
@@ -76,6 +85,7 @@
         inputProps,
         rangeStyleList,
         valueSide,
+        classList,
       }
     },
   })
@@ -90,6 +100,10 @@
     background: rgb(64 231 255 / 20%);
   }
 
+  .ui-input-range.-fetching {
+    @apply bg-gray-700 animate-pulse;
+  }
+
   .ui-input-range > .range-wrapper {
     @apply overflow-hidden rounded-l-full absolute top-0 pointer-events-none select-none;
     height: var(--ui-input-range-height);
@@ -101,6 +115,10 @@
     transform-origin: left center;
     height: var(--ui-input-range-height);
     background: #40e7ff;
+  }
+
+  .ui-input-range.-fetching > .range-wrapper {
+    @apply opacity-0;
   }
 
   .ui-input-range > .range-wrapper > .range > .value {
@@ -134,9 +152,16 @@
     border: none;
     cursor: pointer;
     -webkit-appearance: none;
-    margin-top: -3.6px;
+    margin-top: -4px;
   }
-  .ui-input-range > .input:focus::-webkit-slider-runnable-track {
+
+  .ui-input-range.-fetching > .input::-webkit-slider-thumb {
+    box-shadow: inset 0px 0px 0 2px theme('colors.gray.700');
+    background: theme('colors.gray.700');
+  }
+
+  .ui-input-range > .input:focus::-webkit-slider-runnable-track,
+  .ui-input-range > .input::-webkit-slider-runnable-track {
     background: transparent;
   }
   .ui-input-range > .input::-moz-range-track {

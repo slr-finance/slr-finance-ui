@@ -1,6 +1,3 @@
-export const REFERRER_QUERY_PARAM = 'r'
-export const REFERRER_STORAGE_NAME = 'referrer'
-
 export enum REFERRALS_ACTIONS {
   Presale = 1,
   Staking = 2,
@@ -9,7 +6,7 @@ export enum REFERRALS_ACTIONS {
   Buy = 5,
 }
 
-export const REFERRALS_ACTIONS_LABELS: Record<number, string> = {
+export const REFERRALS_ACTIONS_LABELS: Record<REFERRALS_ACTIONS, string> = {
   [REFERRALS_ACTIONS.Presale]: 'Presale',
   [REFERRALS_ACTIONS.Staking]: 'Staking',
   [REFERRALS_ACTIONS.Transfer]: 'Transfer',

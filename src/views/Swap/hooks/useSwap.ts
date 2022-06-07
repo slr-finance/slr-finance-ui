@@ -1,5 +1,5 @@
 import BigNumber from 'bignumber.js'
-import contractsAddresses from '@/config/constants/contractsAddresses.json'
+import contractsAddresses from '@/config/constants/contractsAddresses'
 import { ref, computed, markRaw, Ref, ComputedRef } from 'vue'
 import { fetchReserves } from '@/utils/tokens/fetchReserves'
 import { BigNumber as BigNumberEthers } from 'ethers'

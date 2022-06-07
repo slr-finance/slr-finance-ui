@@ -3,7 +3,7 @@ import BigNumber from 'bignumber.js'
 import { BigNumber as BigNumberEthers } from 'ethers'
 import get from 'lodash.get'
 import { createModule } from 'vuexok'
-import contractsAddresses from '@/config/constants/contractsAddresses.json'
+import contractsAddresses from '@/config/constants/contractsAddresses'
 import { parseWei } from '@/utils/bigNumber'
 
 export type TokenInfo = {

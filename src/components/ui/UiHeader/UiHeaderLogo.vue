@@ -1,8 +1,8 @@
 <template>
   <router-link
     :class="{ '-mobile': isMobile }"
-    class="app-header-logo flex items-center relative z-10 leading-none"
-    :to="{ name: 'dashboard' }"
+    class="app-header-logo flex items-center relative z-10 leading-none shrink-0"
+    :to="logoLink"
   >
     <div class="logo-wrapper">
       <ui-icon
@@ -12,7 +12,7 @@
       />
     </div>
     <div
-      class="title flex items-center justify-start uppercase"
+      class="title text-18 flex items-center justify-start uppercase"
       v-if="!isMobile"
     >
       SLR
@@ -23,15 +23,20 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent } from 'vue'
-  import UiIcon from '@/components/ui/UiIcon.vue'
+  import type { RouteLocationRaw } from 'vue-router'
+  import { defineComponent, PropType } from 'vue'
+  import UiIcon from '@/components/ui/UiIcon'
 
   export default defineComponent({
     name: 'app-header-logo',
     props: {
+      logoLink: {
+        type: [String, Object] as PropType<RouteLocationRaw>,
+        default: '/',
+      },
       isMobile: {
         type: Boolean,
-        default: true,
+        default: false,
       },
     },
     components: {
@@ -45,22 +50,14 @@
     min-width: 300px;
   }
   .app-header-logo:not(.-mobile) > .logo-wrapper {
-    @apply w-72 flex justify-center items-center mr-ui-page-spacing;
+    @apply w-72 flex justify-center items-center;
   }
   .app-header-logo:not(.-mobile) > .logo-wrapper > .logo {
     @apply w-50 h-50;
   }
 
-  .app-header-logo:not(.-mobile) > .title {
-    @apply text-18;
-  }
-
   .app-header-logo.-mobile > .logo-wrapper > .logo {
     @apply w-36 h-36 mr-16;
-  }
-
-  .app-header-logo.-mobile > .title {
-    @apply text-14;
   }
 
   .app-header-logo > .title > .dot {

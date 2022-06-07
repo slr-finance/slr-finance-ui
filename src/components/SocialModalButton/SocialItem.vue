@@ -7,7 +7,7 @@
   >
     <div class="w-36 h-36 bg-black rounded-full mr-12 flex justify-center items-center">
       <ui-icon
-        prefix="icon-social"
+        prefix="ui-icon-social"
         size="18"
         :name="iconName"
       />
@@ -21,7 +21,7 @@
 
 <script lang="ts">
   import { defineComponent } from 'vue'
-  import UiIcon from '@/components/ui/UiIcon.vue'
+  import UiIcon from '@/components/ui/UiIcon'
 
   export default defineComponent({
     name: 'social-item',

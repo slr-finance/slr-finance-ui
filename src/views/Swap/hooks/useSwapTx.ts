@@ -1,4 +1,4 @@
-import contractsAddresses from '@/config/constants/contractsAddresses.json'
+import contractsAddresses from '@/config/constants/contractsAddresses'
 import { useSwapRouterContract } from '@/hooks/contracts/useSwapRouterContract'
 import { useEthers } from '@/hooks/dapp/useEthers'
 import { useBlockInfo } from '@/hooks/useBlockInfo'
