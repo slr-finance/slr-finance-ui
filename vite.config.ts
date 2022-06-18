@@ -23,6 +23,7 @@ export default defineConfig({
         path.resolve(process.cwd(), 'src/components/ui/UiIcon/icons/currency'),
         path.resolve(process.cwd(), 'src/components/ui/UiIcon/icons/card'),
         path.resolve(process.cwd(), 'src/components/ui/UiIcon/icons/social'),
+        path.resolve(process.cwd(), 'src/assets/icons'),
       ],
       inject: 'body-last',
       symbolId: 'ui-icon-[dir]-[name]',

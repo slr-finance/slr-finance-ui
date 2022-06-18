@@ -1,12 +1,10 @@
 <template>
-  <div
-    v-if="isCorrectAddress"
-    class="rounded-12 border border-white border-opacity-20 h-48 pl-16 pr-6 flex items-center justify-between"
-  >
-    <span class="truncate mr-32">
-      {{ referralLink }}
-    </span>
-
+  <div class="rounded-12 border border-white border-opacity-20 h-48 pl-16 pr-6 flex items-center justify-between">
+    <ui-text-placeholder
+      :text="link"
+      class="flex-1 truncate mr-32"
+    />
+    
     <button
       class="flex justify-center items-center rounded-10 bg-opacity-20 bg-violet min-w-40 w-40 h-40"
       @click="handleCopy"
@@ -18,39 +16,40 @@
       />
     </button>
   </div>
-  <div v-else>Error: Invalid wallet address</div>
 </template>
 
 <script lang="ts">
-  import { computed, defineComponent, unref } from 'vue'
-  import { useEthers } from '@/hooks/dapp/useEthers'
+  import { defineComponent } from 'vue'
   import { useClipboard } from '@vueuse/core'
-  import { DOMAIN } from '@/config/constants/main'
-  import { isAddress } from '@ethersproject/address'
-  import UiIcon from '@/components/ui/UiIcon'
   import { useSingleToast } from '@/hooks/useSingleToast'
-  import { REFERRER_QUERY_PARAM } from '@/libs/referral'
+  import UiIcon from '@/components/ui/UiIcon'
+  import UiTextPlaceholder from '@/components/ui/UiTextPlaceholder.vue'
 
   export default defineComponent({
     name: 'referral-link',
-    components: { UiIcon },
-    setup() {
-      const { address } = useEthers()
-      const isCorrectAddress = computed(() => isAddress(address.value))
-      const referralLink = computed(() => `${DOMAIN}?${REFERRER_QUERY_PARAM}=${unref(address)}`)
+    props: {
+      link: {
+        type: String,
+        required: true,
+      },
+    },
+    setup(props) {
       const { copy } = useClipboard()
       const { success, error } = useSingleToast()
 
       const handleCopy = () => {
-        try {
-          copy(unref(referralLink))
-          success('Referral link has been copied')
-        } catch (e) {
-          error(`Referral link has not been copied: ${e}`)
+        if (props.link) {
+          try {
+            copy(props.link)
+            success('Referral link has been copied')
+          } catch (e) {
+            error(`Referral link has not been copied: ${e}`)
+          }
         }
       }
 
-      return { copy, referralLink, isCorrectAddress, handleCopy }
+      return { copy, handleCopy }
     },
+    components: { UiIcon, UiTextPlaceholder },
   })
 </script>

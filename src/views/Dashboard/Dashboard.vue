@@ -46,39 +46,6 @@
           </ui-button>
         </template>
       </presale-information>
-
-      <div class="border border-gray-800 rounded-12 overflow-hidden">
-        <iframe
-          width="100%"
-          height="470"
-          allowFullScreen
-          frameBorder="0"
-          scrolling="no"
-          src="https://coinbrain.com/embed/0xd32d01a43c869edcd1117c640fbdcfcfd97d9d65?theme=dark&chart=1&trades=0"
-        ></iframe>
-      </div>
-    </div>
-
-    <div class="border border-gray-800 rounded-12 overflow-hidden mt-24">
-      <iframe
-        width="100%"
-        height="850"
-        allowFullScreen
-        frameBorder="0"
-        scrolling="no"
-        src="https://coinbrain.com/embed/0xd32d01a43c869edcd1117c640fbdcfcfd97d9d65?theme=dark&chart=1&trades=1"
-      ></iframe>
-    </div>
-    <div class="border border-gray-800 rounded-12 overflow-hidden mt-24">
-      <iframe
-        style="filter: contrast(2) brightness(0.85) hue-rotate(0deg) saturate(0.8)"
-        width="100%"
-        height="850"
-        allowFullScreen
-        frameBorder="0"
-        scrolling="no"
-        src="https://coinbrain.com/embed/0xd32d01a43c869edcd1117c640fbdcfcfd97d9d65?theme=dark&chart=1&trades=1"
-      ></iframe>
     </div>
   </div>
 </template>

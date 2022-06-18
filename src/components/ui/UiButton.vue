@@ -100,14 +100,14 @@
     padding: 0 14px 0 14px;
   }
 
-  .ui-button.-size-40 {
-    @apply h-40 min-w-40 rounded-10 text-12;
+  .ui-button.-size-48 {
+    @apply h-48 min-w-48 rounded-10 text-12;
 
     padding: 0 8px 0 8px;
   }
 
-  .ui-button.-size-48 {
-    @apply h-48 min-w-48 rounded-10 text-12;
+  .ui-button.-size-40 {
+    @apply h-40 min-w-40 rounded-10 text-12;
 
     padding: 0 8px 0 8px;
   }

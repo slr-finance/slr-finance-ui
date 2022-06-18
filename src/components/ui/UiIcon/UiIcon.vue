@@ -1,8 +1,8 @@
 <template>
   <svg
-    aria-hidden="true"
     :width="size"
     :height="size"
+    aria-hidden="true"
   >
     <use
       :xlink:href="symbolId"
