@@ -10,13 +10,13 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent } from 'vue'
+  import { defineComponent, PropType } from 'vue'
 
   export default defineComponent({
     name: 'ui-text-placeholder',
     props: {
       text: {
-        type: String,
+        type: [String, Object] as PropType<string|null|undefined>,
       },
     },
   })

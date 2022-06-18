@@ -19,7 +19,7 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent } from 'vue'
+  import { defineComponent, PropType } from 'vue'
   import { useClipboard } from '@vueuse/core'
   import { useSingleToast } from '@/hooks/useSingleToast'
   import UiIcon from '@/components/ui/UiIcon'
@@ -29,8 +29,9 @@
     name: 'referral-link',
     props: {
       link: {
-        type: String,
+        type: [String, Object] as PropType<string|null>,
         required: true,
+        validator: (val:string|null) => typeof val === 'string' || val === null
       },
     },
     setup(props) {
