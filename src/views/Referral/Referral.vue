@@ -25,8 +25,11 @@
           <h1 class="text-ui-page-title uppercase font-title leading-140">
             Referral <span class="text-gray">station</span>
           </h1>
-          <p class="text-gray text-ui-page-description mt-12">
-            Earn up to 10% from friends’ preformane fees on SLR and 10% from their earnings on Launchpools
+          <p
+            class="text-gray text-ui-page-description mt-12"
+            style="max-width: 600px"
+          >
+            Send your referral link to your friends and earn up to 15% from friends’ performance fees on SLR and 1% from their earnings on Launchpools via SLR Referral Program.
           </p>
         </div>
         <ui-bread-crumbs
