@@ -4,6 +4,7 @@ import { getReferralContract } from '@/utils/contracts/getReferralContract'
 import { runAsyncWithParamChecking } from '@/hooks/runAsyncWithParamChecking'
 import { isAddress } from 'ethers/lib/utils'
 import { constants } from 'ethers'
+import { getReferrerFromCookies } from '@/libs/referral'
 
 const getStorageInviterKey = (address: string) => `inviterBy:${address}`
 
@@ -37,7 +38,7 @@ export const useOwnInviter = () => {
 
           breakIfValueChanged()
 
-          inviterAddress.value = address
+          inviterAddress.value = isEmpty ? getReferrerFromCookies() : address
           isFetching.value = false
         }
       },
