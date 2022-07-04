@@ -6,7 +6,16 @@
     </h1>
 
     <div class="grid gap-28 grid-cols-2">
-      <div class="border border-gray-800 rounded-12 px-ui-page-inner-spacing py-24">
+      <dashboard-container
+        class="col-span-2"
+        style="height: 400px"
+      >
+        <div class="w-full h-full relative">
+          <dashboard-token-charts class="w-full h-full left-0 top-0 absolute"/>
+        </div>
+      </dashboard-container>
+
+      <dashboard-container>
         <div>
           <div class="text-28 font-title leading-140">
             <span class="text-yellow">DEFI 3.0</span> financial protocol operating in BSC
@@ -22,18 +31,7 @@
         <div>liquidityPriceStr: {{ liquidityPriceStr }}</div>
         <div>slrPriceStr: {{ slrPriceStr }}</div>
         <div>totalStakedStr: {{ totalStakedStr }}</div>
-      </div>
-      <div class="border border-gray-800 rounded-12 overflow-hidden">
-        <iframe
-          style="filter: contrast(2) brightness(0.85) hue-rotate(0deg) saturate(0.8)"
-          width="100%"
-          height="470"
-          allowFullScreen
-          frameBorder="0"
-          scrolling="no"
-          src="https://coinbrain.com/embed/0xd32d01a43c869edcd1117c640fbdcfcfd97d9d65?theme=dark&chart=1&trades=0"
-        ></iframe>
-      </div>
+      </dashboard-container>
       <presale-information bage-text="ITO">
         <template #footer>
           <ui-button
@@ -58,8 +56,10 @@
   import { useSlrPrice } from '@/store/hooks/useSlrPrice'
   import { useMilkyWayInfo } from './hooks/useMilkyWayInfo'
   import { useTotalStakedInAllPools } from '@/store/hooks/useTotalStakedInAllPools'
-  import PresaleInformation from '@/views/Presale/components/PresaleInformation'
   import UiButton from '@/components/ui/UiButton.vue'
+  import PresaleInformation from '@/views/Presale/components/PresaleInformation'
+  import DashboardTokenCharts from './components/DashboardTokenCharts.vue'
+import DashboardContainer from './components/DashboardContainer.vue'
 
   export default defineComponent({
     setup() {
@@ -105,7 +105,9 @@
     },
     components: {
       PresaleInformation,
+      DashboardTokenCharts,
       UiButton,
+        DashboardContainer,
     },
   })
 </script>

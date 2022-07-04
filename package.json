@@ -19,6 +19,7 @@
     "dayjs": "1.11.0",
     "ethers": "5.5.2",
     "js-cookie": "3.0.1",
+    "lightweight-charts": "3.8.0",
     "lodash.get": "4.4.2",
     "qr-code-styling": "1.6.0-rc.1",
     "vite-plugin-svg-icons": "2.0.1",
