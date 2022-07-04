@@ -1,14 +1,10 @@
-import { ref } from 'vue'
+import { useToggle } from '@vueuse/core'
 
-const isOpen = ref(false)
+const [isOpen, toggle] = useToggle()
 
 export const useConnectedWalletModal = () => {
-  const open = () => {
-    isOpen.value = true
-  }
-  const close = () => {
-    isOpen.value = false
-  }
+  const open = () => toggle(true)
+  const close = () => toggle(false)
 
   return {
     isOpen,
