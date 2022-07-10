@@ -140,6 +140,7 @@ module.exports = {
         420: '420px',
         375: '375px',
         320: '320px',
+        1024: '1024px',
       },
       backgroundImage: {
         'green-original-gradient': `linear-gradient(${addAlpha(colors['green-original'], 0.15)}, ${addAlpha(

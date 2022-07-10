@@ -1,28 +1,51 @@
 <template>
   <ui-modal
     v-model="isOpen"
-    label="Staking FAQ"
+    label="questions about the universe"
     max-width="80%"
   >
-    <div class="grid grid-cols-3 gap-ui-page-spacing text-center mb-48">
-      <div>
-        Buy SLR tokens
-        <p class="text-14 text-gray">You can buy SLR tokens on 
-          slr.finance/swap
-          or
-          nomiswap.io
-        </p>
-        <p class="text-14 text-gray">If you use a nomiswap then don't forget to set the slippage to 15%</p>
+    <div class="grid 1024:grid-cols-3 grid-cols-1 gap-ui-page-spacing relative">
+      <div class="absolute w-full h-2 bg-white top-[35px]" />
+      <div class="bg-gray-800 rounded-12 pb-[22px] pt-20 relative z-1">
+        <div class="flex items-center pl-12">
+          <ui-icon name="star-pixel" />
+          <div class="h-2 bg-white w-full" />
+        </div>
+        <div class="px-12 mt-8">
+          <span>Buy SLR tokens</span>
+          <p class="text-white text-opacity-50 mt-8 text-12">You can buy SLR tokens on 
+            slr.finance/swap
+            or
+            nomiswap.io
+            If you use a nomiswap then don't forget to set the slippage to 15%
+          </p>
+        </div>
       </div>
-      <div>
-        Stake SLR tokens on first pool
-        <p class="text-14 text-gray">Conquer the planets of the solar system one by one. And earn with more and more APY</p>
+      <div class="bg-gray-800 rounded-12 pb-[22px] pt-20 relative z-1">
+        <div class="flex items-center">
+          <div class="w-12 h-2 bg-white" />
+          <ui-icon name="star-pixel" />
+          <div class="h-2 bg-white w-full" />
+        </div>
+        <div class="px-12 mt-8">
+          <span>Stake SLR tokens on first pool</span>
+          <p class="text-12 text-white text-opacity-50 mt-8">Conquer the planets of the solar system one by one. And earn with more and more APY</p>
+        </div>
       </div>
-      <div>
-        Earn up to 633% fixed APY
-        <p class="text-14 text-gray">Gain financial freedom with SLR Staking Pools</p>
+      <div class="bg-violet-400 rounded-12 pb-[22px] pt-20 relative z-1">
+        <div class="flex items-center">
+          <div class="w-12 h-2 bg-white" />
+          <div class="rounded-full bg-orange w-32 h-32 flex shrink-0 items-center justify-center">
+            <ui-icon name="nlo" :size="20" />
+          </div>
+        </div>
+        <div class="px-12 mt-8">
+          <span>Earn up to 633% fixed APY</span>
+          <p class="text-12 text-white text-opacity-50 mt-8">Gain financial freedom with SLR Staking Pools</p>
+        </div>
       </div>
     </div>
+    <h4 class="text-18 text-white font-title mt-24 mb-20"><span class="text-gray">SPACE</span> FAQ</h4>
     <div class="grid grid-cols-2 gap-20">
       <div class="space-y-20">
         <ui-accordion title="What is APY?">
@@ -64,6 +87,7 @@ import { defineComponent } from 'vue'
 import UiModal from '@/components/ui/UiModal.vue'
 import { useToggle } from '@vueuse/shared'
 import UiAccordion from '@/components/ui/UiAccordion.vue'
+import UiIcon from '@/components/ui/UiIcon'
 import AnyOtherQuestions from '@/components/AnyOtherQuestions.vue'
 
 export default defineComponent({
@@ -79,6 +103,7 @@ export default defineComponent({
     UiModal,
     UiAccordion,
     AnyOtherQuestions,
+    UiIcon
   }
 })
 </script>
