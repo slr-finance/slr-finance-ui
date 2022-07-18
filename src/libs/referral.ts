@@ -17,7 +17,7 @@ export const initReferral = () => {
     referrer = searchParams.get(REFERRER_QUERY_PARAM)
 
     if (referrer && isAddress(referrer)) {
-      Cookies.set(REFERRER_STORAGE_NAME, referrer, { sameSite: 'Strict', secure: true, domain: '.slr.finance' })
+      Cookies.set(REFERRER_STORAGE_NAME, referrer, { sameSite: 'Strict', secure: true, domain: '.slr.finance', expires: 90 })
     } else {
       referrer = null
     }
