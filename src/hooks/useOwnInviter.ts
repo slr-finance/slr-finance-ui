@@ -1,10 +1,10 @@
 import { ref, watch } from 'vue'
+import { getReferrerFromCookies } from 'slr-finance-ui-share/src/libs/referral'
 import { useEthers } from '@/hooks/dapp/useEthers'
 import { getReferralContract } from '@/utils/contracts/getReferralContract'
 import { runAsyncWithParamChecking } from '@/hooks/runAsyncWithParamChecking'
 import { isAddress } from 'ethers/lib/utils'
 import { constants } from 'ethers'
-import { getReferrerFromCookies } from '@/libs/referral'
 
 const getStorageInviterKey = (address: string) => `inviterBy:${address}`
 

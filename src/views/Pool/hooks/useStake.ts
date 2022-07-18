@@ -1,11 +1,11 @@
 import { computed, unref } from 'vue'
+import { getReferrerFromCookies } from 'slr-finance-ui-share/src/libs/referral'
 import { useSendTx } from '@/hooks/useSendTx'
 import { MaybeRef } from '@vueuse/core'
 import BigNumber from 'bignumber.js'
 import { useSlrBalance } from '@/store/hooks/useBalance'
 import { useStakingContract } from '@/hooks/contracts/useStakingContract'
 import { bigToWei } from '@/utils/bigNumber'
-import { getReferrerFromCookies } from '@/libs/referral'
 
 type UseStakeParams = {
   poolId: MaybeRef<number>

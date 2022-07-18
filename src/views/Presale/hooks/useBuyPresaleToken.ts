@@ -1,11 +1,11 @@
 import { computed, unref } from 'vue'
+import { getReferrerFromCookies } from 'slr-finance-ui-share/src/libs/referral'
 import { useSendTx } from '@/hooks/useSendTx'
 import { useEthers } from '@/hooks/dapp/useEthers'
 import { getPresaleContract } from '@/utils/contracts/getPresaleContract'
 import BigNumber from 'bignumber.js'
 import { MaybeRef } from '@vueuse/core'
 import { bigToWei } from '@/utils/bigNumber'
-import { getReferrerFromCookies } from '@/libs/referral'
 
 export const useBuyPresaleToken = (amountIn: MaybeRef<BigNumber>, amountOut: MaybeRef<BigNumber>) => {
   const { signer } = useEthers()
