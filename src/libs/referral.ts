@@ -2,7 +2,7 @@ import Cookies from 'js-cookie'
 
 export const REFERRER_QUERY_PARAM = 'r'
 export const REFERRER_STORAGE_NAME = 'slr-finance-referrer'
-export const AddressZero = "0x0000000000000000000000000000000000000000"
+export const AddressZero = '0x0000000000000000000000000000000000000000'
 
 const isAddress = (address: string) => {
   return address.match(/^(0x)?[0-9a-fA-F]{40}$/) !== null

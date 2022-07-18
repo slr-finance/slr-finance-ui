@@ -1,77 +1,46 @@
 <template>
-  <div class="text-12 relative">
-    <template v-if="accrualsPreview.length > 0">
-      <ul class="divide-y divide-gray">
-        <li
-          class="item"
-          v-for="item of accrualsPreview"
-          :key="item.address"
-        >
-          <div class="row">
-            <div class="label">Reason</div>
-            <accrual-label
-              :action="item.action"
-              :label="item.actionLabel"
-            />
-          </div>
-          <div class="row">
-            <div class="label">Amount</div>
-            <div class="leading-none">{{ item.amountStr }}</div>
-          </div>
-          <div class="row">
-            <div class="label">Address</div>
-            <div class="leading-none">{{ item.shortAddress }}</div>
-          </div>
-          <div class="row">
-            <div class="label">Date</div>
-            <div class="leading-none">
-              {{ item.dateStr }}
-              <div class="text-gray text-11 leading-none">
-                {{ item.timeStr }}
-              </div>
+  <ui-table
+    :columns="['']"
+    :data="accrualList"
+    :item-height="44"
+    template-columns="1fr"
+  >
+    <template #row="{ data }">
+      <div class="item">
+        <div class="row">
+          <div class="label">Reason</div>
+          <accrual-label
+            :action="data.action"
+            :label="data.actionLabel"
+          />
+        </div>
+        <div class="row">
+          <div class="label">Amount</div>
+          <div class="leading-none">{{ data.amountStr }}</div>
+        </div>
+        <div class="row">
+          <div class="label">Address</div>
+          <div class="leading-none">{{ data.shortAddress }}</div>
+        </div>
+        <div class="row">
+          <div class="label">Date</div>
+          <div class="leading-none">
+            {{ data.dateStr }}
+            <div class="text-gray text-11 leading-none">
+              {{ data.timeStr }}
             </div>
           </div>
-        </li>
-      </ul>
-
-      <ui-button
-        v-if="isShownMoreButton"
-        variant="gray"
-        size="48"
-        class="w-full"
-      >
-        <div class="flex items-center">
-          <span>Show accrual history list</span>
-          <div
-            class="w-24 h-24 rounded-full border border-white border-opacity-20 flex justify-center items-center ml-10"
-          >
-            <ui-icon
-              size="9"
-              name="arrow-pixel"
-              rotate="-90"
-            />
-          </div>
         </div>
-      </ui-button>
+      </div>
     </template>
-
-    <ui-placeholder
-      v-else
-      class="inset-0 absolute"
-      icon="binocular"
-      title="You don't have referrals"
-      description="Share link and Get 10% from perfomance fee for any transactions and 1% from any rawards"
-    />
-  </div>
+  </ui-table>
 </template>
 
 <script lang="ts">
-  import { computed, defineComponent, PropType } from 'vue'
+  import { defineComponent, PropType } from 'vue'
+  import UiTable from '@/components/ui/UiTable.vue'
   import AccrualLabel from './AccrualLabel.vue'
-  import UiIcon from '@/components/ui/UiIcon'
-  import UiButton from '@/components/ui/UiButton.vue'
-  import UiPlaceholder from '@/components/ui/UiPlaceholder.vue'
-  import { AccrualInfo } from '../../hooks/useReferrerAccrualHistory'
+  import { AccrualInfo, useReferrerAccrualHistory } from '../../hooks/useReferrerAccrualHistory'
 
   export default defineComponent({
     name: 'referrer-accrual-history-table-mobile',
@@ -90,19 +59,15 @@
       },
     },
     setup(props) {
-      const accrualsPreview = computed(() => (props.numberOfAccrual > 3 ? props.accruals.slice(0, 3) : props.accruals))
-      const isShownMoreButton = computed(() => props.numberOfAccrual > 3)
+      const { accrualList } = useReferrerAccrualHistory()
 
       return {
-        accrualsPreview,
-        isShownMoreButton,
+        accrualList,
       }
     },
     components: {
-      UiIcon,
-      UiButton,
-      UiPlaceholder,
       AccrualLabel,
+      UiTable,
     },
   })
 </script>

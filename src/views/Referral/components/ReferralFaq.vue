@@ -107,11 +107,10 @@
       </div>
     </div>
 
-    <h3 class="text-white text-ui-page-label mb-24 mt-64 uppercase font-title">Any other questions?</h3>
-    <p>
-      Want to learn more:
-      <ui-external-link href="https://docs.slr.finance/fundamentals/referral-program"> Documentation </ui-external-link>
-    </p>
+    <any-other-questions
+      doc-link="https://docs.slr.finance/fundamentals/referral-program"
+      class="mt-64"
+    />
   </div>
 </template>
 
@@ -120,7 +119,7 @@
   import UiAccordion from '@/components/ui/UiAccordion.vue'
   import UiTextPlaceholder from '@/components/ui/UiTextPlaceholder.vue'
   import { useReferrerPercentRewards } from '../hooks/useReferrerPercentRewards'
-  import UiExternalLink from '@/components/ui/UiExternalLink.vue'
+  import AnyOtherQuestions from '@/components/AnyOtherQuestions.vue'
 
   export default defineComponent({
     name: 'referral-faq',
@@ -132,7 +131,7 @@
     components: {
       UiAccordion,
       UiTextPlaceholder,
-      UiExternalLink,
+      AnyOtherQuestions,
     },
   })
 </script>

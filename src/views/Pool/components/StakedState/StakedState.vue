@@ -43,7 +43,9 @@
         </div>
       </div>
 
-      <div class="bg-green-atomic bg-opacity-10 pl-16 pr-6 py-6 rounded-12 flex justify-between space-x-12">
+      <div
+        class="bg-green-atomic bg-opacity-10 pl-16 pr-16 375:pr-6 py-6 rounded-12 flex justify-between flex-col 375:flex-row space-x-0 375:space-x-12 space-y-12 375:space-y-0"
+      >
         <div class="pt-14">
           <div class="text-green-atomic text-12 leading-none mb-8">Rewards</div>
           <div class="text-12 uppercase text-white leading-none font-title">

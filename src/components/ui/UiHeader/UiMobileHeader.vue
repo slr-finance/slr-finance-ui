@@ -7,16 +7,16 @@
         is-mobile
         :logo-link="logoLink"
       />
-      
+
       <ui-mobile-header-menu
         class="flex-1"
         :links="links"
       />
     </div>
 
-    <slot name="mobile-action"/>
+    <slot name="mobile-action" />
   </header>
-  <div id="ui-mobile-header-menu-place"/>
+  <div id="ui-mobile-header-menu-place" />
 </template>
 
 <script lang="ts">

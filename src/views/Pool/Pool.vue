@@ -73,6 +73,7 @@
           :pool-id="poolId"
           class="mb-24"
         />
+
         <div class="text-14 mb-32">{{ poolInfo.page.aboutPool }}</div>
         <token-info />
       </div>

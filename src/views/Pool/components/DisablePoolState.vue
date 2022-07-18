@@ -3,6 +3,7 @@
     <ui-placeholder
       :icon="icon"
       :title="title"
+      icon-prefix="ui-icon-pools"
       description="Please complete all previous pools"
     >
       <ui-button

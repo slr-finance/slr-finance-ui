@@ -34,7 +34,7 @@
       },
       target: {
         type: String,
-      }
+      },
     },
     setup(props) {
       const componentProps = computed(() => {
@@ -51,7 +51,7 @@
       })
 
       const componentName = computed(() => {
-        return props.to ? 'router-link' : (props.href ? 'a' : 'button')
+        return props.to ? 'router-link' : props.href ? 'a' : 'button'
       })
 
       return {

@@ -14,7 +14,7 @@
         size="12"
       />
     </div>
-    <div class="px-18 pt-12 pb-32">
+    <div class="px-18 pt-12 pb-32 text-white text-opacity-50">
       <slot />
     </div>
   </section>

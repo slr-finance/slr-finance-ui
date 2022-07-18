@@ -16,7 +16,7 @@
     name: 'ui-text-placeholder',
     props: {
       text: {
-        type: [String, Object] as PropType<string|null|undefined>,
+        type: [String, Object] as PropType<string | null | undefined>,
       },
     },
   })

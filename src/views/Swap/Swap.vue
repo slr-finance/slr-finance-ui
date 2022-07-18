@@ -13,7 +13,7 @@
         </h1>
 
         <p class="text-ui-page-description text-white text-opacity-60 mb-48">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.
+          Trading without setting slippage. We will automatically set the best settings.
         </p>
       </div>
 

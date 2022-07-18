@@ -20,8 +20,12 @@
             class="min-h-full h-auto flex"
             :key="$route.name || 'none'"
           >
-            <pool-bg
+            <pool-video-bg
               v-if="isDesktopLayout && poolId"
+              :pool-id="poolId"
+            />
+            <pool-mobile-bg
+              v-else-if="poolId"
               :pool-id="poolId"
             />
             <component :is="Component" />
@@ -30,20 +34,23 @@
       </router-view>
     </div>
 
-    <div
-      v-if="isShownPoolsNav"
-      class="flex flex-col justify-between items-end"
-    >
-      <pools-navigation
-        v-memo="[poolId]"
-        :pool-id="poolId"
-      />
+    <template v-if="isShownPoolsNav">
+      <div class="flex flex-col justify-between items-end">
+        <pools-navigation
+          v-memo="[poolId]"
+          :pool-id="poolId"
+        />
+
+        <pools-faq-button />
+      </div>
 
       <pools-map
         class="fixed bottom-0 pools-map-wrapper"
         v-if="isShownPoolsMap"
       />
-    </div>
+    </template>
+
+    <pools-faq-modal />
   </div>
 </template>
 
@@ -101,7 +108,10 @@
       PoolsList: defineAsyncComponent(() => import('./components/PoolsList.vue')),
       PoolsNavigation: defineAsyncComponent(() => import('./components/PoolsNavigation.vue')),
       PoolsMap: defineAsyncComponent(() => import('./components/PoolsMap.vue')),
-      PoolBg: defineAsyncComponent(() => import('./components/PoolBg.vue')),
+      PoolVideoBg: defineAsyncComponent(() => import('./components/PoolVideoBg.vue')),
+      PoolMobileBg: defineAsyncComponent(() => import('./components/PoolMobileBg.vue')),
+      PoolsFaqModal: defineAsyncComponent(() => import('./components/PoolsFaq/PoolsFaqModal.vue')),
+      PoolsFaqButton: defineAsyncComponent(() => import('./components/PoolsFaq/PoolsFaqButton.vue')),
     },
   })
 </script>

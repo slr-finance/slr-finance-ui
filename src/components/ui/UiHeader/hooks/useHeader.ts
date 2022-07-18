@@ -21,7 +21,7 @@ const size = ref({
   offset: 0,
 })
 
-const type = ref() as Ref<HeaderType|undefined>
+const type = ref() as Ref<HeaderType | undefined>
 
 export const useHeader = () => {
   const setHeaderType = (headerType: HeaderType) => {

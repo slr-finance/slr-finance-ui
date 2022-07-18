@@ -43,7 +43,8 @@
 
 <script lang="ts">
   import { defineComponent, watch, computed, onBeforeUnmount } from 'vue'
-  import { useVModel, useEventListener, useScrollLock } from '@vueuse/core'
+  import { useVModel, useEventListener } from '@vueuse/core'
+  import { useBodyScrollLock } from './hooks/useBodyScrollLock'
   import UiIcon from './UiIcon'
 
   export default defineComponent({
@@ -69,7 +70,7 @@
     setup(props, { emit }) {
       let prevActiveElement = null as null | HTMLElement
       const isOpen = useVModel(props, 'modelValue', emit)
-      const isLocked = useScrollLock(document.body)
+      const toggleBodyScrollLock = useBodyScrollLock()
       const styleList = computed(() => ({ maxWidth: props.maxWidth }))
       const handleClose = () => {
         if (props.closable) {
@@ -80,7 +81,7 @@
         key === 'Escape' && handleClose()
       })
       watch(isOpen, (isOpenVal) => {
-        isLocked.value = isOpenVal
+        toggleBodyScrollLock(isOpenVal)
         if (isOpenVal && document.activeElement && (document.activeElement as HTMLElement).blur) {
           prevActiveElement = document.activeElement as HTMLElement
           ;(document.activeElement as HTMLElement).blur()
@@ -93,7 +94,7 @@
       })
 
       onBeforeUnmount(() => {
-        isLocked.value = false
+        toggleBodyScrollLock(false)
       })
 
       return { isOpen, handleClose, styleList }

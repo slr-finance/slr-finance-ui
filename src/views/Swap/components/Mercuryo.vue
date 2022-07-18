@@ -1,54 +1,62 @@
 <template>
-  <ui-button
-    :disabled="!isActivated"
-    :href="mercuryoLinkBuy"
-    target="_blank"
-  >
-    <ui-icon
-      prefix="ui-icon-card"
-      name="visa"
-      size="16"
-      class="mr-4"
-    />
-    <ui-icon
-      prefix="ui-icon-card"
-      name="mastercard"
-      size="16"
-      class="mr-6"
-    />
-    Buy bnb on Mercuryo
-  </ui-button>
-  <ui-button
-    :disabled="!isActivated"
-    :href="mercuryoLinkSell"
-    target="_blank"
-  >
-    <ui-icon
-      prefix="ui-icon-card"
-      name="visa"
-      size="16"
-      class="mr-4"
-    />
-    <ui-icon
-      prefix="ui-icon-card"
-      name="mastercard"
-      size="16"
-      class="mr-6"
-    />
-    Sell bnb on Mercuryo
-  </ui-button>
-  <ui-button
-    href="https://docs.slr.finance/buy-sell-crypto/binance"
-    target="_blank"
-  >
-    <ui-icon
-      prefix="ui-icon-card"
-      name="binance"
-      size="16"
-      class="mr-6"
-    />
-    Sell/Buy crypto on Binance
-  </ui-button>
+  <div class="grid grid-rows-3 875:grid-cols-3 mt-32 gap-12">
+    <ui-button
+      :disabled="!isActivated"
+      :href="mercuryoLinkBuy"
+      variant="gray"
+      size="48"
+      target="_blank"
+    >
+      <ui-icon
+        prefix="ui-icon-card"
+        name="visa"
+        size="16"
+        class="mr-4"
+      />
+      <ui-icon
+        prefix="ui-icon-card"
+        name="mastercard"
+        size="16"
+        class="mr-6"
+      />
+      Buy bnb on Mercuryo
+    </ui-button>
+    <ui-button
+      :disabled="!isActivated"
+      :href="mercuryoLinkSell"
+      variant="gray"
+      size="48"
+      target="_blank"
+    >
+      <ui-icon
+        prefix="ui-icon-card"
+        name="visa"
+        size="16"
+        class="mr-4"
+      />
+      <ui-icon
+        prefix="ui-icon-card"
+        name="mastercard"
+        size="16"
+        class="mr-6"
+      />
+      Sell bnb on Mercuryo
+    </ui-button>
+    <ui-button
+      href="https://docs.slr.finance/buy-sell-crypto/binance"
+      target="_blank"
+      variant="gray"
+      size="48"
+    >
+      <ui-icon
+        prefix="ui-icon-card"
+        name="binance"
+        size="16"
+        class="mr-6"
+      />
+      Sell/Buy crypto on Binance
+    </ui-button>
+  </div>
 </template>
 
 <script lang="ts">
