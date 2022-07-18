@@ -16,7 +16,7 @@ interface ReferralInfoRaw extends Result {
   dateStr: string
 }
 
-type ReferralInfo = {
+export type ReferralInfo = {
   address: string
   shortAddress: string
   timestamp: number
@@ -24,68 +24,213 @@ type ReferralInfo = {
   timeStr: string
 }
 
-export const useReferrals = () => {
-  const { address } = useEthers()
-  const referralsList = ref<ReferralInfo[]>([])
-  const isFetching = ref(false)
-  const numberOfReferrals = ref(0)
+const referralsList = ref<ReferralInfo[]>([])
+const isFetching = ref(false)
+const numberOfReferrals = ref(0)
+const { address } = useEthers()
 
-  watch(
+watch(
+  address,
+  async () => {
+    await fetchReferralsList()
+  },
+  { immediate: true },
+)
+
+const fetchReferralsList = async () => {
+  runAsyncWithParamChecking(
     address,
-    async () => {
-      runAsyncWithParamChecking(
-        address,
-        async (addressVal, { breakIfValueChanged, isValueChanged, breakIfValueIsNil, isNilValue }) => {
-          isFetching.value = !isNilValue()
-          referralsList.value = []
-          numberOfReferrals.value = 0
-          const step = 20
+    async (addressVal, { breakIfValueChanged, isValueChanged, breakIfValueIsNil, isNilValue }) => {
+      isFetching.value = !isNilValue()
+      referralsList.value = []
+      numberOfReferrals.value = 0
+      const step = 20
 
-          breakIfValueIsNil()
+      breakIfValueIsNil()
 
-          const totalReferralsBn: BigNumberEthers[] = await getReferralContract().functions.referralsLength(addressVal)
-          const totalReferrals = totalReferralsBn[0].toNumber()
-          numberOfReferrals.value = totalReferrals
+      const totalReferralsBn: BigNumberEthers[] = await getReferralContract().functions.referralsLength(addressVal)
+      const totalReferrals = totalReferralsBn[0].toNumber()
+      numberOfReferrals.value = totalReferrals
 
-          breakIfValueChanged()
+      breakIfValueChanged()
 
-          for (let fromIndex = totalReferrals - 1; fromIndex >= 0; fromIndex -= step) {
-            let calls: Call[] = []
+      for (let fromIndex = totalReferrals - 1; fromIndex >= 0; fromIndex -= step) {
+        let calls: Call[] = []
 
-            for (let index = fromIndex; index >= Math.max(0, fromIndex - step + 1); index--) {
-              calls.push({
-                address: contractsAddresses.ReferralService,
-                name: 'referrals',
-                params: [addressVal, index],
-              })
+        for (let index = fromIndex; index >= Math.max(0, fromIndex - step + 1); index--) {
+          calls.push({
+            address: contractsAddresses.ReferralService,
+            name: 'referrals',
+            params: [addressVal, index],
+          })
+        }
+
+        const [referrals] = await multicall<ReferralInfoRaw[]>(ReferralAbi, calls)
+        breakIfValueChanged()
+
+        referralsList.value.push(
+          ...referrals.map(({ account, timestamp }) => {
+            const date = dayjs.unix(timestamp)
+            return {
+              address: account,
+              shortAddress: shortenAddress(account),
+              timestamp,
+              dateStr: date.format('YYYY-MM-DD'),
+              timeStr: date.format('HH:MM'),
             }
-
-            const [referrals] = await multicall<ReferralInfoRaw[]>(ReferralAbi, calls)
-
-            breakIfValueChanged()
-
-            referralsList.value.push(
-              ...referrals.map(({ account, timestamp }) => {
-                const date = dayjs.unix(timestamp)
-                return {
-                  address: account,
-                  shortAddress: shortenAddress(account),
-                  timestamp,
-                  dateStr: date.format('YYYY-MM-DD'),
-                  timeStr: date.format('HH:MM'),
-                }
-              }),
-            )
+          }),
+        )
+        referralsList.value.push(
+          {
+            address: 'asdad',
+            shortAddress: 'asdas',
+            timestamp: 1231,
+            dateStr: 'q2eqe',
+            timeStr: '123123',
+          },
+          {
+            address: 'asdad',
+            shortAddress: 'asdas',
+            timestamp: 1231,
+            dateStr: 'q2eqe',
+            timeStr: '123123',
+          },
+          {
+            address: 'asdad',
+            shortAddress: 'asdas',
+            timestamp: 1231,
+            dateStr: 'q2eqe',
+            timeStr: '123123',
+          },
+          {
+            address: 'asdad',
+            shortAddress: 'asdas',
+            timestamp: 1231,
+            dateStr: 'q2eqe',
+            timeStr: '123123',
+          },
+          {
+            address: 'asdad',
+            shortAddress: 'asdas',
+            timestamp: 1231,
+            dateStr: 'q2eqe',
+            timeStr: '123123',
+          },
+          {
+            address: 'asdad',
+            shortAddress: 'asdas',
+            timestamp: 1231,
+            dateStr: 'q2eqe',
+            timeStr: '123123',
+          },
+          {
+            address: 'asdad',
+            shortAddress: 'asdas',
+            timestamp: 1231,
+            dateStr: 'q2eqe',
+            timeStr: '123123',
+          },
+          {
+            address: 'asdad',
+            shortAddress: 'asdas',
+            timestamp: 1231,
+            dateStr: 'q2eqe',
+            timeStr: '123123',
+          },
+          {
+            address: 'asdad',
+            shortAddress: 'asdas',
+            timestamp: 1231,
+            dateStr: 'q2eqe',
+            timeStr: '123123',
+          },
+          {
+            address: 'asdad',
+            shortAddress: 'asdas',
+            timestamp: 1231,
+            dateStr: 'q2eqe',
+            timeStr: '123123',
+          },
+          {
+            address: 'asdad',
+            shortAddress: 'asdas',
+            timestamp: 1231,
+            dateStr: 'q2eqe',
+            timeStr: '123123',
+          },
+          {
+            address: 'asdad',
+            shortAddress: 'asdas',
+            timestamp: 1231,
+            dateStr: 'q2eqe',
+            timeStr: '123123',
+          },
+          {
+            address: 'asdad',
+            shortAddress: 'asdas',
+            timestamp: 1231,
+            dateStr: 'q2eqe',
+            timeStr: '123123',
+          },
+          {
+            address: 'asdad',
+            shortAddress: 'asdas',
+            timestamp: 1231,
+            dateStr: 'q2eqe',
+            timeStr: '123123',
+          },
+          {
+            address: 'asdad',
+            shortAddress: 'asdas',
+            timestamp: 1231,
+            dateStr: 'q2eqe',
+            timeStr: '123123',
+          },
+          {
+            address: 'asdad',
+            shortAddress: 'asdas',
+            timestamp: 1231,
+            dateStr: 'q2eqe',
+            timeStr: '123123',
+          },
+          {
+            address: 'asdad',
+            shortAddress: 'asdas',
+            timestamp: 1231,
+            dateStr: 'q2eqe',
+            timeStr: '123123',
+          },
+          {
+            address: 'asdad',
+            shortAddress: 'asdas',
+            timestamp: 1231,
+            dateStr: 'q2eqe',
+            timeStr: '123123',
+          },
+          {
+            address: 'asdad',
+            shortAddress: 'asdas',
+            timestamp: 1231,
+            dateStr: 'q2eqe',
+            timeStr: '123123',
+          },
+          {
+            address: 'asdad',
+            shortAddress: 'asdas',
+            timestamp: 1231,
+            dateStr: 'q2eqe',
+            timeStr: '123123',
           }
+        )
+      }
 
-          if (!isValueChanged()) {
-            isFetching.value = false
-          }
-        },
-      )
+      if (!isValueChanged()) {
+        isFetching.value = false
+      }
     },
-    { immediate: true },
   )
+}
 
-  return { referralsList, isFetching, numberOfReferrals }
+export const useReferrals = () => {
+  return { referralsList, isFetching, numberOfReferrals, fetchReferralsList }
 }

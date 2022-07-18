@@ -1,39 +1,27 @@
 <template>
-  <div class="table text-12 relative">
-    <span class="header-item pr-20 uppercase">Amount</span>
-    <span class="header-item pr-20 uppercase">Address</span>
-    <span class="header-item pr-20 text-right uppercase">Date</span>
-    <span class="header-item text-right uppercase">Reason</span>
-    <template v-if="accruals.length > 0">
-      <template
-        v-for="item of accruals"
-        :key="item.address"
-      >
-        <span class="item pr-20 leading-none">{{ item.amountStr }}</span>
-        <span class="item pr-20 leading-none">{{ item.shortAddress }}</span>
-        <div class="item pr-20 text-right leading-none">
-          <div>{{ item.dateStr }}</div>
-          <div class="text-gray text-11 leading-none">
-            {{ item.timeStr }}
-          </div>
+  <ui-table
+    :columns="['Amount', 'Address', 'Date', 'Reason']"
+    :data="accruals"
+    :item-height="44"
+    template-columns="1fr 1fr 1fr max-content"
+  >
+    <template #row="{ data }">
+      <span class="item leading-none">{{ data.amountStr }}</span>
+      <span class="item leading-none">{{ data.shortAddress }}</span>
+      <div class="item text-right leading-none">
+        <div>{{ data.dateStr }}</div>
+        <div class="text-gray text-11 leading-none">
+          {{ data.timeStr }}
         </div>
-        <div class="item">
-          <accrual-label
-            :action="item.action"
-            :label="item.actionLabel"
-          />
-        </div>
-      </template>
+      </div>
+      <div class="item">
+        <accrual-label
+          :action="data.action"
+          :label="data.actionLabel"
+        />
+      </div>
     </template>
-
-    <ui-placeholder
-      v-else
-      class="inset-0 absolute"
-      icon="binocular"
-      title="You don't have referrals"
-      description="Share link and Get 10% from perfomance fee for any transactions and 1% from any rawards"
-    />
-  </div>
+  </ui-table>
 </template>
 
 <script lang="ts">
@@ -41,6 +29,7 @@
   import UiPlaceholder from '@/components/ui/UiPlaceholder.vue'
   import AccrualLabel from './AccrualLabel.vue'
   import { AccrualInfo } from '../../hooks/useReferrerAccrualHistory'
+  import UiTable from '@/components/ui/UiTable.vue'
 
   export default defineComponent({
     name: 'referrer-accrual-history-table',
@@ -49,14 +38,11 @@
         type: Array as PropType<AccrualInfo[]>,
         required: true,
       },
-      isFetching: {
-        type: Boolean,
-        default: false,
-      },
     },
     components: {
       UiPlaceholder,
       AccrualLabel,
+        UiTable,
     },
   })
 </script>

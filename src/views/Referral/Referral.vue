@@ -1,12 +1,11 @@
 <template>
-  <div class="px-ui-page-spacing pt-ui-page-header-spacing pb-ui-page-bottom-spacing flex relative z-ui-page-content">
+  <div class="px-ui-page-spacing pt-ui-page-header-spacing pb-ui-page-bottom-spacing flex relative z-ui-page-content flex-1">
     <div
       v-if="isShownBackButton"
       class="pr-ui-page-spacing flex-shrink-0 w-72 box-content flex justify-center items-start"
     >
       <ui-button
-        size="50"
-        class="w-50 h-50 rounded-16"
+        size="48"
         variant="gray"
         :to="{ name: 'dashboard' }"
       >
@@ -20,52 +19,77 @@
       </ui-button>
     </div>
     <div class="flex-1 w-full">
-      <div class="mb-40 flex justify-between items-start">
-        <div>
-          <h1 class="text-ui-page-title uppercase font-title leading-140">
-            Referral <span class="text-gray">station</span>
-          </h1>
-          <p
-            class="text-gray text-ui-page-description mt-12"
-            style="max-width: 600px"
-          >
-            Send your referral link to your friends and earn up to 15% from friends’ performance fees on SLR and 1% from their earnings on Launchpools via SLR Referral Program.
-          </p>
-        </div>
-        <ui-bread-crumbs
-          v-if="isShownBreadCrumbs"
-          :items="[
-            { to: { name: 'dashboard' }, text: 'Home' },
-            { to: { name: 'referral' }, text: 'Referral' },
-          ]"
-        />
-      </div>
       <connect-wallet-plug>
         <template #plug>
+          <referral-page-title :isDesktopLayout="isDesktopLayout"/>
           <referral-promo-state />
         </template>
 
         <template #default>
-          <div class="content-layout">
-            <referral-link-block />
-            <referrer-rewards />
-            <referrals-list />
-            <referrer-accrual-history />
-          </div>
+          <transition mode="out-in" name="fade">
+            <referral-full-mobile-table
+              v-if="isShownFullMobileAccrualHistoryTable"
+              @close="closeAllMobileTable"
+            >
+              <template #title>
+                <referral-widget-title title="Accrual history"/>
+              </template>
+              <referrer-accrual-history class="flex-1" />
+            </referral-full-mobile-table>
+  
+            <referral-full-mobile-table
+              v-else-if="isShownFullMobileReferralsTable"
+              @close="closeAllMobileTable"
+            >
+              <template #title>
+                <referral-widget-title title="Referrals list" :counter="numberOfReferrals"/>
+              </template>
+              <referrals-list class="flex-1"/>
+            </referral-full-mobile-table>
+            
+            <template v-else>
+              <div class="content-layout">
+                <referral-page-title :isDesktopLayout="isDesktopLayout"/>
+                <referral-link-block />
+                <referrer-rewards />
+                <div class="flex flex-col">
+                  <referral-widget-title
+                    class="mb-24"
+                    title="Referral list"
+                    :counter="numberOfReferrals"
+                  />
+                  <referrals-list
+                    class="flex-1"
+                    @show-all="showFullMobileReferralsTable"
+                    :is-slicing-rows="!isDesktopLayout"
+                  />
+                </div>
+                <div class="flex flex-col">
+                  <referral-widget-title
+                    class="mb-24"
+                    title="Accrual history"
+                  />
+                  <referrer-accrual-history class="flex-1"/>
+                </div>
+              </div>
+            </template>
+          </transition>
         </template>
       </connect-wallet-plug>
 
-      <referral-faq class="mt-48" />
+      <referral-faq
+        class="mt-48"
+        v-if="!isShownFullMobileAccrualHistoryTable && !isShownFullMobileReferralsTable"
+      />
     </div>
   </div>
   <referral-bg v-if="isShownBgVideo" />
 </template>
 
 <script lang="ts">
-  import { defineComponent } from 'vue'
-  import { useBreakpoints } from '@vueuse/core'
+  import { defineComponent, watch } from 'vue'
+  import { useBreakpoints, useToggle } from '@vueuse/core'
   import ConnectWalletPlug from '@/components/ConnectWallet/ConnectWalletPlug.vue'
-  import UiBreadCrumbsAsync from '@/components/ui/UiBreadCrumbs/UiBreadCrumbsAsync'
   import UiButton from '@/components/ui/UiButton.vue'
   import UiIcon from '@/components/ui/UiIcon'
   import ReferralsList from './components/ReferralsList.vue'
@@ -75,19 +99,49 @@
   import ReferralFaq from './components/ReferralFaq.vue'
   import ReferralBg from './components/ReferralBg.vue'
   import ReferralPromoState from './components/ReferralPromoState.vue'
+  import ReferralFullMobileTable from './components/ReferralFullMobileTable.vue'
+  import ReferralPageTitle from './components/ReferralPageTitle.vue'
+  import ReferralWidgetTitle from './components/ReferralWidgetTitle.vue'
+  import { useReferrals } from './hooks/useReferrals'
 
   export default defineComponent({
     setup() {
-      const { isShownBackButton, isShownBreadCrumbs, isShownBgVideo } = useBreakpoints({
+      // Adaptive [BEGIN]
+      const { isShownBackButton, isDesktopLayout, isShownBgVideo } = useBreakpoints({
         isShownBackButton: 980,
-        isShownBreadCrumbs: 875,
+        isDesktopLayout: 875,
         isShownBgVideo: 1200,
       })
 
+      const [isShownFullMobileAccrualHistoryTable, toggleFullMobileAccrualHistoryTable] = useToggle(false)
+      const [isShownFullMobileReferralsTable, toggleFullMobileReferralsTable] = useToggle(false)
+      const closeAllMobileTable = () => {
+        toggleFullMobileAccrualHistoryTable(false)
+        toggleFullMobileReferralsTable(false)
+      }
+      const showFullMobileRewardsTable = () => toggleFullMobileAccrualHistoryTable(true)
+      const showFullMobileReferralsTable = () => toggleFullMobileReferralsTable(true)
+
+      watch(isDesktopLayout, (isDesktopLayoutVal) => isDesktopLayoutVal && closeAllMobileTable())
+      // Adaptive [END]
+
+      // Fetch data [BEGIN]
+      const { numberOfReferrals, fetchReferralsList } = useReferrals()
+      fetchReferralsList()
+      // Fetch data [END]
+
       return {
         isShownBackButton,
-        isShownBreadCrumbs,
+        isDesktopLayout,
         isShownBgVideo,
+
+        isShownFullMobileAccrualHistoryTable,
+        isShownFullMobileReferralsTable,
+        closeAllMobileTable,
+        showFullMobileRewardsTable,
+        showFullMobileReferralsTable,
+
+        numberOfReferrals,
       }
     },
     components: {
@@ -99,9 +153,11 @@
       ReferralFaq,
       ReferralBg,
       ReferralPromoState,
-      UiBreadCrumbs: UiBreadCrumbsAsync,
       UiButton,
       UiIcon,
+      ReferralFullMobileTable,
+      ReferralPageTitle,
+      ReferralWidgetTitle,
     },
   })
 </script>
@@ -114,23 +170,25 @@
     display: grid;
     grid-gap: 32px 20px;
     grid-template-areas:
+      'header header'
       'link rewards'
       'referrals history';
 
     grid-template-columns: repeat(2, minmax(270px, 1fr));
-    grid-template-rows: 227px 380px;
+    grid-template-rows: min-content 227px 380px;
     max-width: 850px;
   }
 
   @media screen and (max-width: 875px) {
     .content-layout {
       grid-template-areas:
+        'header'
         'link'
         'rewards'
         'referrals'
         'history';
       grid-template-columns: 100%;
-      grid-template-rows: repeat(2, minmax(227px, max-content)) 380px minmax(380px, max-content);
+      grid-template-rows: min-content repeat(2, minmax(227px, max-content)) 380px minmax(380px, max-content);
     }
   }
 </style>
