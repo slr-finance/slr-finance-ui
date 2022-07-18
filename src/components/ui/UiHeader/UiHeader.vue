@@ -39,7 +39,7 @@
       mobileMenu: {
         type: Array as PropType<UiLinkProps[]>,
         required: true,
-      }
+      },
     },
     setup() {
       const { type } = useHeader()

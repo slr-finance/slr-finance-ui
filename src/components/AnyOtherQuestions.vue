@@ -9,20 +9,18 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
-import UiExternalLink from './ui/UiExternalLink.vue'
+  import { defineComponent } from 'vue'
+  import UiExternalLink from './ui/UiExternalLink.vue'
 
-export default defineComponent({
-  components: { UiExternalLink },
-  name: 'any-other-questions',
-  props: {
-    docLink: {
-      type: String,
-      required: true,
-    }
-  },
-  setup() {
-    
-  },
-})
+  export default defineComponent({
+    components: { UiExternalLink },
+    name: 'any-other-questions',
+    props: {
+      docLink: {
+        type: String,
+        required: true,
+      },
+    },
+    setup() {},
+  })
 </script>

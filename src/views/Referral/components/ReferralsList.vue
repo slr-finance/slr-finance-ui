@@ -1,12 +1,12 @@
 <template>
-  <div class="flex flex-col border border-white bg-black rounded-12 py-20">
+  <div class="flex flex-col border border-white bg-black rounded-12 py-20 relative">
     <ui-galaxy-loader
       class="m-auto"
       v-if="isFetching"
     />
     <ui-placeholder
       v-else-if="referralsList.length === 0"
-      class="inset-0 absolute"
+      class="inset-0 absolute p-16"
       icon="binocular"
       title="You don't have referrals"
       description="Share link and Get 10% from perfomance fee for any transactions and 1% from any rawards"
@@ -17,15 +17,15 @@
       :data="referralsList"
       :item-height="44"
       :is-slicing-rows="isSlicingRows"
-      template-columns="44px 1fr max-content"
+      template-columns="30px 1fr max-content"
       class="h-full flex-1"
       @show-all="handleShowAllReferrals"
     >
       <template #row="{ data, index }">
-        <span class="item pr-20 text-gray leading-none">{{ index + 1 }}</span>
-        <span class="item pr-20 leading-none">{{ data.shortAddress }}</span>
-        <div class="item text-right">
-          <div class="leading-none">{{ data.dateStr }}</div>
+        <span class="text-12 text-gray leading-none">{{ index + 1 }}</span>
+        <span class="text-12 leading-none">{{ data.shortAddress }}</span>
+        <div class="text-12 text-right">
+          <div class="leading-none mb-2">{{ data.dateStr }}</div>
           <div class="text-gray text-11 leading-none">
             {{ data.timeStr }}
           </div>
@@ -48,7 +48,7 @@
     props: {
       isSlicingRows: {
         type: Boolean,
-      }
+      },
     },
     emits: ['showAll'],
     setup(props, { emit }) {
@@ -66,10 +66,10 @@
       }
     },
     components: {
-    UiWidget,
-    UiPlaceholder,
-    UiTable,
-    UiGalaxyLoader
-},
+      UiWidget,
+      UiPlaceholder,
+      UiTable,
+      UiGalaxyLoader,
+    },
   })
 </script>

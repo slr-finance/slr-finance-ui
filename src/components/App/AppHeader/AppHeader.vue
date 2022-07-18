@@ -4,7 +4,7 @@
     :mobile-menu="links"
   >
     <template #action>
-      <connect-wallet/>
+      <connect-wallet />
     </template>
 
     <template #mobile-action>
@@ -17,42 +17,42 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
-import type { UiLinkProps } from '@/components/ui/UiLink.vue'
-import UiButton from '@/components/ui/UiButton.vue'
-import UiHeader from '@/components/ui/UiHeader'
-import ConnectWallet from '@/components/ConnectWallet/ConnectWallet.vue'
-import AppHeaderMobileTokenPrice from './AppHeaderMobileTokenPrice.vue'
+  import { defineComponent } from 'vue'
+  import type { UiLinkProps } from '@/components/ui/UiLink.vue'
+  import UiButton from '@/components/ui/UiButton.vue'
+  import UiHeader from '@/components/ui/UiHeader'
+  import ConnectWallet from '@/components/ConnectWallet/ConnectWallet.vue'
+  import AppHeaderMobileTokenPrice from './AppHeaderMobileTokenPrice.vue'
 
-const links:UiLinkProps[] = [
-  {
-    text: 'Swap',
-    to: { name: 'swap' },
-  },
-  {
-    text: 'Presale',
-    to: { name: 'presale' },
-  },
-  {
-    text: 'Staking',
-    to: { name: 'pool' },
-  },
-  {
-    text: 'Referral',
-    to: { name: 'referral' },
-  },
-]
+  const links: UiLinkProps[] = [
+    {
+      text: 'Swap',
+      to: { name: 'swap' },
+    },
+    {
+      text: 'Presale',
+      to: { name: 'presale' },
+    },
+    {
+      text: 'Staking',
+      to: { name: 'pool' },
+    },
+    {
+      text: 'Referral',
+      to: { name: 'referral' },
+    },
+  ]
 
-export default defineComponent({
-  name: 'app-header',
-  setup() {    
-    return { links }
-  },
-  components: {
-    UiHeader,
-    UiButton,
-    ConnectWallet,
-    AppHeaderMobileTokenPrice,
-  }
-})
+  export default defineComponent({
+    name: 'app-header',
+    setup() {
+      return { links }
+    },
+    components: {
+      UiHeader,
+      UiButton,
+      ConnectWallet,
+      AppHeaderMobileTokenPrice,
+    },
+  })
 </script>

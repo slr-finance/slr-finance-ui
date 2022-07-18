@@ -67,7 +67,7 @@
     },
     components: {
       AccrualLabel,
-      UiTable
+      UiTable,
     },
   })
 </script>

@@ -82,6 +82,7 @@
   import { useBscScanAddress } from '@/hooks/useBscScanAddress'
 
   export default defineComponent({
+    name: 'connected-wallet-modal',
     setup() {
       const { isOpen, close } = useConnectedWalletModal()
       const { address, balance: bnbBalance } = useEthers()

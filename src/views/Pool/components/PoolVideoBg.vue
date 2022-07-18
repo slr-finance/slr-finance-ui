@@ -20,7 +20,7 @@
   import { usePoolInfo } from '../hooks/usePoolInfo'
 
   export default defineComponent({
-    name: 'pool-bg',
+    name: 'pool-video-bg',
     props: {
       poolId: {
         type: Number,

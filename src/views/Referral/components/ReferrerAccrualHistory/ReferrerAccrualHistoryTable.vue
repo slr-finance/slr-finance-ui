@@ -42,7 +42,7 @@
     components: {
       UiPlaceholder,
       AccrualLabel,
-        UiTable,
+      UiTable,
     },
   })
 </script>

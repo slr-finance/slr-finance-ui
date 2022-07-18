@@ -3,7 +3,7 @@
     <div class="h-full flex flex-col relative">
       <div class="absolute inset-0">
         <div class="table flex-1 relative overflow-auto text-12">
-          <span 
+          <span
             class="header-item"
             :key="index"
             v-for="(column, index) in columns"
@@ -11,7 +11,7 @@
             {{ column }}
           </span>
 
-          <slot/>
+          <slot />
         </div>
 
         <ui-button
@@ -55,7 +55,7 @@
       },
       isVisibleShowAllButton: {
         type: Boolean,
-      }
+      },
     },
     emits: ['showAll'],
     setup(props, { emit }) {

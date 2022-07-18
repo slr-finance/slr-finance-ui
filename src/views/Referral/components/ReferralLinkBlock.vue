@@ -13,9 +13,7 @@
         Share link and <span class="text-yellow">Get 10%</span> from perfomance fee for any transactions and
         <span class="text-yellow">1%</span> from any rawards
       </p>
-      <referral-link
-        :link="referralLink"
-      />
+      <referral-link :link="referralLink" />
       <div class="flex items-center justify-between mt-18">
         Share link
         <social-links
@@ -40,7 +38,7 @@
   import SocialLinks from '@/components/SocialLinks/SocialLinks.vue'
   import UiPoligon from '@/components/ui/UiPoligon.vue'
   import { useReferralLink } from '../hooks/useReferralLink'
-import UiTextPlaceholder from '@/components/ui/UiTextPlaceholder.vue'
+  import UiTextPlaceholder from '@/components/ui/UiTextPlaceholder.vue'
 
   export default defineComponent({
     name: 'referrals-link-block',

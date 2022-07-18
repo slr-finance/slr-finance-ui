@@ -1,5 +1,7 @@
 <template>
-  <div class="px-ui-page-spacing pt-ui-page-header-spacing pb-ui-page-bottom-spacing flex relative z-ui-page-content flex-1">
+  <div
+    class="px-ui-page-spacing pt-ui-page-header-spacing pb-ui-page-bottom-spacing flex relative z-ui-page-content flex-1"
+  >
     <div
       v-if="isShownBackButton"
       class="pr-ui-page-spacing flex-shrink-0 w-72 box-content flex justify-center items-start"
@@ -21,35 +23,41 @@
     <div class="flex-1 w-full">
       <connect-wallet-plug>
         <template #plug>
-          <referral-page-title :isDesktopLayout="isDesktopLayout"/>
+          <referral-page-title :isDesktopLayout="isDesktopLayout" />
           <referral-promo-state />
         </template>
 
         <template #default>
-          <transition mode="out-in" name="fade">
+          <transition
+            mode="out-in"
+            name="fade"
+          >
             <referral-full-mobile-table
               v-if="isShownFullMobileAccrualHistoryTable"
               @close="closeAllMobileTable"
             >
               <template #title>
-                <referral-widget-title title="Accrual history"/>
+                <referral-widget-title title="Accrual history" />
               </template>
               <referrer-accrual-history class="flex-1" />
             </referral-full-mobile-table>
-  
+
             <referral-full-mobile-table
               v-else-if="isShownFullMobileReferralsTable"
               @close="closeAllMobileTable"
             >
               <template #title>
-                <referral-widget-title title="Referrals list" :counter="numberOfReferrals"/>
+                <referral-widget-title
+                  title="Referrals list"
+                  :counter="numberOfReferrals"
+                />
               </template>
-              <referrals-list class="flex-1"/>
+              <referrals-list class="flex-1" />
             </referral-full-mobile-table>
-            
+
             <template v-else>
               <div class="content-layout">
-                <referral-page-title :isDesktopLayout="isDesktopLayout"/>
+                <referral-page-title :isDesktopLayout="isDesktopLayout" />
                 <referral-link-block />
                 <referrer-rewards />
                 <div class="flex flex-col">
@@ -69,7 +77,7 @@
                     class="mb-24"
                     title="Accrual history"
                   />
-                  <referrer-accrual-history class="flex-1"/>
+                  <referrer-accrual-history class="flex-1" />
                 </div>
               </div>
             </template>
@@ -173,7 +181,6 @@
       'header header'
       'link rewards'
       'referrals history';
-
     grid-template-columns: repeat(2, minmax(270px, 1fr));
     grid-template-rows: min-content 227px 380px;
     max-width: 850px;

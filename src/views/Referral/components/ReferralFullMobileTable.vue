@@ -15,26 +15,26 @@
         />
       </ui-button>
 
-      <slot name="title"/>
+      <slot name="title" />
     </div>
 
-    <slot/>
+    <slot />
   </div>
 </template>
 
 <script lang="ts">
-import UiButton from '@/components/ui/UiButton.vue'
-import UiIcon from '@/components/ui/UiIcon/UiIcon.vue'
-import { defineComponent } from 'vue'
+  import UiButton from '@/components/ui/UiButton.vue'
+  import UiIcon from '@/components/ui/UiIcon/UiIcon.vue'
+  import { defineComponent } from 'vue'
 
-export default defineComponent({
-  name: 'referral-full-mobile-table',
-  setup(props, { emit }) {
-    const handleClose = () => emit('close')
+  export default defineComponent({
+    name: 'referral-full-mobile-table',
+    setup(props, { emit }) {
+      const handleClose = () => emit('close')
 
-    return { handleClose }
-  },
-  emits: ['close'],
-  components: { UiButton, UiIcon },
-})
+      return { handleClose }
+    },
+    emits: ['close'],
+    components: { UiButton, UiIcon },
+  })
 </script>

@@ -74,7 +74,6 @@
           class="mb-24"
         />
 
-        <pools-faq/>
         <div class="text-14 mb-32">{{ poolInfo.page.aboutPool }}</div>
         <token-info />
       </div>
@@ -96,7 +95,6 @@
   import MigrateForm from './components/MigrateForm.vue'
   import TokenInfo from './components/TokenInfo.vue'
   import PoolTvl from './components/PoolTvl.vue'
-  import PoolsFaq from './components/PoolsFaq.vue'
   import StakerInfo from './components/StakerInfo.vue'
   import StakedState from './components/StakedState'
   import DisablePoolState from './components/DisablePoolState.vue'
@@ -170,7 +168,6 @@
       CompletedPool,
       TokenInfo,
       PoolTvl,
-      PoolsFaq,
       StakerInfo,
       StakedState,
       DisablePoolState,

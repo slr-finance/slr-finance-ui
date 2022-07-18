@@ -60,7 +60,7 @@
       const links = computed(() => ({
         twitter: `http://twitter.com/share?text=${props.text}&url=${props.link}&hashtags=${props.hashtags.join(',')}`,
         tg: `https://t.me/share/url?url=${props.link}&text=${props.text}`,
-        fb: `https://www.facebook.com/sharer.php?caption=caption&description=${props.text}&u=${props.link}`
+        fb: `https://www.facebook.com/sharer.php?caption=caption&description=${props.text}&u=${props.link}`,
       }))
 
       return { links }

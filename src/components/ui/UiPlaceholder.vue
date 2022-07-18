@@ -10,6 +10,7 @@
       <slot name="icon">
         <ui-icon
           :name="icon"
+          :prefix="iconPrefix"
           class="text-white opacity-60"
           size="18"
         />
@@ -43,6 +44,10 @@
       icon: {
         type: String,
         default: 'info-circle',
+      },
+      iconPrefix: {
+        type: String,
+        default: 'ui-icon',
       },
       variant: {
         type: String,

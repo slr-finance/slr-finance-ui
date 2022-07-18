@@ -11,7 +11,7 @@
         style="height: 400px"
       >
         <div class="w-full h-full relative">
-          <dashboard-token-charts class="w-full h-full left-0 top-0 absolute"/>
+          <dashboard-token-charts class="w-full h-full left-0 top-0 absolute" />
         </div>
       </dashboard-container>
 
@@ -59,7 +59,7 @@
   import UiButton from '@/components/ui/UiButton.vue'
   import PresaleInformation from '@/views/Presale/components/PresaleInformation'
   import DashboardTokenCharts from './components/DashboardTokenCharts.vue'
-import DashboardContainer from './components/DashboardContainer.vue'
+  import DashboardContainer from './components/DashboardContainer.vue'
 
   export default defineComponent({
     setup() {
@@ -107,7 +107,7 @@ import DashboardContainer from './components/DashboardContainer.vue'
       PresaleInformation,
       DashboardTokenCharts,
       UiButton,
-        DashboardContainer,
+      DashboardContainer,
     },
   })
 </script>

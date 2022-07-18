@@ -4,7 +4,7 @@
       :text="link"
       class="flex-1 truncate mr-32"
     />
-    
+
     <button
       class="flex justify-center items-center rounded-10 bg-opacity-20 bg-violet min-w-40 w-40 h-40"
       @click="handleCopy"
@@ -29,9 +29,9 @@
     name: 'referral-link',
     props: {
       link: {
-        type: [String, Object] as PropType<string|null>,
+        type: [String, Object] as PropType<string | null>,
         required: true,
-        validator: (val:string|null) => typeof val === 'string' || val === null
+        validator: (val: string | null) => typeof val === 'string' || val === null,
       },
     },
     setup(props) {

@@ -34,7 +34,7 @@
       </ul>
 
       <div class="ml-16">
-        <slot name="action"/>
+        <slot name="action" />
       </div>
     </div>
   </header>
@@ -68,7 +68,7 @@
         type: [String, Object] as PropType<RouteLocationRaw>,
       },
       links: {
-        type: Array as PropType<UiLinkProps[]>
+        type: Array as PropType<UiLinkProps[]>,
       },
     },
     setup() {
@@ -101,7 +101,7 @@
           handleScroll()
         })
       })
-      
+
       const { css } = useStyleTag(getScrollFactorStyle(scrollY))
       // Handle scroll [END]
 
@@ -117,8 +117,8 @@
       }
     },
     components: {
-        UiLink,
-        UiHeaderLogo,
+      UiLink,
+      UiHeaderLogo,
     },
   })
 </script>
