@@ -3,11 +3,11 @@ import '@/index.postcss'
 import '@/components/ui/index.postcss'
 import { createApp, nextTick } from 'vue'
 import Toast, { POSITION } from 'vue-toastification'
+import { initReferral } from 'slr-finance-ui-share/src/libs/referral'
 import 'vue-toastification/dist/index.css'
 import { router } from '@/router'
 import App from '@/App.vue'
 import { store } from '@/store/store'
-import { initReferral } from './libs/referral'
 
 // Referral [BEGIN]
 initReferral()

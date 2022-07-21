@@ -1,13 +1,14 @@
-import { getErc20Contract } from '@/utils/contracts/getErc20Contract'
 import { MaybeRef } from '@vueuse/core'
 import { isAddress } from 'ethers/lib/utils'
 import { Ref, ref, unref, watch } from 'vue'
+import { useErc20Contract } from '@/hooks/contracts/useErc20Contract'
 
 export type UseDecimalsReturns = [Ref<number>, Ref<boolean>]
 
 export const useDecimals = (tokenAddress: MaybeRef<string>): UseDecimalsReturns => {
   const decimal = ref(0)
   const isFetching = ref(false)
+  const tokenContract = useErc20Contract(tokenAddress)
 
   const fetchDecimal = async () => {
     try {
@@ -27,7 +28,7 @@ export const useDecimals = (tokenAddress: MaybeRef<string>): UseDecimalsReturns 
       isFetching.value = false
       decimal.value = 0
 
-      const responce = await getErc20Contract(tokenAddressVal).decimals()
+      const [responce] = await tokenContract.value.functions.decimals()
 
       decimal.value = responce
     } catch (error) {

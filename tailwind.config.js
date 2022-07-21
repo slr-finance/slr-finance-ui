@@ -95,6 +95,7 @@ module.exports = {
     },
     minHeight: {
       24: '24px',
+      32: '32px',
       full: '100%',
     },
     backdropBlur: {

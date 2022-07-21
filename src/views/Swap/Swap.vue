@@ -13,7 +13,7 @@
         </h1>
 
         <p class="text-ui-page-description text-white text-opacity-60 mb-48">
-          Trading without setting slippage. We will automatically set the best settings.
+          Trading without setting slippage. Make a swap with automatic settings
         </p>
       </div>
 

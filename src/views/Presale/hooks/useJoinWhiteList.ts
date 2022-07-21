@@ -1,13 +1,11 @@
-import { getPresaleContract } from '@/utils/contracts/getPresaleContract'
-import { computed, unref } from 'vue'
+import { computed } from 'vue'
+import { getReferrerFromCookies } from 'slr-finance-ui-share/src/libs/referral'
 import { useSendTx } from '@/hooks/useSendTx'
-import { useEthers } from '@/hooks/dapp/useEthers'
-import { getReferrerFromCookies } from '@/libs/referral'
+import { usePresaleContract } from '@/hooks/contracts/usePresaleContract'
 
 export const useJoinWhiteList = () => {
-  const { signer } = useEthers()
-  const tokenContract = computed(() => getPresaleContract(unref(signer)))
+  const presaleContract = usePresaleContract()
   const joinParams = computed(() => [getReferrerFromCookies()])
 
-  return useSendTx(tokenContract, 'join', joinParams)
+  return useSendTx(presaleContract, 'join', joinParams)
 }

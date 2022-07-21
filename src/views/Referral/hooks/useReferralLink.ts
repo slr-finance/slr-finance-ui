@@ -1,6 +1,6 @@
 import { HOME_DOMAIN, SHORT_IO_API_KEY } from '@/config/constants/main'
+import { REFERRER_QUERY_PARAM } from 'slr-finance-ui-share/src/libs/referral'
 import { useEthers } from '@/hooks/dapp/useEthers'
-import { REFERRER_QUERY_PARAM } from '@/libs/referral'
 import { isAddress } from 'ethers/lib/utils'
 import { computed, ref, watch } from 'vue'
 
