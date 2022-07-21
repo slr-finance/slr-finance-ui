@@ -1,51 +1,56 @@
 import { ref, watch } from 'vue'
-import { getReferrerFromCookies } from 'slr-finance-ui-share/src/libs/referral'
-import { useEthers } from '@/hooks/dapp/useEthers'
-import { getReferralContract } from '@/utils/contracts/getReferralContract'
-import { runAsyncWithParamChecking } from '@/hooks/runAsyncWithParamChecking'
-import { isAddress } from 'ethers/lib/utils'
+import { computedAsync, createSharedComposable } from '@vueuse/core'
 import { constants } from 'ethers'
+import { isAddress } from 'ethers/lib/utils'
+import { AddressZero } from '@ethersproject/constants'
+import { getReferrerFromCookies } from 'slr-finance-ui-share/src/libs/referral'
+import { useReferralContract } from '@/hooks/contracts/useReferralContract'
+import { StopController } from '@/utils/StopController'
 
 const getStorageInviterKey = (address: string) => `inviterBy:${address}`
 
-export const useOwnInviter = () => {
-  const { address } = useEthers()
+export const useOwnInviter = createSharedComposable(() => {
   const isFetching = ref(false)
-  const inviterAddress = ref('')
+  const referralContract = useReferralContract()
 
-  const handleFetchOwnInviter = async () => {
-    await runAsyncWithParamChecking(
-      address,
-      async (addressVal, { breakIfValueChanged, breakIfValueIsNil, isNilValue }) => {
-        isFetching.value = !isNilValue()
-        inviterAddress.value = ''
+  const inviterAddress = computedAsync(
+    async (onCancel) => {
+      const stopController = new StopController(onCancel)
 
-        breakIfValueIsNil()
+      const { value: referralContractVal } = referralContract
+      // TODO: signer может быть null
+      const signerAddress = await referralContractVal?.signer?.getAddress()
 
-        const storageKey = getStorageInviterKey(addressVal)
-        const storageValue = localStorage.getItem(storageKey)
+      if (!signerAddress) {
+        stopController.stop()
+      }
 
-        if (storageValue && isAddress(storageValue)) {
-          inviterAddress.value = storageValue
-          isFetching.value = false
-        } else {
-          const address: string = await getReferralContract().referrers(addressVal)
-          const isEmpty = address === constants.AddressZero
+      stopController.breakIfStoping()
 
-          if (!isEmpty && isAddress(address)) {
-            localStorage.setItem(storageKey, address)
-          }
+      const storageKey = getStorageInviterKey(signerAddress)
+      const storageValue = localStorage.getItem(storageKey)
 
-          breakIfValueChanged()
+      if (storageValue && isAddress(storageValue)) {
+        return storageValue
+      }
 
-          inviterAddress.value = isEmpty ? getReferrerFromCookies() : address
-          isFetching.value = false
-        }
-      },
-    )
-  }
+      const [inviterAddress] = await referralContract.value.functions.referrers(signerAddress)
 
-  watch(address, async () => handleFetchOwnInviter(), { immediate: true })
+      stopController.breakIfStoping()
+
+      const isEmpty = inviterAddress === constants.AddressZero
+
+      if (!isEmpty && isAddress(inviterAddress)) {
+        localStorage.setItem(storageKey, inviterAddress)
+
+        return inviterAddress
+      }
+
+      return getReferrerFromCookies()
+    },
+    AddressZero,
+    isFetching,
+  )
 
   return { inviterAddress, isFetching }
-}
+})

@@ -1,44 +1,52 @@
-import { Ref, ref, watch } from 'vue'
-import { useEthers } from '@/hooks/dapp/useEthers'
-import { getReferralContract } from '@/utils/contracts/getReferralContract'
-import { BigNumber as BigNumberEthers } from 'ethers'
+import { Ref, ref } from 'vue'
 import BigNumber from 'bignumber.js'
-import { runAsyncWithParamChecking } from '@/hooks/runAsyncWithParamChecking'
-import { parseWei } from '@/utils/bigNumber'
+import { BIG_ZERO, parseWei } from '@/utils/bigNumber'
+import { createSharedComposable, watchTriggerable } from '@vueuse/core'
+import { useReferralContract } from '@/hooks/contracts/useReferralContract'
+import { StopController } from '@/utils/StopController'
 
-type ReferrerRewardRaw = {
-  reward: BigNumberEthers
-  rewarded: BigNumberEthers
-}
-
-export const useReferrerRewards = () => {
-  const { address } = useEthers()
+export const useReferrerRewards = createSharedComposable(() => {
   const isFetching = ref(false)
   const reward = ref(new BigNumber(0)) as Ref<BigNumber>
   const rewarded = ref(new BigNumber(0)) as Ref<BigNumber>
+  const referralContract = useReferralContract()
 
-  const handleFetchReward = async () => {
-    await runAsyncWithParamChecking(
-      address,
-      async (addressVal, { breakIfValueChanged, breakIfValueIsNil, isNilValue }) => {
-        isFetching.value = !isNilValue()
-        reward.value = new BigNumber(0)
-        rewarded.value = new BigNumber(0)
+  const resetState = () => {
+    reward.value = BIG_ZERO
+    rewarded.value = BIG_ZERO
+    isFetching.value = false
+  }
 
-        breakIfValueIsNil()
+  const { trigger: refetchRewards } = watchTriggerable(
+    referralContract,
+    async (contract, _, onCleanup) => {
+      try {
+        resetState()
+        const stopController = new StopController(onCleanup)
+        const signerAddress = await contract?.signer?.getAddress()
 
-        const referrerReward: ReferrerRewardRaw = await getReferralContract().referrersRewards(addressVal)
+        if (!signerAddress) {
+          stopController.stop()
+        }
 
-        breakIfValueChanged()
+        stopController.breakIfStoping()
+
+        isFetching.value = true
+        const referrerReward = await contract.referrersRewards(signerAddress)
+
+        stopController.breakIfStoping()
 
         reward.value = parseWei(referrerReward.reward, 18)
         rewarded.value = parseWei(referrerReward.rewarded, 18)
         isFetching.value = false
-      },
-    )
-  }
+      } catch (error) {
+        resetState()
 
-  watch(address, () => handleFetchReward(), { immediate: true })
+        throw error
+      }
+    },
+    { immediate: true },
+  )
 
-  return { reward, rewarded, isFetching, refetchRewards: handleFetchReward }
-}
+  return { reward, rewarded, isFetching, refetchRewards }
+})

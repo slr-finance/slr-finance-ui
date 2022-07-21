@@ -1,5 +1,5 @@
-import { getContract } from './getContract'
-import MulticallAbi from '@/config/abi/Multicall.json'
 import contractsAddresses from '@/config/constants/contractsAddresses'
+import { Multicall__factory } from '@/contracts'
+import { getProvider } from './getProvider'
 
-export const getMulticallContract = () => getContract(contractsAddresses.Multicall, MulticallAbi)
+export const getMulticallContract = () => Multicall__factory.connect(contractsAddresses.Multicall, getProvider())

@@ -1,6 +1,6 @@
 import { calculateGasMargin } from '@/utils/contracts/calculateGasMargin'
 import { MaybeRef } from '@vueuse/core'
-import { Contract, ContractTransaction } from 'ethers'
+import { BaseContract, ContractTransaction } from 'ethers'
 import get from 'lodash.get'
 import { computed, Ref, ref, unref } from 'vue'
 import { useSingleToast } from './useSingleToast'
@@ -31,8 +31,8 @@ type TxToastsText = {
 
 type UseSendTxReturn = [() => Promise<void>, Ref<TxState<TxStatus>>]
 
-export const useSendTx = (
-  contract: MaybeRef<Contract>,
+export const useSendTx = <C extends BaseContract>(
+  contract: MaybeRef<C>,
   method: MaybeRef<string>,
   params: MaybeRef<any[]> = [],
   options: MaybeRef<any> = {},
@@ -69,7 +69,7 @@ export const useSendTx = (
       txToast.info(get(toastsTextVal, 'waitingSigning', 'Confirm transaction in your wallet'), { timeout: false })
 
       const estimateGas = await contractVal.estimateGas[methodVal](...paramsVal, optionsVal)
-      const tx: ContractTransaction = await contractVal[methodVal](...paramsVal, {
+      const tx: ContractTransaction = await contractVal.functions[methodVal](...paramsVal, {
         ...optionsVal,
         gasLimit: calculateGasMargin(estimateGas),
       })

@@ -1,12 +1,12 @@
 <template>
-  <div class="flex flex-col border border-white bg-black rounded-12 py-20 relative">
+  <div class="flex flex-col border border-white bg-black rounded-12 py-20">
     <ui-galaxy-loader
       class="m-auto"
       v-if="isFetching"
     />
     <ui-placeholder
-      v-else-if="referralsList.length === 0"
-      class="inset-0 absolute p-16"
+      v-else-if="numberOfReferrals === 0"
+      class="m-auto p-16"
       icon="binocular"
       title="You don't have referrals"
       description="Share link and Get 10% from perfomance fee for any transactions and 1% from any rawards"
@@ -41,7 +41,7 @@
   import UiWidget from '@/components/ui/UiWidget.vue'
   import UiPlaceholder from '@/components/ui/UiPlaceholder.vue'
   import UiGalaxyLoader from '@/components/ui/UiGalaxyLoader.vue'
-  import { useReferrals } from '../hooks/useReferrals'
+  import { useReferralsList } from '../hooks/useReferralsList'
 
   export default defineComponent({
     name: 'referrals-list',
@@ -56,7 +56,7 @@
         emit('showAll')
       }
 
-      const { referralsList, isFetching, numberOfReferrals } = useReferrals()
+      const { referralsList, isFetching, numberOfReferrals } = useReferralsList()
 
       return {
         referralsList,

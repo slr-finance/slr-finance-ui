@@ -1,5 +1,5 @@
 <template>
-  <div class="text-ui-page-label flex items-center uppercase relative w-max font-title">
+  <div class="text-ui-page-label flex items-center uppercase relative w-max font-title min-h-32">
     {{ title }}
     <div
       class="w-max bg-yellow text-black flex items-center rounded-16 h-32 px-10 text-14 ml-16"

@@ -47,10 +47,7 @@
               @close="closeAllMobileTable"
             >
               <template #title>
-                <referral-widget-title
-                  title="Referrals list"
-                  :counter="numberOfReferrals"
-                />
+                <referral-list-title />
               </template>
               <referrals-list class="flex-1" />
             </referral-full-mobile-table>
@@ -61,11 +58,7 @@
                 <referral-link-block />
                 <referrer-rewards />
                 <div class="flex flex-col">
-                  <referral-widget-title
-                    class="mb-24"
-                    title="Referral list"
-                    :counter="numberOfReferrals"
-                  />
+                  <referral-list-title class="mb-24" />
                   <referrals-list
                     class="flex-1"
                     @show-all="showFullMobileReferralsTable"
@@ -110,7 +103,7 @@
   import ReferralFullMobileTable from './components/ReferralFullMobileTable.vue'
   import ReferralPageTitle from './components/ReferralPageTitle.vue'
   import ReferralWidgetTitle from './components/ReferralWidgetTitle.vue'
-  import { useReferrals } from './hooks/useReferrals'
+  import ReferralListTitle from './components/ReferralListTitle.vue'
 
   export default defineComponent({
     setup() {
@@ -133,11 +126,6 @@
       watch(isDesktopLayout, (isDesktopLayoutVal) => isDesktopLayoutVal && closeAllMobileTable())
       // Adaptive [END]
 
-      // Fetch data [BEGIN]
-      const { numberOfReferrals, fetchReferralsList } = useReferrals()
-      fetchReferralsList()
-      // Fetch data [END]
-
       return {
         isShownBackButton,
         isDesktopLayout,
@@ -148,8 +136,6 @@
         closeAllMobileTable,
         showFullMobileRewardsTable,
         showFullMobileReferralsTable,
-
-        numberOfReferrals,
       }
     },
     components: {
@@ -166,6 +152,7 @@
       ReferralFullMobileTable,
       ReferralPageTitle,
       ReferralWidgetTitle,
+      ReferralListTitle,
     },
   })
 </script>

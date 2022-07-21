@@ -1,7 +1,7 @@
 <template>
   <ui-table
     :columns="['Amount', 'Address', 'Date', 'Reason']"
-    :data="accruals"
+    :data="accrualsList"
     :item-height="44"
     template-columns="1fr 1fr 1fr max-content"
   >
@@ -25,24 +25,24 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent, PropType } from 'vue'
+  import { defineComponent } from 'vue'
   import UiPlaceholder from '@/components/ui/UiPlaceholder.vue'
-  import AccrualLabel from './AccrualLabel.vue'
-  import { AccrualInfo } from '../../hooks/useReferrerAccrualHistory'
   import UiTable from '@/components/ui/UiTable.vue'
+  import AccrualLabel from './AccrualLabel.vue'
+  import { useReferrerAccrualList } from '../../hooks/useReferrerAccrualList'
 
   export default defineComponent({
     name: 'referrer-accrual-history-table',
-    props: {
-      accruals: {
-        type: Array as PropType<AccrualInfo[]>,
-        required: true,
-      },
-    },
     components: {
       UiPlaceholder,
       AccrualLabel,
       UiTable,
+    },
+
+    setup() {
+      const { accrualsList } = useReferrerAccrualList()
+
+      return { accrualsList }
     },
   })
 </script>

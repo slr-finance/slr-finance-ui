@@ -1,43 +1,50 @@
-import { Ref, ref, watch } from 'vue'
-import { getPresaleContract } from '@/utils/contracts/getPresaleContract'
-import { runAsyncWithParamChecking } from '@/hooks/runAsyncWithParamChecking'
-import { useEthers } from '@/hooks/dapp/useEthers'
-
-const contract = getPresaleContract()
-const { address: userAddress } = useEthers()
-const isJoined = ref(false)
-const isFetching = ref(false)
-const isInitalFetched = ref(false)
-
-const fetch = async () => {
-  isFetching.value = true
-
-  try {
-    await runAsyncWithParamChecking(userAddress, async (userAddressVal, { breakIfValueChanged, breakIfValueIsNil }) => {
-      try {
-        breakIfValueIsNil()
-        breakIfValueChanged()
-        isJoined.value = await contract.joined(userAddressVal)
-        isInitalFetched.value = true
-        breakIfValueChanged()
-      } catch (error) {
-        isJoined.value = false
-
-        throw error
-      }
-    })
-  } catch (error) {
-    console.error('useWhiteList')
-    console.error(error)
-  } finally {
-    isFetching.value = false
-  }
-}
-
-watch(userAddress, () => fetch(), { immediate: true })
+import { Ref, ref } from 'vue'
+import { createSharedComposable, watchTriggerable } from '@vueuse/core'
+import { usePresaleContract } from '@/hooks/contracts/usePresaleContract'
+import { StopController } from '@/utils/StopController'
 
 type UseWhiteListReturns = [() => Promise<void>, Ref<boolean>, Ref<boolean>]
 
-export const useWhiteList = (): UseWhiteListReturns => {
+export const useWhiteList = createSharedComposable((): UseWhiteListReturns => {
+  const isJoined = ref(false)
+  const isFetching = ref(false)
+  const presaleContract = usePresaleContract()
+
+  const resetState = () => {
+    isJoined.value = false
+    isFetching.value = false
+  }
+
+  const { trigger: fetch } = watchTriggerable(
+    presaleContract,
+    async (contract, _, onCleanup) => {
+      try {
+        resetState()
+        const stopController = new StopController(onCleanup)
+        const signerAddress = await contract?.signer?.getAddress()
+
+        if (!signerAddress) {
+          stopController.stop()
+        }
+
+        stopController.breakIfStoping()
+
+        isFetching.value = true
+
+        const [isJoinedValue] = await presaleContract.value.functions.joined(signerAddress)
+
+        stopController.breakIfStoping()
+
+        isJoined.value = isJoinedValue
+        isFetching.value = false
+      } catch (error) {
+        resetState()
+
+        throw error
+      }
+    },
+    { immediate: true },
+  )
+
   return [fetch, isJoined, isFetching]
-}
+})
