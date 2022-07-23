@@ -31,6 +31,7 @@
 
 <script lang="ts">
   import { defineComponent } from 'vue'
+  import { useHead } from '@vueuse/head'
   import contractsAddresses from '@/config/constants/contractsAddresses'
   import SwapForm from './components/SwapForm.vue'
   import PowerByDex from './components/PowerByDex.vue'
@@ -40,6 +41,16 @@
   export default defineComponent({
     name: 'swap-page',
     setup() {
+      useHead({
+        title: 'SLR Swap',
+        meta: [
+          {
+            name: 'description',
+            content: 'SLR Swap',
+          },
+        ],
+      })
+
       return {
         tokenAddress: contractsAddresses.SolarToken,
       }

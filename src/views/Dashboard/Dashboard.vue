@@ -50,6 +50,7 @@
 
 <script lang="ts">
   import { defineComponent } from 'vue'
+  import { useHead } from '@vueuse/head'
   import { useTokenAmountFormat } from '@/hooks/formatters/useTokenAmountFormat'
   import { useUsdFormat } from '@/hooks/formatters/useUsdFormat'
   import { useSlrPrice } from '@/hooks/dapp/useSlrPrice'
@@ -62,6 +63,16 @@
 
   export default defineComponent({
     setup() {
+      useHead({
+        title: 'SLR Dashboard',
+        meta: [
+          {
+            name: 'description',
+            content: 'SLR Dashboard',
+          },
+        ],
+      })
+
       const {
         totalBayback,
         currentBnbBalance,

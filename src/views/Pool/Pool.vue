@@ -83,10 +83,12 @@
 
 <script lang="ts">
   import { computed, defineComponent, toRef } from 'vue'
+  import { useHead } from '@vueuse/head'
   import { useEthers } from '@/hooks/dapp/useEthers'
   import { usePoolState } from './hooks/usePoolState'
   import { useStakerState } from './hooks/useStakerState'
   import UiGalaxyLoader from '@/components/ui/UiGalaxyLoader.vue'
+  import UiTextPlaceholder from '@/components/ui/UiTextPlaceholder.vue'
   import { usePoolInfo } from './hooks/usePoolInfo'
   import StakingFinished from './components/StakingFinished.vue'
   import CompletedPool from './components/CompletedPool.vue'
@@ -97,7 +99,6 @@
   import StakerInfo from './components/StakerInfo.vue'
   import StakedState from './components/StakedState'
   import DisablePoolState from './components/DisablePoolState.vue'
-  import UiTextPlaceholder from '@/components/ui/UiTextPlaceholder.vue'
   import { percentFormat } from '@/utils/strFormat/percentFormat'
 
   export default defineComponent({
@@ -118,6 +119,17 @@
         return !isPoolFetching.value ? percentFormat(poolStateVal.apy) : null
       })
       const poolInfo = usePoolInfo(poolId)
+
+      useHead({
+        title: computed(() => `${poolInfo.value.name} Pool`),
+        meta: [
+          {
+            name: 'description',
+            content: computed(() => `${poolInfo.value.name} Pool`),
+          },
+        ],
+      })
+
       const { isActivated } = useEthers()
       const { stakerState, isFetching } = useStakerState()
 

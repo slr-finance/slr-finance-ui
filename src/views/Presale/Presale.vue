@@ -43,6 +43,7 @@
 
 <script lang="ts">
   import { computed, defineComponent } from 'vue'
+  import { useHead } from '@vueuse/head'
   import { usePercentFormat } from '@/hooks/formatters/usePercentFormat'
   import UiButton from '@/components/ui/UiButton.vue'
   import UiGalaxyLoader from '@/components/ui/UiGalaxyLoader.vue'
@@ -58,6 +59,16 @@
   export default defineComponent({
     name: 'presale-view',
     setup() {
+      useHead({
+        title: 'SLR Presale',
+        meta: [
+          {
+            name: 'description',
+            content: 'SLR Presale',
+          },
+        ],
+      })
+
       const { currentPhase, isFetching, isInitalFetched, phasesDiscounts } = usePresale()
       const phaseDiscount = computed(() => phasesDiscounts.value[0])
       const phaseDiscountStr = usePercentFormat(phaseDiscount)

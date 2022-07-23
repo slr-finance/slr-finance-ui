@@ -1,4 +1,5 @@
 import { ViteSSG } from 'vite-ssg'
+import { createHead } from '@vueuse/head'
 import 'virtual:svg-icons-register'
 import '@/index.postcss'
 import '@/components/ui/index.postcss'
@@ -22,8 +23,11 @@ export const createApp = ViteSSG(
   // function to have custom setups
   ({ app, router, routes, isClient, initialState }) => {
     // install plugins etc.
+    const head = createHead()
+
+    app.use(head)
   },
-)
+  )
 // Mount app [END]
 
 if (!import.meta.env.SSR) {
