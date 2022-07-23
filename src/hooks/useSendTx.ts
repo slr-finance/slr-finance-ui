@@ -66,7 +66,10 @@ export const useSendTx = <C extends BaseContract>(
       txHash.value = null
       txStatus.value = TxStatus.WAITING_FOR_SIGNING
 
-      txToast.info({ content: get(toastsTextVal, 'waitingSigning', 'Confirm transaction in your wallet'), timeout: false })
+      txToast.info({
+        content: get(toastsTextVal, 'waitingSigning', 'Confirm transaction in your wallet'),
+        timeout: false,
+      })
 
       const estimateGas = await contractVal.estimateGas[methodVal](...paramsVal, optionsVal)
       const tx: ContractTransaction = await contractVal.functions[methodVal](...paramsVal, {

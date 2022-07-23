@@ -10,5 +10,5 @@ export type UiToastProps = {
   icon?: UiIconProps
   content: string
   type: UiToastType
-  timeout?: number|boolean
+  timeout?: number | boolean
 }

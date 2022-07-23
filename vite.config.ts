@@ -8,12 +8,10 @@ import generateSitemap from 'vite-ssg-sitemap'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  optimizeDeps:{
-    esbuildOptions:{
-      plugins:[
-        esbuildCommonjs(),
-      ]
-    }
+  optimizeDeps: {
+    esbuildOptions: {
+      plugins: [esbuildCommonjs()],
+    },
   },
   resolve: {
     alias: {
@@ -73,10 +71,10 @@ export default defineConfig({
     concurrency: 20,
     script: 'async',
     formatting: 'minify',
-    onFinished() { 
+    onFinished() {
       generateSitemap({
-        hostname: 'https://slr.finance/'
+        hostname: 'https://slr.finance/',
       })
     },
-  }
+  },
 })

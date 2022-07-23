@@ -67,12 +67,11 @@
       const pools = computed(() => {
         return poolsPosition.map(({ id, ...poolPosition }) => {
           const apyNum = poolsStates.value[id].apy?.toNumber() ?? 0
-          const apyStr = `APY ${
-            (apyNum * 100).toLocaleString('en-En', {
-              maximumFractionDigits: 0,
-              minimumFractionDigits: 0,
-              style: 'decimal',
-            })}%`
+          const apyStr = `APY ${(apyNum * 100).toLocaleString('en-En', {
+            maximumFractionDigits: 0,
+            minimumFractionDigits: 0,
+            style: 'decimal',
+          })}%`
 
           return {
             id,

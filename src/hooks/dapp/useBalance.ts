@@ -14,7 +14,6 @@ import BigNumber from 'bignumber.js'
 //   isFetching: boolean
 // }
 
-
 // const balances = new Map<StringTokenAddress, TokenInfo>()
 
 // const state = {
@@ -43,7 +42,7 @@ import BigNumber from 'bignumber.js'
 //   unsubscribe(address:string) {
 //     if (this.usingCounter[address]) {
 //       this.usingCounter[address] -= 1
-      
+
 //       if (this.usingCounter[address] <= 0) {
 //         this.tokensData.delete(address)
 //       }
@@ -65,7 +64,7 @@ import BigNumber from 'bignumber.js'
 //   async refFetchAll() {
 //     const calls:Call[] = []
 //     const fetchingList = [...this.watchedTokens]
-    
+
 //     fetchingList.forEach((tokenAddress) => {
 //       const tokenData = this.tokensData.get(tokenAddress)
 
@@ -116,7 +115,7 @@ export const useBalance = (tokenAddress: MaybeRef<StringTokenAddress>) => {
       params: [unref(userAddress)],
     },
   ])
-  
+
   const { trigger: refetchBalance } = watchTriggerable(calls, async (callsArr) => {
     isFetching.value = true
     const [[[decimalsRaw], [balanceRaw]]] = await multicall(Erc20__factory.abi, callsArr)

@@ -1,5 +1,5 @@
 import type BigNumber from 'bignumber.js'
-import { AddressZero } from "@ethersproject/constants"
+import { AddressZero } from '@ethersproject/constants'
 import { BigNumber as BigNumberEthers } from 'ethers'
 import { ref, ShallowRef, shallowRef } from 'vue'
 import { createSharedComposable, watchTriggerable } from '@vueuse/core'
@@ -47,7 +47,7 @@ const defaultStakerState = (address = AddressZero): StakerState => ({
 })
 
 export const useStakerState = createSharedComposable(() => {
-  const stakerState:ShallowRef<StakerState> = shallowRef(defaultStakerState())
+  const stakerState: ShallowRef<StakerState> = shallowRef(defaultStakerState())
   const isFetching = ref(false)
   const { address } = useEthers()
 
@@ -58,7 +58,7 @@ export const useStakerState = createSharedComposable(() => {
 
   const { trigger: refetchStaker } = watchTriggerable(
     address,
-    async (userAddress:string, _, onCleanup) => {
+    async (userAddress: string, _, onCleanup) => {
       try {
         resetState()
         const stopController = new StopController(onCleanup)
@@ -76,7 +76,7 @@ export const useStakerState = createSharedComposable(() => {
             params: [userAddress],
           },
         ]
-      
+
         POOLS_INFO.map((poolInfo) => {
           calls.push({
             address: contractsAddresses.StakingService,
@@ -84,9 +84,9 @@ export const useStakerState = createSharedComposable(() => {
             params: [userAddress, poolInfo.id],
           })
         })
-      
+
         const [[stakerRaw, ...stakerHistoryRaw]] = await multicall(Staking__factory.abi, calls)
-      
+
         const history = stakerHistoryRaw.map((stakerHistoryItem) => ({
           poolId: stakerHistoryItem.poolId,
           amount: parseWei(stakerHistoryItem.amount, 18),
@@ -106,7 +106,7 @@ export const useStakerState = createSharedComposable(() => {
           reward: parseWei(stakerRaw.reward, 18),
           history,
         }
-      
+
         isFetching.value = false
       } catch (error) {
         resetState()
@@ -116,7 +116,7 @@ export const useStakerState = createSharedComposable(() => {
         }
       }
     },
-    { immediate: true }
+    { immediate: true },
   )
 
   return { stakerState, isFetching, refetchStaker }

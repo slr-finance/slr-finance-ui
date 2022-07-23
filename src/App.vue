@@ -8,7 +8,7 @@
   <social-modal-button v-if="isDesktopLayout" />
   <connected-wallet-modal />
   <connect-wallet-modal />
-  <ui-toast/>
+  <ui-toast />
 </template>
 
 <script lang="ts">

@@ -34,14 +34,12 @@ const getDefaultPoolState = (poolId: number): PoolState => ({
 
 type PoolsStates = Record<number, PoolState>
 
-const getDefaultPoolsStates = () => POOLS_INFO.reduce(
-  (acc, { id }) => {
+const getDefaultPoolsStates = () =>
+  POOLS_INFO.reduce((acc, { id }) => {
     acc[id] = getDefaultPoolState(id)
 
     return acc
-  },
-  {} as PoolsStates
-)
+  }, {} as PoolsStates)
 
 export const usePoolsState = createSharedComposable(() => {
   const isFetching = ref(false)
@@ -50,15 +48,13 @@ export const usePoolsState = createSharedComposable(() => {
   const refetchPools = async () => {
     isFetching.value = true
 
-    const calls: Call[] = POOLS_INFO
-      .map(({id}) => [
-        {
-          address: contractsAddresses.StakingService,
-          name: 'state',
-          params: [id],
-        },
-      ])
-      .flat(1)
+    const calls: Call[] = POOLS_INFO.map(({ id }) => [
+      {
+        address: contractsAddresses.StakingService,
+        name: 'state',
+        params: [id],
+      },
+    ]).flat(1)
 
     const [response] = await multicall(Staking__factory.abi, calls)
 
@@ -66,7 +62,7 @@ export const usePoolsState = createSharedComposable(() => {
       const poolState = response[index]
       const apr = ethersToBigNumber(poolState.apr).div(1000000)
       const withdrawalFee = ethersToBigNumber(poolState.withdrawalFees).div(1000000)
-      
+
       poolsAcc[poolState.id] = {
         apr: apr,
         apy: getApy(apr),

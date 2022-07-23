@@ -59,7 +59,7 @@
   import { useRoute, useRouter } from 'vue-router'
   import { useBreakpoints } from '@vueuse/core'
   import { POOLS_INFO } from '@/config/constants/Pools'
-import { useStakerState } from './hooks/useStakerState'
+  import { useStakerState } from './hooks/useStakerState'
 
   export default defineComponent({
     props: {
@@ -77,7 +77,9 @@ import { useStakerState } from './hooks/useStakerState'
         route,
         ({ name }) => {
           if (name === 'pool') {
-            const { value: { poolId } } = stakerState
+            const {
+              value: { poolId },
+            } = stakerState
 
             if (poolId > 0 && poolId <= POOLS_INFO.length) {
               router.replace({ name: POOLS_INFO[poolId - 1].routeName })

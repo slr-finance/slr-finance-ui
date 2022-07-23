@@ -37,7 +37,7 @@
           :to="nextPoolRoute"
         >
           <div class="flex-1 mr-4 flex justify-center">
-            {{ nextPoolName }} 
+            {{ nextPoolName }}
             <ui-text-placeholder
               class="flex-1 ml-4"
               :text="nextApyStr"
@@ -114,10 +114,10 @@
       }
     },
     components: {
-    UiButton,
-    UiIcon,
-    UiTextPlaceholder,
-},
+      UiButton,
+      UiIcon,
+      UiTextPlaceholder,
+    },
   })
 </script>
 

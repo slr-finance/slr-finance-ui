@@ -27,7 +27,7 @@ export const createApp = ViteSSG(
 // Mount app [END]
 
 if (!import.meta.env.SSR) {
-  nextTick(() => {  
+  nextTick(() => {
     // Cache video [BEGIN]
     setTimeout(() => {
       import('@/utils/video/prefetchPoolsVideo').then(({ prefetchPoolsVideo }) => prefetchPoolsVideo())

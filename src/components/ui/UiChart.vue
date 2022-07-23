@@ -15,7 +15,6 @@
     setup() {
       // const rootRef = templateRef<HTMLElement>('root')
       // let chart: IChartApi | undefined
-
       // useResizeObserver(
       //   rootRef,
       //   ([
@@ -28,12 +27,10 @@
       //     }
       //   },
       // )
-
       // watchOnce(rootRef, (rootEl) => {
       //   if (!rootEl) {
       //     throw new Error('[ui-chart]: rootEl is null')
       //   }
-
       //   chart = createChart(rootEl, {
       //     layout: {
       //       background: {
@@ -64,7 +61,6 @@
       //     topColor: 'rgba(109, 13, 252, 0.3)',
       //     bottomColor: 'rgba(109, 13, 252, 0)',
       //   })
-
       //   lineSeries.setData([
       //     { time: '2019-04-11', value: 0.2 },
       //     { time: '2019-04-12', value: 0.33 },

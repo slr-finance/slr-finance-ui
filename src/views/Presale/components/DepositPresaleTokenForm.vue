@@ -29,11 +29,13 @@
     name: 'deposit-presale-token-form',
     setup() {
       const [handleDeposit, depositPresaleTokenTxState] = useBurnPresaleToken()
-      const { isFetching: isFetchingPresaleSlrBalance, refetchBalance: refetchPresaleBalance, balance: presaleTokenBalance } = useBalance(contractsAddresses.PresaleService)
-      const { refetchBalance: refetchSlrBalance} = useSlrBalance()
-      const isDisabled = computed(
-        () => presaleTokenBalance.value.lte(0) || isFetchingPresaleSlrBalance.value,
-      )
+      const {
+        isFetching: isFetchingPresaleSlrBalance,
+        refetchBalance: refetchPresaleBalance,
+        balance: presaleTokenBalance,
+      } = useBalance(contractsAddresses.PresaleService)
+      const { refetchBalance: refetchSlrBalance } = useSlrBalance()
+      const isDisabled = computed(() => presaleTokenBalance.value.lte(0) || isFetchingPresaleSlrBalance.value)
 
       const presaleSlrAmountStr = useTokenAmountFormat(presaleTokenBalance, 'PresaleSLR')
 

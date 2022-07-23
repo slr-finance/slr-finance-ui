@@ -32,7 +32,7 @@ const checkSupportedVideoCodec = () => {
 
 export const codec = checkSupportedVideoCodec()
 
-export const prefetchVideo = async (folderPath: string) => {  
+export const prefetchVideo = async (folderPath: string) => {
   if (!codec) {
     throw new Error()
   }

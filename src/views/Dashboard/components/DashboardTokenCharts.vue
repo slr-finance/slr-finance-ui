@@ -14,8 +14,8 @@
     components: {
       UiChart: defineAsyncComponent({
         loader: () => import('@/components/ui/UiChart.vue'),
-        loadingComponent: UiGalaxyLoader
-      })
+        loadingComponent: UiGalaxyLoader,
+      }),
     },
   })
 </script>

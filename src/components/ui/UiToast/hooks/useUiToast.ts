@@ -12,18 +12,18 @@ export const useUiToast = createSharedComposable(() => {
   })
   const isShown = ref(false)
 
-  const show = (toastState:UiToastProps) => {
+  const show = (toastState: UiToastProps) => {
     state.value = { ...toastState, id: state.value.id + 1 }
     isShown.value = true
   }
 
-  const success = (props:Omit<UiToastProps, 'type'>) => {
+  const success = (props: Omit<UiToastProps, 'type'>) => {
     show({ ...props, type: UiToastType.SUCCESS })
   }
-  const info = (props:Omit<UiToastProps, 'type'>) => {
+  const info = (props: Omit<UiToastProps, 'type'>) => {
     show({ ...props, type: UiToastType.INFO })
   }
-  const error= (props:Omit<UiToastProps, 'type'>) => {
+  const error = (props: Omit<UiToastProps, 'type'>) => {
     show({ ...props, type: UiToastType.ERROR })
   }
 
