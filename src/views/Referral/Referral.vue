@@ -89,6 +89,7 @@
 
 <script lang="ts">
   import { defineComponent, watch } from 'vue'
+  import { useHead } from '@vueuse/head'
   import { useBreakpoints, useToggle } from '@vueuse/core'
   import ConnectWalletPlug from '@/components/ConnectWallet/ConnectWalletPlug.vue'
   import UiButton from '@/components/ui/UiButton.vue'
@@ -107,6 +108,16 @@
 
   export default defineComponent({
     setup() {
+      useHead({
+        title: 'SLR Referral Program',
+        meta: [
+          {
+            name: 'description',
+            content: 'SLR Referral Program',
+          },
+        ],
+      })
+
       // Adaptive [BEGIN]
       const { isShownBackButton, isDesktopLayout, isShownBgVideo } = useBreakpoints({
         isShownBackButton: 980,

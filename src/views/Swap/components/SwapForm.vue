@@ -1,75 +1,77 @@
 <template>
   <form class="swap-form">
-    <ui-balance-input
-      label="From"
-      :value="amountIn"
-      :currencySymbol="swapParams.tokenInSymbol"
-      :balance="tokensBalances.in"
-      :iconName="tokenInIconName"
-      @input="handleTypeInput"
-    />
-
-    <div class="relative h-8">
-      <swap-side-button
-        @click="swapSide"
-        class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+    <client-only>
+      <ui-balance-input
+        label="From"
+        :value="amountIn"
+        :currencySymbol="swapParams.tokenInSymbol"
+        :balance="tokensBalances.in"
+        :iconName="tokenInIconName"
+        @input="handleTypeInput"
       />
-    </div>
 
-    <ui-balance-input
-      label="To"
-      class="mb-20"
-      :value="amountOut"
-      :currencySymbol="swapParams.tokenOutSymbol"
-      :balance="tokensBalances.out"
-      :iconName="tokenOutIconName"
-      @input="handleTypeOutput"
-    />
-
-    <trade-price
-      :swap-params="swapParams"
-      class="mb-12"
-      v-if="!isZeroAmount && !isInsufficientLiquidity"
-    />
-    <div class="mb-20">
-      <connect-wallet-plug text="Connect wallet to trade">
-        <approve-token-plug
-          :text="`Enable ${swapParams.tokenInSymbol}`"
-          :minAllowance="amountIn"
-          :tokenAddress="swapParams.tokenIn"
-          :spenderAddress="routerAddress"
-        >
-          <send-tx-button
-            @click="handleSwap"
-            :txState="swapTxState"
-            :disabled="isDissableSwapButton"
-            class="w-full"
-            size="48"
-            variant="violet"
-          >
-            {{ swapButtonText }}
-          </send-tx-button>
-        </approve-token-plug>
-      </connect-wallet-plug>
-    </div>
-
-    <div
-      class="text-12"
-      v-if="!isZeroAmount && !isInsufficientLiquidity"
-    >
-      <div class="flex justify-between items-center mb-12">
-        <div class="text-white text-opacity-60">Swap Fee</div>
-        {{ swapFeeStr }}
+      <div class="relative h-8">
+        <swap-side-button
+          @click="swapSide"
+          class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+        />
       </div>
-      <trade-info
+
+      <ui-balance-input
+        label="To"
+        class="mb-20"
+        :value="amountOut"
+        :currencySymbol="swapParams.tokenOutSymbol"
+        :balance="tokensBalances.out"
+        :iconName="tokenOutIconName"
+        @input="handleTypeOutput"
+      />
+
+      <trade-price
         :swap-params="swapParams"
         class="mb-12"
+        v-if="!isZeroAmount && !isInsufficientLiquidity"
       />
-      <price-impact
-        :price-impact="priceImpact"
-        class="mb-12"
-      />
-    </div>
+      <div class="mb-20">
+        <connect-wallet-plug text="Connect wallet to trade">
+          <approve-token-plug
+            :text="`Enable ${swapParams.tokenInSymbol}`"
+            :minAllowance="amountIn"
+            :tokenAddress="swapParams.tokenIn"
+            :spenderAddress="routerAddress"
+          >
+            <send-tx-button
+              @click="handleSwap"
+              :txState="swapTxState"
+              :disabled="isDissableSwapButton"
+              class="w-full"
+              size="48"
+              variant="violet"
+            >
+              {{ swapButtonText }}
+            </send-tx-button>
+          </approve-token-plug>
+        </connect-wallet-plug>
+      </div>
+
+      <div
+        class="text-12"
+        v-if="!isZeroAmount && !isInsufficientLiquidity"
+      >
+        <div class="flex justify-between items-center mb-12">
+          <div class="text-white text-opacity-60">Swap Fee</div>
+          {{ swapFeeStr }}
+        </div>
+        <trade-info
+          :swap-params="swapParams"
+          class="mb-12"
+        />
+        <price-impact
+          :price-impact="priceImpact"
+          class="mb-12"
+        />
+      </div>
+    </client-only>
   </form>
 </template>
 

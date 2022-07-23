@@ -87,15 +87,15 @@
   import ApproveTokenPlug from '@/components/ApproveToken/ApproveTokenPlug.vue'
   import InsufficientBalancePlug from '@/components/ApproveToken/InsufficientBalancePlug.vue'
   import ConnectWalletPlug from '@/components/ConnectWallet/ConnectWalletPlug.vue'
+  import { useSlrBalance } from '@/hooks/dapp/useSlrBalance'
+  import { useTokenAmountFormat } from '@/hooks/formatters/useTokenAmountFormat'
+  import { tokenAmountFormat } from '@/utils/strFormat/tokenAmountFormat'
   import StakingProfit from './StakingProfit.vue'
   import TimelockInput from './TimelockInput.vue'
   import SlrBalanceInput from './SlrBalanceInput.vue'
-  import { useStaker } from '@/store/hooks/useStaker'
+  import { useStakerState } from '../hooks/useStakerState'
   import { usePoolInfo } from '../hooks/usePoolInfo'
   import { useMigrateTx } from '../hooks/useMigrateTx'
-  import { useSlrBalance } from '@/store/hooks/useBalance'
-  import { useTokenAmountFormat } from '@/hooks/formatters/useTokenAmountFormat'
-  import { tokenAmountFormat } from '@/utils/strFormat/tokenAmountFormat'
 
   export default defineComponent({
     name: 'migrate-form',
@@ -109,9 +109,8 @@
       const days = ref(0)
       const amount = ref(new BigNumber(0)) as Ref<BigNumber>
       const totalAmount = computed(() => amount.value.plus(reinvestAmount.value))
-      const [stakerState, refetchStaker] = useStaker()
-      const [slrBalanceInfo, refetchSlrBalance] = useSlrBalance()
-      const slrBalance = computed(() => slrBalanceInfo.value.balance)
+      const { stakerState, refetchStaker } = useStakerState()
+      const { balance: slrBalance, refetchBalance: refetchSlrBalance } = useSlrBalance()
 
       const reinvestAmount = computed(() => {
         const { amount, reward } = stakerState.value

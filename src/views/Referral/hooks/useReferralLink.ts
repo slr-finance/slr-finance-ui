@@ -1,7 +1,7 @@
 import { HOME_DOMAIN, SHORT_IO_API_KEY } from '@/config/constants/main'
-import { REFERRER_QUERY_PARAM } from 'slr-finance-ui-share/src/libs/referral'
+import { REFERRER_QUERY_PARAM } from '@slr-finance/ui-share'
 import { useEthers } from '@/hooks/dapp/useEthers'
-import { isAddress } from 'ethers/lib/utils'
+import { isAddress } from '@ethersproject/address'
 import { computed, ref, watch } from 'vue'
 
 const getLocalestorageKey = (address: string) => `ref-link:${address}`

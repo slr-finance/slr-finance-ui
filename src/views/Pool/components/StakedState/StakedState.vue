@@ -83,7 +83,7 @@
   import UiIcon from '@/components/ui/UiIcon'
   import UiPoligon from '@/components/ui/UiPoligon.vue'
   import UiModal from '@/components/ui/UiModal.vue'
-  import { useStaker } from '@/store/hooks/useStaker'
+  import { useStakerState } from '../../hooks/useStakerState'
   import { useTokenAmountFormat } from '@/hooks/formatters/useTokenAmountFormat'
   import WithdrawalWithFeeModal from './WithdrawalWithFeeModal.vue'
   import StakeMoreModal from './StakeMoreModal.vue'
@@ -98,7 +98,7 @@
       },
     },
     setup() {
-      const [stakerState] = useStaker()
+      const { stakerState } = useStakerState()
       const stakedAmount = computed(() => stakerState.value.amount)
       const earnedAmountNumber = computed(() => stakerState.value.reward.toNumber())
       const stakedStr = useTokenAmountFormat(stakedAmount, 'SLR')

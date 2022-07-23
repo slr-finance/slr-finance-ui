@@ -46,12 +46,12 @@
 <script lang="ts">
   import SendTxButton from '@/components/Tx/SendTxButton.vue'
   import UiButton from '@/components/ui/UiButton.vue'
-  import { useStaker } from '@/store/hooks/useStaker'
+  import { useStakerState } from '../hooks/useStakerState'
   import { computed, defineComponent, toRef, watch } from 'vue'
   import { usePoolInfo } from '../hooks/usePoolInfo'
   import { useUnstake } from '../hooks/useUnstake'
-  import { useSlrBalance } from '@/store/hooks/useBalance'
-  import { usePool } from '@/store/hooks/usePool'
+  import { useSlrBalance } from '@/hooks/dapp/useSlrBalance'
+  import { usePoolState } from '../hooks/usePoolState'
   import { usePercentFormat } from '@/hooks/formatters/usePercentFormat'
   import StakerInfo from './StakerInfo.vue'
   import UiPoligon from '@/components/ui/UiPoligon.vue'
@@ -67,13 +67,13 @@
       },
     },
     setup(props) {
-      const [stakerState, refetchStaker] = useStaker()
-      const [, refetchSlrBalance] = useSlrBalance()
+      const { stakerState, refetchStaker } = useStakerState()
+      const { refetchBalance: refetchSlrBalance } = useSlrBalance()
 
       const poolId = toRef(props, 'poolId')
       const nextPoolId = computed(() => Math.min(stakerState.value.poolId + 1, MAX_POOL_ID))
       const nextPool = usePoolInfo(nextPoolId)
-      const nextPoolState = usePool(nextPoolId)
+      const [nextPoolState] = usePoolState(nextPoolId)
       const nextPoolApy = computed(() => nextPoolState.value.apy)
       const nextPoolApyStr = usePercentFormat(nextPoolApy)
 

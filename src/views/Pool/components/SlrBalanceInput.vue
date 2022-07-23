@@ -21,8 +21,7 @@
 <script lang="ts">
   import { defineComponent, PropType, ref, watch, WritableComputedRef } from 'vue'
   import UiInputBn from '@/components/ui/UiInputBn.vue'
-  import { useSlrBalance } from '@/store/hooks/useBalance'
-  import { FetchingStatus } from '@/entities/common'
+  import { useSlrBalance } from '@/hooks/dapp/useSlrBalance'
   import BigNumber from 'bignumber.js'
   import { useVModel } from '@vueuse/core'
 
@@ -35,22 +34,22 @@
       },
     },
     setup(props, { emit }) {
-      const [slrBalance] = useSlrBalance()
+      const { isFetching, balance } = useSlrBalance()
       const amount = useVModel(props, 'value', emit, { passive: true }) as WritableComputedRef<BigNumber>
       const isChanged = ref(false)
 
       watch(
-        slrBalance,
-        (balanceInfo) => {
-          if (balanceInfo.fetchStatus === FetchingStatus.FETCHED && !isChanged.value) {
-            amount.value = balanceInfo.balance
+        isFetching,
+        (isFetchingVal) => {
+          if (!isFetchingVal && !isChanged.value) {
+            amount.value = balance.value
           }
         },
         { immediate: true },
       )
 
       const handleChangeOnce = () => (isChanged.value = true)
-      const handleSetMaxAmount = () => (amount.value = slrBalance.value.balance)
+      const handleSetMaxAmount = () => (amount.value = balance.value)
 
       return {
         amount,

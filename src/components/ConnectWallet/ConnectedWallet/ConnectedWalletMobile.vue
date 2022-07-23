@@ -17,20 +17,17 @@
   import { computed, defineComponent } from 'vue'
   import { useEthers } from '@/hooks/dapp/useEthers'
   import { shortenAddress } from '@/utils/address/shortenAddress'
-  import { useSlrBalance } from '@/store/hooks/useBalance'
+  import { useSlrBalance } from '@/hooks/dapp/useSlrBalance'
   import { useTokenAmountFormat } from '@/hooks/formatters/useTokenAmountFormat'
   import UiIcon from '@/components/ui/UiIcon'
-  import { FetchingStatus } from '@/entities/common'
   import { useConnectedWalletModal } from '../hooks/useConnectedWalletModal'
 
   export default defineComponent({
     name: 'connected-wallet-mobile',
-    setup(props) {
+    setup() {
       const { address } = useEthers()
+      const { balance } = useSlrBalance()
       const trimedAddress = computed(() => shortenAddress(address.value, 2))
-      const [slrInfo] = useSlrBalance()
-      const balance = computed(() => slrInfo.value.balance)
-      const isBalanceLoaded = computed(() => slrInfo.value.fetchStatus === FetchingStatus.FETCHED)
       const balanceStr = useTokenAmountFormat(balance, 'SLR')
       const { open } = useConnectedWalletModal()
 
@@ -38,7 +35,6 @@
         trimedAddress,
         open,
         balanceStr,
-        isBalanceLoaded,
       }
     },
     components: { UiIcon },

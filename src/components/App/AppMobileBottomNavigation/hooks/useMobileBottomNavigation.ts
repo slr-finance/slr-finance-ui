@@ -7,12 +7,14 @@ const defaultState = {
 
 const size = ref({ ...defaultState })
 
-watch(size, ({ height, offset }) => {
-  if (window?.document) {
-    window.document.documentElement.style.setProperty('--app-ui-bottom-nav-height', `${height}px`)
-    window.document.documentElement.style.setProperty('--app-ui-bottom-nav-offset', `${offset}px`)
-  }
-})
+if (!import.meta.env.SSR) {
+  watch(size, ({ height, offset }) => {
+    if (window?.document) {
+      window.document.documentElement.style.setProperty('--app-ui-bottom-nav-height', `${height}px`)
+      window.document.documentElement.style.setProperty('--app-ui-bottom-nav-offset', `${offset}px`)
+    }
+  })
+}
 
 export enum HeaderType {
   DEFAULT_DESKTOP,

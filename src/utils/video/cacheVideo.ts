@@ -1,6 +1,10 @@
 const fetchPromises = new Map<string, Promise<Response>>()
 
 const checkSupportedVideoCodec = () => {
+  if (import.meta.env.SSR) {
+    return undefined
+  }
+
   const testVideoEl = document.createElement('video')
 
   const codecs = [

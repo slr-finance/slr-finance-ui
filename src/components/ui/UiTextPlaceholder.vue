@@ -1,5 +1,5 @@
 <template>
-  <span v-if="text">{{ text }}</span>
+  <span v-if="text && !isLoading">{{ text }}</span>
   <span
     v-else
     class="ui-text-placeholder"
@@ -15,6 +15,9 @@
   export default defineComponent({
     name: 'ui-text-placeholder',
     props: {
+      isLoading: {
+        type: Boolean,
+      },
       text: {
         type: [String, Object] as PropType<string | null | undefined>,
       },

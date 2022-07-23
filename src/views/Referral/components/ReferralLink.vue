@@ -21,9 +21,9 @@
 <script lang="ts">
   import { defineComponent, PropType } from 'vue'
   import { useClipboard } from '@vueuse/core'
-  import { useSingleToast } from '@/hooks/useSingleToast'
   import UiIcon from '@/components/ui/UiIcon'
   import UiTextPlaceholder from '@/components/ui/UiTextPlaceholder.vue'
+  import { useUiToast } from '@/components/ui/UiToast'
 
   export default defineComponent({
     name: 'referral-link',
@@ -36,15 +36,15 @@
     },
     setup(props) {
       const { copy } = useClipboard()
-      const { success, error } = useSingleToast()
+      const { success, error } = useUiToast()
 
       const handleCopy = () => {
         if (props.link) {
           try {
             copy(props.link)
-            success('Referral link has been copied')
+            success({ content: 'Referral link has been copied' })
           } catch (e) {
-            error(`Referral link has not been copied: ${e}`)
+            error({ content: `Referral link has not been copied: ${e}` })
           }
         }
       }

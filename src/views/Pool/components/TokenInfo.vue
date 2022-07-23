@@ -20,15 +20,16 @@
 <script lang="ts">
   import { defineComponent } from 'vue'
   import { useUsdFormat } from '@/hooks/formatters/useUsdFormat'
-  import { useSlrPrice } from '@/store/hooks/useSlrPrice'
-  import { useSlrLiquidityPrice } from '@/store/hooks/useSlrLiquidityPrice'
+  import { useSlrPrice } from '@/hooks/dapp/useSlrPrice'
   import UiPoligonButton from '@/components/ui/UiPoligonButton.vue'
 
   export default defineComponent({
     name: 'token-info',
     setup() {
-      const priceStr = useUsdFormat(useSlrPrice())
-      const slrLiquidityPriceStr = useUsdFormat(useSlrLiquidityPrice())
+      const { slrPrice, slrLiquidityPrice } = useSlrPrice()
+      const priceStr = useUsdFormat(slrPrice)
+      const slrLiquidityPriceStr = useUsdFormat(slrLiquidityPrice)
+
       return {
         priceStr,
         slrLiquidityPriceStr,

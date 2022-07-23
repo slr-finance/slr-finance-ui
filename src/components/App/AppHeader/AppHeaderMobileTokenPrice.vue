@@ -11,13 +11,14 @@
 
 <script lang="ts">
   import { defineComponent } from 'vue'
-  import { useSlrPrice } from '@/store/hooks/useSlrPrice'
+  import { useSlrPrice } from '@/hooks/dapp/useSlrPrice'
   import { useUsdFormat } from '@/hooks/formatters/useUsdFormat'
   import UiIcon from '@/components/ui/UiIcon'
 
   export default defineComponent({
     setup() {
-      const priceStr = useUsdFormat(useSlrPrice())
+      const { slrPrice } = useSlrPrice()
+      const priceStr = useUsdFormat(slrPrice)
 
       return { priceStr }
     },

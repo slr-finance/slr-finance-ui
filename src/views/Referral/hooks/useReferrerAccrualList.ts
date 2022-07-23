@@ -1,4 +1,4 @@
-import type { Result } from 'ethers/lib/utils'
+import type { Result } from '@ethersproject/abi'
 import { Ref, ref, watch } from 'vue'
 import BigNumber from 'bignumber.js'
 import dayjs from 'dayjs'
@@ -108,7 +108,9 @@ export const useReferrerAccrualList = createSharedComposable(() => {
       } catch (error) {
         resetState()
 
-        throw error
+        if (!StopController.isStoped(error)) {
+          throw error
+        }
       }
     },
     { immediate: true },

@@ -68,6 +68,7 @@ export const useWallet = () => {
     provider.value = markRaw(_provider)
     walletName.value = name
     status.value = 'connected'
+
     localStorage.setItem(LATEST_CONNECTED_PROVIDER, name)
 
     const { chainId } = NETWORK_DETAILS[CHAIN_ID]

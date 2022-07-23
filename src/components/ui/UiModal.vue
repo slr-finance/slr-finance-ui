@@ -77,9 +77,12 @@
           isOpen.value = false
         }
       }
-      useEventListener(document, 'keyup', ({ key }) => {
-        key === 'Escape' && handleClose()
-      })
+
+      if (!import.meta.env.SSR) {
+        useEventListener(document, 'keyup', ({ key }) => {
+          key === 'Escape' && handleClose()
+        })
+      }
       watch(isOpen, (isOpenVal) => {
         toggleBodyScrollLock(isOpenVal)
         if (isOpenVal && document.activeElement && (document.activeElement as HTMLElement).blur) {

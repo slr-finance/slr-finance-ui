@@ -41,7 +41,7 @@
   import UiPlaceholder from '@/components/ui/UiPlaceholder.vue'
   import UiPoligon from '@/components/ui/UiPoligon.vue'
 
-  import { useStaker } from '@/store/hooks/useStaker'
+  import { useStakerState } from '../hooks/useStakerState'
   import { usePoolInfo } from '../hooks/usePoolInfo'
   import { useTokenAmountFormat } from '@/hooks/formatters/useTokenAmountFormat'
   import { BIG_ZERO } from '@/utils/bigNumber'
@@ -55,7 +55,7 @@
       },
     },
     setup(props) {
-      const [stakerState] = useStaker()
+      const { stakerState } = useStakerState()
       const poolId = computed(() => stakerState.value.poolId)
       const stakerPool = usePoolInfo(poolId)
       const history = computed(() => {

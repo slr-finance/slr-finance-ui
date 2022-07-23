@@ -1,9 +1,9 @@
 import { ref, watch } from 'vue'
 import { computedAsync, createSharedComposable } from '@vueuse/core'
 import { constants } from 'ethers'
-import { isAddress } from 'ethers/lib/utils'
+import { isAddress } from '@ethersproject/address'
 import { AddressZero } from '@ethersproject/constants'
-import { getReferrerFromCookies } from 'slr-finance-ui-share/src/libs/referral'
+import { getReferrerFromCookies } from '@slr-finance/ui-share'
 import { useReferralContract } from '@/hooks/contracts/useReferralContract'
 import { StopController } from '@/utils/StopController'
 

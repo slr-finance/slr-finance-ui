@@ -1,20 +1,22 @@
 {
   "compilerOptions": {
-    "types": ["vite-plugin-svg-icons/client"],
-    "target": "esnext",
+    "types": ["node", "vite-plugin-svg-icons/client"],
+    "target": "es2018",
     "useDefineForClassFields": true,
-    "module": "esnext",
+    "module": "es2020",
     "moduleResolution": "node",
     "strict": true,
     "jsx": "preserve",
     "sourceMap": true,
     "resolveJsonModule": true,
+    "isolatedModules": true,
     "esModuleInterop": true,
     "lib": ["esnext", "dom"],
     "paths": {
       "@/*": ["./src/*"]
     },
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "allowSyntheticDefaultImports": true,
   },
   "exclude": ["node_modules"],
   "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"],

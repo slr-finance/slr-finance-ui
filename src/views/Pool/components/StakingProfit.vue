@@ -12,7 +12,7 @@
   import { useUsdPrice } from '@/hooks/useUsdPrice'
   import { useTokenAmountFormat } from '@/hooks/formatters/useTokenAmountFormat'
   import { useUsdFormat } from '@/hooks/formatters/useUsdFormat'
-  import { usePool } from '@/store/hooks/usePool'
+  import { usePoolState } from '../hooks/usePoolState'
   import { useProfit } from '../hooks/useProfit'
   import { usePercentFormat } from '@/hooks/formatters/usePercentFormat'
   import BigNumber from 'bignumber.js'
@@ -34,7 +34,7 @@
       },
     },
     setup(props) {
-      const poolState = usePool(toRef(props, 'poolId'))
+      const [poolState] = usePoolState(toRef(props, 'poolId'))
       const amount = toRef(props, 'amount')
 
       const days = toRef(props, 'days')

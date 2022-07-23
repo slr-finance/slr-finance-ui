@@ -1,59 +1,41 @@
+import { ViteSSG } from 'vite-ssg'
+import { createHead } from '@vueuse/head'
 import 'virtual:svg-icons-register'
 import '@/index.postcss'
 import '@/components/ui/index.postcss'
-import { createApp, nextTick } from 'vue'
-import Toast, { POSITION } from 'vue-toastification'
-import { initReferral } from 'slr-finance-ui-share/src/libs/referral'
-import 'vue-toastification/dist/index.css'
-import { router } from '@/router'
+import { nextTick } from 'vue'
+import { initReferral } from '@slr-finance/ui-share'
+import { routerOptions } from '@/router'
 import App from '@/App.vue'
-import { store } from '@/store/store'
 
 // Referral [BEGIN]
-initReferral()
+if (!import.meta.env.SSR) {
+  initReferral()
+}
 // Referral [END]
 
 // Mount app [BEGIN]
-const app = createApp(App).use(router).use(Toast, { position: POSITION.TOP_LEFT })
+export const createApp = ViteSSG(
+  // the root component
+  App,
+  // vue-router options
+  routerOptions,
+  // function to have custom setups
+  ({ app, router, routes, isClient, initialState }) => {
+    // install plugins etc.
+    const head = createHead()
 
-app.mount('#app')
+    app.use(head)
+  },
+  )
 // Mount app [END]
 
-const fetchPools = async () => {
-  const { stakingModule } = await import('@/store/modules/stakingModule')
-
-  // If the module is already registered, then just call the action.
-  // If not, add a registered listener and register the module
-  if (stakingModule.hasModule()) {
-    stakingModule.actions.fetchAll()
-  } else {
-    stakingModule.once('registered', stakingModule.actions.fetchAll)
-    stakingModule.register(store)
-  }
+if (!import.meta.env.SSR) {
+  nextTick(() => {
+    // Cache video [BEGIN]
+    setTimeout(() => {
+      import('@/utils/video/prefetchPoolsVideo').then(({ prefetchPoolsVideo }) => prefetchPoolsVideo())
+    }, 1000)
+    // Cache video [END]
+  })
 }
-
-const fetchSlrPrice = async () => {
-  const { slrModule } = await import('@/store/modules/slrModule')
-
-  // If the module is already registered, then just call the action.
-  // If not, add a registered listener and register the module
-  if (slrModule.hasModule()) {
-    slrModule.actions.fetchPrice()
-  } else {
-    slrModule.once('registered', slrModule.actions.fetchPrice)
-    slrModule.register(store)
-  }
-}
-
-nextTick(() => {
-  // Fetch pools and slr price [BEGIN]
-  fetchPools()
-  fetchSlrPrice()
-  // Fetch pools and slr price [END]
-
-  // Cache video [BEGIN]
-  setTimeout(() => {
-    import('@/utils/video/prefetchPoolsVideo').then(({ prefetchPoolsVideo }) => prefetchPoolsVideo())
-  }, 1000)
-  // Cache video [END]
-})

@@ -13,7 +13,7 @@
 
 <script lang="ts">
   import { useTokenAmountFormat } from '@/hooks/formatters/useTokenAmountFormat'
-  import { useStaker } from '@/store/hooks/useStaker'
+  import { useStakerState } from '../hooks/useStakerState'
   import { computed, defineComponent } from 'vue'
 
   export default defineComponent({
@@ -25,7 +25,7 @@
       },
     },
     setup() {
-      const [stakerState] = useStaker()
+      const { stakerState } = useStakerState()
       const stakedAmount = computed(() => stakerState.value.amount)
       const earnedAmount = computed(() => stakerState.value.reward)
       const stakedStr = useTokenAmountFormat(stakedAmount, 'SLR')
