@@ -1,4 +1,5 @@
 import path from 'path'
+import poolsConfig from './config/poolsConfig.json'
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
@@ -71,9 +72,18 @@ export default defineConfig({
     concurrency: 20,
     script: 'async',
     formatting: 'minify',
+    includedRoutes(paths, routes) {
+      // use original route records
+      return routes.flatMap((route) => {
+        return route.name === 'pool'
+          ? poolsConfig.pools.map(({ name }) => `/pool/${name.toLocaleLowerCase()}`)
+          : route.path
+      })
+    },
     onFinished() {
       generateSitemap({
         hostname: 'https://slr.finance/',
+        dynamicRoutes: poolsConfig.pools.map(({ name }) => `/pool/${name.toLocaleLowerCase()}`),
       })
     },
   },
