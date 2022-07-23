@@ -4,7 +4,7 @@ import { usePoolsState } from './usePoolsState'
 import BigNumber from 'bignumber.js'
 
 export const useTotalStakedInAllPools = (): ComputedRef<BigNumber> => {
-  const pools = usePoolsState()
+  const { pools } = usePoolsState()
   const totalStaked = computed(() =>
     Object.values(pools.value).reduce((sum, pool) => sum.plus(pool.totalStaked), BIG_ZERO),
   )

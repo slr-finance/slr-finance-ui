@@ -1,7 +1,7 @@
-import type { Ref } from 'vue'
+import { readonly, Ref, ref } from 'vue'
 import type BigNumber from 'bignumber.js'
 import { BIG_ZERO, ethersToBigNumber, parseWei } from '@/utils/bigNumber'
-import { computedAsync, createSharedComposable } from '@vueuse/core'
+import { createSharedComposable } from '@vueuse/core'
 import { getApy } from '@/utils/math/getApy'
 import { Call, multicall } from '@/utils/contracts/multicall'
 import { POOLS_INFO } from '@/config/constants/Pools'
@@ -31,53 +31,65 @@ const getDefaultPoolState = (poolId: number): PoolState => ({
   totalStaked: BIG_ZERO,
   id: poolId,
 })
+
 type PoolsStates = Record<number, PoolState>
-type UsePoolReturns = Ref<PoolsStates>
 
-export const usePoolsState = createSharedComposable((): UsePoolReturns => {
-  const poolsStates = computedAsync<PoolsStates>(
-    async () => {
-      const calls: Call[] = POOLS_INFO
-        .map((poolId) => [
-          {
-            address: contractsAddresses.StakingService,
-            name: 'state',
-            params: [poolId],
-          },
-        ])
-        .flat(1)
+const getDefaultPoolsStates = () => POOLS_INFO.reduce(
+  (acc, { id }) => {
+    acc[id] = getDefaultPoolState(id)
 
-      const [response] = await multicall(Staking__factory.abi, calls)
+    return acc
+  },
+  {} as PoolsStates
+)
 
-      return POOLS_INFO.reduce((poolsAcc, _, index) => {
-        const poolState = response[index]
-        const apr = ethersToBigNumber(poolState.apr).div(1000000)
-        const withdrawalFee = ethersToBigNumber(poolState.withdrawalFees).div(1000000)
-        
-        poolsAcc[poolState.id] = {
-          apr: apr,
-          apy: getApy(apr),
-          maxDays: poolState.maxLock,
-          minDays: poolState.minLock,
-          id: poolState.id,
-          withdrawalFee: withdrawalFee,
-          totalStaked: parseWei(poolState.totalStaked, 18),
-          isDone: false,
-          isActive: true,
-        }
+export const usePoolsState = createSharedComposable(() => {
+  const isFetching = ref(false)
+  const pools = ref(getDefaultPoolsStates())
 
-        return poolsAcc
-      }, {} as PoolsStates)
-    },
-    POOLS_INFO.reduce(
-      (acc, { id }) => {
-        acc[id] = getDefaultPoolState(id)
+  const refetchPools = async () => {
+    isFetching.value = true
 
-        return acc
-      },
-      {} as PoolsStates
-    ),
-  )
+    const calls: Call[] = POOLS_INFO
+      .map(({id}) => [
+        {
+          address: contractsAddresses.StakingService,
+          name: 'state',
+          params: [id],
+        },
+      ])
+      .flat(1)
 
-  return poolsStates
+    const [response] = await multicall(Staking__factory.abi, calls)
+
+    pools.value = POOLS_INFO.reduce((poolsAcc, _, index) => {
+      const poolState = response[index]
+      const apr = ethersToBigNumber(poolState.apr).div(1000000)
+      const withdrawalFee = ethersToBigNumber(poolState.withdrawalFees).div(1000000)
+      
+      poolsAcc[poolState.id] = {
+        apr: apr,
+        apy: getApy(apr),
+        maxDays: poolState.maxLock,
+        minDays: poolState.minLock,
+        id: poolState.id,
+        withdrawalFee: withdrawalFee,
+        totalStaked: parseWei(poolState.totalStaked, 18),
+        isDone: false,
+        isActive: true,
+      }
+
+      return poolsAcc
+    }, {} as PoolsStates)
+
+    isFetching.value = false
+  }
+
+  refetchPools()
+
+  return {
+    pools: readonly(pools) as Readonly<Ref<PoolsStates>>,
+    isFetching: readonly(isFetching),
+    refetchPools,
+  }
 })

@@ -16,7 +16,14 @@
           v-if="prevPoolName"
           :to="prevPoolRoute"
         >
-          <div>{{ prevPoolName }} {{ prevApyStr }}</div>
+          <div class="flex-1 mr-4 flex justify-center">
+            {{ prevPoolName }}
+            <ui-text-placeholder
+              class="flex-1 ml-4"
+              :text="prevApyStr"
+              :is-loading="isFetching"
+            />
+          </div>
           <ui-icon
             name="arrow-pixel-to"
             class="mr-8"
@@ -29,7 +36,14 @@
           v-if="nextPoolName"
           :to="nextPoolRoute"
         >
-          <div>{{ nextPoolName }} {{ nextApyStr }}</div>
+          <div class="flex-1 mr-4 flex justify-center">
+            {{ nextPoolName }} 
+            <ui-text-placeholder
+              class="flex-1 ml-4"
+              :text="nextApyStr"
+              :is-loading="isFetching"
+            />
+          </div>
           <ui-icon
             name="arrow-pixel-to"
             class="mr-8"
@@ -46,7 +60,9 @@
   import { MAX_POOL_ID, POOLS_INFO } from '@/config/constants/Pools'
   import UiButton from '@/components/ui/UiButton.vue'
   import UiIcon from '@/components/ui/UiIcon'
+  import UiTextPlaceholder from '@/components/ui/UiTextPlaceholder.vue'
   import { usePoolState } from '../hooks/usePoolState'
+  import { usePoolsState } from '../hooks/usePoolsState'
   import { BIG_ZERO } from '@/utils/bigNumber'
   import { usePercentFormat } from '@/hooks/formatters/usePercentFormat'
 
@@ -76,6 +92,7 @@
       const nextPoolName = computed(() => nextPoolInfo.value?.name)
       const prevPoolRoute = computed(() => ({ name: prevPoolInfo.value?.routeName }))
       const nextPoolRoute = computed(() => ({ name: nextPoolInfo.value?.routeName }))
+      const { isFetching } = usePoolsState()
       const [prevPoolData] = usePoolState(prevPoolId)
       const [nextPoolData] = usePoolState(nextPoolId)
       const prevApy = computed(() => prevPoolData.value?.apy ?? BIG_ZERO)
@@ -93,12 +110,14 @@
         prevApyStr,
         nextApyStr,
         classList,
+        isFetching,
       }
     },
     components: {
-      UiButton,
-      UiIcon,
-    },
+    UiButton,
+    UiIcon,
+    UiTextPlaceholder,
+},
   })
 </script>
 

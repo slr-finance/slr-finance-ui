@@ -82,7 +82,6 @@
 </template>
 
 <script lang="ts">
-  import { FetchingStatus } from '@/entities/common'
   import { computed, defineComponent, toRef } from 'vue'
   import { useEthers } from '@/hooks/dapp/useEthers'
   import { usePoolState } from './hooks/usePoolState'
@@ -116,7 +115,7 @@
       const apyStr = computed(() => {
         const poolStateVal = poolState.value
 
-        return !isPoolFetching ? percentFormat(poolStateVal.apy) : ''
+        return !isPoolFetching.value ? percentFormat(poolStateVal.apy) : null
       })
       const poolInfo = usePoolInfo(poolId)
       const { isActivated } = useEthers()

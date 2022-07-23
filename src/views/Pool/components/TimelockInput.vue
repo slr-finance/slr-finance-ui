@@ -37,7 +37,7 @@
       watch(
         poolState,
         (poolStateValue) => {
-          if (!isPoolFetching) {
+          if (!isPoolFetching.value) {
             days.value = poolStateValue.maxDays
             isFetched.value = true
           } else {

@@ -5,8 +5,8 @@ import { computed, ComputedRef, ref, Ref, unref } from 'vue'
 type UsePoolReturns = [ComputedRef<PoolState>, Ref<boolean>]
 
 export const usePoolState = (poolId: MaybeRef<number>): UsePoolReturns => {
-  const pools = usePoolsState()
+  const {pools, isFetching} = usePoolsState()
   const poolState = computed(() => pools.value[unref(poolId)])
 
-  return [poolState, ref(false)]
+  return [ poolState, isFetching ]
 }
