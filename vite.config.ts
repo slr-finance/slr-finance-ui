@@ -82,7 +82,7 @@ export default defineConfig({
     },
     onFinished() {
       generateSitemap({
-        hostname: 'https://slr.finance/',
+        hostname: 'https://app.slr.finance/',
         dynamicRoutes: poolsConfig.pools.map(({ name }) => `/pool/${name.toLocaleLowerCase()}`),
       })
     },
