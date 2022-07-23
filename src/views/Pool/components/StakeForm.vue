@@ -61,6 +61,7 @@
   import TimelockInput from './TimelockInput.vue'
   import contractsAddresses from '@/config/constants/contractsAddresses'
   import { useStakerState } from '../hooks/useStakerState'
+import { usePoolsState } from '../hooks/usePoolsState'
 
   export default defineComponent({
     name: 'stake-form',
@@ -73,6 +74,7 @@
     setup(props) {
       const [poolState] = usePoolState(toRef(props, 'poolId'))
       const { refetchStaker } = useStakerState()
+      const { refetchPools } = usePoolsState()
 
       const { balance: slrBalance, refetchBalance } = useSlrBalance()
       const poolId = computed(() => poolState.value.id)
@@ -85,7 +87,7 @@
         return `${daysValue} days`
       })
 
-      const refetchBalanceAndStakerState = () => Promise.all([refetchStaker(), refetchBalance()])
+      const refetchBalanceAndStakerState = () => Promise.all([refetchStaker(), refetchBalance(), refetchPools()])
       const [handleStake, stakeTxState] = useStakeTx({ poolId, amount, days })
       watch(stakeTxState, ({ isSuccess }) => isSuccess && refetchBalanceAndStakerState())
 
