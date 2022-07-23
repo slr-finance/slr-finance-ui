@@ -72,13 +72,13 @@
   import UiModal from '@/components/ui/UiModal.vue'
   import UiIcon from '@/components/ui/UiIcon'
   import UiButton from '@/components/ui/UiButton.vue'
+  import { useUiToast } from '@/components/ui/UiToast'
   import { shortenAddress } from '@/utils/address/shortenAddress'
   import { useEthers } from '@/hooks/dapp/useEthers'
-  import { useSlrBalance } from '@/store/hooks/useBalance'
+  import { useSlrBalance } from '@/hooks/dapp/useSlrBalance'
   import { useWallet } from '@/hooks/dapp/useWallet'
   import { useTokenAmountFormat } from '@/hooks/formatters/useTokenAmountFormat'
   import { useClipboard } from '@vueuse/core'
-  import { useSingleToast } from '@/hooks/useSingleToast'
   import { useBscScanAddress } from '@/hooks/useBscScanAddress'
 
   export default defineComponent({
@@ -87,22 +87,21 @@
       const { isOpen, close } = useConnectedWalletModal()
       const { address, balance: bnbBalance } = useEthers()
       const trimedAddress = computed(() => shortenAddress(address.value, 4))
-      const [slrInfo] = useSlrBalance()
-      const slrBalance = computed(() => slrInfo.value.balance)
+      const { balance: slrBalance } = useSlrBalance()
       const { disconnect, walletName, walletIconName } = useWallet()
       const slrBalanceStr = useTokenAmountFormat(slrBalance)
       const bnbBalanceStr = useTokenAmountFormat(bnbBalance)
       const bscScanAddress = useBscScanAddress(address)
 
       const { copy } = useClipboard()
-      const { success, error } = useSingleToast()
+      const { success, error } = useUiToast()
 
       const handleCopy = () => {
         try {
           copy(unref(address))
-          success('Address has been copied')
+          success({ content: 'Address has been copied' })
         } catch (e) {
-          error(`Address has not been copied: ${e}`)
+          error({ content: `Address has not been copied: ${e}` })
         }
       }
 

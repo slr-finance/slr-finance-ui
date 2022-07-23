@@ -22,7 +22,7 @@
         </p>
 
         <ui-galaxy-loader
-          v-if="!isStakerLoaded"
+          v-if="isFetching && isActivated"
           class="flex-1 py-48"
         />
 
@@ -85,8 +85,8 @@
   import { FetchingStatus } from '@/entities/common'
   import { computed, defineComponent, toRef } from 'vue'
   import { useEthers } from '@/hooks/dapp/useEthers'
-  import { usePool } from '@/store/hooks/usePool'
-  import { useStaker } from '@/store/hooks/useStaker'
+  import { usePoolState } from './hooks/usePoolState'
+  import { useStakerState } from './hooks/useStakerState'
   import UiGalaxyLoader from '@/components/ui/UiGalaxyLoader.vue'
   import { usePoolInfo } from './hooks/usePoolInfo'
   import StakingFinished from './components/StakingFinished.vue'
@@ -112,18 +112,15 @@
     },
     setup(props) {
       const poolId = toRef(props, 'poolId')
-      const poolState = usePool(poolId)
+      const [poolState, isPoolFetching] = usePoolState(poolId)
       const apyStr = computed(() => {
         const poolStateVal = poolState.value
 
-        return poolStateVal.fetchStatus === FetchingStatus.FETCHED ? percentFormat(poolStateVal.apy) : ''
+        return !isPoolFetching ? percentFormat(poolStateVal.apy) : ''
       })
       const poolInfo = usePoolInfo(poolId)
       const { isActivated } = useEthers()
-      const [stakerState] = useStaker()
-      const isStakerLoaded = computed(
-        () => stakerState.value.fetchStatus === FetchingStatus.FETCHED || !isActivated.value,
-      )
+      const { stakerState, isFetching } = useStakerState()
 
       const isCompletedPool = computed(() => poolState.value.id < stakerState.value.poolId)
       const isCurrentStakerPool = computed(
@@ -158,7 +155,7 @@
         poolState,
         stakerState,
         isCurrentStakerPoolFinished,
-        isStakerLoaded,
+        isFetching,
       }
     },
     components: {

@@ -1,6 +1,6 @@
 import { BigNumber as BigNumberEthers, ethers } from 'ethers'
 import { getMulticallContract } from '@/utils/contracts/getMulticallContract'
-import { Result } from 'ethers/lib/utils'
+import { Result } from '@ethersproject/abi'
 import { Multicall } from '@/contracts'
 
 export type MultiCallResponse<T> = T | null

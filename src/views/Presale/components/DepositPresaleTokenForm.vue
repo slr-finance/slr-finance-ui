@@ -1,5 +1,5 @@
 <template>
-  <div v-if="isFetchedPresaleSlrBalance">
+  <div v-if="!isFetchingPresaleSlrBalance">
     <div>You have {{ presaleSlrAmountStr }}</div>
 
     <send-tx-button
@@ -18,9 +18,9 @@
   import SendTxButton from '@/components/Tx/SendTxButton.vue'
   import { useBurnPresaleToken } from '../hooks/useBurnPresaleToken'
   import { computed, defineComponent, watch } from 'vue'
-  import { useBalance } from '@/store/hooks/useBalance'
+  import { useBalance } from '@/hooks/dapp/useBalance'
+  import { useSlrBalance } from '@/hooks/dapp/useSlrBalance'
   import contractsAddresses from '@/config/constants/contractsAddresses'
-  import { FetchingStatus } from '@/entities/common'
   import { useTokenAmountFormat } from '@/hooks/formatters/useTokenAmountFormat'
   import UiGalaxyLoader from '@/components/ui/UiGalaxyLoader.vue'
 
@@ -29,20 +29,18 @@
     name: 'deposit-presale-token-form',
     setup() {
       const [handleDeposit, depositPresaleTokenTxState] = useBurnPresaleToken()
-      const [presaleTokenInfo, handleFetchPresaleBalance] = useBalance(contractsAddresses.PresaleService)
-      const [, handleFetchSlrBalance] = useBalance(contractsAddresses.SolarToken)
+      const { isFetching: isFetchingPresaleSlrBalance, refetchBalance: refetchPresaleBalance, balance: presaleTokenBalance } = useBalance(contractsAddresses.PresaleService)
+      const { refetchBalance: refetchSlrBalance} = useSlrBalance()
       const isDisabled = computed(
-        () => presaleTokenInfo.value.balance.lte(0) || presaleTokenInfo.value.fetchStatus !== FetchingStatus.FETCHED,
+        () => presaleTokenBalance.value.lte(0) || isFetchingPresaleSlrBalance.value,
       )
 
-      const presaleSlrAmount = computed(() => presaleTokenInfo.value.balance)
-      const isFetchedPresaleSlrBalance = computed(() => presaleTokenInfo.value.fetchStatus == FetchingStatus.FETCHED)
-      const presaleSlrAmountStr = useTokenAmountFormat(presaleSlrAmount, 'PresaleSLR')
+      const presaleSlrAmountStr = useTokenAmountFormat(presaleTokenBalance, 'PresaleSLR')
 
       watch(depositPresaleTokenTxState, () => {
         if (depositPresaleTokenTxState.value.isSuccess) {
-          handleFetchSlrBalance()
-          handleFetchPresaleBalance()
+          refetchSlrBalance()
+          refetchPresaleBalance()
         }
       })
 
@@ -50,7 +48,7 @@
         handleDeposit,
         depositPresaleTokenTxState,
         isDisabled,
-        isFetchedPresaleSlrBalance,
+        isFetchingPresaleSlrBalance,
         presaleSlrAmountStr,
       }
     },

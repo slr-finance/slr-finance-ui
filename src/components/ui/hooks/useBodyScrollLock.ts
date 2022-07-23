@@ -5,7 +5,7 @@ import { useScrollLock } from '@vueuse/core'
  * Поэтому используется такая обертка
  */
 
-const isLocked = useScrollLock(document.body)
+const isLocked = useScrollLock(import.meta.env.SSR ? null : document.body)
 
 export const useBodyScrollLock = () => {
   return (value: boolean) => {

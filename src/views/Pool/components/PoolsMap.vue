@@ -37,8 +37,8 @@
 <script lang="ts">
   import { computed, defineComponent } from 'vue'
   import UiIcon from '@/components/ui/UiIcon'
-  import { usePools } from '@/store/hooks/usePools'
-  import { useStaker } from '@/store/hooks/useStaker'
+  import { usePoolsState } from '../hooks/usePoolsState'
+  import { useStakerState } from '../hooks/useStakerState'
 
   const poolsPosition = [
     { id: 1, x: 356.5, y: 62, radius: 12 },
@@ -56,7 +56,7 @@
     name: 'pools-list',
     inheritAttrs: true,
     setup() {
-      const poolsStates = usePools()
+      const poolsStates = usePoolsState()
       const pools = computed(() => {
         return poolsPosition.map(({ id, ...poolPosition }) => {
           const apyNum = poolsStates.value[id].apy?.toNumber() ?? 0
@@ -73,7 +73,7 @@
           }
         })
       })
-      const [stakerState] = useStaker()
+      const { stakerState } = useStakerState()
       const stakerPoolId = computed(() => stakerState.value.poolId)
       return { pools, stakerPoolId }
     },

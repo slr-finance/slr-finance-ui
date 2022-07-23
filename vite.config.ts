@@ -3,15 +3,26 @@ import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import { visualizer } from 'rollup-plugin-visualizer'
+import { esbuildCommonjs, viteCommonjs } from '@originjs/vite-plugin-commonjs'
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  optimizeDeps:{
+    esbuildOptions:{
+      plugins:[
+        esbuildCommonjs(),
+      ]
+    }
+  },
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
     },
   },
   plugins: [
+    viteCommonjs({
+      skipPreBuild: false,
+    }),
     vue(),
     createSvgIconsPlugin({
       // Specify the icon folder to be cached
@@ -30,18 +41,18 @@ export default defineConfig({
     }),
   ],
   build: {
-    minify: 'terser',
-    terserOptions: {
-      ecma: 2020,
-      safari10: true,
-      ie8: false,
-      module: false,
-      toplevel: true,
-      compress: {
-        ecma: 2020,
-        passes: 4,
-      },
-    },
+    // minify: 'terser',
+    // terserOptions: {
+    //   ecma: 2020,
+    //   safari10: true,
+    //   ie8: false,
+    //   module: false,
+    //   toplevel: true,
+    //   compress: {
+    //     ecma: 2020,
+    //     passes: 4,
+    //   },
+    // },
     rollupOptions: {
       plugins: [
         visualizer((opts) => {
@@ -53,4 +64,13 @@ export default defineConfig({
       transformMixedEsModules: true,
     },
   },
+  // @ts-ignore
+  ssgOptions: {
+    format: 'esm',
+    dirStyle: 'flat',
+    rootContainerId: 'app',
+    concurrency: 20,
+    script: 'async',
+    formatting: 'prettify',
+  }
 })

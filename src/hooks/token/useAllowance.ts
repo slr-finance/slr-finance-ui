@@ -58,7 +58,9 @@ export const useAllowance = (tokenAddress: MaybeRef<string>, spender: MaybeRef<s
       } catch (error) {
         resetState()
 
-        throw error
+        if (!StopController.isStoped(error)) {
+          throw error
+        }
       }
     },
     { immediate: true },

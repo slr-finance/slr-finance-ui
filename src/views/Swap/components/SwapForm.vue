@@ -1,5 +1,6 @@
 <template>
   <form class="swap-form">
+    <client-only>
     <ui-balance-input
       label="From"
       :value="amountIn"
@@ -70,6 +71,7 @@
         class="mb-12"
       />
     </div>
+    </client-only>
   </form>
 </template>
 

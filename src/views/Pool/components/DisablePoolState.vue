@@ -22,7 +22,7 @@
   import { computed, defineComponent, toRef } from 'vue'
   import UiButton from '@/components/ui/UiButton.vue'
   import UiPlaceholder from '@/components/ui/UiPlaceholder.vue'
-  import { useStaker } from '@/store/hooks/useStaker'
+  import { useStakerState } from '../hooks/useStakerState'
   import { usePoolInfo } from '../hooks/usePoolInfo'
 
   export default defineComponent({
@@ -35,7 +35,7 @@
     },
     setup(props) {
       const poolInfo = usePoolInfo(toRef(props, 'poolId'))
-      const [stakerState] = useStaker()
+      const { stakerState } = useStakerState()
       const stakerPoolId = computed(() => {
         const { poolId } = stakerState.value
 

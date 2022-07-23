@@ -1,5 +1,5 @@
 import { computed } from 'vue'
-import { getReferrerFromCookies } from 'slr-finance-ui-share/src/libs/referral'
+import { getReferrerFromCookies } from '@slr-finance/ui-share'
 import { useSendTx } from '@/hooks/useSendTx'
 import { usePresaleContract } from '@/hooks/contracts/usePresaleContract'
 

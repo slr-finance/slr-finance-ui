@@ -55,14 +55,14 @@
   import { useVModel } from '@vueuse/core'
   import { POOLS_INFO } from '@/config/constants/Pools'
   import { usePercentFormat } from '@/hooks/formatters/usePercentFormat'
-  import { usePool } from '@/store/hooks/usePool'
-  import { useStaker } from '@/store/hooks/useStaker'
-  import { useSlrBalance } from '@/store/hooks/useBalance'
+  import { useSlrBalance } from '@/hooks/dapp/useSlrBalance'
   import { useTokenAmountFormat } from '@/hooks/formatters/useTokenAmountFormat'
   import SendTxButton from '@/components/Tx/SendTxButton.vue'
   import UiPlaceholder from '@/components/ui/UiPlaceholder.vue'
   import UiIcon from '@/components/ui/UiIcon'
   import UiModal from '@/components/ui/UiModal.vue'
+  import { usePoolState } from '../../hooks/usePoolState'
+  import { useStakerState } from '../../hooks/useStakerState'
   import { useUnstakeWithFee } from '../../hooks/useUnstakeWithFee'
 
   export default defineComponent({
@@ -76,10 +76,10 @@
     emits: ['update:isOpen'],
     setup(props, { emit }) {
       const isOpenModal = useVModel(props, 'isOpen', emit)
-      const [stakerState, refetchStaker] = useStaker()
-      const [, refetchBalance] = useSlrBalance()
+      const { stakerState, refetchStaker } = useStakerState()
+      const { refetchBalance } = useSlrBalance()
       const poolId = computed(() => stakerState.value.poolId)
-      const poolState = usePool(poolId)
+      const [poolState] = usePoolState(poolId)
       const stakedAndEarned = computed(() => {
         const { amount, reward } = stakerState.value
 

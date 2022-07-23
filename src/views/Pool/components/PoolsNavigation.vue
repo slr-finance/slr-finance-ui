@@ -46,7 +46,7 @@
   import { MAX_POOL_ID, POOLS_INFO } from '@/config/constants/Pools'
   import UiButton from '@/components/ui/UiButton.vue'
   import UiIcon from '@/components/ui/UiIcon'
-  import { usePool } from '@/store/hooks/usePool'
+  import { usePoolState } from '../hooks/usePoolState'
   import { BIG_ZERO } from '@/utils/bigNumber'
   import { usePercentFormat } from '@/hooks/formatters/usePercentFormat'
 
@@ -76,8 +76,8 @@
       const nextPoolName = computed(() => nextPoolInfo.value?.name)
       const prevPoolRoute = computed(() => ({ name: prevPoolInfo.value?.routeName }))
       const nextPoolRoute = computed(() => ({ name: nextPoolInfo.value?.routeName }))
-      const prevPoolData = usePool(prevPoolId)
-      const nextPoolData = usePool(nextPoolId)
+      const [prevPoolData] = usePoolState(prevPoolId)
+      const [nextPoolData] = usePoolState(nextPoolId)
       const prevApy = computed(() => prevPoolData.value?.apy ?? BIG_ZERO)
       const nextApy = computed(() => nextPoolData.value?.apy ?? BIG_ZERO)
       const prevApyStr = usePercentFormat(prevApy)

@@ -14,10 +14,9 @@
   import { shortenAddress } from '@/utils/address/shortenAddress'
   import UiButton from '@/components/ui/UiButton.vue'
   import ConnectWalletPlug from './ConnectWalletPlug.vue'
-  import { useSlrBalance } from '@/store/hooks/useBalance'
+  import { useSlrBalance } from '@/hooks/dapp/useSlrBalance'
   import { useTokenAmountFormat } from '@/hooks/formatters/useTokenAmountFormat'
   import UiIcon from '@/components/ui/UiIcon'
-  import { FetchingStatus } from '@/entities/common'
   import { useConnectedWalletModal } from './hooks/useConnectedWalletModal'
   import ConnectedWalletModal from './ConnectedWalletModal/ConnectedWalletModal.vue'
   import ConnectedWalletAsync from './ConnectedWallet/ConnectedWalletAsync'
@@ -35,9 +34,7 @@
       const { address, chainId } = useEthers()
       const trimedAddress = computed(() => shortenAddress(address.value, props.isMobile ? 2 : 4))
       const isCorrectChainId = computed(() => chainId.value === 97)
-      const [slrInfo] = useSlrBalance()
-      const balance = computed(() => slrInfo.value.balance)
-      const isBalanceLoaded = computed(() => slrInfo.value.fetchStatus === FetchingStatus.FETCHED)
+      const { balance } = useSlrBalance()
       const balanceStr = useTokenAmountFormat(balance, 'SLR')
       const buttonSize = computed(() => (props.isMobile ? 36 : 48))
       const connectWalletText = computed(() => (props.isMobile ? 'Connect' : 'Connect Wallet'))
@@ -49,7 +46,6 @@
         open,
         balanceStr,
         buttonSize,
-        isBalanceLoaded,
         connectWalletText,
       }
     },

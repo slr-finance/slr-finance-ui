@@ -40,7 +40,9 @@ export const useWhiteList = createSharedComposable((): UseWhiteListReturns => {
       } catch (error) {
         resetState()
 
-        throw error
+        if (!StopController.isStoped(error)) {
+          throw error
+        }
       }
     },
     { immediate: true },

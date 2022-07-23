@@ -1,6 +1,10 @@
 const fetchPromises = new Map<string, Promise<Response>>()
 
 const checkSupportedVideoCodec = () => {
+  if (import.meta.env.SSR) {
+    return undefined
+  }
+
   const testVideoEl = document.createElement('video')
 
   const codecs = [
@@ -28,7 +32,7 @@ const checkSupportedVideoCodec = () => {
 
 export const codec = checkSupportedVideoCodec()
 
-export const prefetchVideo = async (folderPath: string) => {
+export const prefetchVideo = async (folderPath: string) => {  
   if (!codec) {
     throw new Error()
   }

@@ -1,5 +1,5 @@
 import { MaybeRef } from '@vueuse/core'
-import { isAddress } from 'ethers/lib/utils'
+import { isAddress } from '@ethersproject/address'
 import { Ref, ref, unref, watch } from 'vue'
 import { useErc20Contract } from '@/hooks/contracts/useErc20Contract'
 

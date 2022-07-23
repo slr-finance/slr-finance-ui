@@ -52,10 +52,9 @@
   import { defineComponent } from 'vue'
   import { useTokenAmountFormat } from '@/hooks/formatters/useTokenAmountFormat'
   import { useUsdFormat } from '@/hooks/formatters/useUsdFormat'
-  import { useSlrLiquidityPrice } from '@/store/hooks/useSlrLiquidityPrice'
-  import { useSlrPrice } from '@/store/hooks/useSlrPrice'
+  import { useSlrPrice } from '@/hooks/dapp/useSlrPrice'
   import { useMilkyWayInfo } from './hooks/useMilkyWayInfo'
-  import { useTotalStakedInAllPools } from '@/store/hooks/useTotalStakedInAllPools'
+  import { useTotalStakedInAllPools } from '@/views/Pool/hooks/useTotalStakedInAllPools'
   import UiButton from '@/components/ui/UiButton.vue'
   import PresaleInformation from '@/views/Presale/components/PresaleInformation'
   import DashboardTokenCharts from './components/DashboardTokenCharts.vue'
@@ -80,9 +79,8 @@
       const pendingBuyBackAndBurnStr = useTokenAmountFormat(pendingBuyBackAndBurn, 'BNB')
       const pendingInvestStr = useTokenAmountFormat(pendingInvest, 'BNB')
 
-      const liquidityPrice = useSlrLiquidityPrice()
-      const liquidityPriceStr = useUsdFormat(liquidityPrice)
-      const slrPrice = useSlrPrice()
+      const { slrPrice, slrLiquidityPrice } = useSlrPrice()
+      const liquidityPriceStr = useUsdFormat(slrLiquidityPrice)
       const slrPriceStr = useUsdFormat(slrPrice)
 
       const totalStaked = useTotalStakedInAllPools()

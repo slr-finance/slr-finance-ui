@@ -1,7 +1,7 @@
-import { createRouter as vueCreateRouter, createWebHistory } from 'vue-router'
+import { createWebHistory, createMemoryHistory, RouterOptions } from 'vue-router'
 import { routes } from './routes'
 
-export const router = vueCreateRouter({
-  history: createWebHistory(),
+export const routerOptions:RouterOptions = {
+  history: import.meta.env.SSR ? createMemoryHistory() : createWebHistory(),
   routes,
-})
+}

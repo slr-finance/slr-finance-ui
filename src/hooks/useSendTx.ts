@@ -1,9 +1,9 @@
+import { useUiToast } from '@/components/ui/UiToast'
 import { calculateGasMargin } from '@/utils/contracts/calculateGasMargin'
 import { MaybeRef } from '@vueuse/core'
 import { BaseContract, ContractTransaction } from 'ethers'
 import get from 'lodash.get'
 import { computed, Ref, ref, unref } from 'vue'
-import { useSingleToast } from './useSingleToast'
 
 export enum TxStatus {
   NONE,
@@ -38,7 +38,7 @@ export const useSendTx = <C extends BaseContract>(
   options: MaybeRef<any> = {},
   toastsText?: MaybeRef<TxToastsText>,
 ): UseSendTxReturn => {
-  const txToast = useSingleToast()
+  const txToast = useUiToast()
   const txHash = ref(null as string | null)
   const txStatus = ref(TxStatus.NONE)
   const txState = computed(() => {
@@ -66,7 +66,7 @@ export const useSendTx = <C extends BaseContract>(
       txHash.value = null
       txStatus.value = TxStatus.WAITING_FOR_SIGNING
 
-      txToast.info(get(toastsTextVal, 'waitingSigning', 'Confirm transaction in your wallet'), { timeout: false })
+      txToast.info({ content: get(toastsTextVal, 'waitingSigning', 'Confirm transaction in your wallet'), timeout: false })
 
       const estimateGas = await contractVal.estimateGas[methodVal](...paramsVal, optionsVal)
       const tx: ContractTransaction = await contractVal.functions[methodVal](...paramsVal, {
@@ -74,7 +74,7 @@ export const useSendTx = <C extends BaseContract>(
         gasLimit: calculateGasMargin(estimateGas),
       })
 
-      txToast.info(get(toastsTextVal, 'pending', 'Pending transaction'), { timeout: false })
+      txToast.info({ content: get(toastsTextVal, 'pending', 'Pending transaction'), timeout: false })
 
       txStatus.value = TxStatus.WAITING_FOR_RECEIPT
 
@@ -83,9 +83,9 @@ export const useSendTx = <C extends BaseContract>(
       txStatus.value = TxStatus.SUCCESS
       txHash.value = txReceipt.transactionHash
 
-      txToast.info(`Success transaction\n${`https://bscscan.com/tx/${txReceipt.transactionHash}`}`, {
+      txToast.info({
+        content: `Success transaction\nhttps://bscscan.com/tx/${txReceipt.transactionHash}`,
         timeout: 2000,
-        onClick: () => window.open(`https://bscscan.com/tx/${txReceipt.transactionHash}`),
       })
     } catch (error) {
       const errorMessage = get(
@@ -94,7 +94,7 @@ export const useSendTx = <C extends BaseContract>(
         get(error, ['data'], 'Something wrong. Transaction not success.'),
       )
 
-      txToast.error(errorMessage, { timeout: 8000 })
+      txToast.error({ content: errorMessage, timeout: 8000 })
 
       console.error(errorMessage, error)
       console.error('Faild tx:', methodVal, paramsVal, optionsVal)

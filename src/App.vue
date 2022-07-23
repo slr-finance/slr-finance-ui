@@ -8,19 +8,18 @@
   <social-modal-button v-if="isDesktopLayout" />
   <connected-wallet-modal />
   <connect-wallet-modal />
+  <ui-toast/>
 </template>
 
 <script lang="ts">
   import { defineAsyncComponent, defineComponent, watch } from 'vue'
   import { useBreakpoints } from '@vueuse/core'
-  import { useEthers } from '@/hooks/dapp/useEthers'
-  import { store } from '@/store/store'
   import { HeaderType, useHeader } from '@/components/ui/UiHeader/hooks/useHeader'
+  import UiToast from '@/components/ui/UiToast'
   import AppHeader from '@/components/App/AppHeader/AppHeader.vue'
   import AppMobileBottomNavigation from '@/components/App/AppMobileBottomNavigation/AppMobileBottomNavigation.vue'
   import ConnectedWalletModal from '@/components/ConnectWallet/ConnectedWalletModal/ConnectedWalletModal.vue'
   import ConnectWalletModal from '@/components/ConnectWallet/ConnectWalletModal'
-  import { stakingModule } from '@/store/modules/stakingModule'
   import { useBlockInfo } from './hooks/useBlockInfo'
   import { LATEST_CONNECTED_PROVIDER } from '@/config/constants/localStorage'
   import { useWallet, WalletName } from './hooks/dapp/useWallet'
@@ -32,21 +31,15 @@
       },
     },
     setup() {
-      const { connect } = useWallet()
+      if (!import.meta.env.SSR) {
+        const { connect } = useWallet()
 
-      const latestConnectedProvider = localStorage.getItem(LATEST_CONNECTED_PROVIDER) as WalletName | null
+        const latestConnectedProvider = localStorage.getItem(LATEST_CONNECTED_PROVIDER) as WalletName | null
 
-      if (latestConnectedProvider === 'metamask') {
-        connect(latestConnectedProvider)
+        if (latestConnectedProvider === 'metamask') {
+          connect(latestConnectedProvider)
+        }
       }
-
-      stakingModule.register(store)
-
-      const { address } = useEthers()
-      watch(address, (addressVal) => stakingModule.actions.setStakerAddress(addressVal))
-
-      const { blockNumber } = useBlockInfo()
-      watch(blockNumber, () => stakingModule.actions.refetchStaker())
 
       const { isDesktopLayout } = useBreakpoints({
         isDesktopLayout: 580,
@@ -72,6 +65,7 @@
       SocialModalButton: defineAsyncComponent({
         loader: () => import('@/components/SocialModalButton'),
       }),
+      UiToast,
     },
   })
 </script>

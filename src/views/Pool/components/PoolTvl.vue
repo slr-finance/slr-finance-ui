@@ -29,12 +29,11 @@
 </template>
 
 <script lang="ts">
-  import { computed, defineComponent } from 'vue'
+  import { computed, defineComponent, toRef } from 'vue'
   import UiIcon from '@/components/ui/UiIcon'
-  import { stakingModule } from '@/store/modules/stakingModule'
-  import { store } from '@/store/store'
   import { useBreakpoints } from '@vueuse/core'
   import { tokenAmountFormat } from '@/utils/strFormat/tokenAmountFormat'
+  import { usePoolState } from '../hooks/usePoolState'
 
   export default defineComponent({
     name: 'pool-tvl',
@@ -45,8 +44,7 @@
       },
     },
     setup(props) {
-      stakingModule.register(store)
-      const poolState = computed(() => stakingModule.getters.getPool(props.poolId))
+      const [poolState] = usePoolState(toRef(props, 'poolId'))
       const tvlStr = computed(() => tokenAmountFormat(poolState.value.totalStaked, 'SLR'))
 
       const { isShownImage } = useBreakpoints({

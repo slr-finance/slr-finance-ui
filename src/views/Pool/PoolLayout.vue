@@ -56,10 +56,10 @@
 
 <script lang="ts">
   import { defineAsyncComponent, defineComponent, watch } from 'vue'
-  import { stakingModule } from '@/store/modules/stakingModule'
   import { useRoute, useRouter } from 'vue-router'
   import { useBreakpoints } from '@vueuse/core'
   import { POOLS_INFO } from '@/config/constants/Pools'
+import { useStakerState } from './hooks/useStakerState'
 
   export default defineComponent({
     props: {
@@ -71,16 +71,13 @@
     setup() {
       const route = useRoute()
       const router = useRouter()
+      const { stakerState } = useStakerState()
 
       watch(
         route,
         ({ name }) => {
           if (name === 'pool') {
-            const {
-              state: {
-                staker: { poolId },
-              },
-            } = stakingModule
+            const { value: { poolId } } = stakerState
 
             if (poolId > 0 && poolId <= POOLS_INFO.length) {
               router.replace({ name: POOLS_INFO[poolId - 1].routeName })

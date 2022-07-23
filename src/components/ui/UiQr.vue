@@ -6,9 +6,10 @@
 </template>
 
 <script lang="ts">
+  import type { Options } from 'qr-code-styling'
   import { defineComponent, onMounted, toRef, watch } from 'vue'
   import { templateRef } from '@vueuse/core'
-  import QRCodeStyling, { Options } from 'qr-code-styling'
+  // import QRCodeStyling from 'qr-code-styling'
 
   const getQrOptions = (data: string): Partial<Options> => {
     const options: Partial<Options> = {
@@ -59,15 +60,15 @@
     },
     setup(props) {
       const canvasEl = templateRef<HTMLElement>('canvas')
-      const qrCodeStyling = new QRCodeStyling(getQrOptions(props.data))
+      // const qrCodeStyling = new QRCodeStyling(getQrOptions(props.data))
 
-      onMounted(() => {
-        qrCodeStyling.append(canvasEl.value)
-      })
+      // onMounted(() => {
+      //   qrCodeStyling.append(canvasEl.value)
+      // })
 
-      watch(toRef(props, 'data'), (data) => {
-        qrCodeStyling.update(getQrOptions(data))
-      })
+      // watch(toRef(props, 'data'), (data) => {
+      //   qrCodeStyling.update(getQrOptions(data))
+      // })
     },
   })
 </script>

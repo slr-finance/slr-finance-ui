@@ -1,4 +1,4 @@
-import type { Result } from 'ethers/lib/utils'
+import type { Result } from '@ethersproject/abi'
 import { ref, watch } from 'vue'
 import { shortenAddress } from '@/utils/address/shortenAddress'
 import { multicall, Call } from '@/utils/contracts/multicall'
@@ -93,7 +93,9 @@ export const useReferralsList = createSharedComposable(() => {
       } catch (error) {
         resetState()
 
-        throw error
+        if (!StopController.isStoped(error)) {
+          throw error
+        }
       }
     },
     { immediate: true },
