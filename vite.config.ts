@@ -71,6 +71,6 @@ export default defineConfig({
     rootContainerId: 'app',
     concurrency: 20,
     script: 'async',
-    formatting: 'prettify',
+    formatting: 'minify',
   }
 })
