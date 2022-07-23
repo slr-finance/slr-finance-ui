@@ -44,6 +44,7 @@
     "@walletconnect/types": "1.7.7",
     "autoprefixer": "10.4.2",
     "buffer": "6.0.3",
+    "critters": "0.0.16",
     "postcss": "8.4.6",
     "prettier": "2.6.0",
     "process": "0.11.10",
