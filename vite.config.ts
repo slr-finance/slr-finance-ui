@@ -4,6 +4,7 @@ import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import { visualizer } from 'rollup-plugin-visualizer'
 import { esbuildCommonjs, viteCommonjs } from '@originjs/vite-plugin-commonjs'
+import generateSitemap from 'vite-ssg-sitemap'
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -72,5 +73,10 @@ export default defineConfig({
     concurrency: 20,
     script: 'async',
     formatting: 'minify',
+    onFinished() { 
+      generateSitemap({
+        hostname: 'https://slr.finance/'
+      })
+    },
   }
 })

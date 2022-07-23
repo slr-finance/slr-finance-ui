@@ -27,6 +27,7 @@
     "lodash.get": "4.4.2",
     "qr-code-styling": "1.6.0-rc.1",
     "vite-plugin-svg-icons": "2.0.1",
+    "vite-ssg-sitemap": "^0.3.1",
     "vue": "3.2.33",
     "vue-i18n": "9",
     "vue-router": "4.1.2",
