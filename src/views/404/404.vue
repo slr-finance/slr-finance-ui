@@ -20,17 +20,10 @@
   import { useHead } from '@vueuse/head'
   import UiButton from '@/components/ui/UiButton.vue'
 
-
   export default defineComponent({
     setup() {
       useHead({
         title: 'SLR.Finance | Page not found :(',
-        meta: [
-          {
-            name: 'description',
-            content: 'SLR Dashboard',
-          },
-        ],
       })
     },
     components: {
