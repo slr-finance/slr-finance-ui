@@ -1,10 +1,9 @@
 import { markRaw, onMounted, ref, Ref } from 'vue'
 import contractsAddresses from '@/config/constants/contractsAddresses'
-import MilkyWayAbi from '@/config/abi/MilkyWay.json'
-import Erc20Abi from '@/config/abi/Erc20.json'
 import { Call, multicall } from '@/utils/contracts/multicall'
 import { parseWei } from '@/utils/bigNumber'
 import BigNumber from 'bignumber.js'
+import { Erc20__factory, MilkyWay__factory } from '@/contracts'
 
 export const useMilkyWayInfo = () => {
   const totalBayback = ref(markRaw(new BigNumber(0))) as Ref<BigNumber>
@@ -37,7 +36,7 @@ export const useMilkyWayInfo = () => {
 
   const handleLoad = async () => {
     const [[[totalBaybackRaw], [pendingBuyBackAndBurnRaw], [pendingInvestRaw], [currantBnbBalanceRaw]]] =
-      await multicall([...Erc20Abi, ...MilkyWayAbi], calls)
+      await multicall([...Erc20__factory.abi, ...MilkyWay__factory.abi], calls)
 
     totalBayback.value = markRaw(parseWei(totalBaybackRaw, 18))
     pendingBuyBackAndBurn.value = markRaw(parseWei(pendingBuyBackAndBurnRaw, 18))

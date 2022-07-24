@@ -8,7 +8,7 @@
     "build": "vue-tsc --noEmit && vite-ssg build",
     "build:dev": "VITE_CHAIN=TESTNET vue-tsc --noEmit && vite-ssg build",
     "preview": "vite preview",
-    "generate:contracts": "typechain --target ethers-v5 --out-dir ./src/contracts './src/config/abi/*.json'",
+    "generate:contracts": "typechain --target ethers-v5 --out-dir ./src/contracts './config/abi/*.json' && prettier --write 'src/contracts/**/*.ts'",
     "format:check": "prettier --check '**/*.{js,jsx,ts,tsx,vue}'",
     "format:write": "prettier --write '**/*.{js,jsx,ts,tsx,vue}'"
   },
