@@ -75,9 +75,16 @@ export default defineConfig({
     includedRoutes(paths, routes) {
       // use original route records
       return routes.flatMap((route) => {
-        return route.name === 'pool'
-          ? poolsConfig.pools.map(({ name }) => `/pool/${name.toLocaleLowerCase()}`)
-          : route.path
+        switch (route.name) {
+          case 'pool':
+            return poolsConfig.pools.map(({ name }) => `/pool/${name.toLocaleLowerCase()}`)
+
+          case '404': 
+            return '/404'
+
+          default:
+            return route.path
+        }
       })
     },
     onFinished() {
