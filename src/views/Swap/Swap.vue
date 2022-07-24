@@ -34,7 +34,6 @@
   import { useHead } from '@vueuse/head'
   import contractsAddresses from '@/config/constants/contractsAddresses'
   import SwapForm from './components/SwapForm.vue'
-  import PowerByDex from './components/PowerByDex.vue'
   import Mercuryo from './components/Mercuryo.vue'
   import SwapBg from './components/SwapBg.vue'
 
@@ -57,7 +56,6 @@
     },
     components: {
       SwapForm,
-      PowerByDex,
       Mercuryo,
       SwapBg,
     },
