@@ -11,7 +11,9 @@
         style="height: 400px"
       >
         <div class="w-full h-full relative">
-          <dashboard-token-charts class="w-full h-full left-0 top-0 absolute" />
+          <client-only>
+            <dashboard-token-charts class="w-full h-full left-0 top-0 absolute" />
+          </client-only>
         </div>
       </dashboard-container>
 

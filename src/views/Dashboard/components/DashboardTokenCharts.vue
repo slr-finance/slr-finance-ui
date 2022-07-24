@@ -1,7 +1,5 @@
 <template>
-  <client-only>
-    <ui-chart />
-  </client-only>
+  <ui-chart />
 </template>
 
 <script lang="ts">
