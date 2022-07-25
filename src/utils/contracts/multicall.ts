@@ -12,11 +12,6 @@ export interface Call {
   params?: any[] // Function params
 }
 
-interface AggregateRaw extends Result {
-  blockNumber: BigNumberEthers
-  returnData: string[]
-}
-
 export const multicall = async <T extends Array<any>>(abi: any[], calls: Call[]): Promise<[T, BigNumberEthers]> => {
   try {
     const multi = getMulticallContract()
@@ -26,7 +21,7 @@ export const multicall = async <T extends Array<any>>(abi: any[], calls: Call[])
       target: call.address.toLowerCase(),
       callData: itf.encodeFunctionData(call.name, call.params),
     }))
-    const { returnData, blockNumber } = (await multi.functions.aggregate(calldata)) as any as AggregateRaw
+    const { returnData, blockNumber } = await multi.functions.aggregate(calldata)
     const res = returnData.map((call, i) => itf.decodeFunctionResult(calls[i].name, call)) as T
 
     return [res, blockNumber]
