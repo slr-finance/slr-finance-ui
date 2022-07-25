@@ -77,8 +77,11 @@ export default defineConfig({
       return routes.flatMap((route) => {
         switch (route.name) {
           case 'pool':
-            return poolsConfig.pools.map(({ name }) => `/pool/${name.toLocaleLowerCase()}`)
+            const paths = poolsConfig.pools.map(({ name }) => `/pool/${name.toLocaleLowerCase()}`)
 
+            paths.push('/pool')
+
+            return paths
           case '404': 
             return '/404'
 
