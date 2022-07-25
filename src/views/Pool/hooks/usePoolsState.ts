@@ -1,12 +1,12 @@
 import { readonly, Ref, ref } from 'vue'
+import { createSharedComposable } from '@vueuse/core'
+import { StakingService__factory } from '@slr-finance/contracts'
 import type BigNumber from 'bignumber.js'
 import { BIG_ZERO, ethersToBigNumber, parseWei } from '@/utils/bigNumber'
-import { createSharedComposable } from '@vueuse/core'
 import { getApy } from '@/utils/math/getApy'
 import { Call, multicall } from '@/utils/contracts/multicall'
 import { POOLS_INFO } from '@/config/constants/Pools'
 import contractsAddresses from '@/config/constants/contractsAddresses'
-import { Staking__factory } from '@/contracts'
 
 export type PoolState = {
   apy: BigNumber
@@ -56,7 +56,7 @@ export const usePoolsState = createSharedComposable(() => {
       },
     ]).flat(1)
 
-    const [response] = await multicall(Staking__factory.abi, calls)
+    const [response] = await multicall(StakingService__factory.abi, calls)
 
     pools.value = POOLS_INFO.reduce((poolsAcc, _, index) => {
       const poolState = response[index]

@@ -1,7 +1,8 @@
-import { BigNumber as BigNumberEthers, ethers } from 'ethers'
+import type { Multicall } from '@slr-finance/contracts'
+import type { Result } from '@ethersproject/abi'
+import type { BigNumber as BigNumberEthers } from '@ethersproject/bignumber'
+import { ethers } from 'ethers'
 import { getMulticallContract } from '@/utils/contracts/getMulticallContract'
-import { Result } from '@ethersproject/abi'
-import { Multicall } from '@/contracts'
 
 export type MultiCallResponse<T> = T | null
 
@@ -25,7 +26,7 @@ export const multicall = async <T extends Array<any>>(abi: any[], calls: Call[])
       target: call.address.toLowerCase(),
       callData: itf.encodeFunctionData(call.name, call.params),
     }))
-    const { returnData, blockNumber } = (await multi.functions.aggregate(calldata)) as AggregateRaw
+    const { returnData, blockNumber } = (await multi.functions.aggregate(calldata)) as any as AggregateRaw
     const res = returnData.map((call, i) => itf.decodeFunctionResult(calls[i].name, call)) as T
 
     return [res, blockNumber]

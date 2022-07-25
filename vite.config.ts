@@ -9,20 +9,12 @@ import generateSitemap from 'vite-ssg-sitemap'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  optimizeDeps: {
-    esbuildOptions: {
-      plugins: [esbuildCommonjs()],
-    },
-  },
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
     },
   },
   plugins: [
-    viteCommonjs({
-      skipPreBuild: false,
-    }),
     vue(),
     createSvgIconsPlugin({
       // Specify the icon folder to be cached

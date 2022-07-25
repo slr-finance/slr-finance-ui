@@ -1,12 +1,12 @@
-import type BigNumber from 'bignumber.js'
-import { AddressZero } from '@ethersproject/constants'
-import { BigNumber as BigNumberEthers } from 'ethers'
 import { ref, ShallowRef, shallowRef } from 'vue'
+import { BigNumber as BigNumberEthers } from 'ethers'
+import { StakingService__factory } from '@slr-finance/contracts'
+import { AddressZero } from '@ethersproject/constants'
+import type BigNumber from 'bignumber.js'
 import { createSharedComposable, watchTriggerable } from '@vueuse/core'
 import { useEthers } from '@/hooks/dapp/useEthers'
 import { BIG_ZERO, parseWei } from '@/utils/bigNumber'
 import { Call, multicall } from '@/utils/contracts/multicall'
-import { Staking__factory } from '@/contracts'
 import { POOLS_INFO } from '@/config/constants/Pools'
 import contractsAddresses from '@/config/constants/contractsAddresses'
 import { StopController } from '@/utils/StopController'
@@ -85,7 +85,7 @@ export const useStakerState = createSharedComposable(() => {
           })
         })
 
-        const [[stakerRaw, ...stakerHistoryRaw]] = await multicall(Staking__factory.abi, calls)
+        const [[stakerRaw, ...stakerHistoryRaw]] = await multicall(StakingService__factory.abi, calls)
 
         const history = stakerHistoryRaw.map((stakerHistoryItem) => ({
           poolId: stakerHistoryItem.poolId,

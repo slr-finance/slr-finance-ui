@@ -8,15 +8,16 @@
     "build": "vue-tsc --noEmit && vite-ssg build",
     "build:dev": "VITE_CHAIN=TESTNET vue-tsc --noEmit && vite-ssg build",
     "preview": "vite preview",
-    "generate:contracts": "typechain --target ethers-v5 --out-dir ./src/contracts './config/abi/*.json' && prettier --write 'src/contracts/**/*.ts'",
     "format:check": "prettier --check '**/*.{js,jsx,ts,tsx,vue}'",
     "format:write": "prettier --write '**/*.{js,jsx,ts,tsx,vue}'"
   },
   "dependencies": {
     "@ethersproject/abi": "5.6.4",
     "@ethersproject/address": "5.6.1",
+    "@ethersproject/bignumber": "5.6.2",
     "@ethersproject/providers": "5.6.2",
     "@metamask/detect-provider": "1.2.0",
+    "@slr-finance/contracts": "https://github.com/slr-finance/slr-finance-contracts.git#105fb08b23466d0f937986f4a488bf41d9153f71",
     "@slr-finance/ui-share": "https://github.com/slr-finance/slr-finance-ui-share.git",
     "@vueuse/core": "8.9.4",
     "@walletconnect/web3-provider": "1.7.7",
@@ -36,7 +37,6 @@
   },
   "devDependencies": {
     "@originjs/vite-plugin-commonjs": "1.0.3",
-    "@typechain/ethers-v5": "10.1.0",
     "@types/js-cookie": "3.0.2",
     "@types/lodash.get": "4.4.6",
     "@types/node": "18.0.6",
@@ -52,7 +52,6 @@
     "rollup-plugin-visualizer": "5.6.0",
     "tailwindcss": "3.0.23",
     "ts-node": "10.9.1",
-    "typechain": "8.1.0",
     "typescript": "4.5.4",
     "util": "0.12.4",
     "vite": "3.0.2",

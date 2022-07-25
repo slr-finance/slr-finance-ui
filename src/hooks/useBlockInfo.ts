@@ -1,8 +1,8 @@
 import { ref } from 'vue'
+import { Multicall__factory } from '@slr-finance/contracts'
 import { multicall } from '@/utils/contracts/multicall'
 import contractsAddresses from '@/config/constants/contractsAddresses'
 import { useInterval } from '@vueuse/core'
-import { Multicall__factory } from '@/contracts'
 
 const blockTimestampSync = ref(0)
 const blockTimestamp = useInterval(1000)

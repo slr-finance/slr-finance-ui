@@ -1,10 +1,10 @@
+import { Ref, ref } from 'vue'
 import { MaybeRef, watchTriggerable } from '@vueuse/core'
 import BigNumber from 'bignumber.js'
-import { Ref, ref } from 'vue'
+import { ERC20__factory } from '@slr-finance/contracts'
 import { useEthers } from '@/hooks/dapp/useEthers'
 import { Call, multicall } from '@/utils/contracts/multicall'
 import { BIG_ZERO, parseWei } from '@/utils/bigNumber'
-import { Erc20__factory } from '@/contracts'
 import { StopController } from '@/utils/StopController'
 
 type UseAllowanceReturn = [() => Promise<void>, Ref<BigNumber>, Ref<boolean>]
@@ -48,7 +48,7 @@ export const useAllowance = (tokenAddress: MaybeRef<string>, spender: MaybeRef<s
           },
         ]
 
-        const [[[decimalsResponse], [allowanceResponse]]] = await multicall(Erc20__factory.abi, calls)
+        const [[[decimalsResponse], [allowanceResponse]]] = await multicall(ERC20__factory.abi, calls)
 
         stopController.breakIfStoping()
 

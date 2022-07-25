@@ -1,8 +1,8 @@
-import { Call, multicall } from '@/utils/contracts/multicall'
-import { createSharedComposable, MaybeRef, watchTriggerable } from '@vueuse/core'
 import { computed, readonly, ref, Ref, unref } from 'vue'
+import { createSharedComposable, MaybeRef, watchTriggerable } from '@vueuse/core'
+import { ERC20__factory } from '@slr-finance/contracts'
+import { Call, multicall } from '@/utils/contracts/multicall'
 import { useEthers } from '@/hooks/dapp/useEthers'
-import { Erc20__factory } from '@/contracts'
 import { BIG_ZERO, parseWei } from '@/utils/bigNumber'
 import BigNumber from 'bignumber.js'
 
@@ -118,7 +118,7 @@ export const useBalance = (tokenAddress: MaybeRef<StringTokenAddress>) => {
 
   const { trigger: refetchBalance } = watchTriggerable(calls, async (callsArr) => {
     isFetching.value = true
-    const [[[decimalsRaw], [balanceRaw]]] = await multicall(Erc20__factory.abi, callsArr)
+    const [[[decimalsRaw], [balanceRaw]]] = await multicall(ERC20__factory.abi, callsArr)
 
     balance.value = parseWei(balanceRaw, decimalsRaw)
     decimals.value = decimalsRaw

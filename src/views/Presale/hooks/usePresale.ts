@@ -1,11 +1,11 @@
+import { computed, ComputedRef, Ref, ref, watch } from 'vue'
+import { computedEager } from '@vueuse/core'
 import type { BigNumber as BigNumberEthers } from 'ethers'
+import { PresaleService__factory } from '@slr-finance/contracts'
+import BigNumber from 'bignumber.js'
 import contractsAddresses from '@/config/constants/contractsAddresses'
 import { BIG_ONE, parseWei } from '@/utils/bigNumber'
 import { Call, multicall } from '@/utils/contracts/multicall'
-import BigNumber from 'bignumber.js'
-import { computed, ComputedRef, Ref, ref, watch } from 'vue'
-import { computedEager } from '@vueuse/core'
-import { Presale__factory } from '@/contracts'
 
 const presaleServiceAddress = contractsAddresses.PresaleService
 
@@ -115,7 +115,7 @@ const fetchPresaleState = async () => {
   isFetching.value = true
 
   try {
-    const [rawData] = await multicall(Presale__factory.abi, calls)
+    const [rawData] = await multicall(PresaleService__factory.abi, calls)
     methods.forEach(({ handler }, index) => handler(rawData[index][0]))
 
     isInitalFetched.value = true
