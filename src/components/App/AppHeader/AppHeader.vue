@@ -25,10 +25,10 @@
   import AppHeaderMobileTokenPrice from './AppHeaderMobileTokenPrice.vue'
 
   const links: UiLinkProps[] = [
-    {
-      text: 'Swap',
-      to: { name: 'swap' },
-    },
+    // {
+    //   text: 'Swap',
+    //   to: { name: 'swap' },
+    // },
     {
       text: 'Presale',
       to: { name: 'presale' },
@@ -41,6 +41,10 @@
       text: 'Referral',
       to: { name: 'referral' },
     },
+    {
+      text: 'Achievements',
+      to: { name: 'achievements' },
+    }
   ]
 
   export default defineComponent({

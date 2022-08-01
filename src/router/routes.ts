@@ -20,7 +20,13 @@ export const routes: RouteRecordRaw[] = [
   {
     path: '/swap',
     name: 'swap',
-    component: () => import('@/views/Swap/Swap.vue'),
+    redirect: { name: 'presale' },
+    //component: () => import('@/views/Swap/Swap.vue'),
+  },
+  {
+    path: '/achievements',
+    name: 'achievements',
+    component: () => import('@/views/Achievements/Achievements.vue'),
   },
   {
     path: '/pool',

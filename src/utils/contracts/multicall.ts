@@ -1,5 +1,4 @@
 import type { Multicall } from '@slr-finance/contracts'
-import type { Result } from '@ethersproject/abi'
 import type { BigNumber as BigNumberEthers } from '@ethersproject/bignumber'
 import { ethers } from 'ethers'
 import { getMulticallContract } from '@/utils/contracts/getMulticallContract'

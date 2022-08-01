@@ -63,7 +63,7 @@
       ConnectedWalletModal,
       AppMobileBottomNavigation,
       SocialModalButton: defineAsyncComponent({
-        loader: () => import('@/components/SocialModalButton'),
+        loader: () => import("@/components/SocialModalButton"),
       }),
       UiToast,
     },

@@ -101,20 +101,21 @@
 /**
  * Ui scroll bar [BEGIN]
  */
-.ui-scrollbar {
+/* .ui-scrollbar {
   overflow-x: auto;
   overflow-y: scroll;
-}
+} */
 .ui-scrollbar::-webkit-scrollbar {
   width: 8px;
+  height: 8px;
 }
 
 .ui-scrollbar::-webkit-scrollbar-track {
-  @apply bg-black;
+  background: inherit;
 }
 
 .ui-scrollbar::-webkit-scrollbar-thumb {
-  @apply bg-black;
+  background: inherit;
   transition: background-color 0.3s;
   border-radius: 4px;
 }
