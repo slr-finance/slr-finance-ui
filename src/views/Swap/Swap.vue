@@ -2,7 +2,7 @@
   <div
     class="flex flex-1 flex-col min-h-full px-ui-page-spacing pt-ui-page-header-spacing pb-ui-page-bottom-spacing justify-between items-center relative z-ui-page-content"
   >
-    <div class="swap-page-content">
+    <div class="swap-page-content relative z-ui-page-content">
       <div
         v-once
         class="875:text-center text-left"
@@ -22,11 +22,12 @@
       </div>
     </div>
 
-    <div>
+    <div class="relative z-ui-page-content">
       <mercuryo />
     </div>
+
+    <swap-bg v-once />
   </div>
-  <swap-bg v-once />
 </template>
 
 <script lang="ts">

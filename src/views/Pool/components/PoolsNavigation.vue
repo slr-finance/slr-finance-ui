@@ -1,6 +1,6 @@
 <template>
   <div
-    class="pool-navigation sticky overflow-hidden bg-white bg-opacity-20 rounded-12 px-8 text-12"
+    class="pool-navigation sticky top-ui-page-header-size overflow-hidden bg-white bg-opacity-20 rounded-12 px-8 text-12"
     :class="classList"
   >
     <transition

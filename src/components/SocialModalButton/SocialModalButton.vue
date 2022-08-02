@@ -6,17 +6,19 @@
     <social-modal-content @click-to-link="close" />
   </ui-modal>
 
-  <button
-    type="button"
-    class="social-modal-button flex justify-center items-center fixed bottom-ui-page-bottom-spacing right-ui-page-spacing z-10 h-48 w-48 before:block before:content-[''] before:w-8 before:h-8 before:rounded-full before:bg-violet before:absolute before:right-0 before:top-0 after:block after:content-[''] after:w-full after:h-full after:rounded-12 after:absolute after:right-0 after:top-0 after:-z-1 after:transition-opacity duration-200"
-    @click="open"
-  >
-    <ui-icon
-      name="telegram-flat"
-      prefix="ui-icon-social"
-      size="18"
-    />
-  </button>
+  <app-float-button>
+    <button
+      type="button"
+      class="social-modal-button relative flex justify-center items-center h-48 w-48 before:block before:content-[''] before:w-8 before:h-8 before:rounded-full before:bg-violet before:absolute before:right-0 before:top-0 after:block after:content-[''] after:w-full after:h-full after:rounded-12 after:absolute after:right-0 after:top-0 after:-z-1 after:transition-opacity duration-200"
+      @click="open"
+    >
+      <ui-icon
+        name="telegram-flat"
+        prefix="ui-icon-social"
+        size="18"
+      />
+    </button>
+  </app-float-button>
 </template>
 
 <script lang="ts">
@@ -26,6 +28,7 @@
   import UiIcon from '@/components/ui/UiIcon'
   import UiModal from '@/components/ui/UiModal.vue'
   import NoInternetConnection from '@/components/NoInternetConnection.vue'
+  import AppFloatButton from '@/components/App/AppFloatButton/AppFloatButton.vue'
 
   export default defineComponent({
     name: 'social-modal-button',
@@ -40,13 +43,14 @@
     },
     components: {
       SocialModalContent: defineAsyncComponent({
-        loader: () => import('./SocialModalContent.vue'),
+        loader: () => import("./SocialModalContent.vue"),
         loadingComponent: UiGalaxyLoader,
         errorComponent: NoInternetConnection,
         delay: 200,
       }),
       UiIcon,
       UiModal,
+      AppFloatButton
     },
   })
 </script>

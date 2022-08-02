@@ -1,10 +1,11 @@
 <template>
-  <div class="flex flex-col min-h-full">
+  <div class="flex flex-col min-h-full relative">
     <router-view />
+    <app-float-button-container class="z-ui-page-content"/>
     <app-mobile-bottom-navigation v-if="!isDesktopLayout" />
   </div>
-
   <app-header />
+  <app-footer v-if="isDesktopLayout"/>
   <social-modal-button v-if="isDesktopLayout" />
   <connected-wallet-modal />
   <connect-wallet-modal />
@@ -23,6 +24,7 @@
   import { useBlockInfo } from './hooks/useBlockInfo'
   import { LATEST_CONNECTED_PROVIDER } from '@/config/constants/localStorage'
   import { useWallet, WalletName } from './hooks/dapp/useWallet'
+  import AppFloatButtonContainer from '@/components/App/AppFloatButton/AppFloatButtonContainer.vue'
 
   export default defineComponent({
     props: {
@@ -59,11 +61,15 @@
     },
     components: {
       AppHeader,
+      AppFooter: defineAsyncComponent({
+        loader: () => import('@/components/App/AppFooter'),
+      }),
+      AppFloatButtonContainer,
+      AppMobileBottomNavigation,
       ConnectWalletModal,
       ConnectedWalletModal,
-      AppMobileBottomNavigation,
       SocialModalButton: defineAsyncComponent({
-        loader: () => import("@/components/SocialModalButton"),
+        loader: () => import('@/components/SocialModalButton'),
       }),
       UiToast,
     },

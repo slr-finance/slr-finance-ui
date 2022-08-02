@@ -69,8 +69,11 @@ module.exports = {
       'ui-page-spacing': 'var(--ui-page-spacing)',
       'ui-page-inner-spacing': 'var(--ui-page-inner-spacing)',
       'ui-page-header-spacing': 'calc(var(--app-ui-header-height) + var(--app-ui-header-offset))',
+      'ui-page-header-size': 'var(--app-ui-header-height)',
       'ui-page-bottom-spacing': 'calc(var(--app-ui-bottom-nav-height, 0px) + var(--app-ui-bottom-nav-offset, 42px))',
       full: '100%',
+      '100vh': '100vh',
+      '100vw': '100vw',
     },
     fontSize: {
       8: '8px',
@@ -155,14 +158,11 @@ module.exports = {
     aspectRatio: {
       auto: 'auto',
       1: '1/1',
-      'pool-video': '125 / 108',
-      'pool-video-gradient': '25 / 54',
-      'referral-bg-video': '20 / 27',
     },
     zIndex: {
       header: 1001,
       'mobile-menu': 1000,
-      'bg-video': 0,
+      'bg-content': 0,
       modal: 1100,
       toast: 1200,
       'ui-page-content': 1,

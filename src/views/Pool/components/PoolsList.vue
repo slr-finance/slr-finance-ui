@@ -126,8 +126,8 @@
     padding-right: 9px;
   }
 
-  .pools-list.-fixed > .nav {
-    position: fixed;
+  .pools-list.-fixed {
+    position: sticky;
     top: max(
       calc(
         (
@@ -140,8 +140,6 @@
     transform: translateY(calc(var(--app-ui-header-scroll-padding) * var(--app-ui-header-scroll-factor, 0) * -0.5));
   }
 
-  .pools-list.-sticky {
-  }
   .pools-list-link-icon {
     @apply text-gray rounded-12 transition-colors duration-200;
   }

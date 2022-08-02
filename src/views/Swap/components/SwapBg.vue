@@ -1,23 +1,21 @@
 <template>
-  <div
-    class="pointer-events-none w-full flex justify-end items-stretch fixed z-bg-video left-1/2 transform -translate-x-1/2 bottom-0 aspect-swap-video"
-    style="max-width: 866px"
-  >
+  <app-bg-layer>
     <video
-      class="w-full h-full"
+      class="swap-bg-video"
       ref="video"
       autoplay
       playsinline
       loop
       muted
     />
-  </div>
+  </app-bg-layer>
 </template>
 
 <script lang="ts">
   import { defineComponent, onMounted } from 'vue'
   import { templateRef } from '@vueuse/core'
   import { playVideoFromCache } from '@/utils/video/cacheVideo'
+  import AppBgLayer from '@/components/App/AppBgLayer.vue'
 
   export default defineComponent({
     name: 'swap-bg',
@@ -28,5 +26,13 @@
         playVideoFromCache(videoRef.value, '/swap')
       })
     },
+    components: { AppBgLayer },
   })
 </script>
+
+<style scoped>
+.swap-bg-video {
+  @apply mx-auto mt-auto;
+  max-width: 866px;
+}
+</style>

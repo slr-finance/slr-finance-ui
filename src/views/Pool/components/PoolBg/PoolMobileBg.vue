@@ -1,6 +1,6 @@
 <template>
   <div
-    class="pool-mobile-bg pointer-events-none flex justify-end items-stretch w-full fixed z-bg-video right-0 bottom-0"
+    class="pool-mobile-bg pointer-events-none flex justify-end items-stretch w-full fixed z-bg-content right-0 bottom-0"
   >
     <picture>
       <source
@@ -19,7 +19,7 @@
 
 <script lang="ts">
   import { computed, defineComponent, toRef } from 'vue'
-  import { usePoolInfo } from '../hooks/usePoolInfo'
+  import { usePoolInfo } from '../../hooks/usePoolInfo'
 
   export default defineComponent({
     name: 'pool-mobile-bg',

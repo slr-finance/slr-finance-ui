@@ -1,13 +1,13 @@
 <template>
   <div
-    class="pr-ui-page-spacing pb-ui-page-bottom-spacing pt-ui-page-header-spacing flex flex-1 min-h-full bg-black"
+    class="pr-ui-page-spacing relative pt-ui-page-header-spacing flex flex-1 min-h-full bg-black"
     :class="{ 'pl-ui-page-spacing': isDesktopLayout }"
   >
-    <div class="mr-ui-page-spacing z-ui-page-content">
+    <div class="mr-ui-page-spacing z-ui-page-content pb-ui-page-bottom-spacing">
       <pools-list :is-mobile="!isDesktopLayout" />
     </div>
 
-    <div class="flex-1">
+    <div class="flex-1 pb-ui-page-bottom-spacing">
       <router-view
         v-slot="{ Component }"
         v-if="poolId"
@@ -36,21 +36,24 @@
 
     <template v-if="isShownPoolsNav">
       <div class="flex flex-col justify-between items-end">
-        <pools-navigation
-          v-memo="[poolId]"
-          :pool-id="poolId"
-        />
+        <div class="flex-1 mb-80">
+          <pools-navigation
+            v-memo="[poolId]"
+            :pool-id="poolId"
+          />
+        </div>
 
-        <pools-faq-button />
+        <div class="sticky bottom-0">
+          <pools-map
+            class="pools-map-wrapper"
+            v-if="isShownPoolsMap"
+          />
+        </div>
       </div>
-
-      <pools-map
-        class="fixed bottom-0 pools-map-wrapper"
-        v-if="isShownPoolsMap"
-      />
     </template>
 
     <pools-faq-modal />
+    <pools-faq-button />
   </div>
 </template>
 
@@ -107,8 +110,8 @@
       PoolsList: defineAsyncComponent(() => import('./components/PoolsList.vue')),
       PoolsNavigation: defineAsyncComponent(() => import('./components/PoolsNavigation.vue')),
       PoolsMap: defineAsyncComponent(() => import('./components/PoolsMap.vue')),
-      PoolVideoBg: defineAsyncComponent(() => import('./components/PoolVideoBg.vue')),
-      PoolMobileBg: defineAsyncComponent(() => import('./components/PoolMobileBg.vue')),
+      PoolVideoBg: defineAsyncComponent(() => import('./components/PoolBg/PoolVideoBg.vue')),
+      PoolMobileBg: defineAsyncComponent(() => import('./components/PoolBg/PoolMobileBg.vue')),
       PoolsFaqModal: defineAsyncComponent(() => import('./components/PoolsFaq/PoolsFaqModal.vue')),
       PoolsFaqButton: defineAsyncComponent(() => import('./components/PoolsFaq/PoolsFaqButton.vue')),
     },
@@ -124,7 +127,7 @@
   }
 
   .pools-map-wrapper {
-    right: var(--ui-page-right-spacing-with-right-buttons);
+    margin-right: calc(var(--ui-page-spacing) + 48px);
   }
 
   .pool-page-transition-leave-active {

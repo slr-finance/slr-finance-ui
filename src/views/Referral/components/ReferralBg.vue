@@ -1,22 +1,21 @@
 <template>
-  <div
-    class="pointer-events-none h-full flex justify-end items-stretch fixed z-bg-video right-0 top-0 aspect-referral-bg-video"
-  >
+  <app-bg-layer>
     <video
-      class="w-full h-full"
+      class="referral-bg-video"
       ref="video"
       autoplay
       playsinline
       loop
       muted
     />
-  </div>
+  </app-bg-layer>
 </template>
 
 <script lang="ts">
   import { defineComponent, onMounted } from 'vue'
   import { templateRef } from '@vueuse/core'
   import { playVideoFromCache } from '@/utils/video/cacheVideo'
+  import AppBgLayer from '@/components/App/AppBgLayer.vue'
 
   export default defineComponent({
     name: 'referral-bg',
@@ -27,5 +26,13 @@
         playVideoFromCache(videoRef.value, '/referral')
       })
     },
+    components: { AppBgLayer },
   })
 </script>
+
+<style scoped>
+.referral-bg-video {
+  margin-left: auto;
+  aspect-ratio: 20 / 27;
+}
+</style>

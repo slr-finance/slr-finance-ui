@@ -1,10 +1,12 @@
 <template>
   <div
-    class="px-ui-page-spacing pt-ui-page-header-spacing pb-ui-page-bottom-spacing flex relative z-ui-page-content flex-1"
+    class="px-ui-page-spacing pt-ui-page-header-spacing pb-ui-page-bottom-spacing relative flex z-ui-page-content flex-1"
   >
+    <referral-bg v-if="isShownBgVideo" />
+
     <div
       v-if="isShownBackButton"
-      class="pr-ui-page-spacing flex-shrink-0 w-72 box-content flex justify-center items-start"
+      class="relative pr-ui-page-spacing flex-shrink-0 w-72 box-content flex justify-center items-start"
     >
       <ui-button
         size="48"
@@ -20,7 +22,7 @@
         </div>
       </ui-button>
     </div>
-    <div class="flex-1 w-full">
+    <div class="relative flex-1 w-full">
       <connect-wallet-plug>
         <template #plug>
           <referral-page-title :isDesktopLayout="isDesktopLayout" />
@@ -84,11 +86,10 @@
       />
     </div>
   </div>
-  <referral-bg v-if="isShownBgVideo" />
 </template>
 
 <script lang="ts">
-  import { defineComponent, watch } from 'vue'
+  import { defineAsyncComponent, defineComponent, watch } from 'vue'
   import { useHead } from '@vueuse/head'
   import { useBreakpoints, useToggle } from '@vueuse/core'
   import ConnectWalletPlug from '@/components/ConnectWallet/ConnectWalletPlug.vue'
@@ -99,7 +100,6 @@
   import ReferrerRewards from './components/ReferrerRewards.vue'
   import ReferrerAccrualHistory from './components/ReferrerAccrualHistory/ReferrerAccrualHistory.vue'
   import ReferralFaq from './components/ReferralFaq.vue'
-  import ReferralBg from './components/ReferralBg.vue'
   import ReferralPromoState from './components/ReferralPromoState.vue'
   import ReferralFullMobileTable from './components/ReferralFullMobileTable.vue'
   import ReferralPageTitle from './components/ReferralPageTitle.vue'
@@ -156,7 +156,7 @@
       ReferrerRewards,
       ReferrerAccrualHistory,
       ReferralFaq,
-      ReferralBg,
+      ReferralBg: defineAsyncComponent({ loader: () => import('./components/ReferralBg.vue') }),
       ReferralPromoState,
       UiButton,
       UiIcon,
