@@ -4,7 +4,7 @@
       :links="links"
     >
       <ui-footer-token-widget
-        :action="{ name: 'swap' }"
+        :action="{ to: { name: 'swap' } }"
         @wallet-click="handleWalletClick"
       />
     </ui-footer>

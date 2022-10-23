@@ -81,7 +81,7 @@
               from your friends’ swap commission each time your friend makes a transfer!
             </p>
 
-            <ui-link-external> Read more </ui-link-external>
+            <ui-link-external href="#"> Read more </ui-link-external>
           </div>
           <div class="item-sub-block">
             <h3 class="title">Launchpools Referral Rewards</h3>
@@ -95,7 +95,7 @@
               staked in return for more SLR.
             </p>
 
-            <ui-link-external> Read more </ui-link-external>
+            <ui-link-external href="#"> Read more </ui-link-external>
           </div>
           <div class="item-sub-block">
             <h3 class="title">Swaps Referral Rewards</h3>
@@ -109,7 +109,7 @@
               the swap is made.
             </p>
 
-            <ui-link-external> Read more </ui-link-external>
+            <ui-link-external href="#"> Read more </ui-link-external>
           </div>
         </div>
       </div>

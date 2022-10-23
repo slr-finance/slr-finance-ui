@@ -15,6 +15,7 @@
   import { computed, defineComponent, PropType } from 'vue'
   import { UiButton } from '@slr-finance/uikit'
   import { TxState, TxStatus } from '@/hooks/useSendTx'
+import { UiButtonValiantProp, UI_BUTTON_VARIANTS } from '../../../../slr-uikit/src/components/UiButton'
 
   export default defineComponent({
     name: 'send-tx-button',
@@ -39,7 +40,8 @@
         type: Number,
       },
       variant: {
-        validator: (value: string) => ['green-atomic', 'white', 'default', 'violet', 'gray-800', 'red'].includes(value),
+        type: String as PropType<UiButtonValiantProp>,
+        validator: (value: UiButtonValiantProp) => UI_BUTTON_VARIANTS.includes(value),
         default: 'green-atomic',
       },
     },

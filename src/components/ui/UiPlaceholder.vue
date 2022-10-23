@@ -26,8 +26,8 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent } from 'vue'
-  import { UiPoligon } from '@slr-finance/uikit'
+  import { defineComponent, PropType } from 'vue'
+  import { UiPoligon, UiPoligonButtonValiantProp, UI_POLIGON_BUTTON_VARIANTS } from '@slr-finance/uikit'
   import UiIcon from './UiIcon'
 
   export default defineComponent({
@@ -50,8 +50,8 @@
         default: 'ui-icon',
       },
       variant: {
-        type: String,
-        validator: (val: string) => ['white', 'red'].includes(val),
+        type: String as PropType<UiPoligonButtonValiantProp>,
+        validator: (val: UiPoligonButtonValiantProp) => UI_POLIGON_BUTTON_VARIANTS.includes(val),
         default: 'white',
       },
     },
