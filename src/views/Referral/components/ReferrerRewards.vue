@@ -23,7 +23,7 @@
           :txState="claimTxState"
           :loading="isFetching"
           :disabled="!isEnoughReward"
-          size="36"
+          :size="36"
           v-if="isEnoughReward"
         >
           Claim

@@ -12,10 +12,10 @@
 </template>
 
 <script lang="ts">
+  import { UiButtonValiantProp } from '@slr-finance/uikit'
   import { computed, defineComponent, PropType } from 'vue'
-  import { UiButton } from '@slr-finance/uikit'
+  import { UiButton, UI_BUTTON_VARIANTS } from '@slr-finance/uikit'
   import { TxState, TxStatus } from '@/hooks/useSendTx'
-import { UiButtonValiantProp, UI_BUTTON_VARIANTS } from '../../../../slr-uikit/src/components/UiButton'
 
   export default defineComponent({
     name: 'send-tx-button',
