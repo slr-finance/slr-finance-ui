@@ -16,7 +16,7 @@
 
         <ui-button
           variant="gray"
-          size="48"
+          :size="48"
           class="w-full 875:hidden"
           @click="showAllReferrals"
           v-if="isVisibleShowAllButton"
@@ -41,7 +41,7 @@
 <script lang="ts">
   import { defineComponent, PropType } from 'vue'
   import UiWidget from '@/components/ui/UiWidget.vue'
-  import UiButton from '@/components/ui/UiButton.vue'
+  import { UiButton } from '@slr-finance/uikit'
   import UiIcon from '@/components/ui/UiIcon'
   import UiPlaceholder from '@/components/ui/UiPlaceholder.vue'
   import { useBreakpoints } from '@vueuse/core'

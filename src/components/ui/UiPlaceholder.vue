@@ -1,8 +1,8 @@
 <template>
   <div class="flex flex-col justify-center items-center text-center leading-192">
     <ui-poligon
-      corners="6"
-      size="50"
+      :corners="6"
+      :size="50"
       class="mb-12"
       opacity
       :variant="variant"
@@ -27,7 +27,7 @@
 
 <script lang="ts">
   import { defineComponent } from 'vue'
-  import UiPoligon from './UiPoligon.vue'
+  import { UiPoligon } from '@slr-finance/uikit'
   import UiIcon from './UiIcon'
 
   export default defineComponent({

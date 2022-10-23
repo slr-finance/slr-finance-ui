@@ -34,7 +34,7 @@
             :txState="stakeTxState"
             :disabled="false"
             class="w-full"
-            size="48"
+            :size="48"
             variant="violet"
           >
             Stake on {{ daysStr }}
@@ -47,7 +47,7 @@
 
 <script lang="ts">
   import { computed, defineComponent, Ref, ref, toRef, watch } from 'vue'
-  import UiButton from '@/components/ui/UiButton.vue'
+  import { UiButton } from '@slr-finance/uikit'
   import SlrBalanceInput from './SlrBalanceInput.vue'
   import ConnectWalletPlug from '@/components/ConnectWallet/ConnectWalletPlug.vue'
   import ApproveTokenPlug from '@/components/ApproveToken/ApproveTokenPlug.vue'

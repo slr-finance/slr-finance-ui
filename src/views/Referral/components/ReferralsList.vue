@@ -40,7 +40,7 @@
   import UiTable from '@/components/ui/UiTable.vue'
   import UiWidget from '@/components/ui/UiWidget.vue'
   import UiPlaceholder from '@/components/ui/UiPlaceholder.vue'
-  import UiGalaxyLoader from '@/components/ui/UiGalaxyLoader.vue'
+  import { UiGalaxyLoader } from '@slr-finance/uikit'
   import { useReferralsList } from '../hooks/useReferralsList'
 
   export default defineComponent({

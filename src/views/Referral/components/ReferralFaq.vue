@@ -116,8 +116,8 @@
 
 <script lang="ts">
   import { defineComponent } from 'vue'
-  import UiAccordion from '@/components/ui/UiAccordion.vue'
-  import UiTextPlaceholder from '@/components/ui/UiTextPlaceholder.vue'
+  import { UiAccordion } from '@slr-finance/uikit'
+  import { UiTextPlaceholder } from '@slr-finance/uikit'
   import { useReferrerPercentRewards } from '../hooks/useReferrerPercentRewards'
   import AnyOtherQuestions from '@/components/AnyOtherQuestions.vue'
 

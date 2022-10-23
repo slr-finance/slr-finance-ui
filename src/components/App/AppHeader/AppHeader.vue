@@ -18,9 +18,8 @@
 
 <script lang="ts">
   import { defineComponent } from 'vue'
-  import type { UiLinkProps } from '@/components/ui/UiLink.vue'
-  import UiButton from '@/components/ui/UiButton.vue'
-  import UiHeader from '@/components/ui/UiHeader'
+  import type { UiLinkProps } from '@slr-finance/uikit'
+  import { UiButton, UiHeader } from '@slr-finance/uikit'
   import ConnectWallet from '@/components/ConnectWallet/ConnectWallet.vue'
   import AppHeaderMobileTokenPrice from './AppHeaderMobileTokenPrice.vue'
 

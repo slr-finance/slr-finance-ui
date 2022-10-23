@@ -3,7 +3,7 @@
     <div class="flex items-center mb-32">
       <ui-button
         class="mr-12"
-        size="48"
+        :size="48"
         variant="gray"
         @click="handleClose"
       >
@@ -23,7 +23,7 @@
 </template>
 
 <script lang="ts">
-  import UiButton from '@/components/ui/UiButton.vue'
+  import { UiButton } from '@slr-finance/uikit'
   import UiIcon from '@/components/ui/UiIcon/UiIcon.vue'
   import { defineComponent } from 'vue'
 

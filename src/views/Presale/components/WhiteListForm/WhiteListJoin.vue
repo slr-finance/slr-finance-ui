@@ -18,7 +18,7 @@
       <send-tx-button
         class="w-full"
         variant="violet"
-        size="48"
+        :size="48"
         :txState="joinTxState"
         @click="handleJoin"
       >

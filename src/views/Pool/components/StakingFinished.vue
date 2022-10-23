@@ -21,7 +21,7 @@
         :to="{ name: nextPool.routeName }"
         class="mb-12 w-full"
         variant="violet"
-        size="48"
+        :size="48"
       >
         Migrate to {{ nextPool.name }} pool without fee
       </ui-button>
@@ -31,7 +31,7 @@
         :tx-state="unstakeTxState"
         class="mb-12 w-full"
         variant="violet"
-        size="48"
+        :size="48"
       >
         Withdrawal to wallet
       </send-tx-button>
@@ -45,7 +45,7 @@
 
 <script lang="ts">
   import SendTxButton from '@/components/Tx/SendTxButton.vue'
-  import UiButton from '@/components/ui/UiButton.vue'
+  import { UiButton, UiPoligon } from '@slr-finance/uikit'
   import { useStakerState } from '../hooks/useStakerState'
   import { computed, defineComponent, toRef, watch } from 'vue'
   import { usePoolInfo } from '../hooks/usePoolInfo'
@@ -54,7 +54,6 @@
   import { usePoolState } from '../hooks/usePoolState'
   import { usePercentFormat } from '@/hooks/formatters/usePercentFormat'
   import StakerInfo from './StakerInfo.vue'
-  import UiPoligon from '@/components/ui/UiPoligon.vue'
   import UiAlert from '@/components/ui/UiAlert.vue'
   import { MAX_POOL_ID } from '@/config/constants/Pools'
 

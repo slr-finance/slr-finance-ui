@@ -1,17 +1,17 @@
 <template>
-  <ui-external-link
+  <ui-link-external
     :href="`https://pancake.kiemtienonline360.com/#/swap?outputCurrency=${tokenAddress}`"
     rel="noopener noreferrer"
     target="_blank"
   >
     <slot />
-  </ui-external-link>
+  </ui-link-external>
 </template>
 
 <script lang="ts">
   import { defineComponent } from 'vue'
   import contractsAddresses from '@/config/constants/contractsAddresses'
-  import UiExternalLink from '@/components/ui/UiExternalLink.vue'
+  import { UiLinkExternal } from '@slr-finance/uikit'  
 
   export default defineComponent({
     name: 'link-to-dex',
@@ -20,6 +20,6 @@
         tokenAddress: contractsAddresses.SolarToken,
       }
     },
-    components: { UiExternalLink },
+    components: { UiLinkExternal },
   })
 </script>

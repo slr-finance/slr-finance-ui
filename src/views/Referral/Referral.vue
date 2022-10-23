@@ -9,7 +9,7 @@
       class="relative pr-ui-page-spacing flex-shrink-0 w-72 box-content flex justify-center items-start"
     >
       <ui-button
-        size="48"
+        :size="48"
         variant="gray"
         :to="{ name: 'dashboard' }"
       >
@@ -93,7 +93,7 @@
   import { useHead } from '@vueuse/head'
   import { useBreakpoints, useToggle } from '@vueuse/core'
   import ConnectWalletPlug from '@/components/ConnectWallet/ConnectWalletPlug.vue'
-  import UiButton from '@/components/ui/UiButton.vue'
+  import { UiButton } from '@slr-finance/uikit'
   import UiIcon from '@/components/ui/UiIcon'
   import ReferralsList from './components/ReferralsList.vue'
   import ReferralLinkBlock from './components/ReferralLinkBlock.vue'

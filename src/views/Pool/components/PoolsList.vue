@@ -35,7 +35,7 @@
   import { POOLS_INFO } from '@/config/constants/Pools'
   import { computedEager, templateRef, useElementSize, useWindowSize } from '@vueuse/core'
   import UiIcon from '@/components/ui/UiIcon'
-  import { useHeader } from '@/components/ui/UiHeader/hooks/useHeader'
+  import { useUiHeader } from '@slr-finance/uikit'
   import { useMobileBottomNavigation } from '@/components/App/AppMobileBottomNavigation/hooks/useMobileBottomNavigation'
 
   const poolsLinks = POOLS_INFO.map((pool) => {
@@ -55,7 +55,7 @@
       },
     },
     setup(props) {
-      const { size: headerSize } = useHeader()
+      const { size: headerSize } = useUiHeader()
       const { size: bottomNavSize } = useMobileBottomNavigation()
       const navElement = templateRef('nav')
       const { height } = useWindowSize()

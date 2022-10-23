@@ -9,7 +9,7 @@
       :loading="isFetchingAllowance"
       class="w-full"
       variant="white"
-      size="48"
+      :size="48"
     >
       {{ text }}
     </send-tx-button>
@@ -22,7 +22,7 @@
   import BigNumber from 'bignumber.js'
   import { useApprove } from '@/hooks/token/useApprove'
   import { useAllowance } from '@/hooks/token/useAllowance'
-  import UiButton from '@/components/ui/UiButton.vue'
+  import { UiButton } from '@slr-finance/uikit'
   import SendTxButton from '../Tx/SendTxButton.vue'
 
   export default defineComponent({

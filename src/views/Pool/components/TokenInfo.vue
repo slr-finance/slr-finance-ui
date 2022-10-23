@@ -21,7 +21,7 @@
   import { defineComponent } from 'vue'
   import { useUsdFormat } from '@/hooks/formatters/useUsdFormat'
   import { useSlrPrice } from '@/hooks/dapp/useSlrPrice'
-  import UiPoligonButton from '@/components/ui/UiPoligonButton.vue'
+  import { UiPoligonButton } from '@slr-finance/uikit'
 
   export default defineComponent({
     name: 'token-info',

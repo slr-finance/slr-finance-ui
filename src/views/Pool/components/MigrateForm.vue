@@ -62,7 +62,7 @@
           <send-tx-button
             @click="handleMigrate"
             class="w-full"
-            size="48"
+            :size="48"
             variant="violet"
             :tx-state="migrateTxState"
             :disabled="buttonData.isDisabled"
@@ -80,9 +80,8 @@
   import BigNumber from 'bignumber.js'
   import contractsAddresses from '@/config/constants/contractsAddresses'
   import SendTxButton from '@/components/Tx/SendTxButton.vue'
-  import UiButton from '@/components/ui/UiButton.vue'
+  import { UiButton, UiPoligon } from '@slr-finance/uikit'
   import UiIcon from '@/components/ui/UiIcon'
-  import UiPoligon from '@/components/ui/UiPoligon.vue'
   import UiAlert from '@/components/ui/UiAlert.vue'
   import ApproveTokenPlug from '@/components/ApproveToken/ApproveTokenPlug.vue'
   import InsufficientBalancePlug from '@/components/ApproveToken/InsufficientBalancePlug.vue'

@@ -5,7 +5,7 @@
     <div class="caption">achievement name</div>
     <img
       class="nft max-h-full"
-      src="https://cdn3d.iconscout.com/3d/premium/thumb/armor-nft-4976763-4151896.png"
+      src="https://i0.wp.com/wax.guide/wp-content/uploads/2021/05/shinycard.gif?fit=200%2C280&ssl=1"
     />
     <div class="action">
       <div>
@@ -16,7 +16,7 @@
       </div>
       <ui-button
         variant="violet"
-        size="40"
+        :size="40"
       >
         Mint Achive
       </ui-button>
@@ -26,7 +26,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import UiButton from '@/components/ui/UiButton.vue'
+import { UiButton } from '@slr-finance/uikit'
 
 export default defineComponent({
   name: 'achievement-card',

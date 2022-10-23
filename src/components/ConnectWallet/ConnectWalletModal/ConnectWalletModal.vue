@@ -18,8 +18,7 @@
 
 <script lang="ts">
   import { defineComponent, defineAsyncComponent, ref } from 'vue'
-  import UiGalaxyLoader from '@/components/ui/UiGalaxyLoader.vue'
-  import UiModal from '@/components/ui/UiModal.vue'
+  import { UiGalaxyLoader, UiModal } from '@slr-finance/uikit'
   import NoInternetConnection from '@/components/NoInternetConnection.vue'
   import { useConnectWalletModal } from '../hooks/useConnectWalletModal'
 

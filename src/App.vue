@@ -15,7 +15,7 @@
 <script lang="ts">
   import { defineAsyncComponent, defineComponent, watch } from 'vue'
   import { useBreakpoints } from '@vueuse/core'
-  import { HeaderType, useHeader } from '@/components/ui/UiHeader/hooks/useHeader'
+  import { UiHeaderType, useUiHeader } from '@slr-finance/uikit'
   import UiToast from '@/components/ui/UiToast'
   import AppHeader from '@/components/App/AppHeader/AppHeader.vue'
   import AppMobileBottomNavigation from '@/components/App/AppMobileBottomNavigation/AppMobileBottomNavigation.vue'
@@ -47,11 +47,11 @@
         isDesktopLayout: 580,
       })
 
-      const { setHeaderType } = useHeader()
+      const { setHeaderType } = useUiHeader()
 
       watch(
         isDesktopLayout,
-        (isDesktopVal) => setHeaderType(isDesktopVal ? HeaderType.DEFAULT_DESKTOP : HeaderType.DEFAULT_MOBILE),
+        (isDesktopVal) => setHeaderType(isDesktopVal ? UiHeaderType.DEFAULT_DESKTOP : UiHeaderType.DEFAULT_MOBILE),
         { immediate: true },
       )
 

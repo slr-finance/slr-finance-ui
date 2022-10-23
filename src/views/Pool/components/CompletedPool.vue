@@ -23,7 +23,7 @@
         </template>
 
         <ui-button
-          size="48"
+          :size="48"
           class="w-full"
           variant="violet"
           :to="{ name: stakerPool.routeName }"
@@ -37,10 +37,8 @@
 
 <script lang="ts">
   import { computed, defineComponent } from 'vue'
-  import UiButton from '@/components/ui/UiButton.vue'
+  import { UiButton, UiPoligon } from '@slr-finance/uikit'
   import UiPlaceholder from '@/components/ui/UiPlaceholder.vue'
-  import UiPoligon from '@/components/ui/UiPoligon.vue'
-
   import { useStakerState } from '../hooks/useStakerState'
   import { usePoolInfo } from '../hooks/usePoolInfo'
   import { useTokenAmountFormat } from '@/hooks/formatters/useTokenAmountFormat'

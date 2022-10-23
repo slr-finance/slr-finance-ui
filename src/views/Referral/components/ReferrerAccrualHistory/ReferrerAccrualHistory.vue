@@ -29,7 +29,7 @@
   import { defineComponent } from 'vue'
   import { useBreakpoints } from '@vueuse/core'
   import UiPlaceholder from '@/components/ui/UiPlaceholder.vue'
-  import UiGalaxyLoader from '@/components/ui/UiGalaxyLoader.vue'
+  import { UiGalaxyLoader } from '@slr-finance/uikit'
   import ReferrerAccrualHistoryTableAsync from './ReferrerAccrualHistoryTableAsync'
   import ReferrerAccrualHistoryTableMobileAsync from './ReferrerAccrualHistoryTableMobileAsync'
 

@@ -12,7 +12,7 @@
   import { computed, defineComponent } from 'vue'
   import { useEthers } from '@/hooks/dapp/useEthers'
   import { shortenAddress } from '@/utils/address/shortenAddress'
-  import UiButton from '@/components/ui/UiButton.vue'
+  import { UiButton } from '@slr-finance/uikit'
   import ConnectWalletPlug from './ConnectWalletPlug.vue'
   import { useSlrBalance } from '@/hooks/dapp/useSlrBalance'
   import { useTokenAmountFormat } from '@/hooks/formatters/useTokenAmountFormat'

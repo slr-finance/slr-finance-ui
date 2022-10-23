@@ -3,7 +3,7 @@
     :min="poolState.minDays"
     :max="poolState.maxDays"
     :step="1"
-    :fetching="!isFetched"
+    :is-loading="!isFetched"
     v-model:value="days"
   >
     <template #value="{ value }"> {{ value }} days </template>
@@ -13,7 +13,7 @@
 <script lang="ts">
   import { defineComponent, watch, toRef, ref } from 'vue'
   import { useVModel } from '@vueuse/core'
-  import UiInputRange from '@/components/ui/UiInputRange.vue'
+  import { UiInputRange } from '@slr-finance/uikit'
   import { usePoolState } from '../hooks/usePoolState'
 
   export default defineComponent({

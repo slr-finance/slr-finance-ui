@@ -12,8 +12,7 @@
   import { computed, defineComponent } from 'vue'
   import { useOwnInviter } from '@/hooks/useOwnInviter'
   import { shortenAddress } from '@/utils/address/shortenAddress'
-  import UiTextPlaceholder from '@/components/ui/UiTextPlaceholder.vue'
-
+  import { UiTextPlaceholder } from '@slr-finance/uikit'
   export default defineComponent({
     name: 'own-inviter',
     setup() {

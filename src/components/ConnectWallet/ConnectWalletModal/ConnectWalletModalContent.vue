@@ -7,7 +7,7 @@
       />
     </transition>
 
-    <div v-if="isOpenQr">
+    <!-- <div v-if="isOpenQr">
       <client-only>
         <ui-qr
           :data="walletConnectUri"
@@ -24,10 +24,9 @@
         wallet="trustwallet"
         :uri="walletConnectUri"
       />
-    </div>
+    </div> -->
 
     <div
-      v-else
       class="flex flex-col space-y-16"
     >
       <connect-button
@@ -46,12 +45,12 @@
           </span>
         </transition>
       </connect-button>
-      <connect-button
+      <!-- <connect-button
         @click="handleConnectWalletconnect"
         label="WalletConnect"
         iconName="walletConnect"
         description="Connect wallet with QR code scanning or deep linking."
-      />
+      /> -->
     </div>
   </div>
 </template>
@@ -62,7 +61,7 @@
   import { useVModel } from '@vueuse/core'
   import { useWallet } from '@/hooks/dapp/useWallet'
   import { NETWORK_DETAILS } from '@/config/constants/chain'
-  import UiGalaxyLoader from '@/components/ui/UiGalaxyLoader.vue'
+  import { UiGalaxyLoader } from '@slr-finance/uikit'
   import { useConnectWalletModal } from '../hooks/useConnectWalletModal'
   import ConnectButton from './ConnectButton.vue'
   import { Metamask } from '@/utils/wallet/Metamask'

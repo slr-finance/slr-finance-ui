@@ -58,9 +58,8 @@
 <script lang="ts">
   import { computed, defineComponent, ref, unref } from 'vue'
   import { MAX_POOL_ID, POOLS_INFO } from '@/config/constants/Pools'
-  import UiButton from '@/components/ui/UiButton.vue'
+  import { UiButton, UiTextPlaceholder } from '@slr-finance/uikit'
   import UiIcon from '@/components/ui/UiIcon'
-  import UiTextPlaceholder from '@/components/ui/UiTextPlaceholder.vue'
   import { usePoolState } from '../hooks/usePoolState'
   import { usePoolsState } from '../hooks/usePoolsState'
   import { BIG_ZERO } from '@/utils/bigNumber'

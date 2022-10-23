@@ -29,9 +29,7 @@
 
 <script lang="ts">
   import { defineAsyncComponent, defineComponent } from 'vue'
-  import UiButton from '@/components/ui/UiButton.vue'
-  import UiPoligon from '@/components/ui/UiPoligon.vue'
-  import UiGalaxyLoader from '@/components/ui/UiGalaxyLoader.vue'
+  import { UiButton, UiGalaxyLoader, UiPoligon } from '@slr-finance/uikit'
   import PresaleTime from './PresaleTime.vue'
   import { usePresale } from '../../hooks/usePresale'
 

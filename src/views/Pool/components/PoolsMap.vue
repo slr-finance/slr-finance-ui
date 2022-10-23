@@ -43,7 +43,7 @@
 <script lang="ts">
   import { computed, defineComponent } from 'vue'
   import UiIcon from '@/components/ui/UiIcon'
-  import UiTextPlaceholder from '@/components/ui/UiTextPlaceholder.vue'
+  import { UiTextPlaceholder } from '@slr-finance/uikit'
   import { usePoolsState } from '../hooks/usePoolsState'
   import { useStakerState } from '../hooks/useStakerState'
 

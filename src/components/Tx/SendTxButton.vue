@@ -13,7 +13,7 @@
 
 <script lang="ts">
   import { computed, defineComponent, PropType } from 'vue'
-  import UiButton from '@/components/ui/UiButton.vue'
+  import { UiButton } from '@slr-finance/uikit'
   import { TxState, TxStatus } from '@/hooks/useSendTx'
 
   export default defineComponent({
@@ -36,7 +36,7 @@
         required: true,
       },
       size: {
-        type: [Number, String],
+        type: Number,
       },
       variant: {
         validator: (value: string) => ['green-atomic', 'white', 'default', 'violet', 'gray-800', 'red'].includes(value),

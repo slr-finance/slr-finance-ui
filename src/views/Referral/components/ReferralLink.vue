@@ -22,7 +22,7 @@
   import { defineComponent, PropType } from 'vue'
   import { useClipboard } from '@vueuse/core'
   import UiIcon from '@/components/ui/UiIcon'
-  import UiTextPlaceholder from '@/components/ui/UiTextPlaceholder.vue'
+  import { UiTextPlaceholder } from '@slr-finance/uikit'  
   import { useUiToast } from '@/components/ui/UiToast'
 
   export default defineComponent({

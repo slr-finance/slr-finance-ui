@@ -11,7 +11,7 @@
     </ui>
     <ui-button
       variant="violet"
-      size="40"
+      :size="40"
     >
       Claim rewarded
     </ui-button>
@@ -19,7 +19,7 @@
 </template>
 
 <script lang="ts">
-import UiButton from '@/components/ui/UiButton.vue'
+import { UiButton } from '@slr-finance/uikit'
 import { defineComponent } from 'vue'
 
 export default defineComponent({

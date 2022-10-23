@@ -39,7 +39,7 @@
           <ui-button
             :to="{ name: 'presale' }"
             variant="violet"
-            size="48"
+            :size="48"
             class="w-full mt-28"
           >
             Go to presale
@@ -58,7 +58,7 @@
   import { useSlrPrice } from '@/hooks/dapp/useSlrPrice'
   import { useMilkyWayInfo } from './hooks/useMilkyWayInfo'
   import { useTotalStakedInAllPools } from '@/views/Pool/hooks/useTotalStakedInAllPools'
-  import UiButton from '@/components/ui/UiButton.vue'
+  import { UiButton } from '@slr-finance/uikit'
   import PresaleInformation from '@/views/Presale/components/PresaleInformation'
   import DashboardTokenCharts from './components/DashboardTokenCharts.vue'
   import DashboardContainer from './components/DashboardContainer.vue'

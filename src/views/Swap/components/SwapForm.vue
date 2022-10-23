@@ -45,7 +45,7 @@
               :txState="swapTxState"
               :disabled="isDissableSwapButton"
               class="w-full"
-              size="48"
+              :size="48"
               variant="violet"
             >
               {{ swapButtonText }}
@@ -80,7 +80,7 @@
   import contractsAddresses from '@/config/constants/contractsAddresses'
 
   import UiBalanceInput from '@/components/ui/UiBalanceInput.vue'
-  import UiButton from '@/components/ui/UiButton.vue'
+  import { UiButton } from '@slr-finance/uikit'
 
   import ApproveTokenPlug from '@/components/ApproveToken/ApproveTokenPlug.vue'
   import ConnectWalletPlug from '@/components/ConnectWallet/ConnectWalletPlug.vue'

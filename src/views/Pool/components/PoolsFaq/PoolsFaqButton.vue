@@ -16,7 +16,7 @@
 <script lang="ts">
   import { defineComponent } from 'vue'
   import AppFloatButton from '@/components/App/AppFloatButton/AppFloatButton.vue'
-  import UiButton from '@/components/ui/UiButton.vue'
+  import { UiButton } from '@slr-finance/uikit'
   import UiIcon from '@/components/ui/UiIcon/UiIcon.vue'
   import { usePoolsFaqModal } from './hooks/usePoolsFaqModal'
 

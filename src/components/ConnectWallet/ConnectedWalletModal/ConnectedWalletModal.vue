@@ -65,7 +65,7 @@
     </div>
     <ui-button
       variant="gray"
-      size="40"
+      :size="40"
       class="w-full mt-16"
       @click="handleDisconnect"
     >
@@ -77,9 +77,8 @@
 <script lang="ts">
   import { computed, defineComponent, unref } from 'vue'
   import { useConnectedWalletModal } from '../hooks/useConnectedWalletModal'
-  import UiModal from '@/components/ui/UiModal.vue'
   import UiIcon from '@/components/ui/UiIcon'
-  import UiButton from '@/components/ui/UiButton.vue'
+  import { UiButton, UiModal } from '@slr-finance/uikit'
   import { useUiToast } from '@/components/ui/UiToast'
   import { shortenAddress } from '@/utils/address/shortenAddress'
   import { useEthers } from '@/hooks/dapp/useEthers'

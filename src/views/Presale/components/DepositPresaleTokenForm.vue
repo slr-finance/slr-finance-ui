@@ -6,7 +6,7 @@
       @click="handleDeposit"
       :txState="depositPresaleTokenTxState"
       :disabled="isDisabled"
-      size="48"
+      :size="48"
     >
       Get SOLAR tokens
     </send-tx-button>
@@ -22,7 +22,7 @@
   import { useSlrBalance } from '@/hooks/dapp/useSlrBalance'
   import contractsAddresses from '@/config/constants/contractsAddresses'
   import { useTokenAmountFormat } from '@/hooks/formatters/useTokenAmountFormat'
-  import UiGalaxyLoader from '@/components/ui/UiGalaxyLoader.vue'
+  import { UiGalaxyLoader } from '@slr-finance/uikit'
 
   export default defineComponent({
     components: { SendTxButton, UiGalaxyLoader },

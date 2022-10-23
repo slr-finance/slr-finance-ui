@@ -19,7 +19,7 @@
         <div class="space-x-6">
           <ui-button
             variant="violet"
-            size="40"
+            :size="40"
             @click="() => handleOpenAddForm()"
           >
             <ui-icon
@@ -31,7 +31,7 @@
 
           <ui-button
             variant="gray"
-            size="40"
+            :size="40"
             @click="() => handleOpenRewardForm()"
           >
             <ui-icon
@@ -79,10 +79,8 @@
 <script lang="ts">
   import { defineComponent, computed, watch } from 'vue'
   import { useInterval, useToggle, useTransition } from '@vueuse/core'
-  import UiButton from '@/components/ui/UiButton.vue'
+  import { UiButton, UiPoligon, UiModal } from '@slr-finance/uikit'
   import UiIcon from '@/components/ui/UiIcon'
-  import UiPoligon from '@/components/ui/UiPoligon.vue'
-  import UiModal from '@/components/ui/UiModal.vue'
   import { useStakerState } from '../../hooks/useStakerState'
   import { useTokenAmountFormat } from '@/hooks/formatters/useTokenAmountFormat'
   import WithdrawalWithFeeModal from './WithdrawalWithFeeModal.vue'

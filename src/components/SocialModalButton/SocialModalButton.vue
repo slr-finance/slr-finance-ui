@@ -24,9 +24,8 @@
 <script lang="ts">
   import { defineAsyncComponent, defineComponent } from 'vue'
   import { useToggle } from '@vueuse/shared'
-  import UiGalaxyLoader from '@/components/ui/UiGalaxyLoader.vue'
+  import { UiGalaxyLoader, UiModal } from '@slr-finance/uikit'
   import UiIcon from '@/components/ui/UiIcon'
-  import UiModal from '@/components/ui/UiModal.vue'
   import NoInternetConnection from '@/components/NoInternetConnection.vue'
   import AppFloatButton from '@/components/App/AppFloatButton/AppFloatButton.vue'
 

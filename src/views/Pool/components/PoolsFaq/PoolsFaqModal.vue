@@ -34,8 +34,7 @@
 
 <script lang="ts">
   import { defineComponent } from 'vue'
-  import UiModal from '@/components/ui/UiModal.vue'
-  import UiAccordion from '@/components/ui/UiAccordion.vue'
+  import { UiAccordion, UiModal } from '@slr-finance/uikit'
   import AnyOtherQuestions from '@/components/AnyOtherQuestions.vue'
   import PoolsFaqSteps from './PoolsFaqSteps.vue'
   import { usePoolsFaqModal } from './hooks/usePoolsFaqModal'

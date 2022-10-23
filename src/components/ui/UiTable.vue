@@ -43,7 +43,7 @@
     >
       <ui-button
         variant="gray"
-        size="48"
+        :size="48"
         class="w-full 875:hidden"
         @click="$emit('showAll')"
       >
@@ -66,7 +66,7 @@
 <script lang="ts">
   import { computed, watch, PropType, defineComponent } from 'vue'
   import { templateRef, useVirtualList } from '@vueuse/core'
-  import UiButton from './UiButton.vue'
+  import { UiButton } from '@slr-finance/uikit'
   import UiIcon from './UiIcon/UiIcon.vue'
 
   export default defineComponent({

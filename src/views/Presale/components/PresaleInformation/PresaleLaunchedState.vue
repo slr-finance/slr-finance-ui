@@ -35,7 +35,7 @@
 
 <script lang="ts">
   import { computed, defineComponent } from 'vue'
-  import UiProgress from '@/components/ui/UiProgress.vue'
+  import { UiProgress } from '@slr-finance/uikit'
   import PresalePrice from '../PresalePrice.vue'
   import { usePresale } from '../../hooks/usePresale'
 

@@ -5,7 +5,7 @@
       <achievement-score class="flex-1"/>
       <ui-button
         variant="violet"
-        size="48"
+        :size="48"
       >
         Claim Reward
       </ui-button>
@@ -14,7 +14,7 @@
 </template>
 
 <script lang="ts">
-import UiButton from '@/components/ui/UiButton.vue'
+import { UiButton } from '@slr-finance/uikit'
 import { defineComponent } from 'vue'
 import AchievementScore from './AchievementScore.vue'
 

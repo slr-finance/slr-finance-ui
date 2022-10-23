@@ -4,7 +4,7 @@
 
 <script lang="ts">
   import { defineAsyncComponent, defineComponent } from 'vue'
-  import UiGalaxyLoader from '@/components/ui/UiGalaxyLoader.vue'
+  import { UiGalaxyLoader } from '@slr-finance/uikit'
 
   export default defineComponent({
     name: 'dashboard-token-charts',

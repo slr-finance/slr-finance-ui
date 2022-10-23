@@ -8,7 +8,7 @@
     >
       <ui-button
         class="w-full"
-        size="48"
+        :size="48"
         variant="violet"
         :to="activePoolLink"
       >
@@ -20,7 +20,7 @@
 
 <script lang="ts">
   import { computed, defineComponent, toRef } from 'vue'
-  import UiButton from '@/components/ui/UiButton.vue'
+  import { UiButton } from '@slr-finance/uikit'
   import UiPlaceholder from '@/components/ui/UiPlaceholder.vue'
   import { useStakerState } from '../hooks/useStakerState'
   import { usePoolInfo } from '../hooks/usePoolInfo'

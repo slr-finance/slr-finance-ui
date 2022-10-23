@@ -54,7 +54,7 @@
           @click="handleBuy"
           :txState="buyTxState"
           :disabled="buttonData.disabled"
-          size="40"
+          :size="40"
           variant="violet"
         >
           {{ buttonData.text }}
@@ -77,7 +77,7 @@
   import { useEthers } from '@/hooks/dapp/useEthers'
   import { usePresale } from '../hooks/usePresale'
   import { useWhiteList } from '../hooks/useWhiteList'
-  import UiGalaxyLoader from '@/components/ui/UiGalaxyLoader.vue'
+  import { UiGalaxyLoader } from '@slr-finance/uikit'
 
   export default defineComponent({
     setup() {

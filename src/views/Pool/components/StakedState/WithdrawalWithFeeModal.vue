@@ -40,7 +40,7 @@
     <send-tx-button
       @click="handleUnstakeWithFee"
       :txState="unstakeWithFeeTxState"
-      size="48"
+      :size="48"
       variant="red"
       class="w-full"
     >
@@ -60,7 +60,7 @@
   import SendTxButton from '@/components/Tx/SendTxButton.vue'
   import UiPlaceholder from '@/components/ui/UiPlaceholder.vue'
   import UiIcon from '@/components/ui/UiIcon'
-  import UiModal from '@/components/ui/UiModal.vue'
+  import { UiModal } from '@slr-finance/uikit'
   import { usePoolState } from '../../hooks/usePoolState'
   import { useStakerState } from '../../hooks/useStakerState'
   import { useUnstakeWithFee } from '../../hooks/useUnstakeWithFee'

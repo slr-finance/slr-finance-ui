@@ -7,7 +7,7 @@
 
     <ui-button
       :to="{name: 'dashboard'}"
-      size="48"
+      :size="48"
       variant="violet"
     >
       Go to Dashboard
@@ -18,7 +18,7 @@
 <script lang="ts">
   import { defineComponent } from 'vue'
   import { useHead } from '@vueuse/head'
-  import UiButton from '@/components/ui/UiButton.vue'
+  import { UiButton } from '@slr-finance/uikit'
 
   export default defineComponent({
     setup() {
