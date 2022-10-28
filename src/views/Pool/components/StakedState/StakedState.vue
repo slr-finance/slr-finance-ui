@@ -7,7 +7,7 @@
     >
       Active
     </ui-poligon>
-    <div class="ui-box-corners">
+    <ui-box-corners class="p-12">
       <div class="flex justify-between pt-18 mb-24">
         <div>
           <div class="text-12 uppercase text-white text-opacity-60 leading-none mb-8">SLR Staked</div>
@@ -22,11 +22,7 @@
             :size="40"
             @click="() => handleOpenAddForm()"
           >
-            <ui-icon
-              name="plus"
-              size="10"
-              class="text-white"
-            />
+            <ui-icon-plus class="text-white w-10 h-10"/>
           </ui-button>
 
           <ui-button
@@ -34,11 +30,7 @@
             :size="40"
             @click="() => handleOpenRewardForm()"
           >
-            <ui-icon
-              name="minus"
-              size="10"
-              class="text-white"
-            />
+            <ui-icon-minus class="text-white w-10 h-10"/>
           </ui-button>
         </div>
       </div>
@@ -63,7 +55,7 @@
           </div>
         </div>
       </div>
-    </div>
+    </ui-box-corners>
   </div>
 
   <ui-modal
@@ -79,8 +71,7 @@
 <script lang="ts">
   import { defineComponent, computed, watch } from 'vue'
   import { useInterval, useToggle, useTransition } from '@vueuse/core'
-  import { UiButton, UiPoligon, UiModal } from '@slr-finance/uikit'
-  import UiIcon from '@/components/ui/UiIcon'
+  import { UiButton, UiPoligon, UiModal, UiBoxCorners, UiIconPlus, UiIconMinus } from '@slr-finance/uikit'
   import { useStakerState } from '../../hooks/useStakerState'
   import { useTokenAmountFormat } from '@/hooks/formatters/useTokenAmountFormat'
   import WithdrawalWithFeeModal from './WithdrawalWithFeeModal.vue'
@@ -135,9 +126,12 @@
     },
     components: {
       UiButton,
-      UiIcon,
       UiPoligon,
       UiModal,
+      UiIconPlus,
+      UiIconMinus,
+      UiBoxCorners,
+
       WithdrawalWithFeeModal,
       StakeMoreModal,
     },

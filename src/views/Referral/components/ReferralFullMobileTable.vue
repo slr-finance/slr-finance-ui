@@ -7,12 +7,7 @@
         variant="gray"
         @click="handleClose"
       >
-        <ui-icon
-          class="arrow"
-          name="arrow-pixel"
-          :rotate="90"
-          size="8"
-        />
+        <ui-icon-pixel-arrow  class="arrow transform rotate-90 w-8 h-8"/>
       </ui-button>
 
       <slot name="title" />
@@ -23,8 +18,7 @@
 </template>
 
 <script lang="ts">
-  import { UiButton } from '@slr-finance/uikit'
-  import UiIcon from '@/components/ui/UiIcon/UiIcon.vue'
+  import { UiButton, UiIconPixelArrow } from '@slr-finance/uikit'
   import { defineComponent } from 'vue'
 
   export default defineComponent({
@@ -35,6 +29,6 @@
       return { handleClose }
     },
     emits: ['close'],
-    components: { UiButton, UiIcon },
+    components: { UiButton, UiIconPixelArrow },
   })
 </script>

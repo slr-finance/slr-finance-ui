@@ -2,17 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer components {
-  .ui-box-corners {
-    @apply overflow-hidden relative p-12;
-  }
-
-  .ui-box-corners::after {
-    content: '';
-    @apply w-full h-full -left-2 -top-2 p-1 absolute border border-white border-opacity-60 block box-content rounded-18 pointer-events-none select-none;
-  }
-}
-
 #app {
   display: contents;
 }

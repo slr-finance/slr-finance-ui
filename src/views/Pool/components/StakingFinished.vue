@@ -8,9 +8,9 @@
       Ended
     </ui-poligon>
 
-    <div
+    <ui-box-corners
       v-if="poolId === stakerState.poolId"
-      class="ui-box-corners"
+      class="p-12"
     >
       <staker-info
         :poolId="poolId"
@@ -39,13 +39,13 @@
       <ui-alert class="text-red">
         When withdrawing, farming is possible only from the first pool without the ability to return to the end point
       </ui-alert>
-    </div>
+    </ui-box-corners>
   </div>
 </template>
 
 <script lang="ts">
   import SendTxButton from '@/components/Tx/SendTxButton.vue'
-  import { UiButton, UiPoligon } from '@slr-finance/uikit'
+  import { UiButton, UiPoligon, UiBoxCorners } from '@slr-finance/uikit'
   import { useStakerState } from '../hooks/useStakerState'
   import { computed, defineComponent, toRef, watch } from 'vue'
   import { usePoolInfo } from '../hooks/usePoolInfo'
@@ -91,6 +91,6 @@
         unstakeTxState,
       }
     },
-    components: { SendTxButton, UiButton, StakerInfo, UiPoligon, UiAlert },
+    components: { SendTxButton, UiButton, StakerInfo, UiPoligon, UiAlert, UiBoxCorners },
   })
 </script>

@@ -18,11 +18,7 @@
     <div
       class="flex justify-center items-center cursor-default border border-white border-opacity-20 px-12 py-8 mt-8 rounded-8"
     >
-      <ui-icon
-        name="lock"
-        size="14"
-        class="mr-6"
-      />
+      <ui-icon-lock class="mr-6 w-14 h-14"/>
       {{ tvlStr }}
     </div>
   </div>
@@ -30,10 +26,10 @@
 
 <script lang="ts">
   import { computed, defineComponent, toRef } from 'vue'
-  import UiIcon from '@/components/ui/UiIcon'
-  import { useBreakpoints } from '@vueuse/core'
+  import { UiIconLock } from '@slr-finance/uikit'
   import { tokenAmountFormat } from '@/utils/strFormat/tokenAmountFormat'
   import { usePoolState } from '../hooks/usePoolState'
+  import { useAppBreakpoints } from '@/hooks/useAppBreakpoints'
 
   export default defineComponent({
     name: 'pool-tvl',
@@ -46,13 +42,10 @@
     setup(props) {
       const [poolState] = usePoolState(toRef(props, 'poolId'))
       const tvlStr = computed(() => tokenAmountFormat(poolState.value.totalStaked, 'SLR'))
-
-      const { isShownImage } = useBreakpoints({
-        isShownImage: 380,
-      })
+      const { w380: isShownImage } = useAppBreakpoints()
 
       return { tvlStr, isShownImage }
     },
-    components: { UiIcon },
+    components: { UiIconLock },
   })
 </script>

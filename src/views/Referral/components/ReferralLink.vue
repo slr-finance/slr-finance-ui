@@ -9,11 +9,7 @@
       class="flex justify-center items-center rounded-10 bg-opacity-20 bg-violet min-w-40 w-40 h-40"
       @click="handleCopy"
     >
-      <ui-icon
-        class="text-violet"
-        size="18"
-        name="copy"
-      />
+      <ui-icon-copy class="text-violet w-18 h-18"/>
     </button>
   </div>
 </template>
@@ -21,8 +17,7 @@
 <script lang="ts">
   import { defineComponent, PropType } from 'vue'
   import { useClipboard } from '@vueuse/core'
-  import UiIcon from '@/components/ui/UiIcon'
-  import { UiTextPlaceholder } from '@slr-finance/uikit'  
+  import { UiTextPlaceholder, UiIconCopy } from '@slr-finance/uikit'  
   import { useUiToast } from '@/components/ui/UiToast'
 
   export default defineComponent({
@@ -51,6 +46,6 @@
 
       return { copy, handleCopy }
     },
-    components: { UiIcon, UiTextPlaceholder },
+    components: { UiIconCopy, UiTextPlaceholder },
   })
 </script>

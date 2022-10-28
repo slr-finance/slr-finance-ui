@@ -6,19 +6,17 @@
     <social-modal-content @click-to-link="close" />
   </ui-modal>
 
-  <app-float-button>
-    <button
-      type="button"
-      class="social-modal-button relative flex justify-center items-center h-48 w-48 before:block before:content-[''] before:w-8 before:h-8 before:rounded-full before:bg-violet before:absolute before:right-0 before:top-0 after:block after:content-[''] after:w-full after:h-full after:rounded-12 after:absolute after:right-0 after:top-0 after:-z-1 after:transition-opacity duration-200"
-      @click="open"
-    >
-      <ui-icon
-        name="telegram-flat"
-        prefix="ui-icon-social"
-        size="18"
-      />
-    </button>
-  </app-float-button>
+  <button
+    type="button"
+    class="social-modal-button relative flex justify-center items-center h-50 w-50 before:block before:content-[''] before:w-8 before:h-8 before:rounded-full before:bg-violet before:absolute before:right-0 before:top-0 after:block after:content-[''] after:w-full after:h-full after:rounded-12 after:absolute after:right-0 after:top-0 after:-z-1 after:transition-opacity duration-200"
+    @click="open"
+  >
+    <ui-icon
+      name="telegram-flat"
+      prefix="ui-icon-social"
+      size="18"
+    />
+  </button>
 </template>
 
 <script lang="ts">

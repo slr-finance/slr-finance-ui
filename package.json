@@ -19,7 +19,7 @@
     "@metamask/detect-provider": "1.2.0",
     "@slr-finance/contracts": "https://github.com/slr-finance/slr-finance-contracts.git#ee203dae2160fcca3152d4000d1a83dd92580aa8",
     "@slr-finance/ui-share": "https://github.com/slr-finance/slr-finance-ui-share.git",
-    "@slr-finance/uikit": "0.0.23-0",
+    "@slr-finance/uikit": "0.0.26-91557441",
     "@vueuse/core": "8.9.4",
     "@walletconnect/web3-provider": "1.7.7",
     "bignumber.js": "9.0.2",

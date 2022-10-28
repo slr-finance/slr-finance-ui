@@ -27,13 +27,13 @@
 
 <script lang="ts">
   import { defineComponent } from 'vue'
-  import { useBreakpoints } from '@vueuse/core'
   import UiPlaceholder from '@/components/ui/UiPlaceholder.vue'
   import { UiGalaxyLoader } from '@slr-finance/uikit'
   import ReferrerAccrualHistoryTableAsync from './ReferrerAccrualHistoryTableAsync'
   import ReferrerAccrualHistoryTableMobileAsync from './ReferrerAccrualHistoryTableMobileAsync'
 
   import { useReferrerAccrualList } from '../../hooks/useReferrerAccrualList'
+  import { useAppBreakpoints } from '@/hooks/useAppBreakpoints'
 
   export default defineComponent({
     name: 'referrer-accrual-history',
@@ -44,7 +44,7 @@
       UiGalaxyLoader,
     },
     setup() {
-      const { isDesktop } = useBreakpoints({ isDesktop: 875 })
+      const { w875: isDesktop } = useAppBreakpoints()
       const { isFetching, numberOfAccruals } = useReferrerAccrualList()
 
       return {

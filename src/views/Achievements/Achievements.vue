@@ -1,6 +1,6 @@
 <template>
   <div
-    class="flex flex-1 flex-col min-h-full px-ui-page-spacing pt-ui-page-header-spacing pb-ui-page-bottom-spacing justify-between items-center relative z-ui-page-content"
+    class="flex flex-1 flex-col justify-between items-center"
   >
     <div class="achievements-page-content">
       <div
@@ -28,7 +28,7 @@
   import { useHead } from '@vueuse/head'
   import AchievementsInfo from './components/AchievementsInfo.vue'
   import AchievementsList from './components/AchievementsList.vue'
-import { useAchievements } from './hooks/useAchievements'
+  import { useAchievements } from './hooks/useAchievements'
 
   export default defineComponent({
     name: 'swap-achievements',

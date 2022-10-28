@@ -1,5 +1,5 @@
 <template>
-  <div class="flex-1 pt-ui-page-header-spacing pb-ui-page-bottom-spacing px-ui-page-spacing">
+  <div>
     <h1 class="text-white font-title mb-16 text-ui-page-title">
       <span class="text-white text-opacity-60">Dashboard</span>
       station

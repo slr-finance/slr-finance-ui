@@ -1,27 +1,7 @@
 <template>
   <div
-    class="px-ui-page-spacing pt-ui-page-header-spacing pb-ui-page-bottom-spacing relative flex z-ui-page-content flex-1"
+    class="relative flex"
   >
-    <referral-bg v-if="isShownBgVideo" />
-
-    <div
-      v-if="isShownBackButton"
-      class="relative pr-ui-page-spacing flex-shrink-0 w-72 box-content flex justify-center items-start"
-    >
-      <ui-button
-        :size="48"
-        variant="gray"
-        :to="{ name: 'dashboard' }"
-      >
-        <div class="flex justify-center items-center">
-          <ui-icon
-            name="arrow-pixel"
-            class="rotate-90"
-            size="14"
-          />
-        </div>
-      </ui-button>
-    </div>
     <div class="relative flex-1 w-full">
       <connect-wallet-plug>
         <template #plug>
@@ -89,11 +69,10 @@
 </template>
 
 <script lang="ts">
-  import { defineAsyncComponent, defineComponent, watch } from 'vue'
+  import { defineComponent, watch } from 'vue'
   import { useHead } from '@vueuse/head'
   import { useBreakpoints, useToggle } from '@vueuse/core'
   import ConnectWalletPlug from '@/components/ConnectWallet/ConnectWalletPlug.vue'
-  import { UiButton } from '@slr-finance/uikit'
   import UiIcon from '@/components/ui/UiIcon'
   import ReferralsList from './components/ReferralsList.vue'
   import ReferralLinkBlock from './components/ReferralLinkBlock.vue'
@@ -105,6 +84,7 @@
   import ReferralPageTitle from './components/ReferralPageTitle.vue'
   import ReferralWidgetTitle from './components/ReferralWidgetTitle.vue'
   import ReferralListTitle from './components/ReferralListTitle.vue'
+  import { useAppBreakpoints } from '@/hooks/useAppBreakpoints'
 
   export default defineComponent({
     setup() {
@@ -119,12 +99,7 @@
       })
 
       // Adaptive [BEGIN]
-      const { isShownBackButton, isDesktopLayout, isShownBgVideo } = useBreakpoints({
-        isShownBackButton: 980,
-        isDesktopLayout: 875,
-        isShownBgVideo: 1200,
-      })
-
+      const { w1200: isShownBgVideo, w875: isDesktopLayout, w980: isShownBackButton } = useAppBreakpoints()
       const [isShownFullMobileAccrualHistoryTable, toggleFullMobileAccrualHistoryTable] = useToggle(false)
       const [isShownFullMobileReferralsTable, toggleFullMobileReferralsTable] = useToggle(false)
       const closeAllMobileTable = () => {
@@ -156,9 +131,7 @@
       ReferrerRewards,
       ReferrerAccrualHistory,
       ReferralFaq,
-      ReferralBg: defineAsyncComponent({ loader: () => import('./components/ReferralBg.vue') }),
       ReferralPromoState,
-      UiButton,
       UiIcon,
       ReferralFullMobileTable,
       ReferralPageTitle,

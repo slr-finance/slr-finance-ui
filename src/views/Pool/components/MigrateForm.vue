@@ -18,11 +18,7 @@
         <div
           class="relative z-10 flex justify-center items-center bg-black border border-white border-opacity-20 rounded-full h-24 w-24"
         >
-          <ui-icon
-            name="plus"
-            size="14"
-            class="text-white"
-          />
+          <ui-icon-plus class="text-white w-14"/>
         </div>
       </div>
 
@@ -80,8 +76,7 @@
   import BigNumber from 'bignumber.js'
   import contractsAddresses from '@/config/constants/contractsAddresses'
   import SendTxButton from '@/components/Tx/SendTxButton.vue'
-  import { UiButton, UiPoligon } from '@slr-finance/uikit'
-  import UiIcon from '@/components/ui/UiIcon'
+  import { UiButton, UiPoligon, UiIconPlus } from '@slr-finance/uikit'
   import UiAlert from '@/components/ui/UiAlert.vue'
   import ApproveTokenPlug from '@/components/ApproveToken/ApproveTokenPlug.vue'
   import InsufficientBalancePlug from '@/components/ApproveToken/InsufficientBalancePlug.vue'
@@ -163,9 +158,9 @@
       InsufficientBalancePlug,
 
       UiButton,
-      UiIcon,
       UiPoligon,
       UiAlert,
+      UiIconPlus,
     },
   })
 </script>

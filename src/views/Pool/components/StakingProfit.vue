@@ -1,14 +1,15 @@
 <template>
-  <div class="ui-box-corners mb-24 cursor-default">
+  <ui-box-corners class="p-12 mb-24 cursor-default">
     <p class="text-14">
       Will be earned <span class="text-white">{{ profitStr }} ({{ profitInDollStr }})</span> for {{ daysStr }}
     </p>
     <p class="text-14 text-white/60">Early unlock penalty fee is {{ withdrawalFeeStr }}</p>
-  </div>
+  </ui-box-corners>
 </template>
 
 <script lang="ts">
   import { computed, defineComponent, PropType, toRef } from 'vue'
+  import { UiBoxCorners } from '@slr-finance/uikit'
   import { useUsdPrice } from '@/hooks/useUsdPrice'
   import { useTokenAmountFormat } from '@/hooks/formatters/useTokenAmountFormat'
   import { useUsdFormat } from '@/hooks/formatters/useUsdFormat'
@@ -60,5 +61,6 @@
         daysStr,
       }
     },
+    components: { UiBoxCorners },
   })
 </script>

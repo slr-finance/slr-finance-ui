@@ -19,7 +19,7 @@
 
 <script lang="ts">
   import { computed, defineComponent, toRef } from 'vue'
-  import { usePoolInfo } from '../../hooks/usePoolInfo'
+  import { usePoolInfo } from '../../../hooks/usePoolInfo'
 
   export default defineComponent({
     name: 'pool-mobile-bg',

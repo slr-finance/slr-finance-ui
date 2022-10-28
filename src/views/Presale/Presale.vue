@@ -9,7 +9,7 @@
     />
     <div
       v-else
-      class="px-ui-page-spacing pt-ui-page-header-spacing pb-ui-page-bottom-spacing flex flex-col flex-1"
+      class="flex flex-col flex-1"
     >
       <div class="flex flex-col items-center max-w-[800px] mx-auto relative z-1">
         <div class="text-center flex flex-col justify-center items-center mb-24">
@@ -36,7 +36,6 @@
           />
         </div>
       </div>
-      <presale-bg />
     </div>
   </transition>
 </template>
@@ -54,7 +53,6 @@
   import PresaleInformation from './components/PresaleInformation'
   import PresaleEnded from './components/PresaleEnded.vue'
   import WhiteListForm from './components/WhiteListForm'
-  import PresaleBg from './components/PresaleBg.vue'
 
   export default defineComponent({
     name: 'presale-view',
@@ -89,7 +87,6 @@
       PresaleEnded,
       UiGalaxyLoader,
       WhiteListForm,
-      PresaleBg,
     },
   })
 </script>

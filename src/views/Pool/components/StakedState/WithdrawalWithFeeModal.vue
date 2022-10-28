@@ -10,11 +10,7 @@
         variant="red"
       >
         <template #icon>
-          <ui-icon
-            name="alert-circle"
-            class="text-red"
-            size="18"
-          />
+          <ui-icon-alert-circle class="text-red w-18 h-18"/>
         </template>
       </ui-placeholder>
     </div>
@@ -59,8 +55,7 @@
   import { useTokenAmountFormat } from '@/hooks/formatters/useTokenAmountFormat'
   import SendTxButton from '@/components/Tx/SendTxButton.vue'
   import UiPlaceholder from '@/components/ui/UiPlaceholder.vue'
-  import UiIcon from '@/components/ui/UiIcon'
-  import { UiModal } from '@slr-finance/uikit'
+  import { UiModal, UiIconAlertCircle } from '@slr-finance/uikit'
   import { usePoolState } from '../../hooks/usePoolState'
   import { useStakerState } from '../../hooks/useStakerState'
   import { useUnstakeWithFee } from '../../hooks/useUnstakeWithFee'
@@ -118,7 +113,7 @@
     components: {
       SendTxButton,
       UiPlaceholder,
-      UiIcon,
+      UiIconAlertCircle,
       UiModal,
     },
   })

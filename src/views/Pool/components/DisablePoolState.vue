@@ -1,5 +1,5 @@
 <template>
-  <div class="ui-box-corners mb-20">
+  <ui-box-corners class="mb-20 p-12">
     <ui-placeholder
       :icon="icon"
       :title="title"
@@ -15,12 +15,12 @@
         Go to active pool
       </ui-button>
     </ui-placeholder>
-  </div>
+  </ui-box-corners>
 </template>
 
 <script lang="ts">
   import { computed, defineComponent, toRef } from 'vue'
-  import { UiButton } from '@slr-finance/uikit'
+  import { UiButton, UiBoxCorners } from '@slr-finance/uikit'
   import UiPlaceholder from '@/components/ui/UiPlaceholder.vue'
   import { useStakerState } from '../hooks/useStakerState'
   import { usePoolInfo } from '../hooks/usePoolInfo'
@@ -52,6 +52,6 @@
 
       return { activePoolLink, icon, title }
     },
-    components: { UiButton, UiPlaceholder },
+    components: { UiButton, UiPlaceholder, UiBoxCorners },
   })
 </script>

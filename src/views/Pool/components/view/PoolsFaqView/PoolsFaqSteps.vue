@@ -2,10 +2,7 @@
   <div class="pools-faq-steps grid grid-cols-1 875:grid-cols-3 gap-24 mb-48 leading-192">
     <div class="item">
       <div class="icon-wrapper">
-        <ui-icon
-          name="center"
-          :size="20"
-        />
+        <ui-icon-pixel-center class="w-20 h-20"/>
       </div>
       <div class="content">
         <p class="title">Buy SLR tokens</p>
@@ -15,10 +12,7 @@
     </div>
     <div class="item">
       <div class="icon-wrapper">
-        <ui-icon
-          name="center"
-          :size="20"
-        />
+        <ui-icon-pixel-center class="w-20 h-20"/>
       </div>
       <div class="content">
         <p class="title">Stake SLR tokens on first pool</p>
@@ -27,10 +21,7 @@
     </div>
     <div class="item">
       <div class="icon-wrapper bg-yellow-500 rounded-full">
-        <ui-icon
-          name="center"
-          :size="20"
-        />
+        <ui-icon-pixel-center class="w-20 h-20"/>
       </div>
       <div class="content">
         <p class="title">Earn up to 633% fixed APY</p>
@@ -41,11 +32,11 @@
 </template>
 
 <script lang="ts">
-  import UiIcon from '@/components/ui/UiIcon/UiIcon.vue'
   import { defineComponent } from 'vue'
+  import { UiIconPixelCenter } from '@slr-finance/uikit'
 
   export default defineComponent({
-    components: { UiIcon },
+    components: { UiIconPixelCenter },
     setup() {},
   })
 </script>

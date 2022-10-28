@@ -9,7 +9,7 @@ export type PoolType = {
     objectTypeName: string
     videoFolder: string
     mobileBgPath: string
-    icon: string
+    iconComponent: string
     aboutPool: string
   }
 }

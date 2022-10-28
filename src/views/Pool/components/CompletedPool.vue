@@ -8,7 +8,7 @@
       Ended
     </ui-poligon>
 
-    <div class="ui-box-corners">
+    <ui-box-corners class="p-12">
       <ui-placeholder
         icon="finish"
         title="Staking completed"
@@ -31,13 +31,13 @@
           Go to active pool
         </ui-button>
       </ui-placeholder>
-    </div>
+    </ui-box-corners>
   </div>
 </template>
 
 <script lang="ts">
   import { computed, defineComponent } from 'vue'
-  import { UiButton, UiPoligon } from '@slr-finance/uikit'
+  import { UiButton, UiPoligon, UiBoxCorners } from '@slr-finance/uikit'
   import UiPlaceholder from '@/components/ui/UiPlaceholder.vue'
   import { useStakerState } from '../hooks/useStakerState'
   import { usePoolInfo } from '../hooks/usePoolInfo'
@@ -67,6 +67,6 @@
 
       return { stakerPool, ernedStr, history, daysStr }
     },
-    components: { UiButton, UiPlaceholder, UiPoligon },
+    components: { UiButton, UiPlaceholder, UiPoligon, UiBoxCorners },
   })
 </script>

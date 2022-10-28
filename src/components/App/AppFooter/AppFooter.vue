@@ -1,14 +1,12 @@
 <template>
-  <div class="px-ui-page-spacing">
-    <ui-footer
-      :links="links"
-    >
-      <ui-footer-token-widget
-        :action="{ to: { name: 'swap' } }"
-        @wallet-click="handleWalletClick"
-      />
-    </ui-footer>
-  </div>
+  <ui-footer
+    :links="links"
+  >
+    <ui-footer-token-widget
+      :action="{ to: { name: 'swap' } }"
+      @wallet-click="handleWalletClick"
+    />
+  </ui-footer>
 </template>
 
 <script lang="ts">
