@@ -13,13 +13,13 @@
         :is-loading="isFetching"
       />
     </div>
-    <ui-icon-pixel-arrow-to class="pools-navigation-link--icon"/>
+    <ui-async-icon-pixel-arrow-to class="pools-navigation-link--icon"/>
   </router-link>
 </template>
 
 <script lang="ts">
 import { computed, defineComponent, toRef } from 'vue'
-import { UiTextPlaceholder, UiIconPixelArrowTo } from '@slr-finance/uikit'
+import { UiTextPlaceholder, UiAsyncIconPixelArrowTo } from '@slr-finance/uikit'
 import { usePercentFormat } from '@/hooks/formatters/usePercentFormat'
 import { POOLS_INFO } from '@/config/constants/Pools'
 
@@ -55,7 +55,7 @@ export default defineComponent({
     }
   },
   components: {
-    UiIconPixelArrowTo,
+    UiAsyncIconPixelArrowTo,
     UiTextPlaceholder,
   }
 })

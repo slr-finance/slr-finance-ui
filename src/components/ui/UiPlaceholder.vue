@@ -7,14 +7,7 @@
       opacity
       :variant="variant"
     >
-      <slot name="icon">
-        <ui-icon
-          :name="icon"
-          :prefix="iconPrefix"
-          class="text-white opacity-60"
-          size="18"
-        />
-      </slot>
+      <slot name="icon"/>
     </ui-poligon>
     <div class="font-title text-12 text-white uppercase leading-192 mb-12">{{ title }}</div>
     <div class="font-body text-12 text-white text-opacity-60 mb-12">
