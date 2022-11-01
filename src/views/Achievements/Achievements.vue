@@ -10,8 +10,8 @@
           Achievements <span class="text-gray">station</span>
         </h1>
 
-        <achievements-info class="mt-32 mb-48"/>
-        <div class=" space-y-32">
+        <!-- <achievements-info class="mt-32 mb-48"/> -->
+        <div class="space-y-32">
           <achievements-list
             v-for="group in groups"
             :group="group"
@@ -26,7 +26,7 @@
 <script lang="ts">
   import { defineComponent } from 'vue'
   import { useHead } from '@vueuse/head'
-  import AchievementsInfo from './components/AchievementsInfo.vue'
+  // import AchievementsInfo from './components/AchievementsInfo.vue'
   import AchievementsList from './components/AchievementsList.vue'
   import { useAchievements } from './hooks/useAchievements'
 
@@ -48,9 +48,9 @@
       return { groups }
     },
     components: {
-    AchievementsInfo,
-    AchievementsList
-}
+      // AchievementsInfo,
+      AchievementsList
+    }
   })
 </script>
 

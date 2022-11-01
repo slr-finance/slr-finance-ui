@@ -21,7 +21,6 @@
 <script lang="ts">
   import { defineComponent, PropType } from 'vue'
   import { UiPoligon, UiPoligonVariantProp, UI_POLIGON_BUTTON_VARIANTS } from '@slr-finance/uikit'
-  import UiIcon from './UiIcon'
 
   export default defineComponent({
     name: 'ui-placeholder',
@@ -34,14 +33,6 @@
         type: String,
         default: '',
       },
-      icon: {
-        type: String,
-        default: 'info-circle',
-      },
-      iconPrefix: {
-        type: String,
-        default: 'ui-icon',
-      },
       variant: {
         type: String as PropType<UiPoligonVariantProp>,
         validator: (val: UiPoligonVariantProp) => UI_POLIGON_BUTTON_VARIANTS.includes(val),
@@ -50,7 +41,6 @@
     },
     components: {
       UiPoligon,
-      UiIcon,
     },
   })
 </script>

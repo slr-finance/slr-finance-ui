@@ -1,14 +1,14 @@
 <template>
   <div class="px-16">
     Remuneration:
-    <ui>
+    <ul>
       <li>+ 10 000 SLR</li>
       <li>+ 1 to multiplier</li>
-    </ui>
+    </ul>
     <div>Requirements:</div>
-    <ui>
+    <ul>
       <li>Get all achievement for this group</li>
-    </ui>
+    </ul>
     <ui-button
       variant="violet"
       :size="40"

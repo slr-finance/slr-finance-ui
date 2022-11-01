@@ -37,7 +37,9 @@ export const routes: RouteRecordRaw[] = [
   {
     path: '/achievements',
     name: 'achievements',
-    component: () => import('@/views/Achievements/Achievements.vue'),
+    components: {
+      default: () => import('@/views/Achievements'),
+    },
   },
   {
     path: '/pool',
