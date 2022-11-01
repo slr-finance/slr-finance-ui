@@ -1,5 +1,6 @@
 <template>
   <div class="flex flex-1">
+    <pools-list v-if="!isShownPoolsNav"/>
     <router-view
       v-slot="{ Component }"
       v-if="poolId"
@@ -9,7 +10,7 @@
         mode="out-in"
       >
         <div
-          class="min-h-full h-auto flex flex-1"
+          class="min-h-full pl-ui-page-spacing h-auto flex flex-1"
           :key="$route.name || 'none'"
         >
           <component :is="Component" />
@@ -62,17 +63,17 @@
         { immediate: true },
       )
 
-      const { w1000: isShownPoolsMap, w641: isShownPoolsNav, w580: isDesktopLayout } = useAppBreakpoints()
+      const { w1000: isShownPoolsMap, w641: isShownPoolsNav, } = useAppBreakpoints()
 
       return {
         isShownPoolsMap,
         isShownPoolsNav,
-        isDesktopLayout,
         poolId
       }
     },
     components: {
       PoolsMap: defineAsyncComponent(() => import('./components/PoolsMap.vue')),
+      PoolsList: defineAsyncComponent(() => import('./components/PoolsList.vue')),
     },
   })
 </script>

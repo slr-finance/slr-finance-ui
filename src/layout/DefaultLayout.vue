@@ -1,6 +1,6 @@
 <template>
-  <div class="flex relative px-ui-page-spacing min-h-full">
-    <app-aside v-if="isShownAside" class="pr-ui-page-spacing">
+  <div class="flex relative min-h-full" :class="{'px-ui-page-spacing': !isWithoutSpacing || isShownAside}">
+    <app-aside v-if="isShownAside" :class="{'pr-ui-page-spacing': !isWithoutSpacing}">
       <template #top>
         <router-view name="left-top-sidebar" v-slot="{Component}">
           <transition name="fade" mode="out-in">
@@ -34,7 +34,7 @@
       <app-mobile-bottom-navigation v-if="!isShownFooter" />
     </div>
 
-    <app-aside v-if="isShownAside" class="pl-ui-page-spacing">
+    <app-aside v-if="isShownAside" :class="{'pl-ui-page-spacing': !isWithoutSpacing}">
       <template #top><router-view name="right-top-sidebar"/></template>
       <template #bottom>
         <router-view name="right-bottom-sidebar"/>
@@ -46,12 +46,14 @@
 
 <script lang="ts">
 import { computed, defineAsyncComponent, defineComponent, ref } from 'vue'
+import { useRoute } from 'vue-router';
+import get from 'lodash.get'
 import { AppAside } from '@/components/App/AppAside';
 import AppMobileBottomNavigation from '@/components/App/AppMobileBottomNavigation/AppMobileBottomNavigation.vue'
 import { AppSettings } from '@/components/App/AppSettings'
 import { templateRef, useResizeObserver, useWindowSize } from '@vueuse/core'
 import DefaultLayoutVideoBg from '@/components/Layout/DefaultLayoutVideoBg.vue'
-import { useAppBreakpoints } from '@/hooks/useAppBreakpoints';
+import { useAppBreakpoints } from '@/hooks/useAppBreakpoints'
 
 export default defineComponent({
   props: {
@@ -72,8 +74,10 @@ export default defineComponent({
     }),
   },
   setup() {
+    const route = useRoute()
     const contentRef = templateRef('content')
     const { w580: isShownFooter, w641: isShownAside } = useAppBreakpoints()
+    const isWithoutSpacing = computed(() => get(route, 'meta.layout.withoutSpacing', false))
 
     const contentHeight = ref(0)
     const { height } = useWindowSize()
@@ -88,7 +92,7 @@ export default defineComponent({
       contentHeight.value = height
     }, { box: 'content-box' })
 
-    return { isShownFooter, isShownAside, contentHeight, contentWrapperStyleList }
+    return { isShownFooter, isShownAside, contentHeight, contentWrapperStyleList, isWithoutSpacing }
   },
 })
 </script>

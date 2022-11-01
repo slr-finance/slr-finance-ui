@@ -7,11 +7,7 @@
     >
       {{ trimedAddress }}
       <div class="bg-bnb w-20 h-20 flex justify-center items-center ml-6 rounded-4">
-        <ui-icon
-          class="text-white"
-          name="bnb-chain"
-          size="14"
-        />
+        <ui-async-icon-bnb-chain class="text-white w-14 h-14" size="14"/>
       </div>
     </div>
     <connected-wallet-modal />
@@ -24,7 +20,7 @@
   import { shortenAddress } from '@/utils/address/shortenAddress'
   import { useSlrBalance } from '@/hooks/dapp/useSlrBalance'
   import { useTokenAmountFormat } from '@/hooks/formatters/useTokenAmountFormat'
-  import UiIcon from '@/components/ui/UiIcon'
+  import { UiAsyncIconBnbChain } from '@slr-finance/uikit'
   import { useConnectedWalletModal } from '../hooks/useConnectedWalletModal'
   import ConnectedWalletModal from '../ConnectedWalletModal/ConnectedWalletModal.vue'
 
@@ -45,7 +41,7 @@
       }
     },
     components: {
-      UiIcon,
+      UiAsyncIconBnbChain,
       ConnectedWalletModal,
     },
   })

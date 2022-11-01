@@ -9,14 +9,12 @@
 </template>
 
 <script lang="ts">
-  import { defineAsyncComponent, defineComponent, watch } from 'vue'
-  import { useBreakpoints } from '@vueuse/core'
+  import { defineComponent, watch } from 'vue'
   import { UiHeaderType, useUiHeader } from '@slr-finance/uikit'
   import UiToast from '@/components/ui/UiToast'
   import AppHeader from '@/components/App/AppHeader/AppHeader.vue'
   import ConnectedWalletModal from '@/components/ConnectWallet/ConnectedWalletModal/ConnectedWalletModal.vue'
   import ConnectWalletModal from '@/components/ConnectWallet/ConnectWalletModal'
-  import { useBlockInfo } from './hooks/useBlockInfo'
   import { LATEST_CONNECTED_PROVIDER } from '@/config/constants/localStorage'
   import { useWallet, WalletName } from './hooks/dapp/useWallet'
   import AppFloatButtonContainer from '@/components/App/AppFloatButton/AppFloatButtonContainer.vue'

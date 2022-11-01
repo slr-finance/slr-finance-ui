@@ -17,7 +17,7 @@
         </div>
       </dashboard-container>
 
-      <dashboard-container>
+      <dashboard-container class="col-span-2 875:col-span-1">
         <div>
           <div class="text-28 font-title leading-140">
             <span class="text-yellow">DEFI 3.0</span> financial protocol operating in BSC
@@ -34,7 +34,7 @@
         <div>slrPriceStr: {{ slrPriceStr }}</div>
         <div>totalStakedStr: {{ totalStakedStr }}</div>
       </dashboard-container>
-      <presale-information bage-text="ITO">
+      <presale-information  class="col-span-2 875:col-span-1" bage-text="ITO">
         <template #footer>
           <ui-button
             :to="{ name: 'presale' }"

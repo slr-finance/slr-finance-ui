@@ -44,6 +44,11 @@ export const routes: RouteRecordRaw[] = [
   {
     path: '/pool',
     name: 'pool',
+    meta: {
+      layout: {
+        withoutSpacing: true
+      }
+    },
     components: {
       default: () => import('@/views/Pool/PoolLayout.vue'),
       'bg-video': () => import('@/views/Pool/components/view/PoolBgView'),

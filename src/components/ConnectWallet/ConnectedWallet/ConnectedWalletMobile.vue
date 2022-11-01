@@ -5,11 +5,7 @@
   >
     {{ trimedAddress }}
 
-    <ui-icon
-      class="text-white ml-4"
-      name="arrow-pixel"
-      size="8"
-    />
+    <ui-icon-pixel-arrow class="text-white ml-4 w-8 h-8"/>
   </div>
 </template>
 
@@ -19,7 +15,7 @@
   import { shortenAddress } from '@/utils/address/shortenAddress'
   import { useSlrBalance } from '@/hooks/dapp/useSlrBalance'
   import { useTokenAmountFormat } from '@/hooks/formatters/useTokenAmountFormat'
-  import UiIcon from '@/components/ui/UiIcon'
+  import { UiIconPixelArrow } from '@slr-finance/uikit'
   import { useConnectedWalletModal } from '../hooks/useConnectedWalletModal'
 
   export default defineComponent({
@@ -37,6 +33,6 @@
         balanceStr,
       }
     },
-    components: { UiIcon },
+    components: { UiIconPixelArrow },
   })
 </script>
