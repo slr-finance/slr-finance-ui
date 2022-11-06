@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "types": ["node", "vite-plugin-svg-icons/client"],
-    "target": "es2018",
+    "target": "es2020",
     "useDefineForClassFields": true,
     "module": "es2020",
     "moduleResolution": "node",

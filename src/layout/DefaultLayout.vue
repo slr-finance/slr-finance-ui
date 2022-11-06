@@ -1,6 +1,6 @@
 <template>
-  <div class="flex relative min-h-full" :class="{'px-ui-page-spacing': !isWithoutSpacing || isShownAside}">
-    <app-aside v-if="isShownAside" :class="{'pr-ui-page-spacing': !isWithoutSpacing}">
+  <div class="flex relative min-h-full" :class="{'px-ui-page-spacing': !layoutOptions.withoutSpacing || isShownAside}">
+    <app-aside v-if="isShownAside" :class="{'pr-ui-page-spacing': !layoutOptions.withoutSpacing}">
       <template #top>
         <router-view name="left-top-sidebar" v-slot="{Component}">
           <transition name="fade" mode="out-in">
@@ -30,11 +30,11 @@
         </div>
       </div>
 
-      <app-footer v-if="isShownFooter && !withoutDesktopFooter" class="pb-ui-page-spacing"/>
+      <app-footer v-if="isShownFooter && !layoutOptions.withoutFooter" class="pb-ui-page-spacing"/>
       <app-mobile-bottom-navigation v-if="!isShownFooter" />
     </div>
 
-    <app-aside v-if="isShownAside" :class="{'pl-ui-page-spacing': !isWithoutSpacing}">
+    <app-aside v-if="isShownAside" :class="{'pl-ui-page-spacing': !layoutOptions.withoutSpacing}">
       <template #top><router-view name="right-top-sidebar"/></template>
       <template #bottom>
         <router-view name="right-bottom-sidebar"/>
@@ -56,11 +56,6 @@ import DefaultLayoutVideoBg from '@/components/Layout/DefaultLayoutVideoBg.vue'
 import { useAppBreakpoints } from '@/hooks/useAppBreakpoints'
 
 export default defineComponent({
-  props: {
-    withoutDesktopFooter: {
-      type: Boolean,
-    },
-  },
   components: {
     DefaultLayoutVideoBg,
     AppAside,
@@ -77,7 +72,10 @@ export default defineComponent({
     const route = useRoute()
     const contentRef = templateRef('content')
     const { w580: isShownFooter, w641: isShownAside } = useAppBreakpoints()
-    const isWithoutSpacing = computed(() => get(route, 'meta.layout.withoutSpacing', false))
+    const layoutOptions = computed(() => ({
+      withoutSpacing: get(route, 'meta.layout.withoutSpacing', false),
+      withoutFooter: get(route, 'meta.layout.withoutFooter', false)
+    }))
 
     const contentHeight = ref(0)
     const { height } = useWindowSize()
@@ -92,7 +90,7 @@ export default defineComponent({
       contentHeight.value = height
     }, { box: 'content-box' })
 
-    return { isShownFooter, isShownAside, contentHeight, contentWrapperStyleList, isWithoutSpacing }
+    return { isShownFooter, isShownAside, contentHeight, contentWrapperStyleList, layoutOptions }
   },
 })
 </script>

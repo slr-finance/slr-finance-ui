@@ -38,6 +38,7 @@
   },
   "devDependencies": {
     "@originjs/vite-plugin-commonjs": "1.0.3",
+    "@originjs/vite-plugin-federation": "^1.1.11",
     "@types/js-cookie": "3.0.2",
     "@types/lodash.get": "4.4.6",
     "@types/node": "18.0.6",

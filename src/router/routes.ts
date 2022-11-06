@@ -46,7 +46,8 @@ export const routes: RouteRecordRaw[] = [
     name: 'pool',
     meta: {
       layout: {
-        withoutSpacing: true
+        withoutSpacing: true,
+        withoutFooter: true,
       }
     },
     components: {

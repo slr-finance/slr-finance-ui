@@ -4,8 +4,8 @@ import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import { visualizer } from 'rollup-plugin-visualizer'
-import { esbuildCommonjs, viteCommonjs } from '@originjs/vite-plugin-commonjs'
 import generateSitemap from 'vite-ssg-sitemap'
+import federation from '@originjs/vite-plugin-federation'
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -31,6 +31,35 @@ export default defineConfig({
       inject: 'body-last',
       symbolId: 'ui-icon-[dir]-[name]',
     }),
+    federation({
+      name: 'host-app',
+      remotes: {
+        'slr-common': {
+          /**
+           * Container locations from which modules should be resolved and loaded at runtime.
+           */
+          external: 'http://localhost:3000/remoteEntry.js',
+          externalType: 'url',
+          /**
+           * The name of the share scope shared with this remote.
+           */
+          shareScope: 'mf-slr-share-cope',
+          /**
+           * the remote format
+           */
+          // format: 'systemjs',
+          /**
+           * from
+           */
+          from: 'webpack',
+        }
+      },
+      shared: {
+        vue: {
+          import: true,
+        },
+      }
+    })
   ],
   build: {
     // minify: 'terser',
@@ -45,6 +74,7 @@ export default defineConfig({
     //     passes: 4,
     //   },
     // },
+    target: 'esnext',
     rollupOptions: {
       plugins: [
         visualizer((opts) => {

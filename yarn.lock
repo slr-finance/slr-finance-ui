@@ -1321,6 +1321,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@originjs/vite-plugin-federation@npm:^1.1.11":
+  version: 1.1.11
+  resolution: "@originjs/vite-plugin-federation@npm:1.1.11"
+  dependencies:
+    estree-walker: ^1.0.1
+    magic-string: ^0.25.7
+  checksum: e4c49cae49f3d4cee1047399820c10bbaa5f19108b32d96d7002711166f51e862c58ffe43e69f014d092076101aaaf98cd8d3398a53dee18eb0cff0d8344d47f
+  languageName: node
+  linkType: hard
+
 "@slr-finance/contracts@https://github.com/slr-finance/slr-finance-contracts.git#ee203dae2160fcca3152d4000d1a83dd92580aa8":
   version: 0.0.1
   resolution: "@slr-finance/contracts@https://github.com/slr-finance/slr-finance-contracts.git#commit=ee203dae2160fcca3152d4000d1a83dd92580aa8"
@@ -2844,9 +2854,9 @@ __metadata:
   linkType: hard
 
 "caniuse-lite@npm:^1.0.30001297, caniuse-lite@npm:^1.0.30001312":
-  version: 1.0.30001312
-  resolution: "caniuse-lite@npm:1.0.30001312"
-  checksum: 753fb9ea1e02e999430b323a71b5acab5120f3b5fc0161b01669f54a3ef5c5296240b6ae9b79b12a3742e3aed216aa9ee3d5398a23c16d08625ccd376b79545d
+  version: 1.0.30001430
+  resolution: "caniuse-lite@npm:1.0.30001430"
+  checksum: 15200fe2658871807341a451b01e3d6ae2bf5e0e30b60af86e1e8d9e1655a5f5011bb23fdc3d6b696019d63d3e60ad6864b15c40c80c538c4500ac5098b9701b
   languageName: node
   linkType: hard
 
@@ -4090,6 +4100,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"estree-walker@npm:^1.0.1":
+  version: 1.0.1
+  resolution: "estree-walker@npm:1.0.1"
+  checksum: 7e70da539691f6db03a08e7ce94f394ce2eef4180e136d251af299d41f92fb2d28ebcd9a6e393e3728d7970aeb5358705ddf7209d52fbcb2dd4693f95dcf925f
+  languageName: node
+  linkType: hard
+
 "estree-walker@npm:^2.0.2":
   version: 2.0.2
   resolution: "estree-walker@npm:2.0.2"
@@ -4677,6 +4694,7 @@ __metadata:
     "@ethersproject/providers": 5.6.2
     "@metamask/detect-provider": 1.2.0
     "@originjs/vite-plugin-commonjs": 1.0.3
+    "@originjs/vite-plugin-federation": ^1.1.11
     "@slr-finance/contracts": "https://github.com/slr-finance/slr-finance-contracts.git#ee203dae2160fcca3152d4000d1a83dd92580aa8"
     "@slr-finance/ui-share": "https://github.com/slr-finance/slr-finance-ui-share.git"
     "@slr-finance/uikit": 0.0.26-321a3e84

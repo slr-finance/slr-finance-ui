@@ -1,5 +1,6 @@
 <template>
   <app-header />
+  <SlrHeader></SlrHeader>
   <DefaultLayout/>
   <app-float-button-container class="z-ui-page-content"/>
   
@@ -20,6 +21,8 @@
   import AppFloatButtonContainer from '@/components/App/AppFloatButton/AppFloatButtonContainer.vue'
   import DefaultLayout from '@/layout/DefaultLayout.vue'
   import { useAppBreakpoints } from '@/hooks/useAppBreakpoints'
+  // @ts-ignore
+  import SlrHeader from 'slr-common/components/common/slr-header'
 
   export default defineComponent({
     props: {
@@ -54,6 +57,7 @@
       ConnectWalletModal,
       ConnectedWalletModal,
       UiToast,
+      SlrHeader,
     },
   })
 </script>
