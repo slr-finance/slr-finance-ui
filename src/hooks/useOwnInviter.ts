@@ -3,7 +3,7 @@ import { computedAsync, createSharedComposable } from '@vueuse/core'
 import { constants } from 'ethers'
 import { isAddress } from '@ethersproject/address'
 import { AddressZero } from '@ethersproject/constants'
-import { getReferrerFromCookies } from '@slr-finance/ui-share'
+// import { getReferrerFromCookies } from '@slr-finance/ui-share'
 import { useReferralContract } from '@/hooks/contracts/useReferralContract'
 import { StopController } from '@/utils/StopController'
 
@@ -46,7 +46,7 @@ export const useOwnInviter = createSharedComposable(() => {
         return inviterAddress
       }
 
-      return getReferrerFromCookies()
+      return '' //getReferrerFromCookies()
     },
     AddressZero,
     isFetching,

@@ -1,5 +1,5 @@
 import { HOME_DOMAIN, SHORT_IO_API_KEY } from '@/config/constants/main'
-import { REFERRER_QUERY_PARAM } from '@slr-finance/ui-share'
+// import { REFERRER_QUERY_PARAM } from '@slr-finance/ui-share'
 import { useEthers } from '@/hooks/dapp/useEthers'
 import { isAddress } from '@ethersproject/address'
 import { computed, ref, watch } from 'vue'
@@ -20,7 +20,7 @@ export const useReferralLink = (domain = HOME_DOMAIN) => {
     const addressVal = address.value
 
     return {
-      link: `https://${domain}?${REFERRER_QUERY_PARAM}=${addressVal}`,
+      link: `https://${domain}?${'REFERRER_QUERY_PARAM'}=${addressVal}`,
       address: addressVal,
     }
   })

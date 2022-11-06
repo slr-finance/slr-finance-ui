@@ -5,13 +5,13 @@ import '@/index.postcss'
 import '@slr-finance/uikit/dist/style.css'
 import '@/components/ui/index.postcss'
 import { nextTick } from 'vue'
-import { initReferral } from '@slr-finance/ui-share'
+// import { initReferral } from '@slr-finance/ui-share'
 import { routerOptions } from '@/router'
 import App from '@/App.vue'
 
 // Referral [BEGIN]
 if (!import.meta.env.SSR) {
-  initReferral()
+  // initReferral()
 }
 // Referral [END]
 
@@ -28,7 +28,10 @@ export const createApp = ViteSSG(
 
     app.use(head)
   },
-  )
+  {
+    rootContainer: 'slr-app',
+  }
+)
 // Mount app [END]
 
 if (!import.meta.env.SSR) {

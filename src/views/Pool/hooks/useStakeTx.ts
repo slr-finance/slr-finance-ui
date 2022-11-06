@@ -1,5 +1,5 @@
 import { computed, unref } from 'vue'
-import { getReferrerFromCookies } from '@slr-finance/ui-share'
+// import { getReferrerFromCookies } from '@slr-finance/ui-share'
 import { useSendTx } from '@/hooks/useSendTx'
 import { MaybeRef } from '@vueuse/core'
 import BigNumber from 'bignumber.js'
@@ -21,7 +21,7 @@ export const useStakeTx = (params: UseStakeParams) => {
     unref(params.poolId),
     unref(amountWei),
     Number(unref(params.days)),
-    getReferrerFromCookies(),
+    // getReferrerFromCookies(),
   ])
 
   return useSendTx(stakingContract, 'stake', callParams)

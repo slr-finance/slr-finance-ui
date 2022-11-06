@@ -1,11 +1,11 @@
 import path from 'path'
-import poolsConfig from './config/poolsConfig.json'
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
-import { visualizer } from 'rollup-plugin-visualizer'
-import generateSitemap from 'vite-ssg-sitemap'
-import federation from '@originjs/vite-plugin-federation'
+import { viteSsgOptions } from './config/viteSsgOptions'
+import { viteFederationPlugin } from './config/viteFederationPlugin'
+import topLevelAwait from "vite-plugin-top-level-await";
+import { viteCommonjs } from '@originjs/vite-plugin-commonjs'
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -15,6 +15,14 @@ export default defineConfig({
     },
   },
   plugins: [
+    viteCommonjs({include: '*'}),
+    topLevelAwait({
+      // The export name of top-level await promise for each chunk module
+      promiseExportName: "__tla",
+      // The function to generate import names of top-level await promise in each chunk module
+      promiseImportName: i => `__tla_${i}`
+    }),
+    viteFederationPlugin,
     vue(),
     createSvgIconsPlugin({
       // Specify the icon folder to be cached
@@ -31,37 +39,9 @@ export default defineConfig({
       inject: 'body-last',
       symbolId: 'ui-icon-[dir]-[name]',
     }),
-    federation({
-      name: 'host-app',
-      remotes: {
-        'slr-common': {
-          /**
-           * Container locations from which modules should be resolved and loaded at runtime.
-           */
-          external: 'http://localhost:3000/remoteEntry.js',
-          externalType: 'url',
-          /**
-           * The name of the share scope shared with this remote.
-           */
-          shareScope: 'mf-slr-share-cope',
-          /**
-           * the remote format
-           */
-          // format: 'systemjs',
-          /**
-           * from
-           */
-          from: 'webpack',
-        }
-      },
-      shared: {
-        vue: {
-          import: true,
-        },
-      }
-    })
   ],
   build: {
+    emptyOutDir: true,
     // minify: 'terser',
     // terserOptions: {
     //   ecma: 2020,
@@ -74,49 +54,10 @@ export default defineConfig({
     //     passes: 4,
     //   },
     // },
-    target: 'esnext',
-    rollupOptions: {
-      plugins: [
-        visualizer((opts) => {
-          return { filename: path.join(opts.dir, 'stats.html') }
-        }),
-      ],
-    },
+    target: 'es2020',
     commonjsOptions: {
       transformMixedEsModules: true,
     },
   },
-  // @ts-ignore
-  ssgOptions: {
-    format: 'esm',
-    dirStyle: 'flat',
-    rootContainerId: 'app',
-    concurrency: 20,
-    script: 'async',
-    formatting: 'minify',
-    includedRoutes(paths, routes) {
-      // use original route records
-      return routes.flatMap((route) => {
-        switch (route.name) {
-          case 'pool':
-            const paths = poolsConfig.pools.map(({ name }) => `/pool/${name.toLocaleLowerCase()}`)
-
-            paths.push('/pool')
-
-            return paths
-          case '404': 
-            return '/404'
-
-          default:
-            return route.path
-        }
-      })
-    },
-    onFinished() {
-      generateSitemap({
-        hostname: 'https://app.slr.finance/',
-        dynamicRoutes: poolsConfig.pools.map(({ name }) => `/pool/${name.toLocaleLowerCase()}`),
-      })
-    },
-  },
+  ssgOptions: viteSsgOptions,
 })
