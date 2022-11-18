@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "VITE_CHAIN=TESTNET vite",
     "prod": "VITE_CHAIN=BNB vite",
-    "build": "vue-tsc --noEmit && vite-ssg build",
+    "build": "vue-tsc --noEmit && node --experimental-loader @node-loader/http node_modules/.bin/vite-ssg build",
     "build:dev": "VITE_CHAIN=TESTNET vue-tsc --noEmit && vite-ssg build",
     "preview": "vite preview",
     "format:check": "prettier --check '**/*.{js,jsx,ts,tsx,vue}'",
@@ -20,7 +20,7 @@
     "@metamask/detect-provider": "1.2.0",
     "@slr-finance/contracts": "https://github.com/slr-finance/slr-finance-contracts.git#ee203dae2160fcca3152d4000d1a83dd92580aa8",
     "@slr-finance/ui-share": "https://github.com/slr-finance/slr-finance-ui-share.git",
-    "@slr-finance/uikit": "0.0.26-321a3e84",
+    "@slr-finance/uikit": "0.0.27-38c0796c",
     "@vueuse/core": "8.9.4",
     "@walletconnect/web3-provider": "1.7.7",
     "bignumber.js": "9.0.2",
@@ -38,6 +38,7 @@
     "vuexok": "1.0.2"
   },
   "devDependencies": {
+    "@node-loader/http": "2.0.0",
     "@originjs/vite-plugin-commonjs": "1.0.3",
     "@originjs/vite-plugin-federation": "^1.1.11",
     "@types/js-cookie": "3.0.2",
@@ -61,5 +62,8 @@
     "vite-ssg": "0.21.2",
     "vue-tsc": "0.29.8"
   },
-  "packageManager": "yarn@3.2.4"
+  "packageManager": "yarn@3.2.4",
+  "resolutions": {
+    "@slr-finance/uikit": "portal:/Users/vyacheslav/Documents/solar.finance/slr-uikit"
+  }
 }

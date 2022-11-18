@@ -1,10 +1,20 @@
 <template>
-  <component :is="iconComponent"/>
+  <component :is="iconComponent" class="w-full h-full"/>
 </template>
 
 <script lang="ts">
 import { computed, defineComponent } from 'vue'
-import { UiIconPoolsEarth, UiIconPoolsSaturn, UiIconPoolsJupiter, UiIconPoolsMars, UiIconPoolsMercury, UiIconPoolsNeptune, UiIconPoolsSun, UiIconPoolsUranus, UiIconPoolsVenus } from '@slr-finance/uikit'
+import { 
+  UiIconPoolsEarth,
+  UiIconPoolsSaturn,
+  UiIconPoolsJupiter,
+  UiIconPoolsMars,
+  UiIconPoolsMercury,
+  UiIconPoolsNeptune,
+  UiIconPoolsSun,
+  UiIconPoolsUranus,
+  UiIconPoolsVenus,
+} from '@slr-finance/uikit'
 import { POOLS_INFO } from '@/config/constants/Pools'
 
 const poolIconsMap = new Map(POOLS_INFO.map(({id, page: { iconComponent }}) => [id, iconComponent]))

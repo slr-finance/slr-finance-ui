@@ -71,7 +71,7 @@
 <script lang="ts">
   import { defineComponent, watch } from 'vue'
   import { useHead } from '@vueuse/head'
-  import { useBreakpoints, useToggle } from '@vueuse/core'
+  import { useToggle } from '@vueuse/core'
   import ConnectWalletPlug from '@/components/ConnectWallet/ConnectWalletPlug.vue'
   import UiIcon from '@/components/ui/UiIcon'
   import ReferralsList from './components/ReferralsList.vue'

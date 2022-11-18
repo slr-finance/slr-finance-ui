@@ -2,7 +2,7 @@ import { ViteSSG } from 'vite-ssg'
 import { createHead } from '@vueuse/head'
 import 'virtual:svg-icons-register'
 import '@/index.postcss'
-import '@slr-finance/uikit/dist/style.css'
+import '@slr-finance/uikit/styles'
 import '@/components/ui/index.postcss'
 import { nextTick } from 'vue'
 // import { initReferral } from '@slr-finance/ui-share'
@@ -22,14 +22,14 @@ export const createApp = ViteSSG(
   // vue-router options
   routerOptions,
   // function to have custom setups
-  ({ app, router, routes, isClient, initialState }) => {
+  ({ app }) => {
     // install plugins etc.
     const head = createHead()
 
     app.use(head)
   },
   {
-    rootContainer: 'slr-app',
+    rootContainer: '#slr-app',
   }
 )
 // Mount app [END]

@@ -86,7 +86,7 @@
   })
 </script>
 
-<style lang="postcss">
+<style>
   .pools-list > .nav {
     @apply bg-white bg-opacity-[0.082];
   }
@@ -133,7 +133,7 @@
   }
 
   .pools-list-link-icon {
-    @apply text-gray rounded-12 transition-colors duration-200;
+    @apply text-gray rounded-12 transition-colors duration-200 aspect-1;
   }
 
   .pools-list-link-icon:hover {

@@ -32,6 +32,7 @@
   import { useUiToast } from './hooks/useUiToast'
   import UiIcon from '../UiIcon'
   import { templateRef, useDraggable } from '@vueuse/core'
+  import { UiButton } from '@slr-finance/uikit'
 
   export default defineComponent({
     setup() {
@@ -71,6 +72,7 @@
     },
     components: {
       UiIcon,
+      UiButton,
     },
   })
 </script>

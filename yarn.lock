@@ -1272,6 +1272,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@node-loader/http@npm:2.0.0":
+  version: 2.0.0
+  resolution: "@node-loader/http@npm:2.0.0"
+  dependencies:
+    node-fetch: ^2.6.0
+  checksum: a753ed709f62175225a0e59af98e004066907344cddc1aad8d5df6be682743cdf4a734cf6ceb36efde614bff12b86a41d07609f3ffc247471966404ad92b7170
+  languageName: node
+  linkType: hard
+
 "@nodelib/fs.scandir@npm:2.1.5":
   version: 2.1.5
   resolution: "@nodelib/fs.scandir@npm:2.1.5"
@@ -1367,17 +1376,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@slr-finance/uikit@npm:0.0.26-321a3e84":
-  version: 0.0.26-321a3e84
-  resolution: "@slr-finance/uikit@npm:0.0.26-321a3e84::__archiveUrl=https%3A%2F%2Fgitlab.com%2Fapi%2Fv4%2Fprojects%2F40432136%2Fpackages%2Fnpm%2F%40slr-finance%2Fuikit%2F-%2F%40slr-finance%2Fuikit-0.0.26-321a3e84.tgz"
-  dependencies:
-    lodash.get: ^4.4.2
+"@slr-finance/uikit@portal:/Users/vyacheslav/Documents/solar.finance/slr-uikit::locator=front-end%40workspace%3A.":
+  version: 0.0.0-use.local
+  resolution: "@slr-finance/uikit@portal:/Users/vyacheslav/Documents/solar.finance/slr-uikit::locator=front-end%40workspace%3A."
   peerDependencies:
-    "@vueuse/core": "*"
-    vue-router: ^4.1.5
-  checksum: fbac95df533d591e1ac7cbc54b074edf181451c7dd4bad2f78efd6b624ae6cde09635059ede3435368aab03b4928451935e15d5b36f19aa60c6527aff6a12f61
+    "@vueuse/core": 9.5.0
+    "@vueuse/shared": 9.5.0
+    lodash.get: 4.4.2
+    vue: 3.2.45
+    vue-router: 4.1.5
   languageName: node
-  linkType: hard
+  linkType: soft
 
 "@swc/core-darwin-arm64@npm:1.3.14":
   version: 1.3.14
@@ -5030,11 +5039,12 @@ __metadata:
     "@ethersproject/bignumber": 5.6.2
     "@ethersproject/providers": 5.6.2
     "@metamask/detect-provider": 1.2.0
+    "@node-loader/http": 2.0.0
     "@originjs/vite-plugin-commonjs": 1.0.3
     "@originjs/vite-plugin-federation": ^1.1.11
     "@slr-finance/contracts": "https://github.com/slr-finance/slr-finance-contracts.git#ee203dae2160fcca3152d4000d1a83dd92580aa8"
     "@slr-finance/ui-share": "https://github.com/slr-finance/slr-finance-ui-share.git"
-    "@slr-finance/uikit": 0.0.26-321a3e84
+    "@slr-finance/uikit": 0.0.27-38c0796c
     "@types/js-cookie": 3.0.2
     "@types/lodash.get": 4.4.6
     "@types/node": 18.0.6
@@ -6476,7 +6486,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lodash.get@npm:4.4.2, lodash.get@npm:^4.4.2":
+"lodash.get@npm:4.4.2":
   version: 4.4.2
   resolution: "lodash.get@npm:4.4.2"
   checksum: e403047ddb03181c9d0e92df9556570e2b67e0f0a930fcbbbd779370972368f5568e914f913e93f3b08f6d492abc71e14d4e9b7a18916c31fa04bd2306efe545

@@ -10,7 +10,7 @@ export const viteSsgOptions: ViteSSGOptions = {
   rootContainerId: 'slr-app',
   concurrency: 20,
   script: 'async',
-  formatting: 'none',
+  formatting: 'minify',
   includeAllRoutes: false,
   includedRoutes(paths, routes) {
     // use original route records
