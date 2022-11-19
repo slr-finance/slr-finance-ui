@@ -1376,16 +1376,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@slr-finance/uikit@npm:0.0.27-c0eafcd4":
-  version: 0.0.27-c0eafcd4
-  resolution: "@slr-finance/uikit@npm:0.0.27-c0eafcd4::__archiveUrl=https%3A%2F%2Fgitlab.com%2Fapi%2Fv4%2Fprojects%2F40432136%2Fpackages%2Fnpm%2F%40slr-finance%2Fuikit%2F-%2F%40slr-finance%2Fuikit-0.0.27-c0eafcd4.tgz"
+"@slr-finance/uikit@npm:0.0.27":
+  version: 0.0.27
+  resolution: "@slr-finance/uikit@npm:0.0.27::__archiveUrl=https%3A%2F%2Fgitlab.com%2Fapi%2Fv4%2Fprojects%2F40432136%2Fpackages%2Fnpm%2F%40slr-finance%2Fuikit%2F-%2F%40slr-finance%2Fuikit-0.0.27.tgz"
   peerDependencies:
     "@vueuse/core": 9.5.0
     "@vueuse/shared": 9.5.0
     lodash.get: 4.4.2
     vue: 3.2.45
     vue-router: 4.1.5
-  checksum: 66a96324b07922db672eab6fd200b7f096f65472b2ce267e8b3f18609ffbd62bda0b6e830aae43cf42c3290d9d08935b6d1f72e69eb116951f10b92473b83b27
+  checksum: bd0fa15293000d2189dc4efb2ac206cb96b925056793e813e63dbdb85edfcdc3928e674875ce9c4e9c32027023025cb80cb4fe2aab4912af091bdfd14fb425bb
   languageName: node
   linkType: hard
 
@@ -5045,7 +5045,7 @@ __metadata:
     "@originjs/vite-plugin-federation": ^1.1.11
     "@slr-finance/contracts": "https://github.com/slr-finance/slr-finance-contracts.git#ee203dae2160fcca3152d4000d1a83dd92580aa8"
     "@slr-finance/ui-share": "https://github.com/slr-finance/slr-finance-ui-share.git"
-    "@slr-finance/uikit": 0.0.27-c0eafcd4
+    "@slr-finance/uikit": 0.0.27
     "@types/js-cookie": 3.0.2
     "@types/lodash.get": 4.4.6
     "@types/node": 18.0.6
