@@ -20,7 +20,7 @@
     "@metamask/detect-provider": "1.2.0",
     "@slr-finance/contracts": "https://github.com/slr-finance/slr-finance-contracts.git#ee203dae2160fcca3152d4000d1a83dd92580aa8",
     "@slr-finance/ui-share": "https://github.com/slr-finance/slr-finance-ui-share.git",
-    "@slr-finance/uikit": "0.0.27-38c0796c",
+    "@slr-finance/uikit": "0.0.27-c0eafcd4",
     "@vueuse/core": "8.9.4",
     "@walletconnect/web3-provider": "1.7.7",
     "bignumber.js": "9.0.2",
@@ -62,8 +62,5 @@
     "vite-ssg": "0.21.2",
     "vue-tsc": "0.29.8"
   },
-  "packageManager": "yarn@3.2.4",
-  "resolutions": {
-    "@slr-finance/uikit": "portal:/Users/vyacheslav/Documents/solar.finance/slr-uikit"
-  }
+  "packageManager": "yarn@3.2.4"
 }
