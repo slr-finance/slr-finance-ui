@@ -1,6 +1,6 @@
 <template>
   <transition
-    name="pool-page-transition"
+    name="pool-page-video-bg"
     mode="out-in"
   >
     <div
@@ -9,6 +9,7 @@
     >
       <pool-video-bg
         v-if="isDesktopLayout && poolId"
+        :key="poolId"
         :pool-id="poolId"
       />
       <pool-mobile-bg
@@ -48,15 +49,27 @@ export default defineComponent({
   lang="postcss"
   scoped
 >
-  .pool-page-transition-enter-active {
-    transition: all 0.3s ease-out;
-  }
+.pool-page-video-bg-enter-active, .pool-page-video-bg-leave-active {
+  transition: opacity 1s, transform 1s;
+  transform-origin: center center;
+}
 
-  .pool-page-transition-leave-active {
-    transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
-  }
-  .pool-page-transition-enter-from,
-  .pool-page-transition-leave-to {
-    opacity: 0;
-  }
+.pool-page-video-bg-leave-active {
+  transition: opacity 1s, transform 1s;
+}
+
+.pool-page-video-bg-enter-active, .pool-page-video-bg-leave-to {
+  opacity: 0;
+  transform: scale(3);
+}
+
+.pool-page-video-bg-leave-to {
+  opacity: 0;
+  transform: translateX(400px);
+}
+
+.pool-page-video-bg-enter-to {
+  opacity: 1;
+  transform: scale(1);
+}
 </style>

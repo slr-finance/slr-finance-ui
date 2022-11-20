@@ -17,7 +17,7 @@
         class="pt-18 pb-16"
       />
       <ui-button
-        v-if="nextPoolId > poolId"
+        v-if="nextPool && nextPoolId > poolId"
         :to="{ name: nextPool.routeName }"
         class="mb-12 w-full"
         variant="violet"

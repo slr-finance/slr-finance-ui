@@ -31,10 +31,15 @@
     },
     setup(props) {
       const poolInfo = usePoolInfo(toRef(props, 'poolId'))
-      const imgsPaths = computed(() => ({
-        jpg: `${poolInfo.value.page.mobileBgPath}.jpg`,
-        webp: `${poolInfo.value.page.mobileBgPath}.webp`,
-      }))
+      const imgsPaths = computed(() => {
+        const { value } = poolInfo
+        const mobileBgPath = value ? value.page.mobileBgPath : ''
+
+        return {
+          jpg: `${mobileBgPath}.jpg`,
+          webp: `${mobileBgPath}.webp`,
+        }
+      })
 
       return { imgsPaths }
     },

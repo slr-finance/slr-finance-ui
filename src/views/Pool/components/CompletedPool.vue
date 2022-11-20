@@ -1,37 +1,43 @@
 <template>
-  <div class="relative">
-    <ui-poligon
-      class="absolute top-0 right-0 transform-gpu 600:translate-x-1/2 translate-x-ui-page-spacing -translate-y-1/2 z-20"
-      variant="yellow"
-      animated
-    >
-      Ended
-    </ui-poligon>
-
-    <ui-box-corners class="p-12">
-      <ui-placeholder
-        icon="finish"
-        title="Staking completed"
+  <div class="flex-1 flex justify-center items-center w-full">
+    <div class="relative w-full">
+      <ui-poligon
+        class="absolute top-0 right-0 transform-gpu 600:translate-x-1/2 translate-x-ui-page-spacing -translate-y-1/2 z-20"
+        variant="yellow"
+        animated
       >
-        <template #description>
-          <p>
-            Earned
-            <span class="text-white">{{ ernedStr }}</span>
-            for
-            <span class="text-white">{{ daysStr }} days</span>
-          </p>
-        </template>
-
-        <ui-button
-          :size="48"
-          class="w-full"
-          variant="violet"
-          :to="{ name: stakerPool.routeName }"
-        >
-          Go to active pool
-        </ui-button>
-      </ui-placeholder>
-    </ui-box-corners>
+        Ended
+      </ui-poligon>
+  
+      <ui-box-corners class="p-12 w-full">
+        <ui-placeholder title="Staking completed">
+          <template #icon>
+            <pool-icon
+              :pool-id="poolId"
+              class="text-white opacity-60 w-18 h-18"
+            />
+          </template>
+          <template #description>
+            <p>
+              Earned
+              <span class="text-white">{{ ernedStr }}</span>
+              for
+              <span class="text-white">{{ daysStr }} days</span>
+            </p>
+          </template>
+  
+          <ui-button
+            v-if="stakerPool"
+            :size="48"
+            class="w-full"
+            variant="violet"
+            :to="{ name: stakerPool.routeName }"
+          >
+            Go to active pool
+          </ui-button>
+        </ui-placeholder>
+      </ui-box-corners>
+    </div>
   </div>
 </template>
 
@@ -43,6 +49,7 @@
   import { usePoolInfo } from '../hooks/usePoolInfo'
   import { useTokenAmountFormat } from '@/hooks/formatters/useTokenAmountFormat'
   import { BIG_ZERO } from '@/utils/bigNumber'
+  import PoolIcon from './PoolIcon.vue'
 
   export default defineComponent({
     name: 'completed-pool',
@@ -67,6 +74,6 @@
 
       return { stakerPool, ernedStr, history, daysStr }
     },
-    components: { UiButton, UiPlaceholder, UiPoligon, UiBoxCorners },
+    components: { UiButton, UiPlaceholder, UiPoligon, UiBoxCorners, PoolIcon },
   })
 </script>

@@ -1,25 +1,27 @@
 <template>
-  <ui-box-corners class="mb-20 p-12">
-    <ui-placeholder
-      :title="title"
-      description="Please complete all previous pools"
-    >
-      <template #icon>
-        <pool-icon
-          :pool-id="poolId"
-          class="text-white opacity-60 w-18 h-18"
-        />
-      </template>
-      <ui-button
-        class="w-full"
-        :size="48"
-        variant="violet"
-        :to="activePoolLink"
+  <div class="flex-1 flex justify-center items-center">
+    <ui-box-corners class="mb-20 p-12 w-full">
+      <ui-placeholder
+        :title="title"
+        description="Please complete all previous pools"
       >
-        Go to active pool
-      </ui-button>
-    </ui-placeholder>
-  </ui-box-corners>
+        <template #icon>
+          <pool-icon
+            :pool-id="poolId"
+            class="text-white opacity-60 w-18 h-18"
+          />
+        </template>
+        <ui-button
+          class="w-full"
+          :size="48"
+          variant="violet"
+          :to="activePoolLink"
+        >
+          Go to active pool
+        </ui-button>
+      </ui-placeholder>
+    </ui-box-corners>
+  </div>
 </template>
 
 <script lang="ts">
@@ -47,10 +49,16 @@
         return poolId ? poolId : 1
       })
       const stakerPool = usePoolInfo(stakerPoolId)
-      const title = computed(() => `The ${poolInfo.value.name} pool is not open for you`)
+      const title = computed(() => {
+        const { value } = poolInfo
+        const name = value ? ` ${value.name}` : ''
+      
+        return `The${name} pool is not open for you`
+      })
+
       const activePoolLink = computed(() => {
         return {
-          name: stakerPool.value.routeName,
+          name: stakerPool.value?.routeName,
         }
       })
 

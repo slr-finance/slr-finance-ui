@@ -121,12 +121,14 @@
       const buttonData = computed(() => {
         const reinvestAmountVal = reinvestAmount.value
         const isIncorrectAmount = reinvestAmountVal.lte(amount.value)
+        const { value } = poolInfo
+        const name = value ? ` ${value.name}` : ''
 
         return {
           isDisabled: isIncorrectAmount,
           text: isIncorrectAmount
             ? `Quantity must not exceed ${tokenAmountFormat(reinvestAmountVal, 'SLR')}`
-            : `Migrate to ${poolInfo.value.name} pool without fee`,
+            : `Migrate to${name} pool without fee`,
         }
       })
 
