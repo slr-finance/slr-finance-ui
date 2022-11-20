@@ -6,17 +6,6 @@
     </h1>
 
     <div class="grid gap-28 grid-cols-2">
-      <dashboard-container
-        class="col-span-2"
-        style="height: 400px"
-      >
-        <div class="w-full h-full relative">
-          <client-only>
-            <dashboard-token-charts class="w-full h-full left-0 top-0 absolute" />
-          </client-only>
-        </div>
-      </dashboard-container>
-
       <dashboard-container class="col-span-2 875:col-span-1">
         <div>
           <div class="text-28 font-title leading-140">
@@ -46,6 +35,10 @@
           </ui-button>
         </template>
       </presale-information>
+
+      <dashboard-token-charts
+        class="col-span-2"
+        style="height: 800px" />
     </div>
   </div>
 </template>
