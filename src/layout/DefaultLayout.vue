@@ -14,7 +14,7 @@
     <div class="min-h-full w-full">
       <default-layout-video-bg :content-height="contentHeight">
         <router-view name="bg-video" v-slot="{Component}">
-          <transition name="fade" mode="out-in">
+          <transition name="video-bg" mode="out-in">
             <component :is="Component" />
           </transition>
         </router-view>
@@ -94,3 +94,29 @@ export default defineComponent({
   },
 })
 </script>
+
+<style>
+.video-bg-enter-active, .video-bg-leave-active {
+  transition: opacity 1s, transform 1s;
+  transform-origin: center center;
+}
+
+.video-bg-leave-active {
+  transition: opacity .5s, transform .5s;
+}
+
+
+.video-bg-enter-active {
+  opacity: 0;
+  transform: scale(1.2);
+}
+
+.video-bg-leave-to {
+  opacity: 0;
+}
+
+.video-bg-enter-to {
+  opacity: 1;
+  transform: scale(1);
+}
+</style>

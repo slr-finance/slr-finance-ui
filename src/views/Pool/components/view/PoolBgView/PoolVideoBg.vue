@@ -28,7 +28,7 @@
     },
     setup(props) {
       const poolInfo = usePoolInfo(toRef(props, 'poolId'))
-      const videoFolder = computed(() => poolInfo.value.page.videoFolder)
+      const videoFolder = computed(() => poolInfo.value?.page.videoFolder)
       const { videoRef } = useAppVideoCache(videoFolder)
 
       return { videoRef }

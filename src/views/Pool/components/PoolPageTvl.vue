@@ -30,6 +30,7 @@
   import { tokenAmountFormat } from '@/utils/strFormat/tokenAmountFormat'
   import { usePoolState } from '../hooks/usePoolState'
   import { useAppBreakpoints } from '@/hooks/useAppBreakpoints'
+  import { useTransition } from '@vueuse/core'
 
   export default defineComponent({
     name: 'pool-tvl',
@@ -41,7 +42,9 @@
     },
     setup(props) {
       const [poolState] = usePoolState(toRef(props, 'poolId'))
-      const tvlStr = computed(() => tokenAmountFormat(poolState.value.totalStaked, 'SLR'))
+      const tvl = computed(() => poolState.value.totalStaked.toNumber())
+      const tvlAnimated = useTransition(tvl, { duration: 500 })
+      const tvlStr = computed(() => tokenAmountFormat(tvlAnimated.value, 'SLR'))
       const { w380: isShownImage } = useAppBreakpoints()
 
       return { tvlStr, isShownImage }

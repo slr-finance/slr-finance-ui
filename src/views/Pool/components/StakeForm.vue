@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="flex-1">
     <slr-balance-input
       v-model:value="amount"
       class="mb-16"
