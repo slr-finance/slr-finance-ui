@@ -10,7 +10,7 @@
         mode="out-in"
       >
         <div
-          class="min-h-full pl-ui-page-spacing h-auto flex flex-1"
+          class="min-h-full px-ui-page-spacing h-auto flex flex-1"
           :key="$route.name || 'none'"
         >
           <component :is="Component" />
@@ -18,7 +18,7 @@
       </transition>
     </router-view>
 
-    <div class="flex flex-col justify-end items-end h-full absolute right-0 top-0 bottom-0">
+    <div class="flex flex-col justify-end items-end h-full absolute right-ui-page-spacing top-0 bottom-0">
       <div class="sticky bottom-0">
         <pools-map
           class="pools-map-wrapper"
