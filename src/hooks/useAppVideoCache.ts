@@ -2,7 +2,7 @@ import { playVideoFromCache } from "@/utils/video/cacheVideo"
 import { MaybeRef } from "@vueuse/core"
 import { watch, ref, unref } from "vue"
 
-export const useAppVideoCache = (videoFileUrlRef: MaybeRef<string>, isShownRef:MaybeRef<boolean> = true) => {
+export const useAppVideoCache = (videoFileUrlRef: MaybeRef<string|undefined>, isShownRef:MaybeRef<boolean> = true) => {
   const videoRef = ref<HTMLVideoElement>()
 
   watch(
@@ -12,7 +12,7 @@ export const useAppVideoCache = (videoFileUrlRef: MaybeRef<string>, isShownRef:M
       () => unref(videoFileUrlRef),
     ],
     ([video, isShown, videoFileUrl]) => {
-      if (video && isShown && videoFileUrlRef) {
+      if (video && isShown && videoFileUrl && videoFileUrlRef) {
         playVideoFromCache(video, videoFileUrl)
       }
     },
