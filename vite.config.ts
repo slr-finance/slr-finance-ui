@@ -3,9 +3,9 @@ import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import { viteSsgOptions } from './config/viteSsgOptions'
-import { viteFederationPlugin } from './config/viteFederationPlugin'
-import topLevelAwait from "vite-plugin-top-level-await";
-import { viteCommonjs } from '@originjs/vite-plugin-commonjs'
+// import { viteFederationPlugin } from './config/viteFederationPlugin'
+// import topLevelAwait from "vite-plugin-top-level-await";
+// import { viteCommonjs } from '@originjs/vite-plugin-commonjs'
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -27,12 +27,8 @@ export default defineConfig({
     createSvgIconsPlugin({
       // Specify the icon folder to be cached
       iconDirs: [
-        path.resolve(process.cwd(), 'src/components/ui/UiIcon/icons'),
         path.resolve(process.cwd(), 'src/components/ui/UiIcon/icons/social'),
-        path.resolve(process.cwd(), 'src/components/ui/UiIcon/icons/pools'),
-        path.resolve(process.cwd(), 'src/components/ui/UiIcon/icons/wallets'),
         path.resolve(process.cwd(), 'src/components/ui/UiIcon/icons/currency'),
-        path.resolve(process.cwd(), 'src/components/ui/UiIcon/icons/card'),
         path.resolve(process.cwd(), 'src/components/ui/UiIcon/icons/social'),
         path.resolve(process.cwd(), 'src/assets/icons'),
       ],

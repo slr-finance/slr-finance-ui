@@ -52,10 +52,7 @@
           <div
             class="w-24 h-24 rounded-full border border-white border-opacity-20 flex justify-center items-center ml-10"
           >
-            <ui-icon
-              size="14"
-              name="arrow-right"
-            />
+            <ui-async-icon-arrow-right class="h-14 w-14" />
           </div>
         </div>
       </ui-button>
@@ -66,11 +63,10 @@
 <script lang="ts">
   import { computed, watch, PropType, defineComponent } from 'vue'
   import { templateRef, useVirtualList } from '@vueuse/core'
-  import { UiButton } from '@slr-finance/uikit'
-  import UiIcon from './UiIcon/UiIcon.vue'
+  import { UiButton, UiAsyncIconArrowRight } from '@slr-finance/uikit'
 
   export default defineComponent({
-    components: { UiButton, UiIcon },
+    components: { UiButton, UiAsyncIconArrowRight },
     props: {
       columns: {
         type: Array as PropType<String[]>,

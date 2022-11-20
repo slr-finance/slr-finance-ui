@@ -14,12 +14,7 @@
           <div
             class="absolute top-0 left-1/2 420:top-1/2 420:left-0 transform -translate-x-1/2 -translate-y-1/2 w-20 h-20 rounded-full bg-green-original flex justify-center items-center"
           >
-            <ui-icon
-              class="text-white transform rotate-90 420:rotate-0"
-              name="arrow-pixel"
-              size="8"
-              rotate="270"
-            />
+            <ui-icon-pixel-arrow class="text-white w-8 h-8 transform rotate-0 420:-rotate-90"/>
           </div>
           <p class="text-green-original mb-6">Your can buy</p>
           <p class="text-white uppercase leading-none font-title">{{ amountStr }}</p>
@@ -33,18 +28,8 @@
           target="_blank"
           rel="noopener noreferrer"
         >
-          <ui-icon
-            prefix="ui-icon-card"
-            name="visa"
-            size="16"
-            class="mr-4"
-          />
-          <ui-icon
-            prefix="ui-icon-card"
-            name="mastercard"
-            size="16"
-            class="mr-6"
-          />
+          <ui-async-icon-card-visa class="mr-4 w-16 h-16"/>
+          <ui-async-icon-card-mastercard class="mr-6 w-16 h-16"/>
           Buy BNB on Mercuryo
         </a>
 
@@ -54,12 +39,7 @@
           target="_blank"
           rel="noopener noreferrer"
         >
-          <ui-icon
-            name="binance"
-            prefix="ui-icon-card"
-            size="16"
-            class="mr-6"
-          />
+          <ui-async-icon-card-binance class="mr-6 w-16 h-16"/>
           Buy BNB on Binance
         </a>
       </div>
@@ -70,11 +50,11 @@
 <script lang="ts">
   import { computed, defineComponent } from 'vue'
   import { computedEager } from '@vueuse/shared'
-  import UiIcon from '@/components/ui/UiIcon'
   import { useEthers } from '@/hooks/dapp/useEthers'
   import { useTokenAmountFormat } from '@/hooks/formatters/useTokenAmountFormat'
   import { tokenAmountFormat } from '@/utils/strFormat/tokenAmountFormat'
   import { usePresale } from '../../hooks/usePresale'
+  import { UiAsyncIconCardBinance, UiAsyncIconCardMastercard, UiAsyncIconCardVisa, UiIconPixelArrow } from '@slr-finance/uikit'
 
   export default defineComponent({
     name: 'white-list-joined',
@@ -103,6 +83,6 @@
         mercuryoLinkBuy,
       }
     },
-    components: { UiIcon },
+    components: { UiAsyncIconCardBinance, UiAsyncIconCardMastercard, UiAsyncIconCardVisa, UiIconPixelArrow },
   })
 </script>

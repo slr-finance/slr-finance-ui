@@ -4,10 +4,9 @@
   >
     <div class="flex justify-between items-center mb-16">
       <div class="bg-black rounded-full w-32 h-32 flex justify-center items-center">
-        <ui-icon
-          prefix="ui-icon-wallets"
-          :name="iconName"
-          size="16"
+        <wallet-icon
+          :wallet-name="walletName"
+          class="h-16 w-16"
         />
       </div>
       <div><slot /></div>
@@ -23,14 +22,15 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent } from 'vue'
-  import UiIcon from '@/components/ui/UiIcon'
+  import { defineComponent, PropType } from 'vue'
+  import { WalletName } from '@/hooks/dapp/useWallet'
+  import WalletIcon from '../WalletIcon'
 
   export default defineComponent({
     name: 'connect-button',
     props: {
-      iconName: {
-        type: String,
+      walletName: {
+        type: String as PropType<WalletName>,
         required: true,
       },
       label: {
@@ -43,7 +43,7 @@
       },
     },
     components: {
-      UiIcon,
+      WalletIcon,
     },
   })
 </script>

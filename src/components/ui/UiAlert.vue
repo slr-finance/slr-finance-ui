@@ -1,10 +1,8 @@
 <template>
   <div class="flex items-start cursor-default">
-    <ui-icon
-      :name="icon"
-      size="10"
-      class="mt-2"
-    />
+    <slot name="icon">
+      <ui-icon-info-circle class="mt-2 w-10 h-10"/>
+    </slot>
 
     <div class="flex-1 ml-4 text-10 leading-140">
       <slot />
@@ -14,7 +12,7 @@
 
 <script lang="ts">
   import { defineComponent } from 'vue'
-  import UiIcon from './UiIcon'
+  import { UiIconInfoCircle } from '@slr-finance/uikit'
 
   export default defineComponent({
     name: 'ui-alert',
@@ -25,7 +23,7 @@
       },
     },
     components: {
-      UiIcon,
+      UiIconInfoCircle,
     },
   })
 </script>

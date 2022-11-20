@@ -2,7 +2,6 @@
   <app-header />
   <!-- <SlrHeader></SlrHeader> -->
   <DefaultLayout/>
-  <app-float-button-container class="z-ui-page-content"/>
   
   <connected-wallet-modal />
   <connect-wallet-modal />
@@ -18,7 +17,6 @@
   import ConnectWalletModal from '@/components/ConnectWallet/ConnectWalletModal'
   import { LATEST_CONNECTED_PROVIDER } from '@/config/constants/localStorage'
   import { useWallet, WalletName } from './hooks/dapp/useWallet'
-  import AppFloatButtonContainer from '@/components/App/AppFloatButton/AppFloatButtonContainer.vue'
   import DefaultLayout from '@/layout/DefaultLayout.vue'
   import { useAppBreakpoints } from '@/hooks/useAppBreakpoints'
   // @ts-ignore
@@ -53,7 +51,6 @@
     components: {
       DefaultLayout,
       AppHeader,
-      AppFloatButtonContainer,
       ConnectWalletModal,
       ConnectedWalletModal,
       UiToast,

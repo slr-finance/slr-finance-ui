@@ -13,13 +13,9 @@
       >
         <div :style="styleList">
           TOAST
-          <ui-icon
-            v-if="state.icon"
-            v-bind="state.icon"
-          />
           {{ state.content }}
           <ui-button @click="hide">
-            <ui-icon name="close" />
+            <ui-icon-close />
           </ui-button>
         </div>
       </div>
@@ -30,9 +26,8 @@
 <script lang="ts">
   import { computed, defineComponent, watch } from 'vue'
   import { useUiToast } from './hooks/useUiToast'
-  import UiIcon from '../UiIcon'
   import { templateRef, useDraggable } from '@vueuse/core'
-  import { UiButton } from '@slr-finance/uikit'
+  import { UiButton, UiIconClose } from '@slr-finance/uikit'
 
   export default defineComponent({
     setup() {
@@ -71,7 +66,7 @@
       return { hide, state, styleList, isShown }
     },
     components: {
-      UiIcon,
+      UiIconClose,
       UiButton,
     },
   })

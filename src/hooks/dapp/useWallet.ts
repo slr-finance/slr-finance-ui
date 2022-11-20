@@ -6,14 +6,19 @@ import { loadWalletConnect } from '@/utils/wallet/loadWalletConnect'
 import { CHAIN_ID, NETWORK_DETAILS } from '@/config/constants/chain'
 import { LATEST_CONNECTED_PROVIDER } from '@/config/constants/localStorage'
 
-export type WalletName = 'none' | 'metamask' | 'walletconnect'
+export enum WalletName {
+  none = 'none',
+  metamask = 'metamask',
+  walletconnect = 'walletconnect',
+  trustwallet = 'trustwallet'
+}
 export type ConnectionState = 'none' | 'connecting' | 'connected'
 export type WalletProvider = MetaMaskProvider | WalletConnectProvider
 
 // State [BEGIN]
 const provider = ref<WalletProvider | null>(null)
 const status = ref<ConnectionState>('none')
-const walletName = ref<WalletName>('none')
+const walletName = ref<WalletName>(WalletName.none)
 const error = ref('')
 // State [END]
 
@@ -23,7 +28,7 @@ export const useWallet = () => {
   const clear = () => {
     provider.value = null
     status.value = 'none'
-    walletName.value = 'none'
+    walletName.value = WalletName.none
     error.value = ''
 
     deactivate()
@@ -220,7 +225,6 @@ export const useWallet = () => {
     provider: provider as Ref<WalletProvider | null>,
     status,
     walletName,
-    walletIconName: 'metamask',
     error,
   }
 }

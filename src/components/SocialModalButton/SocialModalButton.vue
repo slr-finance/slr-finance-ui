@@ -11,21 +11,15 @@
     class="social-modal-button relative flex justify-center items-center h-50 w-50 before:block before:content-[''] before:w-8 before:h-8 before:rounded-full before:bg-violet before:absolute before:right-0 before:top-0 after:block after:content-[''] after:w-full after:h-full after:rounded-12 after:absolute after:right-0 after:top-0 after:-z-1 after:transition-opacity duration-200"
     @click="open"
   >
-    <ui-icon
-      name="telegram-flat"
-      prefix="ui-icon-social"
-      size="18"
-    />
+    <ui-async-icon-social-telegram-flat class="w-18 h-18"/>
   </button>
 </template>
 
 <script lang="ts">
   import { defineAsyncComponent, defineComponent } from 'vue'
   import { useToggle } from '@vueuse/shared'
-  import { UiGalaxyLoader, UiModal } from '@slr-finance/uikit'
-  import UiIcon from '@/components/ui/UiIcon'
+  import { UiGalaxyLoader, UiModal, UiAsyncIconSocialTelegramFlat } from '@slr-finance/uikit'
   import NoInternetConnection from '@/components/NoInternetConnection.vue'
-  import AppFloatButton from '@/components/App/AppFloatButton/AppFloatButton.vue'
 
   export default defineComponent({
     name: 'social-modal-button',
@@ -45,9 +39,8 @@
         errorComponent: NoInternetConnection,
         delay: 200,
       }),
-      UiIcon,
+      UiAsyncIconSocialTelegramFlat,
       UiModal,
-      AppFloatButton
     },
   })
 </script>

@@ -9,11 +9,8 @@
       <h2 class="text-ui-page-label uppercase font-title">How to invite friends</h2>
 
       <div class="item-block 500:flex">
-        <ui-icon
-          :size="20"
-          class="item-point"
-          name="center"
-        />
+        <ui-icon-pixel-center class="item-point"/>
+
         <div class="flex 500:mr-16 flex-1">
           <ui-icon
             :size="40"
@@ -35,11 +32,7 @@
       </div>
 
       <div class="item-block flex">
-        <ui-icon
-          :size="20"
-          class="item-point"
-          name="center"
-        />
+        <ui-icon-pixel-center class="item-point"/>
         <ui-icon
           :size="40"
           class="icon"
@@ -52,11 +45,7 @@
       </div>
 
       <div class="item-block">
-        <ui-icon
-          :size="20"
-          class="item-point"
-          name="center"
-        />
+        <ui-icon-pixel-center class="item-point"/>
         <div class="flex mb-20">
           <ui-icon
             :size="40"
@@ -121,9 +110,8 @@
   import { defineComponent } from 'vue'
   import ConnectWalletPlug from '@/components/ConnectWallet/ConnectWalletPlug.vue'
   import { useReferrerPercentRewards } from '../hooks/useReferrerPercentRewards'
-  import { UiTextPlaceholder } from '@slr-finance/uikit'  
+  import { UiTextPlaceholder, UiLinkExternal, UiIconPixelCenter } from '@slr-finance/uikit'  
   import UiIcon from '@/components/ui/UiIcon/UiIcon.vue'
-  import { UiLinkExternal } from '@slr-finance/uikit'  
 
   export default defineComponent({
     name: 'referral-promo-state',
@@ -137,11 +125,12 @@
       UiTextPlaceholder,
       UiIcon,
       UiLinkExternal,
+      UiIconPixelCenter,
     },
   })
 </script>
 
-<style lang="postcss">
+<style>
   .referral-promo-state .item-block,
   .referral-promo-state .item-sub-block {
     @apply rounded-12 bg-gray-800 bg-opacity-60;
@@ -166,7 +155,7 @@
   }
 
   .referral-promo-state .item-block .item-point {
-    @apply absolute top-32 -left-ui-page-inner-spacing p-6 bg-black transform -translate-x-1/2 box-content -ml-1 rounded-full;
+    @apply w-20 h-20 absolute top-32 -left-ui-page-inner-spacing p-6 bg-black transform -translate-x-1/2 box-content -ml-1 rounded-full;
   }
 
   .referral-promo-state .item-block .icon {

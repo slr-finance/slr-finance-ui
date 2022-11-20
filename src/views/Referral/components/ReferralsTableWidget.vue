@@ -26,10 +26,7 @@
             <div
               class="w-24 h-24 rounded-full border border-white border-opacity-20 flex justify-center items-center ml-10"
             >
-              <ui-icon
-                size="14"
-                name="arrow-right"
-              />
+              <ui-async-icon-arrow-right class="w-14 h-14"/>
             </div>
           </div>
         </ui-button>
@@ -41,8 +38,7 @@
 <script lang="ts">
   import { defineComponent, PropType } from 'vue'
   import UiWidget from '@/components/ui/UiWidget.vue'
-  import { UiButton } from '@slr-finance/uikit'
-  import UiIcon from '@/components/ui/UiIcon'
+  import { UiButton, UiAsyncIconArrowRight } from '@slr-finance/uikit'
   import UiPlaceholder from '@/components/ui/UiPlaceholder.vue'
   import { useAppBreakpoints } from '@/hooks/useAppBreakpoints'
 
@@ -70,7 +66,7 @@
     components: {
       UiWidget,
       UiButton,
-      UiIcon,
+      UiAsyncIconArrowRight,
       UiPlaceholder,
     },
   })

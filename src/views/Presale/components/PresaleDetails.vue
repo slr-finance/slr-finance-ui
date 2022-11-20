@@ -94,11 +94,7 @@
     >
       <div class="wrapper flex justify-center items-center font-title">
         <span class="text" />
-        <ui-icon
-          class="arrow ml-6"
-          name="arrow-pixel"
-          size="8"
-        />
+        <ui-icon-pixel-arrow class="arrow ml-6 h-8 w-8"/>
       </div>
     </button>
   </div>
@@ -107,9 +103,7 @@
 <script lang="ts">
   import { computed, defineComponent } from 'vue'
   import { computedEager, useToggle } from '@vueuse/shared'
-  import { UiButton, UiLink } from '@slr-finance/uikit'
-  import UiIcon from '@/components/ui/UiIcon'
-  import { UiLinkExternal } from '@slr-finance/uikit'
+  import { UiLinkExternal, UiButton, UiLink, UiIconPixelArrow } from '@slr-finance/uikit'
   import PresaleReferralProgramWidget from './PresaleReferralProgramWidget.vue'
   import { useTokenAmountFormat } from '@/hooks/formatters/useTokenAmountFormat'
   import { usePresale } from '../hooks/usePresale'
@@ -172,7 +166,7 @@
         phasesTimeData,
       }
     },
-    components: { PresaleReferralProgramWidget, UiButton, UiIcon, UiLinkExternal, UiLink },
+    components: { PresaleReferralProgramWidget, UiButton, UiIconPixelArrow, UiLinkExternal, UiLink },
   })
 </script>
 

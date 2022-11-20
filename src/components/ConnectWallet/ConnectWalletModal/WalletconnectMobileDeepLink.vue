@@ -3,10 +3,9 @@
     :href="walletInfo.link"
     :size="48"
   >
-    <ui-icon
-      prefix="ui-icon-wallets"
-      size="18"
-      :name="walletInfo.iconName"
+    <wallet-icon
+      class="w-18 h-18"
+      :wallet-name="walletInfo.walletName"
     />
     {{ wallet }}
   </ui-button>
@@ -14,17 +13,18 @@
 
 <script lang="ts">
   import { defineComponent, computed, PropType } from 'vue'
-  import UiIcon from '@/components/ui/UiIcon'
   import { UiButton } from '@slr-finance/uikit'
+  import { WalletName } from '@/hooks/dapp/useWallet'
+  import WalletIcon from '../WalletIcon'
 
   const walletDeepLinkInfo = {
-    metamask: {
+    [WalletName.metamask]: {
       prefix: 'https://metamask.app.link/wc?uri=',
-      iconName: 'metamask',
+      walletName: WalletName.metamask,
     },
-    trustwallet: {
+    [WalletName.trustwallet]: {
       prefix: 'https://link.trustwallet.com/wc?uri=',
-      iconName: 'trustwallet',
+      walletName: WalletName.trustwallet,
     },
   }
 
@@ -43,7 +43,7 @@
     setup(props) {
       const walletInfo = computed(() => ({
         link: `${walletDeepLinkInfo[props.wallet].prefix}${props.uri}`,
-        iconName: walletDeepLinkInfo[props.wallet].iconName,
+        walletName: walletDeepLinkInfo[props.wallet].walletName,
       }))
 
       return {
@@ -51,7 +51,7 @@
       }
     },
     components: {
-      UiIcon,
+      WalletIcon,
       UiButton,
     },
   })

@@ -7,10 +7,9 @@
       <div class="flex items-center justify-between">
         <span class="text-12 text-gray">Connected to {{ walletName }}</span>
         <div class="bg-black rounded-full w-32 h-32 flex justify-center items-center mr-12">
-          <ui-icon
-            prefix="ui-icon-wallets"
-            :name="walletIconName"
-            size="16"
+          <wallet-icon
+            :wallet-name="walletName"
+            class="w-16 h-16"
           />
         </div>
       </div>
@@ -23,11 +22,7 @@
         >
           <div class="flex items-end">
             <div>Copy Address</div>
-            <ui-icon
-              class="text-violet text-opacity-50 ml-6"
-              name="copy-hollow"
-              size="18"
-            />
+            <ui-icon-copy-hollow class="text-violet text-opacity-50 ml-6 h-18 w-18"/>
           </div>
         </button>
         <a
@@ -38,11 +33,7 @@
         >
           <div class="flex items-end">
             <div>View on BscScan</div>
-            <ui-icon
-              class="text-violet text-opacity-50 ml-6"
-              name="external"
-              size="18"
-            />
+            <ui-icon-external class="text-violet text-opacity-50 ml-6 w-18 h-18"/>
           </div>
         </a>
       </div>
@@ -77,8 +68,7 @@
 <script lang="ts">
   import { computed, defineComponent, unref } from 'vue'
   import { useConnectedWalletModal } from '../hooks/useConnectedWalletModal'
-  import UiIcon from '@/components/ui/UiIcon'
-  import { UiButton, UiModal } from '@slr-finance/uikit'
+  import { UiButton, UiModal, UiIconExternal, UiIconCopyHollow } from '@slr-finance/uikit'
   import { useUiToast } from '@/components/ui/UiToast'
   import { shortenAddress } from '@/utils/address/shortenAddress'
   import { useEthers } from '@/hooks/dapp/useEthers'
@@ -88,6 +78,7 @@
   import { useClipboard } from '@vueuse/core'
   import { useBscScanAddress } from '@/hooks/useBscScanAddress'
   import { useStakerState } from '@/views/Pool/hooks/useStakerState'
+  import WalletIcon from '../WalletIcon'
 
   export default defineComponent({
     name: 'connected-wallet-modal',
@@ -97,7 +88,7 @@
       const trimedAddress = computed(() => shortenAddress(address.value, 4))
       const { balance: slrBalance } = useSlrBalance()
       const { stakerState } = useStakerState()
-      const { disconnect, walletName, walletIconName } = useWallet()
+      const { disconnect, walletName } = useWallet()
       const slrStakedAmount = computed(() => stakerState.value.amount)
       const slrTotalBalance = computed(() => slrStakedAmount.value.plus(slrBalance.value))
       const slrBalanceStr = useTokenAmountFormat(slrBalance)
@@ -131,16 +122,17 @@
         slrStakedAmountStr,
         slrTotalBalanceStr,
         walletName,
-        walletIconName,
         bscScanAddress,
         handleCopy,
         handleDisconnect,
       }
     },
     components: {
-      UiIcon,
       UiModal,
       UiButton,
+      UiIconExternal,
+      UiIconCopyHollow,
+      WalletIcon,
     },
   })
 </script>

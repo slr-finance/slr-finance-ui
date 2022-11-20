@@ -32,7 +32,7 @@
       <connect-button
         @click="handleConnectMetamask"
         label="Metamask"
-        iconName="metamask"
+        :walletName="WalletName.metamask"
         description="One of the most secure wallets with great flexibility"
         :disabled="checkingMetamask"
       >
@@ -59,7 +59,7 @@
   import type { IQRCodeModal } from '@walletconnect/types'
   import { defineAsyncComponent, defineComponent, onMounted, ref, watch } from 'vue'
   import { useVModel } from '@vueuse/core'
-  import { useWallet } from '@/hooks/dapp/useWallet'
+  import { useWallet, WalletName } from '@/hooks/dapp/useWallet'
   import { NETWORK_DETAILS } from '@/config/constants/chain'
   import { UiGalaxyLoader } from '@slr-finance/uikit'
   import { useConnectWalletModal } from '../hooks/useConnectWalletModal'
@@ -130,7 +130,7 @@
         // Prevent from closing the board while clicking disabled wallet
         openLoading()
         try {
-          await connect('metamask')
+          await connect(WalletName.metamask)
         } catch (error) {
           console.log(error)
         } finally {
@@ -141,7 +141,7 @@
       const handleConnectWalletconnect = async () => {
         try {
           openLoading()
-          await connect('walletconnect', {
+          await connect(WalletName.walletconnect, {
             bridge: 'https://bridge.walletconnect.org', // Required
             qrcodeModal: walletConnectQr,
             rpc: Object.entries(NETWORK_DETAILS).reduce((chainMap, [chainId, chainInfo]) => {
@@ -166,6 +166,7 @@
         walletConnectUri,
         metamaskDisabled,
         checkingMetamask,
+        WalletName
       }
     },
     components: {

@@ -40,10 +40,7 @@
 
       <div class="flex flex-col 500:flex-row justify-between text-14 mt-12 mb-20">
         <div class="flex items-center">
-          <ui-icon
-            size="18"
-            name="slr-logo"
-          />
+          <ui-async-icon-slr-logo class="w-18 h-18" />
           <span class="text-gray ml-6">Your recieve </span>
         </div>
         <span class="text-white">{{ amountOutStr }}</span>
@@ -67,7 +64,6 @@
 <script lang="ts">
   import { computed, ComputedRef, defineComponent, Ref, ref } from 'vue'
   import BigNumber from 'bignumber.js'
-  import UiIcon from '@/components/ui/UiIcon'
   import UiInputBn from '@/components/ui/UiInputBn.vue'
   import SendTxButton from '@/components/Tx/SendTxButton.vue'
   import ConnectWalletPlug from '@/components/ConnectWallet/ConnectWalletPlug.vue'
@@ -77,7 +73,7 @@
   import { useEthers } from '@/hooks/dapp/useEthers'
   import { usePresale } from '../hooks/usePresale'
   import { useWhiteList } from '../hooks/useWhiteList'
-  import { UiGalaxyLoader } from '@slr-finance/uikit'
+  import { UiGalaxyLoader, UiAsyncIconSlrLogo } from '@slr-finance/uikit'
 
   export default defineComponent({
     setup() {
@@ -123,7 +119,7 @@
     },
     components: {
       UiInputBn,
-      UiIcon,
+      UiAsyncIconSlrLogo,
       SendTxButton,
       ConnectWalletPlug,
       PresalePrice,

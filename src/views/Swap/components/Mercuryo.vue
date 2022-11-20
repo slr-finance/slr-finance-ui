@@ -7,18 +7,8 @@
       :size="48"
       target="_blank"
     >
-      <ui-icon
-        prefix="ui-icon-card"
-        name="visa"
-        size="16"
-        class="mr-4"
-      />
-      <ui-icon
-        prefix="ui-icon-card"
-        name="mastercard"
-        size="16"
-        class="mr-6"
-      />
+      <ui-async-icon-card-visa class="mr-4 w-16 h-16"/>
+      <ui-async-icon-card-mastercard class="mr-6 w-16 h-16"/>
       Buy bnb on Mercuryo
     </ui-button>
     <ui-button
@@ -28,18 +18,8 @@
       :size="48"
       target="_blank"
     >
-      <ui-icon
-        prefix="ui-icon-card"
-        name="visa"
-        size="16"
-        class="mr-4"
-      />
-      <ui-icon
-        prefix="ui-icon-card"
-        name="mastercard"
-        size="16"
-        class="mr-6"
-      />
+      <ui-async-icon-card-visa class="mr-4 w-16 h-16"/>
+      <ui-async-icon-card-mastercard class="mr-6 w-16 h-16"/>
       Sell bnb on Mercuryo
     </ui-button>
     <ui-button
@@ -48,12 +28,7 @@
       variant="gray"
       :size="48"
     >
-      <ui-icon
-        prefix="ui-icon-card"
-        name="binance"
-        size="16"
-        class="mr-6"
-      />
+      <ui-async-icon-card-binance class="mr-6 w-16 h-16"/>
       Sell/Buy crypto on Binance
     </ui-button>
   </div>
@@ -62,8 +37,8 @@
 <script lang="ts">
   import { defineComponent, computed } from 'vue'
   import { UiButton } from '@slr-finance/uikit'
-  import UiIcon from '@/components/ui/UiIcon'
   import { useEthers } from '@/hooks/dapp/useEthers'
+  import { UiAsyncIconCardBinance, UiAsyncIconCardMastercard, UiAsyncIconCardVisa } from '@slr-finance/uikit'
 
   export default defineComponent({
     name: 'mercuryo',
@@ -102,7 +77,9 @@
     },
     components: {
       UiButton,
-      UiIcon,
+      UiAsyncIconCardBinance,
+      UiAsyncIconCardMastercard,
+      UiAsyncIconCardVisa,
     },
   })
 </script>
