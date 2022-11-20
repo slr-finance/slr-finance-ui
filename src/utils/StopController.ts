@@ -16,7 +16,7 @@ type CancelCallback = (callback: () => void) => void
  * }
  */
 export class StopController {
-  #stoping = false
+  _stoping = false
 
   constructor(cancelCallback?: CancelCallback) {
     if (cancelCallback) {
@@ -25,11 +25,11 @@ export class StopController {
   }
 
   public stop = () => {
-    this.#stoping = true
+    this._stoping = true
   }
 
   public breakIfStoping = () => {
-    if (this.#stoping) {
+    if (this._stoping) {
       throw new ScriptStoped()
     }
   }

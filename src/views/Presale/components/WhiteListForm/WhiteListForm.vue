@@ -33,8 +33,7 @@
 
 <script lang="ts">
   import { computed, defineComponent } from 'vue'
-  import UiGalaxyLoader from '@/components/ui/UiGalaxyLoader.vue'
-  import UiPoligon from '@/components/ui/UiPoligon.vue'
+  import { UiGalaxyLoader, UiPoligon } from '@slr-finance/uikit'
   import UiWidget from '@/components/ui/UiWidget.vue'
   import WhiteListJoined from './WhiteListJoined.vue'
   import WhiteListJoin from './WhiteListJoin.vue'

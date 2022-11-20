@@ -70,7 +70,6 @@
 <script lang="ts">
   import { computed, defineComponent } from 'vue'
   import { computedEager } from '@vueuse/shared'
-  import UiExternalLink from '@/components/ui/UiExternalLink.vue'
   import UiIcon from '@/components/ui/UiIcon'
   import { useEthers } from '@/hooks/dapp/useEthers'
   import { useTokenAmountFormat } from '@/hooks/formatters/useTokenAmountFormat'
@@ -104,6 +103,6 @@
         mercuryoLinkBuy,
       }
     },
-    components: { UiIcon, UiExternalLink },
+    components: { UiIcon },
   })
 </script>

@@ -1,6 +1,6 @@
+import type { BigNumber as BigNumberEthers } from 'ethers'
+import { IRouter02__factory } from '@slr-finance/contracts'
 import { Call, multicall } from '@/utils/contracts/multicall'
-import PairAbi from '@/config/abi/Pair.json'
-import { BigNumber as BigNumberEthers } from 'ethers'
 
 export const fetchReserves = async (
   pairs: string[],
@@ -20,7 +20,7 @@ export const fetchReserves = async (
     ])
     .flat()
 
-  const [response] = await multicall(PairAbi, calls)
+  const [response] = await multicall(IRouter02__factory.abi, calls)
 
   return pairs.map((pair, index) => ({
     pair: pair,

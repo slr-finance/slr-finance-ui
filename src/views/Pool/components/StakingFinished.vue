@@ -8,9 +8,9 @@
       Ended
     </ui-poligon>
 
-    <div
+    <ui-box-corners
       v-if="poolId === stakerState.poolId"
-      class="ui-box-corners"
+      class="p-12"
     >
       <staker-info
         :poolId="poolId"
@@ -21,7 +21,7 @@
         :to="{ name: nextPool.routeName }"
         class="mb-12 w-full"
         variant="violet"
-        size="48"
+        :size="48"
       >
         Migrate to {{ nextPool.name }} pool without fee
       </ui-button>
@@ -31,7 +31,7 @@
         :tx-state="unstakeTxState"
         class="mb-12 w-full"
         variant="violet"
-        size="48"
+        :size="48"
       >
         Withdrawal to wallet
       </send-tx-button>
@@ -39,22 +39,21 @@
       <ui-alert class="text-red">
         When withdrawing, farming is possible only from the first pool without the ability to return to the end point
       </ui-alert>
-    </div>
+    </ui-box-corners>
   </div>
 </template>
 
 <script lang="ts">
   import SendTxButton from '@/components/Tx/SendTxButton.vue'
-  import UiButton from '@/components/ui/UiButton.vue'
-  import { useStaker } from '@/store/hooks/useStaker'
+  import { UiButton, UiPoligon, UiBoxCorners } from '@slr-finance/uikit'
+  import { useStakerState } from '../hooks/useStakerState'
   import { computed, defineComponent, toRef, watch } from 'vue'
   import { usePoolInfo } from '../hooks/usePoolInfo'
   import { useUnstake } from '../hooks/useUnstake'
-  import { useSlrBalance } from '@/store/hooks/useBalance'
-  import { usePool } from '@/store/hooks/usePool'
+  import { useSlrBalance } from '@/hooks/dapp/useSlrBalance'
+  import { usePoolState } from '../hooks/usePoolState'
   import { usePercentFormat } from '@/hooks/formatters/usePercentFormat'
   import StakerInfo from './StakerInfo.vue'
-  import UiPoligon from '@/components/ui/UiPoligon.vue'
   import UiAlert from '@/components/ui/UiAlert.vue'
   import { MAX_POOL_ID } from '@/config/constants/Pools'
 
@@ -67,13 +66,13 @@
       },
     },
     setup(props) {
-      const [stakerState, refetchStaker] = useStaker()
-      const [, refetchSlrBalance] = useSlrBalance()
+      const { stakerState, refetchStaker } = useStakerState()
+      const { refetchBalance: refetchSlrBalance } = useSlrBalance()
 
       const poolId = toRef(props, 'poolId')
       const nextPoolId = computed(() => Math.min(stakerState.value.poolId + 1, MAX_POOL_ID))
       const nextPool = usePoolInfo(nextPoolId)
-      const nextPoolState = usePool(nextPoolId)
+      const [nextPoolState] = usePoolState(nextPoolId)
       const nextPoolApy = computed(() => nextPoolState.value.apy)
       const nextPoolApyStr = usePercentFormat(nextPoolApy)
 
@@ -92,6 +91,6 @@
         unstakeTxState,
       }
     },
-    components: { SendTxButton, UiButton, StakerInfo, UiPoligon, UiAlert },
+    components: { SendTxButton, UiButton, StakerInfo, UiPoligon, UiAlert, UiBoxCorners },
   })
 </script>

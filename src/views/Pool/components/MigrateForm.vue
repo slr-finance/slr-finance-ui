@@ -18,11 +18,7 @@
         <div
           class="relative z-10 flex justify-center items-center bg-black border border-white border-opacity-20 rounded-full h-24 w-24"
         >
-          <ui-icon
-            name="plus"
-            size="14"
-            class="text-white"
-          />
+          <ui-icon-plus class="text-white w-14"/>
         </div>
       </div>
 
@@ -62,7 +58,7 @@
           <send-tx-button
             @click="handleMigrate"
             class="w-full"
-            size="48"
+            :size="48"
             variant="violet"
             :tx-state="migrateTxState"
             :disabled="buttonData.isDisabled"
@@ -80,22 +76,20 @@
   import BigNumber from 'bignumber.js'
   import contractsAddresses from '@/config/constants/contractsAddresses'
   import SendTxButton from '@/components/Tx/SendTxButton.vue'
-  import UiButton from '@/components/ui/UiButton.vue'
-  import UiIcon from '@/components/ui/UiIcon'
-  import UiPoligon from '@/components/ui/UiPoligon.vue'
+  import { UiButton, UiPoligon, UiIconPlus } from '@slr-finance/uikit'
   import UiAlert from '@/components/ui/UiAlert.vue'
   import ApproveTokenPlug from '@/components/ApproveToken/ApproveTokenPlug.vue'
   import InsufficientBalancePlug from '@/components/ApproveToken/InsufficientBalancePlug.vue'
   import ConnectWalletPlug from '@/components/ConnectWallet/ConnectWalletPlug.vue'
+  import { useSlrBalance } from '@/hooks/dapp/useSlrBalance'
+  import { useTokenAmountFormat } from '@/hooks/formatters/useTokenAmountFormat'
+  import { tokenAmountFormat } from '@/utils/strFormat/tokenAmountFormat'
   import StakingProfit from './StakingProfit.vue'
   import TimelockInput from './TimelockInput.vue'
   import SlrBalanceInput from './SlrBalanceInput.vue'
-  import { useStaker } from '@/store/hooks/useStaker'
+  import { useStakerState } from '../hooks/useStakerState'
   import { usePoolInfo } from '../hooks/usePoolInfo'
   import { useMigrateTx } from '../hooks/useMigrateTx'
-  import { useSlrBalance } from '@/store/hooks/useBalance'
-  import { useTokenAmountFormat } from '@/hooks/formatters/useTokenAmountFormat'
-  import { tokenAmountFormat } from '@/utils/strFormat/tokenAmountFormat'
 
   export default defineComponent({
     name: 'migrate-form',
@@ -109,9 +103,8 @@
       const days = ref(0)
       const amount = ref(new BigNumber(0)) as Ref<BigNumber>
       const totalAmount = computed(() => amount.value.plus(reinvestAmount.value))
-      const [stakerState, refetchStaker] = useStaker()
-      const [slrBalanceInfo, refetchSlrBalance] = useSlrBalance()
-      const slrBalance = computed(() => slrBalanceInfo.value.balance)
+      const { stakerState, refetchStaker } = useStakerState()
+      const { balance: slrBalance, refetchBalance: refetchSlrBalance } = useSlrBalance()
 
       const reinvestAmount = computed(() => {
         const { amount, reward } = stakerState.value
@@ -165,9 +158,9 @@
       InsufficientBalancePlug,
 
       UiButton,
-      UiIcon,
       UiPoligon,
       UiAlert,
+      UiIconPlus,
     },
   })
 </script>

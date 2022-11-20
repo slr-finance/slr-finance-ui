@@ -1,4 +1,4 @@
-import type { Result } from 'ethers/lib/utils'
+import type { Result } from '@ethersproject/abi'
 import { Ref, ref, watch } from 'vue'
 import BigNumber from 'bignumber.js'
 import dayjs from 'dayjs'
@@ -12,7 +12,7 @@ import { tokenAmountFormat } from '@/utils/strFormat/tokenAmountFormat'
 import { createSharedComposable } from '@vueuse/core'
 import { useReferralContract } from '@/hooks/contracts/useReferralContract'
 import { StopController } from '@/utils/StopController'
-import { Referral__factory } from '@/contracts'
+import { ReferralService__factory } from '@slr-finance/contracts'
 
 interface AccrualRaw extends Result {
   from: string
@@ -80,7 +80,7 @@ export const useReferrerAccrualList = createSharedComposable(() => {
             })
           }
 
-          const [referrals] = await multicall<AccrualRaw[]>(Referral__factory.abi, calls)
+          const [referrals] = await multicall<AccrualRaw[]>(ReferralService__factory.abi, calls)
 
           stopController.breakIfStoping()
 
@@ -108,7 +108,9 @@ export const useReferrerAccrualList = createSharedComposable(() => {
       } catch (error) {
         resetState()
 
-        throw error
+        if (!StopController.isStoped(error)) {
+          throw error
+        }
       }
     },
     { immediate: true },

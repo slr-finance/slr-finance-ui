@@ -34,7 +34,7 @@
             :txState="stakeTxState"
             :disabled="false"
             class="w-full"
-            size="48"
+            :size="48"
             variant="violet"
           >
             Stake on {{ daysStr }}
@@ -47,20 +47,21 @@
 
 <script lang="ts">
   import { computed, defineComponent, Ref, ref, toRef, watch } from 'vue'
-  import UiButton from '@/components/ui/UiButton.vue'
+  import { UiButton } from '@slr-finance/uikit'
   import SlrBalanceInput from './SlrBalanceInput.vue'
   import ConnectWalletPlug from '@/components/ConnectWallet/ConnectWalletPlug.vue'
   import ApproveTokenPlug from '@/components/ApproveToken/ApproveTokenPlug.vue'
   import InsufficientBalancePlug from '@/components/ApproveToken/InsufficientBalancePlug.vue'
+  import { useSlrBalance } from '@/hooks/dapp/useSlrBalance'
   import StakingProfit from './StakingProfit.vue'
-  import { usePool } from '@/store/hooks/usePool'
-  import { useSlrBalance } from '@/store/hooks/useBalance'
-  import { useStake } from '../hooks/useStake'
+  import { usePoolState } from '../hooks/usePoolState'
+  import { useStakeTx } from '../hooks/useStakeTx'
   import SendTxButton from '@/components/Tx/SendTxButton.vue'
   import BigNumber from 'bignumber.js'
   import TimelockInput from './TimelockInput.vue'
   import contractsAddresses from '@/config/constants/contractsAddresses'
-  import { useStaker } from '@/store/hooks/useStaker'
+  import { useStakerState } from '../hooks/useStakerState'
+import { usePoolsState } from '../hooks/usePoolsState'
 
   export default defineComponent({
     name: 'stake-form',
@@ -71,11 +72,11 @@
       },
     },
     setup(props) {
-      const poolState = usePool(toRef(props, 'poolId'))
-      const [, refetchStaker] = useStaker()
+      const [poolState] = usePoolState(toRef(props, 'poolId'))
+      const { refetchStaker } = useStakerState()
+      const { refetchPools } = usePoolsState()
 
-      const [slrBalanceInfo, refetchBalance] = useSlrBalance()
-      const slrBalance = computed(() => slrBalanceInfo.value.balance)
+      const { balance: slrBalance, refetchBalance } = useSlrBalance()
       const poolId = computed(() => poolState.value.id)
       const amount = ref(new BigNumber(0)) as Ref<BigNumber>
 
@@ -86,8 +87,8 @@
         return `${daysValue} days`
       })
 
-      const refetchBalanceAndStakerState = () => Promise.all([refetchStaker(), refetchBalance()])
-      const [handleStake, stakeTxState] = useStake({ poolId, amount, days })
+      const refetchBalanceAndStakerState = () => Promise.all([refetchStaker(), refetchBalance(), refetchPools()])
+      const [handleStake, stakeTxState] = useStakeTx({ poolId, amount, days })
       watch(stakeTxState, ({ isSuccess }) => isSuccess && refetchBalanceAndStakerState())
 
       return {

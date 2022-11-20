@@ -9,11 +9,11 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent, computed, PropType } from 'vue'
-  import { RouteRecord } from 'vue-router'
+  import { defineComponent, PropType } from 'vue'
+  import { RouteLocationRaw } from 'vue-router'
 
   export type TProps = {
-    to: Partial<RouteRecord>
+    to: Partial<RouteLocationRaw>
     text: string
   }
 
@@ -25,8 +25,8 @@
         required: true,
       },
       to: {
-        type: [String, Object] as PropType<TProps['to']>,
-        require: true,
+        type: Object as PropType<TProps['to']>,
+        required: true,
       },
     },
   })

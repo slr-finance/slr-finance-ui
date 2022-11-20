@@ -82,7 +82,7 @@
         </ul>
         <p class="mt-24">
           Want to learn more:
-          <ui-external-link href="https://docs.slr.finance/fundamentals/presale"> Documentation </ui-external-link>
+          <ui-link-external href="https://docs.slr.finance/fundamentals/presale"> Documentation </ui-link-external>
         </p>
       </div>
     </div>
@@ -107,10 +107,9 @@
 <script lang="ts">
   import { computed, defineComponent } from 'vue'
   import { computedEager, useToggle } from '@vueuse/shared'
-  import UiButton from '@/components/ui/UiButton.vue'
+  import { UiButton, UiLink } from '@slr-finance/uikit'
   import UiIcon from '@/components/ui/UiIcon'
-  import UiExternalLink from '@/components/ui/UiExternalLink.vue'
-  import UiLink from '@/components/ui/UiLink.vue'
+  import { UiLinkExternal } from '@slr-finance/uikit'
   import PresaleReferralProgramWidget from './PresaleReferralProgramWidget.vue'
   import { useTokenAmountFormat } from '@/hooks/formatters/useTokenAmountFormat'
   import { usePresale } from '../hooks/usePresale'
@@ -173,7 +172,7 @@
         phasesTimeData,
       }
     },
-    components: { PresaleReferralProgramWidget, UiButton, UiIcon, UiExternalLink, UiLink },
+    components: { PresaleReferralProgramWidget, UiButton, UiIcon, UiLinkExternal, UiLink },
   })
 </script>
 

@@ -13,7 +13,7 @@
   import { defineComponent, PropType, ref, watch, markRaw, Ref } from 'vue'
   import { useVModel } from '@vueuse/core'
   import BigNumber from 'bignumber.js'
-  import UiInput from './UiInput.vue'
+  import { UiInput } from '@slr-finance/uikit'
 
   const stringToBn = (value: string, defaultBn: BigNumber) => {
     const preparedStr = value.replace(/[^\d,\.]/g, '').replace(/([\.,])(?=\d*[\.,])/g, '')

@@ -1,20 +1,13 @@
 <template>
   <div class="flex flex-col justify-center items-center text-center leading-192">
     <ui-poligon
-      corners="6"
-      size="50"
+      :corners="6"
+      :size="50"
       class="mb-12"
       opacity
       :variant="variant"
     >
-      <slot name="icon">
-        <ui-icon
-          :name="icon"
-          :prefix="iconPrefix"
-          class="text-white opacity-60"
-          size="18"
-        />
-      </slot>
+      <slot name="icon"/>
     </ui-poligon>
     <div class="font-title text-12 text-white uppercase leading-192 mb-12">{{ title }}</div>
     <div class="font-body text-12 text-white text-opacity-60 mb-12">
@@ -26,9 +19,8 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent } from 'vue'
-  import UiPoligon from './UiPoligon.vue'
-  import UiIcon from './UiIcon'
+  import { defineComponent, PropType } from 'vue'
+  import { UiPoligon, UiPoligonVariantProp, UI_POLIGON_BUTTON_VARIANTS } from '@slr-finance/uikit'
 
   export default defineComponent({
     name: 'ui-placeholder',
@@ -41,23 +33,14 @@
         type: String,
         default: '',
       },
-      icon: {
-        type: String,
-        default: 'info-circle',
-      },
-      iconPrefix: {
-        type: String,
-        default: 'ui-icon',
-      },
       variant: {
-        type: String,
-        validator: (val: string) => ['white', 'red'].includes(val),
+        type: String as PropType<UiPoligonVariantProp>,
+        validator: (val: UiPoligonVariantProp) => UI_POLIGON_BUTTON_VARIANTS.includes(val),
         default: 'white',
       },
     },
     components: {
       UiPoligon,
-      UiIcon,
     },
   })
 </script>

@@ -24,4 +24,4 @@ const mainnetAddresses = {
   MilkyWay: '0x0000000000000000000000000000000000000000',
 }
 
-export default import.meta.env.VITE_CHAIN === 'TESTNET' ? testnetAddresses : mainnetAddresses
+export default import.meta.env.VITE_CHAIN !== 'TESTNET' ? mainnetAddresses : testnetAddresses

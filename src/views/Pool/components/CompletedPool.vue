@@ -8,7 +8,7 @@
       Ended
     </ui-poligon>
 
-    <div class="ui-box-corners">
+    <ui-box-corners class="p-12">
       <ui-placeholder
         icon="finish"
         title="Staking completed"
@@ -23,7 +23,7 @@
         </template>
 
         <ui-button
-          size="48"
+          :size="48"
           class="w-full"
           variant="violet"
           :to="{ name: stakerPool.routeName }"
@@ -31,17 +31,15 @@
           Go to active pool
         </ui-button>
       </ui-placeholder>
-    </div>
+    </ui-box-corners>
   </div>
 </template>
 
 <script lang="ts">
   import { computed, defineComponent } from 'vue'
-  import UiButton from '@/components/ui/UiButton.vue'
+  import { UiButton, UiPoligon, UiBoxCorners } from '@slr-finance/uikit'
   import UiPlaceholder from '@/components/ui/UiPlaceholder.vue'
-  import UiPoligon from '@/components/ui/UiPoligon.vue'
-
-  import { useStaker } from '@/store/hooks/useStaker'
+  import { useStakerState } from '../hooks/useStakerState'
   import { usePoolInfo } from '../hooks/usePoolInfo'
   import { useTokenAmountFormat } from '@/hooks/formatters/useTokenAmountFormat'
   import { BIG_ZERO } from '@/utils/bigNumber'
@@ -55,7 +53,7 @@
       },
     },
     setup(props) {
-      const [stakerState] = useStaker()
+      const { stakerState } = useStakerState()
       const poolId = computed(() => stakerState.value.poolId)
       const stakerPool = usePoolInfo(poolId)
       const history = computed(() => {
@@ -69,6 +67,6 @@
 
       return { stakerPool, ernedStr, history, daysStr }
     },
-    components: { UiButton, UiPlaceholder, UiPoligon },
+    components: { UiButton, UiPlaceholder, UiPoligon, UiBoxCorners },
   })
 </script>

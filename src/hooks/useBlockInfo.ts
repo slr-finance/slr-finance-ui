@@ -1,6 +1,6 @@
 import { ref } from 'vue'
+import { Multicall__factory } from '@slr-finance/contracts'
 import { multicall } from '@/utils/contracts/multicall'
-import MulticallAbi from '@/config/abi/Multicall.json'
 import contractsAddresses from '@/config/constants/contractsAddresses'
 import { useInterval } from '@vueuse/core'
 
@@ -10,7 +10,7 @@ const blockNumber = ref(0)
 
 const loopBlock = async () => {
   try {
-    const [[[blockTimestampRaw]], blockNumberRaw] = await multicall(MulticallAbi, [
+    const [[[blockTimestampRaw]], blockNumberRaw] = await multicall(Multicall__factory.abi, [
       { name: 'getCurrentBlockTimestamp', address: contractsAddresses.Multicall },
     ])
 

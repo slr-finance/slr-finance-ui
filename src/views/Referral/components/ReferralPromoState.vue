@@ -81,7 +81,7 @@
               from your friends’ swap commission each time your friend makes a transfer!
             </p>
 
-            <ui-external-link> Read more </ui-external-link>
+            <ui-link-external href="#"> Read more </ui-link-external>
           </div>
           <div class="item-sub-block">
             <h3 class="title">Launchpools Referral Rewards</h3>
@@ -95,7 +95,7 @@
               staked in return for more SLR.
             </p>
 
-            <ui-external-link> Read more </ui-external-link>
+            <ui-link-external href="#"> Read more </ui-link-external>
           </div>
           <div class="item-sub-block">
             <h3 class="title">Swaps Referral Rewards</h3>
@@ -109,7 +109,7 @@
               the swap is made.
             </p>
 
-            <ui-external-link> Read more </ui-external-link>
+            <ui-link-external href="#"> Read more </ui-link-external>
           </div>
         </div>
       </div>
@@ -121,9 +121,9 @@
   import { defineComponent } from 'vue'
   import ConnectWalletPlug from '@/components/ConnectWallet/ConnectWalletPlug.vue'
   import { useReferrerPercentRewards } from '../hooks/useReferrerPercentRewards'
-  import UiTextPlaceholder from '@/components/ui/UiTextPlaceholder.vue'
+  import { UiTextPlaceholder } from '@slr-finance/uikit'  
   import UiIcon from '@/components/ui/UiIcon/UiIcon.vue'
-  import UiExternalLink from '@/components/ui/UiExternalLink.vue'
+  import { UiLinkExternal } from '@slr-finance/uikit'  
 
   export default defineComponent({
     name: 'referral-promo-state',
@@ -136,7 +136,7 @@
       ConnectWalletPlug,
       UiTextPlaceholder,
       UiIcon,
-      UiExternalLink,
+      UiLinkExternal,
     },
   })
 </script>

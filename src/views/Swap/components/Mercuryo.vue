@@ -4,7 +4,7 @@
       :disabled="!isActivated"
       :href="mercuryoLinkBuy"
       variant="gray"
-      size="48"
+      :size="48"
       target="_blank"
     >
       <ui-icon
@@ -25,7 +25,7 @@
       :disabled="!isActivated"
       :href="mercuryoLinkSell"
       variant="gray"
-      size="48"
+      :size="48"
       target="_blank"
     >
       <ui-icon
@@ -46,7 +46,7 @@
       href="https://docs.slr.finance/buy-sell-crypto/binance"
       target="_blank"
       variant="gray"
-      size="48"
+      :size="48"
     >
       <ui-icon
         prefix="ui-icon-card"
@@ -61,7 +61,7 @@
 
 <script lang="ts">
   import { defineComponent, computed } from 'vue'
-  import UiButton from '@/components/ui/UiButton.vue'
+  import { UiButton } from '@slr-finance/uikit'
   import UiIcon from '@/components/ui/UiIcon'
   import { useEthers } from '@/hooks/dapp/useEthers'
 

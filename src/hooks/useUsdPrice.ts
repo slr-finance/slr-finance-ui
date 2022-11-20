@@ -1,11 +1,11 @@
-import { useSlrPrice } from '@/store/hooks/useSlrPrice'
+import { useSlrPrice } from '@/hooks/dapp/useSlrPrice'
 import BigNumber from 'bignumber.js'
 import { computed, Ref, unref } from 'vue'
 
 export const useUsdPrice = (bignumber: Ref<BigNumber>) => {
-  const price = useSlrPrice()
+  const { slrPrice } = useSlrPrice()
 
   return computed(() => {
-    return unref(bignumber).times(unref(price))
+    return unref(bignumber).times(slrPrice.value)
   })
 }

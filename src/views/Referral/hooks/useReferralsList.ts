@@ -1,13 +1,13 @@
-import type { Result } from 'ethers/lib/utils'
 import { ref, watch } from 'vue'
+import { ReferralService__factory } from '@slr-finance/contracts'
+import type { Result } from '@ethersproject/abi'
+import dayjs from 'dayjs'
 import { shortenAddress } from '@/utils/address/shortenAddress'
 import { multicall, Call } from '@/utils/contracts/multicall'
 import contractsAddresses from '@/config/constants/contractsAddresses'
-import dayjs from 'dayjs'
 import { useReferralContract } from '@/hooks/contracts/useReferralContract'
 import { StopController } from '@/utils/StopController'
 import { createSharedComposable } from '@vueuse/core'
-import { Referral__factory } from '@/contracts'
 
 interface ReferralInfoRaw extends Result {
   account: string
@@ -71,7 +71,7 @@ export const useReferralsList = createSharedComposable(() => {
             })
           }
 
-          const [referrals] = await multicall<ReferralInfoRaw[]>(Referral__factory.abi, calls)
+          const [referrals] = await multicall<ReferralInfoRaw[]>(ReferralService__factory.abi, calls)
 
           stopController.breakIfStoping()
 
@@ -93,7 +93,9 @@ export const useReferralsList = createSharedComposable(() => {
       } catch (error) {
         resetState()
 
-        throw error
+        if (!StopController.isStoped(error)) {
+          throw error
+        }
       }
     },
     { immediate: true },

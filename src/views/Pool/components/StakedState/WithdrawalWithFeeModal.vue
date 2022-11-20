@@ -10,11 +10,7 @@
         variant="red"
       >
         <template #icon>
-          <ui-icon
-            name="alert-circle"
-            class="text-red"
-            size="18"
-          />
+          <ui-icon-alert-circle class="text-red w-18 h-18"/>
         </template>
       </ui-placeholder>
     </div>
@@ -40,7 +36,7 @@
     <send-tx-button
       @click="handleUnstakeWithFee"
       :txState="unstakeWithFeeTxState"
-      size="48"
+      :size="48"
       variant="red"
       class="w-full"
     >
@@ -55,15 +51,15 @@
   import { useVModel } from '@vueuse/core'
   import { POOLS_INFO } from '@/config/constants/Pools'
   import { usePercentFormat } from '@/hooks/formatters/usePercentFormat'
-  import { usePool } from '@/store/hooks/usePool'
-  import { useStaker } from '@/store/hooks/useStaker'
-  import { useSlrBalance } from '@/store/hooks/useBalance'
+  import { useSlrBalance } from '@/hooks/dapp/useSlrBalance'
   import { useTokenAmountFormat } from '@/hooks/formatters/useTokenAmountFormat'
   import SendTxButton from '@/components/Tx/SendTxButton.vue'
   import UiPlaceholder from '@/components/ui/UiPlaceholder.vue'
-  import UiIcon from '@/components/ui/UiIcon'
-  import UiModal from '@/components/ui/UiModal.vue'
+  import { UiModal, UiIconAlertCircle } from '@slr-finance/uikit'
+  import { usePoolState } from '../../hooks/usePoolState'
+  import { useStakerState } from '../../hooks/useStakerState'
   import { useUnstakeWithFee } from '../../hooks/useUnstakeWithFee'
+  import { usePoolsState } from '../../hooks/usePoolsState'
 
   export default defineComponent({
     name: 'withdrawal-with-fee-modal',
@@ -76,10 +72,11 @@
     emits: ['update:isOpen'],
     setup(props, { emit }) {
       const isOpenModal = useVModel(props, 'isOpen', emit)
-      const [stakerState, refetchStaker] = useStaker()
-      const [, refetchBalance] = useSlrBalance()
+      const { stakerState, refetchStaker } = useStakerState()
+      const { refetchBalance } = useSlrBalance()
+      const { refetchPools } = usePoolsState()
       const poolId = computed(() => stakerState.value.poolId)
-      const poolState = usePool(poolId)
+      const [poolState] = usePoolState(poolId)
       const stakedAndEarned = computed(() => {
         const { amount, reward } = stakerState.value
 
@@ -97,7 +94,7 @@
       const [handleUnstakeWithFee, unstakeWithFeeTxState] = useUnstakeWithFee(poolId)
       const router = useRouter()
       const handleUnstaked = async () => {
-        Promise.all([refetchStaker(), refetchBalance()])
+        Promise.all([refetchStaker(), refetchBalance(), refetchPools()])
         isOpenModal.value = false
         router.push({ name: POOLS_INFO[0].routeName })
       }
@@ -116,7 +113,7 @@
     components: {
       SendTxButton,
       UiPlaceholder,
-      UiIcon,
+      UiIconAlertCircle,
       UiModal,
     },
   })

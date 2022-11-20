@@ -22,7 +22,7 @@
         </p>
 
         <ui-galaxy-loader
-          v-if="!isStakerLoaded"
+          v-if="isFetching && isActivated"
           class="flex-1 py-48"
         />
 
@@ -82,12 +82,13 @@
 </template>
 
 <script lang="ts">
-  import { FetchingStatus } from '@/entities/common'
   import { computed, defineComponent, toRef } from 'vue'
+  import { useHead } from '@vueuse/head'
   import { useEthers } from '@/hooks/dapp/useEthers'
-  import { usePool } from '@/store/hooks/usePool'
-  import { useStaker } from '@/store/hooks/useStaker'
-  import UiGalaxyLoader from '@/components/ui/UiGalaxyLoader.vue'
+  import { usePoolState } from './hooks/usePoolState'
+  import { useStakerState } from './hooks/useStakerState'
+  import { UiGalaxyLoader } from '@slr-finance/uikit'
+  import { UiTextPlaceholder } from '@slr-finance/uikit'
   import { usePoolInfo } from './hooks/usePoolInfo'
   import StakingFinished from './components/StakingFinished.vue'
   import CompletedPool from './components/CompletedPool.vue'
@@ -98,7 +99,6 @@
   import StakerInfo from './components/StakerInfo.vue'
   import StakedState from './components/StakedState'
   import DisablePoolState from './components/DisablePoolState.vue'
-  import UiTextPlaceholder from '@/components/ui/UiTextPlaceholder.vue'
   import { percentFormat } from '@/utils/strFormat/percentFormat'
 
   export default defineComponent({
@@ -112,18 +112,26 @@
     },
     setup(props) {
       const poolId = toRef(props, 'poolId')
-      const poolState = usePool(poolId)
+      const [poolState, isPoolFetching] = usePoolState(poolId)
       const apyStr = computed(() => {
         const poolStateVal = poolState.value
 
-        return poolStateVal.fetchStatus === FetchingStatus.FETCHED ? percentFormat(poolStateVal.apy) : ''
+        return !isPoolFetching.value ? percentFormat(poolStateVal.apy) : null
       })
       const poolInfo = usePoolInfo(poolId)
+
+      useHead({
+        title: computed(() => `${poolInfo.value.name} Pool`),
+        meta: [
+          {
+            name: 'description',
+            content: computed(() => `${poolInfo.value.name} Pool`),
+          },
+        ],
+      })
+
       const { isActivated } = useEthers()
-      const [stakerState] = useStaker()
-      const isStakerLoaded = computed(
-        () => stakerState.value.fetchStatus === FetchingStatus.FETCHED || !isActivated.value,
-      )
+      const { stakerState, isFetching } = useStakerState()
 
       const isCompletedPool = computed(() => poolState.value.id < stakerState.value.poolId)
       const isCurrentStakerPool = computed(
@@ -158,7 +166,7 @@
         poolState,
         stakerState,
         isCurrentStakerPoolFinished,
-        isStakerLoaded,
+        isFetching,
       }
     },
     components: {

@@ -2,17 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer components {
-  .ui-box-corners {
-    @apply overflow-hidden relative p-12;
-  }
-
-  .ui-box-corners::after {
-    content: '';
-    @apply w-full h-full -left-2 -top-2 p-1 absolute border border-white border-opacity-60 block box-content rounded-18 pointer-events-none select-none;
-  }
-}
-
 #app {
   display: contents;
 }
@@ -31,90 +20,23 @@
 }
 
 /**
- * Ui page spacing [BEGIN]
- */
- body {
-  --ui-page-title-size: 38px;
-  --ui-page-description-size: 16px;
-  --ui-page-label-size: 18px;
-  --ui-page-spacing: 64px;
-  --ui-page-inner-spacing: 24px;
-  --ui-page-right-spacing-with-right-buttons: calc(var(--ui-page-spacing) * 2 + 50px)
-}
-
-@media only screen and (max-width: 1900px) {
-  body {
-    --ui-page-spacing: 40px;
-  }
-}
-
-@media only screen and (max-width: 1360px) {
-  body {
-    --ui-page-spacing: 32px;
-  }
-}
-
-@media only screen and (max-width: 1200px) {
-  body {
-    --ui-page-spacing: 24px;
-  }
-}
-
-@media only screen and (max-width: 800px) {
-  body {
-    --ui-page-spacing: 18px;
-    --ui-page-inner-spacing: 18px;
-    --ui-page-title-size: 32px;
-    --ui-page-description-size: 15px;
-    --ui-page-label-size: 17px;
-    --ui-page-label-size: 16px;
-  }
-}
-
-@media only screen and (max-width: 400px) {
-  body {
-    --ui-page-spacing: 12px;
-    --ui-page-inner-spacing: 12px;
-    --ui-page-title-size: 28px;
-    --ui-page-description-size: 14px;
-    --ui-page-label-size: 15px;
-  }
-}
-
-@media only screen and (max-width: 320px) {
-  body {
-    --ui-page-spacing: 8px;
-    --ui-page-inner-spacing: 8px;
-    --ui-page-label-size: 14px;
-  }
-}
-
-@media only screen and (max-width: 300px) {
-  body {
-    --ui-page-label-size: 12px;
-  }
-}
-/**
- * Ui page spacing [END]
- */
-
-/**
  * Ui scroll bar [BEGIN]
  */
-.ui-scrollbar {
+/* .ui-scrollbar {
   overflow-x: auto;
   overflow-y: scroll;
-}
+} */
 .ui-scrollbar::-webkit-scrollbar {
   width: 8px;
+  height: 8px;
 }
 
 .ui-scrollbar::-webkit-scrollbar-track {
-  @apply bg-black;
+  background: inherit;
 }
 
 .ui-scrollbar::-webkit-scrollbar-thumb {
-  @apply bg-black;
+  background: inherit;
   transition: background-color 0.3s;
   border-radius: 4px;
 }

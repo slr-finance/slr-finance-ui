@@ -9,7 +9,7 @@
     />
     <div
       v-else
-      class="px-ui-page-spacing pt-ui-page-header-spacing pb-ui-page-bottom-spacing flex flex-col flex-1"
+      class="flex flex-col flex-1"
     >
       <div class="flex flex-col items-center max-w-[800px] mx-auto relative z-1">
         <div class="text-center flex flex-col justify-center items-center mb-24">
@@ -36,16 +36,16 @@
           />
         </div>
       </div>
-      <presale-bg />
     </div>
   </transition>
 </template>
 
 <script lang="ts">
   import { computed, defineComponent } from 'vue'
+  import { useHead } from '@vueuse/head'
   import { usePercentFormat } from '@/hooks/formatters/usePercentFormat'
-  import UiButton from '@/components/ui/UiButton.vue'
-  import UiGalaxyLoader from '@/components/ui/UiGalaxyLoader.vue'
+  import { UiButton } from '@slr-finance/uikit'
+  import { UiGalaxyLoader } from '@slr-finance/uikit'
   import { usePresale } from './hooks/usePresale'
   import PresaleForm from './components/PresaleForm.vue'
   import DepositPresaleTokenForm from './components/DepositPresaleTokenForm.vue'
@@ -53,11 +53,20 @@
   import PresaleInformation from './components/PresaleInformation'
   import PresaleEnded from './components/PresaleEnded.vue'
   import WhiteListForm from './components/WhiteListForm'
-  import PresaleBg from './components/PresaleBg.vue'
 
   export default defineComponent({
     name: 'presale-view',
     setup() {
+      useHead({
+        title: 'SLR Presale',
+        meta: [
+          {
+            name: 'description',
+            content: 'SLR Presale',
+          },
+        ],
+      })
+
       const { currentPhase, isFetching, isInitalFetched, phasesDiscounts } = usePresale()
       const phaseDiscount = computed(() => phasesDiscounts.value[0])
       const phaseDiscountStr = usePercentFormat(phaseDiscount)
@@ -78,7 +87,6 @@
       PresaleEnded,
       UiGalaxyLoader,
       WhiteListForm,
-      PresaleBg,
     },
   })
 </script>

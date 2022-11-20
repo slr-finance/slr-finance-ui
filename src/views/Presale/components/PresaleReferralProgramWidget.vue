@@ -5,7 +5,7 @@
     <div class="flex items-center mr-ui-page-inner-spacing">
       <h3 class="text-white flex-1 text-28 font-title mr-4">referral program</h3>
       <ui-poligon
-        corners="6"
+        :corners="6"
         variant="orange"
         >earn</ui-poligon
       >
@@ -30,8 +30,7 @@
 
 <script lang="ts">
   import { defineComponent } from 'vue'
-  import UiButton from '@/components/ui/UiButton.vue'
-  import UiPoligon from '@/components/ui/UiPoligon.vue'
+  import { UiButton, UiPoligon } from '@slr-finance/uikit'
   import { usePresale } from '../hooks/usePresale'
   import { usePercentFormat } from '@/hooks/formatters/usePercentFormat'
 

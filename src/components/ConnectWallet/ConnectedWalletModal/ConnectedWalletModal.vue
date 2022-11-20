@@ -15,7 +15,7 @@
         </div>
       </div>
       <div class="mt-2 text-[17px] text-white mr-16">{{ trimedAddress }}</div>
-      <div class="flex pb-12 border-b border-gray-800 mt-6 mr-16 375:flex-row flex-col 375:space-x-16 space-x-0">
+      <div class="flex pb-12 mt-6 mr-16 375:flex-row flex-col 375:space-x-16 space-x-0">
         <button
           type="button"
           class="text-violet text-14 mb-8"
@@ -46,18 +46,26 @@
           </div>
         </a>
       </div>
-      <div class="flex justify-between pt-4 mr-16">
-        <span class="text-gray text-12">BNB Balance</span>
+      <div class="flex justify-between items-center min-h-24 pt-4 mr-16 border-t border-gray-800">
+        <span class="text-gray text-12">BNB balance</span>
         <span class="text-12">{{ bnbBalanceStr }}</span>
       </div>
-      <div class="flex justify-between mt-6 mr-16">
-        <span class="text-gray text-12">SLR Balance</span>
+      <div class="flex justify-between items-center min-h-24 mt-6 mr-16 border-t border-gray-800">
+        <span class="text-gray text-12">SLR wallet balance</span>
         <span class="text-12">{{ slrBalanceStr }}</span>
+      </div>
+      <div class="flex justify-between items-center min-h-24 mt-6 mr-16">
+        <span class="text-gray text-12">SLR staked</span>
+        <span class="text-12">{{ slrStakedAmountStr }}</span>
+      </div>
+      <div class="flex justify-between items-center min-h-24 mt-6 mr-16 border-t border-gray-800">
+        <span class="text-gray text-12">Total SLR balance</span>
+        <span class="text-12">{{ slrTotalBalanceStr }}</span>
       </div>
     </div>
     <ui-button
       variant="gray"
-      size="40"
+      :size="40"
       class="w-full mt-16"
       @click="handleDisconnect"
     >
@@ -69,17 +77,17 @@
 <script lang="ts">
   import { computed, defineComponent, unref } from 'vue'
   import { useConnectedWalletModal } from '../hooks/useConnectedWalletModal'
-  import UiModal from '@/components/ui/UiModal.vue'
   import UiIcon from '@/components/ui/UiIcon'
-  import UiButton from '@/components/ui/UiButton.vue'
+  import { UiButton, UiModal } from '@slr-finance/uikit'
+  import { useUiToast } from '@/components/ui/UiToast'
   import { shortenAddress } from '@/utils/address/shortenAddress'
   import { useEthers } from '@/hooks/dapp/useEthers'
-  import { useSlrBalance } from '@/store/hooks/useBalance'
+  import { useSlrBalance } from '@/hooks/dapp/useSlrBalance'
   import { useWallet } from '@/hooks/dapp/useWallet'
   import { useTokenAmountFormat } from '@/hooks/formatters/useTokenAmountFormat'
   import { useClipboard } from '@vueuse/core'
-  import { useSingleToast } from '@/hooks/useSingleToast'
   import { useBscScanAddress } from '@/hooks/useBscScanAddress'
+  import { useStakerState } from '@/views/Pool/hooks/useStakerState'
 
   export default defineComponent({
     name: 'connected-wallet-modal',
@@ -87,22 +95,26 @@
       const { isOpen, close } = useConnectedWalletModal()
       const { address, balance: bnbBalance } = useEthers()
       const trimedAddress = computed(() => shortenAddress(address.value, 4))
-      const [slrInfo] = useSlrBalance()
-      const slrBalance = computed(() => slrInfo.value.balance)
+      const { balance: slrBalance } = useSlrBalance()
+      const { stakerState } = useStakerState()
       const { disconnect, walletName, walletIconName } = useWallet()
+      const slrStakedAmount = computed(() => stakerState.value.amount)
+      const slrTotalBalance = computed(() => slrStakedAmount.value.plus(slrBalance.value))
       const slrBalanceStr = useTokenAmountFormat(slrBalance)
       const bnbBalanceStr = useTokenAmountFormat(bnbBalance)
+      const slrStakedAmountStr = useTokenAmountFormat(slrStakedAmount)
+      const slrTotalBalanceStr = useTokenAmountFormat(slrTotalBalance)
       const bscScanAddress = useBscScanAddress(address)
 
       const { copy } = useClipboard()
-      const { success, error } = useSingleToast()
+      const { success, error } = useUiToast()
 
       const handleCopy = () => {
         try {
           copy(unref(address))
-          success('Address has been copied')
+          success({ content: 'Address has been copied' })
         } catch (e) {
-          error(`Address has not been copied: ${e}`)
+          error({ content: `Address has not been copied: ${e}` })
         }
       }
 
@@ -116,6 +128,8 @@
         trimedAddress,
         slrBalanceStr,
         bnbBalanceStr,
+        slrStakedAmountStr,
+        slrTotalBalanceStr,
         walletName,
         walletIconName,
         bscScanAddress,

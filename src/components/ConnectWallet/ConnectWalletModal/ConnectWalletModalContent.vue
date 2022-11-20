@@ -7,11 +7,13 @@
       />
     </transition>
 
-    <div v-if="isOpenQr">
-      <ui-qr
-        :data="walletConnectUri"
-        class="w-full rounded-8"
-      />
+    <!-- <div v-if="isOpenQr">
+      <client-only>
+        <ui-qr
+          :data="walletConnectUri"
+          class="w-full rounded-8"
+        />
+      </client-only>
 
       <walletconnect-mobile-deep-link
         wallet="metamask"
@@ -22,10 +24,9 @@
         wallet="trustwallet"
         :uri="walletConnectUri"
       />
-    </div>
+    </div> -->
 
     <div
-      v-else
       class="flex flex-col space-y-16"
     >
       <connect-button
@@ -44,24 +45,23 @@
           </span>
         </transition>
       </connect-button>
-      <connect-button
+      <!-- <connect-button
         @click="handleConnectWalletconnect"
         label="WalletConnect"
         iconName="walletConnect"
         description="Connect wallet with QR code scanning or deep linking."
-      />
+      /> -->
     </div>
   </div>
 </template>
 
 <script lang="ts">
   import type { IQRCodeModal } from '@walletconnect/types'
-  import { defineComponent, onMounted, ref, watch } from 'vue'
+  import { defineAsyncComponent, defineComponent, onMounted, ref, watch } from 'vue'
   import { useVModel } from '@vueuse/core'
   import { useWallet } from '@/hooks/dapp/useWallet'
   import { NETWORK_DETAILS } from '@/config/constants/chain'
-  import UiQr from '@/components/ui/UiQr.vue'
-  import UiGalaxyLoader from '@/components/ui/UiGalaxyLoader.vue'
+  import { UiGalaxyLoader } from '@slr-finance/uikit'
   import { useConnectWalletModal } from '../hooks/useConnectWalletModal'
   import ConnectButton from './ConnectButton.vue'
   import { Metamask } from '@/utils/wallet/Metamask'
@@ -169,7 +169,10 @@
       }
     },
     components: {
-      UiQr,
+      UiQr: defineAsyncComponent({
+        loader: () => import('@/components/ui/UiQr.vue'),
+        loadingComponent: UiGalaxyLoader,
+      }),
       UiGalaxyLoader,
       ConnectButton,
       WalletconnectMobileDeepLink,

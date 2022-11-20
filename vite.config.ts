@@ -2,7 +2,10 @@ import path from 'path'
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
-import { visualizer } from 'rollup-plugin-visualizer'
+import { viteSsgOptions } from './config/viteSsgOptions'
+import { viteFederationPlugin } from './config/viteFederationPlugin'
+import topLevelAwait from "vite-plugin-top-level-await";
+import { viteCommonjs } from '@originjs/vite-plugin-commonjs'
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -12,6 +15,14 @@ export default defineConfig({
     },
   },
   plugins: [
+    // viteCommonjs({include: '*'}),
+    // topLevelAwait({
+    //   // The export name of top-level await promise for each chunk module
+    //   promiseExportName: "__tla",
+    //   // The function to generate import names of top-level await promise in each chunk module
+    //   promiseImportName: i => `__tla_${i}`
+    // }),
+    // viteFederationPlugin,
     vue(),
     createSvgIconsPlugin({
       // Specify the icon folder to be cached
@@ -30,27 +41,23 @@ export default defineConfig({
     }),
   ],
   build: {
-    minify: 'terser',
-    terserOptions: {
-      ecma: 2020,
-      safari10: true,
-      ie8: false,
-      module: false,
-      toplevel: true,
-      compress: {
-        ecma: 2020,
-        passes: 4,
-      },
-    },
-    rollupOptions: {
-      plugins: [
-        visualizer((opts) => {
-          return { filename: path.join(opts.dir, 'stats.html') }
-        }),
-      ],
-    },
+    emptyOutDir: true,
+    // minify: 'terser',
+    // terserOptions: {
+    //   ecma: 2020,
+    //   safari10: true,
+    //   ie8: false,
+    //   module: false,
+    //   toplevel: true,
+    //   compress: {
+    //     ecma: 2020,
+    //     passes: 4,
+    //   },
+    // },
+    target: 'es2020',
     commonjsOptions: {
       transformMixedEsModules: true,
     },
   },
+  ssgOptions: viteSsgOptions,
 })

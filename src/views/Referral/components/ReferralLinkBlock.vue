@@ -36,9 +36,8 @@
   import UiWidget from '@/components/ui/UiWidget.vue'
   import ReferralLink from './ReferralLink.vue'
   import SocialLinks from '@/components/SocialLinks/SocialLinks.vue'
-  import UiPoligon from '@/components/ui/UiPoligon.vue'
   import { useReferralLink } from '../hooks/useReferralLink'
-  import UiTextPlaceholder from '@/components/ui/UiTextPlaceholder.vue'
+  import { UiTextPlaceholder, UiPoligon } from '@slr-finance/uikit'
 
   export default defineComponent({
     name: 'referrals-link-block',

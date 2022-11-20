@@ -3,7 +3,7 @@
     :min="poolState.minDays"
     :max="poolState.maxDays"
     :step="1"
-    :fetching="!isFetched"
+    :is-loading="!isFetched"
     v-model:value="days"
   >
     <template #value="{ value }"> {{ value }} days </template>
@@ -12,10 +12,9 @@
 
 <script lang="ts">
   import { defineComponent, watch, toRef, ref } from 'vue'
-  import { usePool } from '@/store/hooks/usePool'
-  import UiInputRange from '@/components/ui/UiInputRange.vue'
   import { useVModel } from '@vueuse/core'
-  import { FetchingStatus } from '@/entities/common'
+  import { UiInputRange } from '@slr-finance/uikit'
+  import { usePoolState } from '../hooks/usePoolState'
 
   export default defineComponent({
     name: 'timelock-input',
@@ -32,13 +31,13 @@
     emits: ['update:value'],
     setup(props, { emit }) {
       const days = useVModel(props, 'value', emit, { passive: true })
-      const poolState = usePool(toRef(props, 'poolId'))
+      const [poolState, isPoolFetching] = usePoolState(toRef(props, 'poolId'))
       const isFetched = ref(false)
 
       watch(
         poolState,
         (poolStateValue) => {
-          if (poolStateValue.fetchStatus === FetchingStatus.FETCHED) {
+          if (!isPoolFetching.value) {
             days.value = poolStateValue.maxDays
             isFetched.value = true
           } else {

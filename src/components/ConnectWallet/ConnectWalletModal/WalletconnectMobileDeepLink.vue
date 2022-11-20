@@ -1,7 +1,7 @@
 <template>
   <ui-button
     :href="walletInfo.link"
-    size="48"
+    :size="48"
   >
     <ui-icon
       prefix="ui-icon-wallets"
@@ -15,7 +15,7 @@
 <script lang="ts">
   import { defineComponent, computed, PropType } from 'vue'
   import UiIcon from '@/components/ui/UiIcon'
-  import UiButton from '@/components/ui/UiButton.vue'
+  import { UiButton } from '@slr-finance/uikit'
 
   const walletDeepLinkInfo = {
     metamask: {

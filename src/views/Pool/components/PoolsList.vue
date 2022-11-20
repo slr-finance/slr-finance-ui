@@ -18,11 +18,7 @@
             class="p-6 block pools-list-link-icon"
             active-class="-active"
           >
-            <ui-icon
-              prefix="ui-icon-pools"
-              :name="link.icon"
-              :size="iconSize"
-            />
+            <pool-icon :pool-id="link.id"/>
           </router-link>
         </li>
       </ul>
@@ -34,28 +30,24 @@
   import { defineComponent, watch } from 'vue'
   import { POOLS_INFO } from '@/config/constants/Pools'
   import { computedEager, templateRef, useElementSize, useWindowSize } from '@vueuse/core'
-  import UiIcon from '@/components/ui/UiIcon'
-  import { useHeader } from '@/components/ui/UiHeader/hooks/useHeader'
+  import { useUiHeader } from '@slr-finance/uikit'
   import { useMobileBottomNavigation } from '@/components/App/AppMobileBottomNavigation/hooks/useMobileBottomNavigation'
+  import { useAppBreakpoints } from '@/hooks/useAppBreakpoints'
+  import PoolIcon from './PoolIcon.vue'
 
   const poolsLinks = POOLS_INFO.map((pool) => {
     return {
       to: { name: pool.routeName },
       name: pool.name,
-      icon: pool.page.icon,
+      id: pool.id,
     }
   })
 
   export default defineComponent({
     name: 'pools-list',
-    props: {
-      isMobile: {
-        type: Boolean,
-        default: true,
-      },
-    },
-    setup(props) {
-      const { size: headerSize } = useHeader()
+    setup() {
+      const { w641: isDesktopLayout } = useAppBreakpoints()
+      const { size: headerSize } = useUiHeader()
       const { size: bottomNavSize } = useMobileBottomNavigation()
       const navElement = templateRef('nav')
       const { height } = useWindowSize()
@@ -71,10 +63,10 @@
             bottomNavSizeVal.offset >
           navHeight.value
 
-        return `${isFixed ? '-fixed' : ''} ${props.isMobile ? '-mobile' : ''}`
+        return `${isFixed ? '-fixed' : ''} ${!isDesktopLayout.value ? '-mobile' : ''}`
       })
 
-      const iconSize = computedEager(() => (props.isMobile ? 22 : 28))
+      const iconSize = computedEager(() => (!isDesktopLayout.value ? 22 : 28))
 
       watch(
         navHeight,
@@ -90,11 +82,11 @@
 
       return { poolsLinks, classList, iconSize }
     },
-    components: { UiIcon },
+    components: { PoolIcon },
   })
 </script>
 
-<style lang="postcss">
+<style>
   .pools-list > .nav {
     @apply bg-white bg-opacity-[0.082];
   }
@@ -126,8 +118,8 @@
     padding-right: 9px;
   }
 
-  .pools-list.-fixed > .nav {
-    position: fixed;
+  .pools-list.-fixed {
+    position: sticky;
     top: max(
       calc(
         (
@@ -140,10 +132,8 @@
     transform: translateY(calc(var(--app-ui-header-scroll-padding) * var(--app-ui-header-scroll-factor, 0) * -0.5));
   }
 
-  .pools-list.-sticky {
-  }
   .pools-list-link-icon {
-    @apply text-gray rounded-12 transition-colors duration-200;
+    @apply text-gray rounded-12 transition-colors duration-200 aspect-1;
   }
 
   .pools-list-link-icon:hover {

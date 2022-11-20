@@ -23,7 +23,7 @@
   import { CHAIN_ID } from '@/config/constants/chain'
   import { computed, defineComponent } from 'vue'
   import { useEthers } from '@/hooks/dapp/useEthers'
-  import UiButton from '@/components/ui/UiButton.vue'
+  import { UiButton } from '@slr-finance/uikit'
   import { useConnectWalletModal } from './hooks/useConnectWalletModal'
 
   export default defineComponent({
@@ -34,7 +34,7 @@
         default: 'Connect Wallet',
       },
       size: {
-        type: [Number, String],
+        type: Number,
         default: 48,
       },
     },

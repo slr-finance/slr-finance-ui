@@ -1,8 +1,8 @@
 <template>
   <div
-    class="flex flex-1 flex-col min-h-full px-ui-page-spacing pt-ui-page-header-spacing pb-ui-page-bottom-spacing justify-between items-center relative z-ui-page-content"
+    class="flex flex-1 flex-col justify-between items-center"
   >
-    <div class="swap-page-content">
+    <div class="swap-page-content relative z-ui-page-content">
       <div
         v-once
         class="875:text-center text-left"
@@ -22,33 +22,39 @@
       </div>
     </div>
 
-    <div>
+    <div class="relative z-ui-page-content">
       <mercuryo />
     </div>
   </div>
-  <swap-bg v-once />
 </template>
 
 <script lang="ts">
   import { defineComponent } from 'vue'
+  import { useHead } from '@vueuse/head'
   import contractsAddresses from '@/config/constants/contractsAddresses'
   import SwapForm from './components/SwapForm.vue'
-  import PowerByDex from './components/PowerByDex.vue'
   import Mercuryo from './components/Mercuryo.vue'
-  import SwapBg from './components/SwapBg.vue'
 
   export default defineComponent({
     name: 'swap-page',
     setup() {
+      useHead({
+        title: 'SLR Swap',
+        meta: [
+          {
+            name: 'description',
+            content: 'SLR Swap',
+          },
+        ],
+      })
+
       return {
         tokenAddress: contractsAddresses.SolarToken,
       }
     },
     components: {
       SwapForm,
-      PowerByDex,
       Mercuryo,
-      SwapBg,
     },
   })
 </script>

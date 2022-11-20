@@ -13,11 +13,9 @@
           :to="link.to"
           active-class="-active"
         >
-          <ui-icon
-            prefix="ui-icon-mobile-navigation"
-            size="24"
-            :name="link.icon"
-            class="mb-10"
+          <app-mobile-bottom-navigation-icons
+            :icon-component="link.icon"
+            class="mb-10 w-24 h-24"
           />
           {{ link.label }}
         </router-link>
@@ -28,28 +26,28 @@
 
 <script lang="ts">
   import { defineComponent, onUnmounted } from 'vue'
-  import UiIcon from '@/components/ui/UiIcon'
+  import AppMobileBottomNavigationIcons from './AppMobileBottomNavigationIcons.vue'
   import { useMobileBottomNavigation } from './hooks/useMobileBottomNavigation'
 
   const links = [
     {
       label: 'Dashboard',
-      icon: 'dashboard',
+      icon: 'UiIconMobileNavigationDashboard',
       to: { name: 'dashboard' },
     },
     {
       label: 'Presale',
-      icon: 'swap',
+      icon: 'UiIconPixelArrowBoth',
       to: { name: 'presale' },
     },
     {
       label: 'Staking',
-      icon: 'staking',
+      icon: 'UiIconMobileNavigationStaking',
       to: { name: 'pool' },
     },
     {
       label: 'Referral',
-      icon: 'referral',
+      icon: 'UiIconMobileNavigationReferral',
       to: { name: 'referral' },
     },
   ]
@@ -63,9 +61,7 @@
 
       return { links }
     },
-    components: {
-      UiIcon,
-    },
+    components: { AppMobileBottomNavigationIcons },
   })
 </script>
 

@@ -1,29 +1,28 @@
 <template>
-  <div class="flex flex-col min-h-full">
-    <router-view />
-    <app-mobile-bottom-navigation v-if="!isDesktopLayout" />
-  </div>
-
   <app-header />
-  <social-modal-button v-if="isDesktopLayout" />
+  <!-- <SlrHeader></SlrHeader> -->
+  <DefaultLayout/>
+  <app-float-button-container class="z-ui-page-content"/>
+  
   <connected-wallet-modal />
   <connect-wallet-modal />
+  <ui-toast />
 </template>
 
 <script lang="ts">
-  import { defineAsyncComponent, defineComponent, watch } from 'vue'
-  import { useBreakpoints } from '@vueuse/core'
-  import { useEthers } from '@/hooks/dapp/useEthers'
-  import { store } from '@/store/store'
-  import { HeaderType, useHeader } from '@/components/ui/UiHeader/hooks/useHeader'
+  import { defineComponent, watch } from 'vue'
+  import { UiHeaderType, useUiHeader } from '@slr-finance/uikit'
+  import UiToast from '@/components/ui/UiToast'
   import AppHeader from '@/components/App/AppHeader/AppHeader.vue'
-  import AppMobileBottomNavigation from '@/components/App/AppMobileBottomNavigation/AppMobileBottomNavigation.vue'
   import ConnectedWalletModal from '@/components/ConnectWallet/ConnectedWalletModal/ConnectedWalletModal.vue'
   import ConnectWalletModal from '@/components/ConnectWallet/ConnectWalletModal'
-  import { stakingModule } from '@/store/modules/stakingModule'
-  import { useBlockInfo } from './hooks/useBlockInfo'
   import { LATEST_CONNECTED_PROVIDER } from '@/config/constants/localStorage'
   import { useWallet, WalletName } from './hooks/dapp/useWallet'
+  import AppFloatButtonContainer from '@/components/App/AppFloatButton/AppFloatButtonContainer.vue'
+  import DefaultLayout from '@/layout/DefaultLayout.vue'
+  import { useAppBreakpoints } from '@/hooks/useAppBreakpoints'
+  // @ts-ignore
+  // import SlrHeader from 'slr-common/components/common/slr-header'
 
   export default defineComponent({
     props: {
@@ -32,46 +31,33 @@
       },
     },
     setup() {
-      const { connect } = useWallet()
+      if (!import.meta.env.SSR) {
+        const { connect } = useWallet()
 
-      const latestConnectedProvider = localStorage.getItem(LATEST_CONNECTED_PROVIDER) as WalletName | null
+        const latestConnectedProvider = localStorage.getItem(LATEST_CONNECTED_PROVIDER) as WalletName | null
 
-      if (latestConnectedProvider === 'metamask') {
-        connect(latestConnectedProvider)
+        if (latestConnectedProvider === 'metamask') {
+          connect(latestConnectedProvider)
+        }
       }
 
-      stakingModule.register(store)
-
-      const { address } = useEthers()
-      watch(address, (addressVal) => stakingModule.actions.setStakerAddress(addressVal))
-
-      const { blockNumber } = useBlockInfo()
-      watch(blockNumber, () => stakingModule.actions.refetchStaker())
-
-      const { isDesktopLayout } = useBreakpoints({
-        isDesktopLayout: 580,
-      })
-
-      const { setHeaderType } = useHeader()
+      const breakpoints = useAppBreakpoints()
+      const { setHeaderType } = useUiHeader()
 
       watch(
-        isDesktopLayout,
-        (isDesktopVal) => setHeaderType(isDesktopVal ? HeaderType.DEFAULT_DESKTOP : HeaderType.DEFAULT_MOBILE),
+        breakpoints.w580,
+        (isDesktopVal) => setHeaderType(isDesktopVal ? UiHeaderType.DEFAULT_DESKTOP : UiHeaderType.DEFAULT_MOBILE),
         { immediate: true },
       )
-
-      return {
-        isDesktopLayout,
-      }
     },
     components: {
+      DefaultLayout,
       AppHeader,
+      AppFloatButtonContainer,
       ConnectWalletModal,
       ConnectedWalletModal,
-      AppMobileBottomNavigation,
-      SocialModalButton: defineAsyncComponent({
-        loader: () => import('@/components/SocialModalButton'),
-      }),
+      UiToast,
+      // SlrHeader,
     },
   })
 </script>

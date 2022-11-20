@@ -1,21 +1,12 @@
 <template>
-  <div class="flex-1 pt-ui-page-header-spacing pb-ui-page-bottom-spacing px-ui-page-spacing">
+  <div>
     <h1 class="text-white font-title mb-16 text-ui-page-title">
       <span class="text-white text-opacity-60">Dashboard</span>
       station
     </h1>
 
     <div class="grid gap-28 grid-cols-2">
-      <dashboard-container
-        class="col-span-2"
-        style="height: 400px"
-      >
-        <div class="w-full h-full relative">
-          <dashboard-token-charts class="w-full h-full left-0 top-0 absolute" />
-        </div>
-      </dashboard-container>
-
-      <dashboard-container>
+      <dashboard-container class="col-span-2 875:col-span-1">
         <div>
           <div class="text-28 font-title leading-140">
             <span class="text-yellow">DEFI 3.0</span> financial protocol operating in BSC
@@ -32,37 +23,51 @@
         <div>slrPriceStr: {{ slrPriceStr }}</div>
         <div>totalStakedStr: {{ totalStakedStr }}</div>
       </dashboard-container>
-      <presale-information bage-text="ITO">
+      <presale-information  class="col-span-2 875:col-span-1" bage-text="ITO">
         <template #footer>
           <ui-button
             :to="{ name: 'presale' }"
             variant="violet"
-            size="48"
+            :size="48"
             class="w-full mt-28"
           >
             Go to presale
           </ui-button>
         </template>
       </presale-information>
+
+      <dashboard-token-charts
+        class="col-span-2"
+        style="height: 800px" />
     </div>
   </div>
 </template>
 
 <script lang="ts">
   import { defineComponent } from 'vue'
+  import { useHead } from '@vueuse/head'
   import { useTokenAmountFormat } from '@/hooks/formatters/useTokenAmountFormat'
   import { useUsdFormat } from '@/hooks/formatters/useUsdFormat'
-  import { useSlrLiquidityPrice } from '@/store/hooks/useSlrLiquidityPrice'
-  import { useSlrPrice } from '@/store/hooks/useSlrPrice'
+  import { useSlrPrice } from '@/hooks/dapp/useSlrPrice'
   import { useMilkyWayInfo } from './hooks/useMilkyWayInfo'
-  import { useTotalStakedInAllPools } from '@/store/hooks/useTotalStakedInAllPools'
-  import UiButton from '@/components/ui/UiButton.vue'
+  import { useTotalStakedInAllPools } from '@/views/Pool/hooks/useTotalStakedInAllPools'
+  import { UiButton } from '@slr-finance/uikit'
   import PresaleInformation from '@/views/Presale/components/PresaleInformation'
   import DashboardTokenCharts from './components/DashboardTokenCharts.vue'
   import DashboardContainer from './components/DashboardContainer.vue'
 
   export default defineComponent({
     setup() {
+      useHead({
+        title: 'SLR Dashboard',
+        meta: [
+          {
+            name: 'description',
+            content: 'SLR Dashboard',
+          },
+        ],
+      })
+
       const {
         totalBayback,
         currentBnbBalance,
@@ -80,9 +85,8 @@
       const pendingBuyBackAndBurnStr = useTokenAmountFormat(pendingBuyBackAndBurn, 'BNB')
       const pendingInvestStr = useTokenAmountFormat(pendingInvest, 'BNB')
 
-      const liquidityPrice = useSlrLiquidityPrice()
-      const liquidityPriceStr = useUsdFormat(liquidityPrice)
-      const slrPrice = useSlrPrice()
+      const { slrPrice, slrLiquidityPrice } = useSlrPrice()
+      const liquidityPriceStr = useUsdFormat(slrLiquidityPrice)
       const slrPriceStr = useUsdFormat(slrPrice)
 
       const totalStaked = useTotalStakedInAllPools()

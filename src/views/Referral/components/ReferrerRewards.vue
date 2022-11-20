@@ -23,7 +23,7 @@
           :txState="claimTxState"
           :loading="isFetching"
           :disabled="!isEnoughReward"
-          size="36"
+          :size="36"
           v-if="isEnoughReward"
         >
           Claim
@@ -39,7 +39,7 @@
   import { useReferrerRewards } from '../hooks/useReferrerRewards'
   import { useReferrerClaim } from '../hooks/useReferrerClaim'
   import SendTxButton from '@/components/Tx/SendTxButton.vue'
-  import { useSlrBalance } from '@/store/hooks/useBalance'
+  import { useSlrBalance } from '@/hooks/dapp/useSlrBalance'
   import UiWidget from '@/components/ui/UiWidget.vue'
   import OwnInviter from './OwnInviter.vue'
 
@@ -47,7 +47,7 @@
     name: 'referrer-rewards',
     setup() {
       const [handleClaim, claimTxState] = useReferrerClaim()
-      const [, refetchSlrBalance] = useSlrBalance()
+      const { refetchBalance: refetchSlrBalance } = useSlrBalance()
       const { reward, rewarded, isFetching, refetchRewards } = useReferrerRewards()
       const pendingReward = computed(() => reward.value.minus(rewarded.value))
       const isEnoughReward = computed(() => pendingReward.value.gt(0))

@@ -23,7 +23,7 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent, onMounted, ref, watch } from 'vue'
+  import { defineComponent } from 'vue'
   import UiIcon from '@/components/ui/UiIcon'
 
   export default defineComponent({

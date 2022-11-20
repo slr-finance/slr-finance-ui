@@ -24,7 +24,13 @@
         >
           <div :style="{ width: `${pool.position.radius}px`, height: `${pool.position.radius}px` }"></div>
           <div class="pool-info text-10 whitespace-nowrap">
-            <div class="apy text-white text-opacity-70 font-title">APY {{ pool.apyStr }}%</div>
+            <div class="apy text-white text-opacity-70 font-title">
+              <ui-text-placeholder
+                class="min-w-40"
+                :text="pool.apyStr"
+                :is-loading="isPoolsFetching"
+              />
+            </div>
             <div class="your-point text-8 text-yellow">Your point</div>
             <div class="ended text-8 text-white text-opacity-70">Ended</div>
           </div>
@@ -37,8 +43,9 @@
 <script lang="ts">
   import { computed, defineComponent } from 'vue'
   import UiIcon from '@/components/ui/UiIcon'
-  import { usePools } from '@/store/hooks/usePools'
-  import { useStaker } from '@/store/hooks/useStaker'
+  import { UiTextPlaceholder } from '@slr-finance/uikit'
+  import { usePoolsState } from '../hooks/usePoolsState'
+  import { useStakerState } from '../hooks/useStakerState'
 
   const poolsPosition = [
     { id: 1, x: 356.5, y: 62, radius: 12 },
@@ -56,15 +63,15 @@
     name: 'pools-list',
     inheritAttrs: true,
     setup() {
-      const poolsStates = usePools()
+      const { pools: poolsStates, isFetching: isPoolsFetching } = usePoolsState()
       const pools = computed(() => {
         return poolsPosition.map(({ id, ...poolPosition }) => {
           const apyNum = poolsStates.value[id].apy?.toNumber() ?? 0
-          const apyStr = (apyNum * 100).toLocaleString('en-En', {
+          const apyStr = `APY ${(apyNum * 100).toLocaleString('en-En', {
             maximumFractionDigits: 0,
             minimumFractionDigits: 0,
             style: 'decimal',
-          })
+          })}%`
 
           return {
             id,
@@ -73,11 +80,11 @@
           }
         })
       })
-      const [stakerState] = useStaker()
+      const { stakerState } = useStakerState()
       const stakerPoolId = computed(() => stakerState.value.poolId)
-      return { pools, stakerPoolId }
+      return { pools, stakerPoolId, isPoolsFetching }
     },
-    components: { UiIcon },
+    components: { UiIcon, UiTextPlaceholder },
   })
 </script>
 <style
